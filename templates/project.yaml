@@ -13,6 +13,13 @@ language_profile:
   secondary: []
   reason: <why this profile governs the repo>
 decision_brain:
+  principles:
+    coupling_rule: <domain/use cases do not depend on framework, database, broker, cloud SDK, transport, or UI>
+    solid: [srp, ocp, lsp, isp, dip]
+    simplicity_rule: <KISS/YAGNI rule for this repo>
+    testability_rule: <how use cases run without transport/infrastructure>
+    rejected_overengineering:
+      - <pattern/tool/abstraction rejected>
   stack_profile: <spring-kotlin-backend|fastapi-backend|go-backend|node-typescript-backend|angular|nextjs|python-ml|terraform>
   api_style: <rest-http|graphql|grpc|websocket|sse|cli>
   messaging: <none|outbox-only|rabbitmq|kafka|redis-streams|nats>

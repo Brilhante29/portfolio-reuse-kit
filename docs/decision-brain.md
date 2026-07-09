@@ -26,6 +26,7 @@ That is not enough for a serious portfolio. Every choice must prove something.
 portfolio program
   -> proficiency signal
   -> architecture
+  -> engineering principles and coupling boundaries
   -> concrete stack profile
   -> API style
   -> messaging mode
@@ -35,6 +36,17 @@ portfolio program
   -> README/post evidence
 ```
 
+## Engineering Principles Rules
+
+| Concern | Rule |
+|---|---|
+| Decoupling | Domain and use cases do not import framework, HTTP, GraphQL, ORM, DB driver, cloud SDK, broker SDK, env vars, or UI rendering. |
+| SOLID | SRP, OCP, LSP, ISP, and DIP must be visible in boundaries, ports, adapters, and tests. |
+| LSP | Local fakes, Kumo adapters, real cloud adapters, broker adapters, and persistence adapters must obey the same port contract. |
+| KISS | Choose the simplest design that proves the claim and benchmark. |
+| YAGNI | Do not add extension points for futures the repo does not prove. |
+| DRY | Remove duplicated business knowledge, not incidental similarity. |
+| Testability | Use cases must run without transport and infrastructure. |
 ## Backend Stack Rules
 
 | Problem | Default Stack | Why |

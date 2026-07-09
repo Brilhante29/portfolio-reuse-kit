@@ -2,7 +2,7 @@
 
 Reusable decision brain and engineering layer for a 30-repository technical portfolio.
 
-This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, architecture decision rules, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
+This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, architecture decision rules, engineering principles, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
 
 It is intentionally not one of the portfolio projects. It exists so every project can be created, evaluated, documented, and published with the same level of rigor.
 
@@ -32,7 +32,7 @@ Every completed project must provide:
 - a `project.yaml` manifest
 - an explicit portfolio program
 - an explicit architecture decision with rejected alternatives
-- a `decision_brain` section with stack, API style, messaging, cloud/Kumo, database/runtime, library policy, and rejected options
+- a `decision_brain` section with principles, stack, API style, messaging, cloud/Kumo, database/runtime, library policy, and rejected options
 - a primary language/framework profile
 - shared design-system components
 - README opening with project number, claim, and benchmark result
@@ -49,7 +49,7 @@ Every completed project must provide:
 portfolio-reuse-kit
   catalog/           -> portfolio source of truth and program grouping
   architecture/      -> decision matrix for MVC, modular, Clean, Hexagonal, MVVM, pipeline, etc.
-  decision-brain/    -> stack, API style, messaging, cloud, database/runtime, and library decision matrices
+  decision-brain/    -> engineering principles, stack, API style, messaging, cloud, database/runtime, and library decision matrices
   language-profiles/ -> language/framework-specific repo standards
   design-system/     -> README, diagram, dashboard, and benchmark presentation standards
   contracts/         -> schemas every project must satisfy
@@ -111,7 +111,7 @@ Remove-Item Env:\GH_TOKEN
 |---|---|
 | `catalog/` | Source of truth for all 30 projects, program grouping, stack, claim, benchmark, and references. |
 | `architecture/` | Decision matrix for choosing software architecture by problem forces. |
-| `decision-brain/` | Central decision matrices for stack profiles, API style, messaging, cloud local-first, runtime/database, and library selection. |
+| `decision-brain/` | Central decision matrices for engineering principles, stack profiles, API style, messaging, cloud local-first, runtime/database, and library selection. |
 | `language-profiles/` | Language/framework-specific conventions for Python, Java, Go, TypeScript, Angular, Next.js, Spring Kotlin, FastAPI, Go backend, and Terraform. |
 | `design-system/` | Shared README, diagram, badge, benchmark, and dashboard standards. |
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
@@ -133,6 +133,7 @@ The same skills are provided for Codex and Claude Code:
 | `portfolio-project` | Build, review, harden, validate, or publish one portfolio project. |
 | `spec-driven-project` | Write project manifest, SDD, benchmark plan, ADRs, and release criteria. |
 | `architecture-selector` | Choose MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, or microservices for the specific problem. |
+| `engineering-principles` | Enforce decoupling, SOLID, LSP, KISS, YAGNI, DRY, dependency inversion, and testability evidence. |
 | `stack-decision` | Choose concrete stack profile from the decision brain. |
 | `api-style-decision` | Decide REST/HTTP, GraphQL, gRPC, WebSocket, SSE, or CLI. |
 | `cloud-local-first` | Apply Kumo local-first cloud and real-cloud adapter rules. |
@@ -175,6 +176,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Reuse layer architecture](docs/reuse-layer.md)
 - [Architecture decision guide](docs/architecture-decision-guide.md)
 - [Decision brain](docs/decision-brain.md)
+- [Engineering principles](docs/engineering-principles.md)
 - [API style decision](docs/api-style-decision.md)
 - [Cloud local-first](docs/cloud-local-first.md)
 - [Portfolio operating model](docs/portfolio-operating-model.md)

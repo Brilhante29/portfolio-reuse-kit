@@ -53,9 +53,19 @@
     },
     "decision_brain": {
       "type": "object",
-      "required": ["stack_profile", "api_style", "messaging", "cloud", "database", "library_policy", "record_path"],
+      "required": ["principles", "stack_profile", "api_style", "messaging", "cloud", "database", "library_policy", "record_path"],
       "properties": {
-        "stack_profile": {
+        "principles": {
+          "type": "object",
+          "required": ["coupling_rule", "solid", "simplicity_rule", "testability_rule"],
+          "properties": {
+            "coupling_rule": { "type": "string", "minLength": 10 },
+            "solid": { "type": "array", "items": { "type": "string", "enum": ["srp", "ocp", "lsp", "isp", "dip"] }, "minItems": 1 },
+            "simplicity_rule": { "type": "string", "minLength": 10 },
+            "testability_rule": { "type": "string", "minLength": 10 },
+            "rejected_overengineering": { "type": "array", "items": { "type": "string" } }
+          }
+        },        "stack_profile": {
           "type": "string",
           "enum": [
             "spring-kotlin-backend",

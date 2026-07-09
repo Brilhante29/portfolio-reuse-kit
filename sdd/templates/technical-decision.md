@@ -33,6 +33,30 @@ Reason:
 - Database/runtime: `<selection>`
 - Library policy: `<selection>`
 
+## Engineering Principles
+
+Coupling boundary:
+
+`<Domain/use cases must not depend on framework, DB, broker, cloud SDK, transport, or UI.>`
+
+SOLID application:
+
+- SRP: `<how responsibilities are split>`
+- OCP: `<how behavior extends without rewriting stable policy>`
+- LSP: `<how adapters/fakes/reals stay substitutable>`
+- ISP: `<small ports/interfaces used>`
+- DIP: `<high-level policy depends on abstractions>`
+
+Simplicity:
+
+- KISS: `<simplest design that proves the claim>`
+- YAGNI: `<future abstraction intentionally not added>`
+- DRY: `<duplicated business knowledge removed without premature abstraction>`
+
+Testability evidence:
+
+- `<use case test without transport/infrastructure>`
+- `<adapter or contract test>`
 ## Rejected Options
 
 | Option | Why rejected |
