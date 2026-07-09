@@ -9,18 +9,27 @@ status: scaffold
 claim: <one sentence claim>
 stack: []
 language_profile:
-  primary: <python|java|go|typescript|angular|nextjs|terraform|spring-kotlin-backend|fastapi-backend|go-backend>
+  primary: <python|java|go|typescript|angular|nextjs|terraform|spring-kotlin-backend|fastapi-backend|go-backend|node-typescript-backend>
   secondary: []
   reason: <why this profile governs the repo>
 decision_brain:
-  stack_profile: <spring-kotlin-backend|fastapi-backend|go-backend|angular|nextjs|python-ml|terraform>
+  stack_profile: <spring-kotlin-backend|fastapi-backend|go-backend|node-typescript-backend|angular|nextjs|python-ml|terraform>
+  api_style: <rest-http|graphql|grpc|websocket|sse|cli>
   messaging: <none|outbox-only|rabbitmq|kafka|redis-streams|nats>
+  cloud:
+    mode: <none|kumo-local-first|adapter-fake|real-cloud-required>
+    local_provider: kumo
+    real_provider_target: <aws|none|other>
+    emulated_services: []
+    adapter_rule: <ports/adapters keep cloud SDK outside domain/use cases>
+    config_switch: CLOUD_PROVIDER=kumo|aws
+    unsupported_behaviors: []
   database: <postgresql|sqlite|redis|qdrant|duckdb|none|other>
   runtime: <runtime decision>
   library_policy: <why selected libs fit the problem and benchmark>
   record_path: sdd/technical-decision.md
   rejected_options:
-    - option: <alternative stack/broker/library>
+    - option: <alternative stack/broker/api/cloud/library>
       reason: <why it was not chosen>
 architecture:
   style: <mvc|layered|modular-monolith|clean-architecture|hexagonal|cqrs-event-sourcing|event-driven|mvvm|pipeline|serverless|microservices>

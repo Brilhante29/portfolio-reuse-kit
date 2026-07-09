@@ -44,6 +44,28 @@ libraries:
     observability: [slog, pprof, prometheus_client_golang]
     tests: [go-test, testcontainers-go]
     load: [k6, ghz]
+  node-typescript-backend:
+    framework:
+      default: nestjs
+      use_raw_fastify_when: [tiny_service, benchmark_requires_minimal_framework]
+      use_express_direct_when: [small_http_adapter_or_teaching_demo]
+    http_adapter:
+      default: express
+      alternative: fastify
+      rule: "Fastify only when p95/p99 benchmark or deployment constraints justify checking compatibility."
+    api_style:
+      rest: [nestjs_controllers, openapi_swagger]
+      graphql: [nestjs_graphql, apollo_default, mercurius_when_fastify_selected, graphql_codegen]
+      websocket: [nestjs_websockets]
+    persistence:
+      default: prisma
+      alternative: drizzle
+      rule: "Prisma for type-safe app development and migrations; Drizzle when SQL visibility is the proof."
+    validation:
+      boundary_default: class-validator
+      functional_schema: zod
+    tests: [vitest_or_jest, supertest, testcontainers_when_external_services_exist]
+    observability: [pino_or_winston, prom-client, nestjs_terminus]
   messaging:
     rabbitmq_clients:
       spring: spring-amqp

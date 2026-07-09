@@ -33,6 +33,8 @@ $requiredFiles = @(
   "architecture/decision-matrix.yaml",
   "decision-brain/README.md",
   "decision-brain/stack-matrix.yaml",
+  "decision-brain/api-style-matrix.yaml",
+  "decision-brain/cloud-matrix.yaml",
   "decision-brain/messaging-matrix.yaml",
   "decision-brain/library-selection.yaml",
   "design-system/README.md",
@@ -46,12 +48,15 @@ $requiredFiles = @(
   "language-profiles/spring-kotlin.yaml",
   "language-profiles/fastapi-backend.yaml",
   "language-profiles/go-backend.yaml",
+  "language-profiles/node-typescript-backend.yaml",
   "language-profiles/terraform.yaml",
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
   "docs/reuse-layer.md",
   "docs/architecture-decision-guide.md",
   "docs/decision-brain.md",
+  "docs/api-style-decision.md",
+  "docs/cloud-local-first.md",
   "docs/portfolio-operating-model.md",
   "docs/proficiency-map.md",
   "docs/project-lifecycle.md",
@@ -85,23 +90,29 @@ $requiredDirs = @(
   ".codex/skills/benchmark-harness",
   ".codex/skills/architecture-selector",
   ".codex/skills/stack-decision",
+  ".codex/skills/api-style-decision",
+  ".codex/skills/cloud-local-first",
   ".codex/skills/messaging-decision",
   ".codex/skills/language-standards",
   ".codex/skills/design-system",
   ".codex/skills/spring-kotlin-backend",
   ".codex/skills/fastapi-backend",
   ".codex/skills/go-backend",
+  ".codex/skills/node-typescript-backend",
   ".claude/skills/portfolio-project",
   ".claude/skills/spec-driven-project",
   ".claude/skills/benchmark-harness",
   ".claude/skills/architecture-selector",
   ".claude/skills/stack-decision",
+  ".claude/skills/api-style-decision",
+  ".claude/skills/cloud-local-first",
   ".claude/skills/messaging-decision",
   ".claude/skills/language-standards",
   ".claude/skills/design-system",
   ".claude/skills/spring-kotlin-backend",
   ".claude/skills/fastapi-backend",
-  ".claude/skills/go-backend"
+  ".claude/skills/go-backend",
+  ".claude/skills/node-typescript-backend"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -152,9 +163,14 @@ foreach ($script in $powerShellScripts) {
 }
 
 $legacy = ("ro" + "che" + "do")
-$pattern = "$legacy|$($legacy.Substring(0,1).ToUpper() + $legacy.Substring(1))"
-$forbidden = rg -n $pattern $root 2>$null
-if ($LASTEXITCODE -eq 0) {
+$patterns = @($legacy, ($legacy.Substring(0,1).ToUpper() + $legacy.Substring(1)))
+$searchFiles = Get-ChildItem -Path $root -Recurse -File | Where-Object {
+  $_.FullName -notmatch "\\.git\\" -and
+  $_.FullName -notmatch "\\benchmarks\\results\\" -and
+  $_.Extension -in @(".md", ".yaml", ".yml", ".json", ".ps1", ".py", ".js", ".ts", ".tsx", ".go", ".kt", ".java")
+}
+$forbidden = Select-String -Path $searchFiles.FullName -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
+if ($forbidden) {
   $failures.Add("Forbidden legacy project nickname found")
 }
 

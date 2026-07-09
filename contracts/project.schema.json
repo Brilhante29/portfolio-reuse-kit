@@ -43,7 +43,8 @@
             "terraform",
             "spring-kotlin-backend",
             "fastapi-backend",
-            "go-backend"
+            "go-backend",
+            "node-typescript-backend"
           ]
         },
         "secondary": { "type": "array", "items": { "type": "string" } },
@@ -52,7 +53,7 @@
     },
     "decision_brain": {
       "type": "object",
-      "required": ["stack_profile", "messaging", "database", "library_policy", "record_path"],
+      "required": ["stack_profile", "api_style", "messaging", "cloud", "database", "library_policy", "record_path"],
       "properties": {
         "stack_profile": {
           "type": "string",
@@ -63,12 +64,30 @@
             "angular",
             "nextjs",
             "python-ml",
-            "terraform"
+            "terraform",
+            "node-typescript-backend"
           ]
+        },
+        "api_style": {
+          "type": "string",
+          "enum": ["rest-http", "graphql", "grpc", "websocket", "sse", "cli"]
         },
         "messaging": {
           "type": "string",
           "enum": ["none", "outbox-only", "rabbitmq", "kafka", "redis-streams", "nats"]
+        },
+        "cloud": {
+          "type": "object",
+          "required": ["mode", "local_provider", "real_provider_target", "adapter_rule", "config_switch"],
+          "properties": {
+            "mode": { "type": "string", "enum": ["none", "kumo-local-first", "adapter-fake", "real-cloud-required"] },
+            "local_provider": { "type": "string" },
+            "real_provider_target": { "type": "string" },
+            "emulated_services": { "type": "array", "items": { "type": "string" } },
+            "adapter_rule": { "type": "string", "minLength": 10 },
+            "config_switch": { "type": "string", "minLength": 5 },
+            "unsupported_behaviors": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "database": { "type": "string" },
         "runtime": { "type": "string" },

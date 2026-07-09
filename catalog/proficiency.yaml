@@ -33,6 +33,12 @@ backend:
       - gateways, rate limiters, emulators, protocol benchmarks, networking, or low overhead services are central
       - performance should be proven with p95/p99, allocation, pprof, or throughput evidence
     public_signal: "Go backend for low-overhead services and measured performance"
+  node-typescript-backend:
+    use_when:
+      - TypeScript backend, NestJS, GraphQL, BFF, or product API skill should be visible
+      - Rocketseat-style modular Clean Architecture organization strengthens the portfolio signal
+      - Prisma/type-safe contracts/tests are part of the proof
+    public_signal: "TypeScript/Node backend with NestJS, clean boundaries, typed API contracts, and benchmark evidence"
 front_end:
   angular:
     use_when:

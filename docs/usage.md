@@ -32,7 +32,7 @@ powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
   -TargetRepo C:\path\to\repo
 ```
 
-This installs agent skills and a local `.portfolio/` snapshot with program catalog, proficiency map, decision brain, architecture matrix, language/framework profiles, design system, and schemas.
+This installs agent skills and a local `.portfolio/` snapshot with program catalog, proficiency map, decision brain, architecture matrix, API style matrix, Kumo cloud local-first rules, language/framework profiles, design system, and schemas.
 
 ## Validate The Kit
 

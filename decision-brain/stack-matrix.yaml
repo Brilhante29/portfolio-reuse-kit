@@ -108,6 +108,47 @@ profiles:
       - p99_latency_ms
       - allocs_per_operation
       - cpu_profile_summary
+  node-typescript-backend:
+    public_signal: "TypeScript/Node backend with NestJS modular architecture, REST/GraphQL contracts, Prisma, tests, and benchmark evidence"
+    reference_style: "Rocketseat NestJS Clean Architecture organization: core/domain/application/infra/test boundaries."
+    use_when:
+      - TypeScript backend proficiency should be explicit
+      - NestJS-style modular architecture, dependency injection, guards, pipes, providers, and tests strengthen the proof
+      - API contract decision between REST, GraphQL, WebSocket/SSE, or gRPC is part of the evidence
+      - Prisma/type-safe persistence is a good fit for the project
+      - BFF, dashboard backend, GraphQL schema, or product API is central
+    avoid_when:
+      - low-level protocol performance is better shown in Go
+      - transactional enterprise JVM ecosystem is the main signal
+      - Python ML/data ecosystem is required by the domain
+    default_api_style: rest-http
+    use_graphql_when:
+      - client needs flexible nested reads
+      - BFF aggregates multiple sources
+      - schema-driven client workflow is part of the proof
+      - query complexity and N+1 controls will be implemented
+    default_http_adapter: express
+    use_fastify_when:
+      - p95/p99 performance is part of the benchmark
+      - middleware compatibility is checked
+    core_libraries:
+      - nodejs-lts
+      - typescript-strict
+      - nestjs
+      - prisma_default
+      - zod_or_class-validator_by_boundary
+      - vitest_or_jest
+      - supertest
+      - eslint
+      - prettier
+      - pino_or_winston
+      - graphql_when_selected
+      - k6_for_http
+    benchmark_fit:
+      - p95_latency_ms
+      - endpoint_throughput_rps
+      - query_latency_ms
+      - payload_bytes
   angular:
     public_signal: "enterprise frontend with modular UI, forms, guards, and dashboard workflows"
     use_when:
@@ -129,11 +170,12 @@ profiles:
       - infrastructure module, AWS baseline, security checks, or provision-time benchmark is the claim
 selection_rules:
   default_backend_api:
-    prefer: [spring-kotlin-backend, fastapi-backend, go-backend]
+    prefer: [spring-kotlin-backend, fastapi-backend, go-backend, node-typescript-backend]
     decide_by:
       domain_transactions: spring-kotlin-backend
       ai_data_python_ecosystem: fastapi-backend
       low_overhead_networking: go-backend
+      typescript_contracts_or_bff: node-typescript-backend
   performance_claim:
     prefer: [go-backend, spring-kotlin-backend]
     note: "Use a benchmark to justify framework choice. Do not claim performance from reputation."

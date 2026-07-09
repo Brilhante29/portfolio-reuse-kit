@@ -5,7 +5,7 @@ This repository is a reusable decision platform for the portfolio. It should ans
 1. What larger portfolio program does this project strengthen?
 2. What public proficiency signal should this project prove?
 3. Which architecture best fits the problem forces?
-4. Which stack, broker, database/runtime, and libraries should be selected?
+4. Which stack, API style, broker, cloud mode, database/runtime, and libraries should be selected?
 5. Which language/framework and design standards does it inherit?
 6. How is the claim measured before publication?
 
@@ -16,7 +16,7 @@ This repository is a reusable decision platform for the portfolio. It should ans
 | Portfolio registry | `catalog/` | Defines the 30 projects, program groups, proficiency signals, and intended evidence. |
 | Project contract | `contracts/` | Defines required shape for `project.yaml` and benchmark JSON. |
 | Architecture selection | `architecture/` | Provides the decision matrix for MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, and microservices. |
-| Decision brain | `decision-brain/` | Provides stack, messaging, runtime/database, and library decision matrices. |
+| Decision brain | `decision-brain/` | Provides stack, API style, messaging, cloud local-first, runtime/database, and library decision matrices. |
 | Language standards | `language-profiles/` | Provides language/framework-specific layout, testing, lint, Docker, and benchmark expectations. |
 | Design system | `design-system/` | Provides shared README, diagram, badge, dashboard, and benchmark presentation rules. |
 | Scaffolding | `templates/` | Provides reusable files copied into each project. |
@@ -36,7 +36,7 @@ Owned by this kit:
 - README structure
 - manifest schema
 - architecture decision matrix
-- stack and messaging decision matrices
+- stack, API style, cloud, and messaging decision matrices
 - library selection policy
 - architecture ADR template
 - technical decision template
@@ -57,7 +57,7 @@ Owned by each project:
 - benchmark script details
 - measured results
 - final architecture decision for the project
-- final technical decisions for stack, messaging, database/runtime, and libraries
+- final technical decisions for stack, API style, cloud, messaging, database/runtime, and libraries
 - project-specific tests
 
 ## Project Contract

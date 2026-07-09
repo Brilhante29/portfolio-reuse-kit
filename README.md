@@ -13,7 +13,7 @@ Without a reuse layer, each repository tends to drift:
 - different README structure
 - missing benchmark command
 - architecture chosen by habit instead of problem forces
-- stack, broker, database, or library choices made without a recorded decision
+- stack, API style, broker, cloud, database, or library choices made without a recorded decision
 - repositories that do not belong to a larger portfolio story
 - visual and documentation inconsistency across repos
 - language conventions reinvented per project
@@ -32,7 +32,7 @@ Every completed project must provide:
 - a `project.yaml` manifest
 - an explicit portfolio program
 - an explicit architecture decision with rejected alternatives
-- a `decision_brain` section with stack, messaging, database/runtime, library policy, and rejected options
+- a `decision_brain` section with stack, API style, messaging, cloud/Kumo, database/runtime, library policy, and rejected options
 - a primary language/framework profile
 - shared design-system components
 - README opening with project number, claim, and benchmark result
@@ -49,7 +49,7 @@ Every completed project must provide:
 portfolio-reuse-kit
   catalog/           -> portfolio source of truth and program grouping
   architecture/      -> decision matrix for MVC, modular, Clean, Hexagonal, MVVM, pipeline, etc.
-  decision-brain/    -> stack, messaging, database/runtime, and library decision matrices
+  decision-brain/    -> stack, API style, messaging, cloud, database/runtime, and library decision matrices
   language-profiles/ -> language/framework-specific repo standards
   design-system/     -> README, diagram, dashboard, and benchmark presentation standards
   contracts/         -> schemas every project must satisfy
@@ -111,7 +111,7 @@ Remove-Item Env:\GH_TOKEN
 |---|---|
 | `catalog/` | Source of truth for all 30 projects, program grouping, stack, claim, benchmark, and references. |
 | `architecture/` | Decision matrix for choosing software architecture by problem forces. |
-| `decision-brain/` | Central decision matrices for stack profiles, messaging, runtime/database, and library selection. |
+| `decision-brain/` | Central decision matrices for stack profiles, API style, messaging, cloud local-first, runtime/database, and library selection. |
 | `language-profiles/` | Language/framework-specific conventions for Python, Java, Go, TypeScript, Angular, Next.js, Spring Kotlin, FastAPI, Go backend, and Terraform. |
 | `design-system/` | Shared README, diagram, badge, benchmark, and dashboard standards. |
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
@@ -134,10 +134,13 @@ The same skills are provided for Codex and Claude Code:
 | `spec-driven-project` | Write project manifest, SDD, benchmark plan, ADRs, and release criteria. |
 | `architecture-selector` | Choose MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, or microservices for the specific problem. |
 | `stack-decision` | Choose concrete stack profile from the decision brain. |
+| `api-style-decision` | Decide REST/HTTP, GraphQL, gRPC, WebSocket, SSE, or CLI. |
+| `cloud-local-first` | Apply Kumo local-first cloud and real-cloud adapter rules. |
 | `messaging-decision` | Decide no broker, outbox, RabbitMQ, Kafka, Redis Streams, or NATS. |
 | `spring-kotlin-backend` | Apply Spring Kotlin backend standards. |
 | `fastapi-backend` | Apply FastAPI backend standards. |
 | `go-backend` | Apply Go backend standards. |
+| `node-typescript-backend` | Apply NestJS/Rocketseat-style Node TypeScript backend standards. |
 | `language-standards` | Apply language/framework layout, tests, linting, Docker, and benchmark conventions. |
 | `design-system` | Apply shared visual and documentation standards across repositories. |
 | `benchmark-harness` | Add or validate metrics, benchmark JSON, k6 checks, and README tables. |
@@ -172,6 +175,8 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Reuse layer architecture](docs/reuse-layer.md)
 - [Architecture decision guide](docs/architecture-decision-guide.md)
 - [Decision brain](docs/decision-brain.md)
+- [API style decision](docs/api-style-decision.md)
+- [Cloud local-first](docs/cloud-local-first.md)
 - [Portfolio operating model](docs/portfolio-operating-model.md)
 - [Proficiency map](docs/proficiency-map.md)
 - [Project lifecycle](docs/project-lifecycle.md)
