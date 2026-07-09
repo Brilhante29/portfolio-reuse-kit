@@ -1,32 +1,39 @@
 # Publish
 
-Use this when the kit is ready to publish.
+This kit includes automation so repositories do not need to be created and pushed by hand.
 
-## Expected GitHub Repository
-
-```txt
-Brilhante29/portfolio-reuse-kit
-```
-
-## If The Remote Repo Already Exists
+## One Repo
 
 ```powershell
-git remote add origin https://github.com/Brilhante29/portfolio-reuse-kit.git
-git add .
-git commit -m "Polish portfolio reuse kit"
-git push -u origin main
+$env:GH_TOKEN = "<token>"
+powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
+  -RepoPath C:\Users\Guilherme\Desktop\repos-github\portfolio-reuse-kit `
+  -Owner Brilhante29 `
+  -RepoName portfolio-reuse-kit `
+  -Description "Reusable engineering kit for benchmark-driven portfolio repos" `
+  -Visibility public `
+  -CommitMessage "Polish portfolio reuse kit"
+Remove-Item Env:\GH_TOKEN
 ```
 
-## If The Remote Repo Does Not Exist
-
-Create an empty public repository named `portfolio-reuse-kit` under `Brilhante29`, then run:
+## All Local Repos In A Folder
 
 ```powershell
-git remote add origin https://github.com/Brilhante29/portfolio-reuse-kit.git
-git add .
-git commit -m "Polish portfolio reuse kit"
-git push -u origin main
+$env:GH_TOKEN = "<token>"
+powershell -ExecutionPolicy Bypass -File tools/publish-all.ps1 `
+  -RepoRoot C:\Users\Guilherme\Desktop\repos-github `
+  -Owner Brilhante29 `
+  -Visibility public
+Remove-Item Env:\GH_TOKEN
 ```
+
+## Token Permissions
+
+Use a short-lived token and revoke it after publishing.
+
+For classic PATs, use `repo` for private repositories or `public_repo` for public-only repositories.
+
+For fine-grained tokens, repository creation may be blocked by GitHub. In that case, create the empty repository once in the GitHub UI and rerun the script; the script will configure `origin`, commit local changes, and push.
 
 ## Validation Before Push
 

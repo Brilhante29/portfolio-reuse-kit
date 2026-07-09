@@ -21,6 +21,7 @@ function Require-Directory {
 
 $requiredFiles = @(
   "README.md",
+  "PUBLISH.md",
   "LICENSE",
   ".editorconfig",
   ".gitattributes",
@@ -38,7 +39,10 @@ $requiredFiles = @(
   "sdd/templates/adr.md",
   "sdd/templates/release-checklist.md",
   "tools/new-project.ps1",
-  "tools/install-project-skills.ps1"
+  "tools/install-project-skills.ps1",
+  "tools/publish-github.ps1",
+  "tools/publish-all.ps1",
+  "tools/validate-kit.ps1"
 )
 
 foreach ($file in $requiredFiles) { Require-File $file }
@@ -76,7 +80,15 @@ if ($projectCount -ne 30) {
 python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null
 python -c "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')" | Out-Null
 
-foreach ($script in @("tools/new-project.ps1", "tools/install-project-skills.ps1", "tools/validate-kit.ps1")) {
+$powerShellScripts = @(
+  "tools/new-project.ps1",
+  "tools/install-project-skills.ps1",
+  "tools/publish-github.ps1",
+  "tools/publish-all.ps1",
+  "tools/validate-kit.ps1"
+)
+
+foreach ($script in $powerShellScripts) {
   $tokens = $null
   $errors = $null
   [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $root $script), [ref]$tokens, [ref]$errors) | Out-Null

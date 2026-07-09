@@ -106,6 +106,22 @@ Use public repositories as references, not as disguised copies. Reuse dependenci
 
 See [catalog/reuse-policy.md](catalog/reuse-policy.md).
 
+
+## Publish to GitHub
+
+Use the built-in publisher instead of creating repositories by hand:
+
+```powershell
+$env:GH_TOKEN = "<token>"
+powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
+  -RepoPath . `
+  -Owner Brilhante29 `
+  -RepoName portfolio-reuse-kit `
+  -Visibility public
+Remove-Item Env:\GH_TOKEN
+```
+
+For bulk publishing, see [PUBLISH.md](PUBLISH.md).
 ## License
 
 MIT.
