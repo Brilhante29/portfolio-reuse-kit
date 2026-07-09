@@ -9,7 +9,7 @@ status: scaffold
 claim: <one sentence claim>
 stack: []
 language_profile:
-  primary: <python|java|go|typescript|terraform>
+  primary: <python|java|go|typescript|angular|nextjs|terraform>
   secondary: []
   reason: <why this profile governs the repo>
 architecture:
@@ -44,6 +44,7 @@ reuse:
     - programs
     - architecture
     - language-profiles
+    - proficiency-map
     - design-system
     - sdd
     - harness

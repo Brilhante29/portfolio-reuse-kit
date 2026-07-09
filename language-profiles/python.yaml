@@ -9,7 +9,16 @@ required_tooling:
   - ruff
   - mypy_when_reasonable
   - pydantic_for_contracts
+  - mlflow_when_experiment_tracking_is_part_of_claim
+  - airflow_when_orchestration_is_part_of_claim
   - docker
+stack_addons:
+  mlflow:
+    use_when: [experiment_tracking, model_registry, run_comparison, model_lifecycle]
+  airflow:
+    use_when: [scheduled_pipeline, dependency_graph, retries, backfills, orchestration]
+  notebooks:
+    rule: explanation_allowed_but_not_default_runtime
 architecture_mapping:
   pipeline: [stages, artifacts, benchmarks, tests]
   clean-architecture: [domain, application, infra, tests]

@@ -38,6 +38,7 @@ foreach ($dir in $standardDirs) {
 New-Item -ItemType Directory -Force -Path (Join-Path $portfolioTarget "catalog") | Out-Null
 Copy-Item -Force -Path (Join-Path $root "catalog\programs.yaml") -Destination (Join-Path $portfolioTarget "catalog\programs.yaml")
 Copy-Item -Force -Path (Join-Path $root "catalog\projects.yaml") -Destination (Join-Path $portfolioTarget "catalog\projects.yaml")
+Copy-Item -Force -Path (Join-Path $root "catalog\proficiency.yaml") -Destination (Join-Path $portfolioTarget "catalog\proficiency.yaml")
 
 New-Item -ItemType Directory -Force -Path (Join-Path $portfolioTarget "contracts") | Out-Null
 Copy-Item -Force -Path (Join-Path $root "contracts\project.schema.json") -Destination (Join-Path $portfolioTarget "contracts\project.schema.json")

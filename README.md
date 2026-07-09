@@ -2,7 +2,7 @@
 
 Reusable engineering layer for a 30-repository technical portfolio.
 
-This repository is the shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, architecture decision rules, language profiles, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
+This repository is the shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, architecture decision rules, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
 
 It is intentionally not one of the portfolio projects. It exists so every project can be created, evaluated, documented, and published with the same level of rigor.
 
@@ -47,8 +47,9 @@ Every completed project must provide:
 portfolio-reuse-kit
   catalog/           -> portfolio source of truth and program grouping
   architecture/      -> decision matrix for MVC, modular, Clean, Hexagonal, MVVM, pipeline, etc.
-  language-profiles/ -> language-specific repo standards
+  language-profiles/ -> language/framework-specific repo standards
   design-system/     -> README, diagram, dashboard, and benchmark presentation standards
+  catalog/proficiency.yaml -> GitHub/LinkedIn proficiency signals and stack decision order
   contracts/         -> schemas every project must satisfy
   templates/         -> reusable project scaffolding
   sdd/               -> specification-driven development templates
@@ -108,7 +109,7 @@ Remove-Item Env:\GH_TOKEN
 |---|---|
 | `catalog/` | Source of truth for all 30 projects, program grouping, stack, claim, benchmark, and references. |
 | `architecture/` | Decision matrix for choosing software architecture by problem forces. |
-| `language-profiles/` | Language-specific conventions for Python, Java, Go, TypeScript, and Terraform. |
+| `language-profiles/` | Language/framework-specific conventions for Python, Java, Go, TypeScript, Angular, Next.js, and Terraform. |
 | `design-system/` | Shared README, diagram, badge, benchmark, and dashboard standards. |
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
 | `templates/` | Files copied into new projects: README, manifest, references, Dockerfiles, CI. |
@@ -163,6 +164,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Reuse layer architecture](docs/reuse-layer.md)
 - [Architecture decision guide](docs/architecture-decision-guide.md)
 - [Portfolio operating model](docs/portfolio-operating-model.md)
+- [Proficiency map](docs/proficiency-map.md)
 - [Project lifecycle](docs/project-lifecycle.md)
 - [Repository standard](docs/repository-standard.md)
 - [Usage](docs/usage.md)

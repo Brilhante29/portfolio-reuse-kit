@@ -15,7 +15,7 @@ This repository is a reusable platform layer for the portfolio. It should answer
 | Portfolio registry | `catalog/` | Defines the 30 projects, program groups, and intended evidence. |
 | Project contract | `contracts/` | Defines required shape for `project.yaml` and benchmark JSON. |
 | Architecture selection | `architecture/` | Provides the decision matrix for MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, and microservices. |
-| Language standards | `language-profiles/` | Provides language-specific layout, testing, lint, Docker, and benchmark expectations. |
+| Language standards | `language-profiles/` | Provides language/framework-specific layout, testing, lint, Docker, and benchmark expectations. |
 | Design system | `design-system/` | Provides shared README, diagram, badge, dashboard, and benchmark presentation rules. |
 | Scaffolding | `templates/` | Provides reusable files copied into each project. |
 | Specification | `sdd/` | Forces scope, architecture, metrics, and acceptance criteria before implementation. |
@@ -35,6 +35,7 @@ Owned by this kit:
 - architecture decision matrix
 - architecture ADR template
 - language profiles
+- proficiency map for GitHub/LinkedIn signals
 - design-system tokens
 - SDD templates
 - benchmark result schema

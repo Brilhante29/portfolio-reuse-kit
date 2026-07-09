@@ -31,7 +31,7 @@ powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
   -TargetRepo C:\path\to\repo
 ```
 
-This installs agent skills and a local `.portfolio/` snapshot with program catalog, architecture matrix, language profiles, design system, and schemas.
+This installs agent skills and a local `.portfolio/` snapshot with program catalog, proficiency map, architecture matrix, language/framework profiles, design system, and schemas.
 
 ## Validate The Kit
 
@@ -39,7 +39,7 @@ This installs agent skills and a local `.portfolio/` snapshot with program catal
 powershell -ExecutionPolicy Bypass -File tools/validate-kit.ps1
 ```
 
-The validator checks required files, architecture assets, program catalog, language profiles, design-system assets, skill frontmatter, JSON schema syntax, Python syntax, PowerShell syntax, forbidden legacy wording, and catalog count.
+The validator checks required files, architecture assets, program catalog, proficiency map, language/framework profiles, design-system assets, skill frontmatter, JSON schema syntax, Python syntax, PowerShell syntax, forbidden legacy wording, and catalog count.
 
 ## Benchmark A Command
 
