@@ -27,10 +27,21 @@ $requiredFiles = @(
   ".gitattributes",
   "catalog/projects.yaml",
   "catalog/projects.md",
+  "catalog/programs.yaml",
   "catalog/reuse-policy.md",
+  "architecture/decision-matrix.yaml",
+  "design-system/README.md",
+  "design-system/tokens.yaml",
+  "language-profiles/python.yaml",
+  "language-profiles/java.yaml",
+  "language-profiles/go.yaml",
+  "language-profiles/typescript.yaml",
+  "language-profiles/terraform.yaml",
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
   "docs/reuse-layer.md",
+  "docs/architecture-decision-guide.md",
+  "docs/portfolio-operating-model.md",
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
   "docs/usage.md",
@@ -42,6 +53,7 @@ $requiredFiles = @(
   "sdd/templates/spec.md",
   "sdd/templates/benchmark-plan.md",
   "sdd/templates/adr.md",
+  "sdd/templates/architecture-decision.md",
   "sdd/templates/release-checklist.md",
   "templates/README-project.md",
   "templates/project.yaml",
@@ -58,9 +70,15 @@ $requiredDirs = @(
   ".codex/skills/portfolio-project",
   ".codex/skills/spec-driven-project",
   ".codex/skills/benchmark-harness",
+  ".codex/skills/architecture-selector",
+  ".codex/skills/language-standards",
+  ".codex/skills/design-system",
   ".claude/skills/portfolio-project",
   ".claude/skills/spec-driven-project",
-  ".claude/skills/benchmark-harness"
+  ".claude/skills/benchmark-harness",
+  ".claude/skills/architecture-selector",
+  ".claude/skills/language-standards",
+  ".claude/skills/design-system"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -80,8 +98,12 @@ foreach ($skill in $skillFiles) {
 }
 
 $projectCount = (Select-String -Path (Join-Path $root "catalog/projects.yaml") -Pattern "^  - id: ").Count
+$programCount = (Select-String -Path (Join-Path $root "catalog/programs.yaml") -Pattern "^  - id: ").Count
 if ($projectCount -ne 30) {
   $failures.Add("Expected 30 projects in catalog/projects.yaml; found $projectCount")
+}
+if ($programCount -lt 5) {
+  $failures.Add("Expected at least 5 programs in catalog/programs.yaml; found $programCount")
 }
 
 python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null

@@ -18,9 +18,11 @@ The generated repo contains:
 - `REFERENCES.md`
 - `sdd/spec.md`
 - `sdd/benchmark-plan.md`
+- `sdd/architecture-decision.md`
 - `benchmarks/results/.gitkeep`
 - `.codex/skills/*`
 - `.claude/skills/*`
+- `.portfolio/*` standards snapshot when `-InstallSkills` is used
 
 ## Install Skills Later
 
@@ -29,13 +31,15 @@ powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
   -TargetRepo C:\path\to\repo
 ```
 
+This installs agent skills and a local `.portfolio/` snapshot with program catalog, architecture matrix, language profiles, design system, and schemas.
+
 ## Validate The Kit
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools/validate-kit.ps1
 ```
 
-The validator checks required files, skill frontmatter, JSON schema syntax, Python syntax, PowerShell syntax, and catalog count.
+The validator checks required files, architecture assets, program catalog, language profiles, design-system assets, skill frontmatter, JSON schema syntax, Python syntax, PowerShell syntax, forbidden legacy wording, and catalog count.
 
 ## Benchmark A Command
 
@@ -52,6 +56,7 @@ python harness/compare_results.py old.json new.json
 ```
 
 Use this for before/after optimization posts.
+
 ## Publish To GitHub
 
 Publish the current repo without saving the token in the remote URL:

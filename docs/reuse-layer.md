@@ -1,18 +1,22 @@
 # Reuse Layer Architecture
 
-This repository is a reusable platform layer for the portfolio. It should answer four questions for every project:
+This repository is a reusable platform layer for the portfolio. It should answer five questions for every project:
 
-1. What is this project supposed to prove?
-2. Which stack and reusable standards does it inherit?
-3. How is the claim measured?
-4. What must be true before the project is published?
+1. What larger portfolio program does this project strengthen?
+2. What is this project supposed to prove?
+3. Which architecture best fits the problem forces?
+4. Which language and design standards does it inherit?
+5. How is the claim measured before publication?
 
 ## Layers
 
 | Layer | Path | Responsibility |
 |---|---|---|
-| Portfolio registry | `catalog/` | Defines the 30 projects and their intended evidence. |
+| Portfolio registry | `catalog/` | Defines the 30 projects, program groups, and intended evidence. |
 | Project contract | `contracts/` | Defines required shape for `project.yaml` and benchmark JSON. |
+| Architecture selection | `architecture/` | Provides the decision matrix for MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, and microservices. |
+| Language standards | `language-profiles/` | Provides language-specific layout, testing, lint, Docker, and benchmark expectations. |
+| Design system | `design-system/` | Provides shared README, diagram, badge, dashboard, and benchmark presentation rules. |
 | Scaffolding | `templates/` | Provides reusable files copied into each project. |
 | Specification | `sdd/` | Forces scope, architecture, metrics, and acceptance criteria before implementation. |
 | Measurement | `harness/` and `metrics/` | Provides repeatable benchmark execution and metric vocabulary. |
@@ -25,8 +29,13 @@ This kit owns shared process and infrastructure. Individual portfolio projects o
 
 Owned by this kit:
 
+- program catalog
 - README structure
 - manifest schema
+- architecture decision matrix
+- architecture ADR template
+- language profiles
+- design-system tokens
 - SDD templates
 - benchmark result schema
 - CI templates
@@ -41,7 +50,7 @@ Owned by each project:
 - dataset fixtures
 - benchmark script details
 - measured results
-- architecture decisions specific to the project
+- final architecture decision for the project
 - project-specific tests
 
 ## Project Contract
@@ -54,6 +63,8 @@ README.md
 REFERENCES.md
 sdd/spec.md
 sdd/benchmark-plan.md
+sdd/architecture-decision.md
+.portfolio/*
 benchmarks/results/.gitkeep
 .codex/skills/*
 .claude/skills/*

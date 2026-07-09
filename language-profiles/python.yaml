@@ -1,0 +1,25 @@
+language: python
+applies_to: [ai, ml, data, rag, benchmark, fastapi]
+package_layout:
+  default: src/<package_name>
+  tests: tests
+  benchmarks: benchmarks
+required_tooling:
+  - pytest
+  - ruff
+  - mypy_when_reasonable
+  - pydantic_for_contracts
+  - docker
+architecture_mapping:
+  pipeline: [stages, artifacts, benchmarks, tests]
+  clean-architecture: [domain, application, infra, tests]
+  hexagonal: [domain, application/ports, adapters, tests]
+  layered: [api, services, repositories, tests]
+benchmark_rules:
+  - benchmark command must write JSON under benchmarks/results
+  - fixtures must be small enough for Docker default path
+  - random seeds must be explicit for ML/data demos
+readme_rules:
+  - include dataset or fixture description
+  - include metric definitions
+  - include CPU/GPU note when relevant

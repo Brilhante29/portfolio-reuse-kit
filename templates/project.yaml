@@ -1,12 +1,50 @@
 id: <id>
 name: <project-name>
+program:
+  id: <ai-evaluation-retrieval|applied-computer-vision|backend-reliability-platform|mlops-data-platform|delivery-observability-infra>
+  narrative_fit: <how this repo strengthens the program story>
+  shared_assets:
+    - <program-level reusable asset>
 status: scaffold
 claim: <one sentence claim>
 stack: []
+language_profile:
+  primary: <python|java|go|typescript|terraform>
+  secondary: []
+  reason: <why this profile governs the repo>
+architecture:
+  style: <mvc|layered|modular-monolith|clean-architecture|hexagonal|cqrs-event-sourcing|event-driven|mvvm|pipeline|serverless|microservices>
+  reason: <why this problem and benchmark fit this architecture>
+  problem_forces:
+    domain_complexity: <low|medium|high>
+    integration_pressure: <low|medium|high>
+    ui_state_complexity: <none|low|medium|high>
+    data_or_ml_reproducibility: <low|medium|high>
+    auditability: <low|medium|high>
+    throughput_or_async: <low|medium|high>
+    independent_deployability: <low|medium|high>
+  dependency_rule: <dependency direction rule>
+  boundaries:
+    - <module/layer/context boundary>
+  rejected_alternatives:
+    - style: <alternative>
+      reason: <why it was not chosen>
+design_system:
+  tokens: design-system/tokens.yaml
+  readme_components:
+    - readme_header
+    - benchmark_card
+    - architecture_card
+    - references_table
+  diagram_required: true
 reuse:
   kit_version: local
   uses:
     - catalog
+    - programs
+    - architecture
+    - language-profiles
+    - design-system
     - sdd
     - harness
     - templates
