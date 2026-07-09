@@ -13,6 +13,12 @@ $claudeSource = Join-Path $root ".claude\skills"
 $codexTarget = Join-Path $target ".codex\skills"
 $claudeTarget = Join-Path $target ".claude\skills"
 
+foreach ($path in @($codexSource, $claudeSource)) {
+  if (-not (Test-Path -LiteralPath $path)) {
+    throw "Missing skill source: $path"
+  }
+}
+
 New-Item -ItemType Directory -Force -Path $codexTarget | Out-Null
 New-Item -ItemType Directory -Force -Path $claudeTarget | Out-Null
 

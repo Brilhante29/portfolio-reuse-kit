@@ -4,10 +4,21 @@ param(
   [Parameter(Mandatory=$true)]
   [string]$Name,
   [Parameter(Mandatory=$true)]
-  [string]$TargetDir
+  [string]$TargetDir,
+  [switch]$InstallSkills,
+  [switch]$InitializeGit
 )
 
 $ErrorActionPreference = "Stop"
+
+function Write-Utf8NoBom {
+  param(
+    [Parameter(Mandatory=$true)] [string]$Path,
+    [Parameter(Mandatory=$true)] [string]$Content
+  )
+  $encoding = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllText($Path, $Content, $encoding)
+}
 
 $root = Split-Path -Parent $PSScriptRoot
 $targetRoot = Resolve-Path -LiteralPath $TargetDir
@@ -25,10 +36,32 @@ Copy-Item (Join-Path $root "templates\README-rochedo.md") (Join-Path $target "RE
 Copy-Item (Join-Path $root "templates\REFERENCES.md") (Join-Path $target "REFERENCES.md")
 Copy-Item (Join-Path $root "sdd\templates\spec.md") (Join-Path $target "sdd\spec.md")
 Copy-Item (Join-Path $root "sdd\templates\benchmark-plan.md") (Join-Path $target "sdd\benchmark-plan.md")
+Copy-Item (Join-Path $root "sdd\templates\release-checklist.md") (Join-Path $target "sdd\release-checklist.md")
+Copy-Item (Join-Path $root "LICENSE") (Join-Path $target "LICENSE")
+Copy-Item (Join-Path $root ".gitignore") (Join-Path $target ".gitignore")
+Copy-Item (Join-Path $root ".gitattributes") (Join-Path $target ".gitattributes")
+Copy-Item (Join-Path $root ".editorconfig") (Join-Path $target ".editorconfig")
 
-(Get-Content (Join-Path $target "README.md")) `
+$readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<id>", $Id `
-  -replace "<project-name>", $Name |
-  Set-Content (Join-Path $target "README.md")
+  -replace "<project-name>", $Name
+Write-Utf8NoBom -Path (Join-Path $target "README.md") -Content $readmeContent
+
+$specContent = (Get-Content (Join-Path $target "sdd\spec.md") -Raw) `
+  -replace "<id>", $Id `
+  -replace "<project-name>", $Name
+Write-Utf8NoBom -Path (Join-Path $target "sdd\spec.md") -Content $specContent
+
+Write-Utf8NoBom -Path (Join-Path $target "benchmarks\results\.gitkeep") -Content ""
+
+if ($InstallSkills) {
+  & (Join-Path $PSScriptRoot "install-project-skills.ps1") -TargetRepo $target
+}
+
+if ($InitializeGit) {
+  git -C $target init -b main | Out-Null
+  git -C $target add . | Out-Null
+  git -C $target commit -m "Initial portfolio scaffold" | Out-Null
+}
 
 Write-Host "Created $target"

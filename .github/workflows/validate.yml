@@ -1,0 +1,23 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate JSON schema
+        run: python -m json.tool harness/result.schema.json > /dev/null
+      - name: Validate Python syntax
+        run: python -m py_compile harness/bench.py harness/compare_results.py
+      - name: Validate kit structure
+        shell: pwsh
+        run: ./tools/validate-kit.ps1
+      - name: Smoke benchmark harness
+        run: python harness/bench.py --project kit-ci --metric latency_ms --unit ms --repeat 1 --warmup 0 --out-dir /tmp/kit-results python --version

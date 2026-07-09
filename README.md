@@ -1,55 +1,111 @@
 # Portfolio Reuse Kit
 
-Repositorio base para construir os 30 projetos com o mesmo padrao de qualidade: Docker, README com numero, SDD, benchmark reproduzivel, referencias e skills para agentes.
+Reusable engineering kit for building a 30-repository technical portfolio with the same release standard: specification first, Docker path, reproducible benchmark, clear references, and agent-readable skills.
 
-Este repo nao e um dos 30 projetos. Ele e a fabrica dos projetos.
+This repository is not one of the 30 portfolio projects. It is the factory that keeps them consistent.
 
-## O que ele prove
+## Why This Exists
 
-- `catalog/`: matriz dos 30 projetos, stacks e metricas.
-- `sdd/`: templates de especificacao antes de codar.
-- `harness/`: scripts para rodar benchmark e comparar resultados.
-- `templates/`: README, Dockerfile, CI e estruturas reutilizaveis.
-- `.codex/skills/`: skills para Codex usar dentro do repo.
-- `.claude/skills/`: skills equivalentes para Claude Code.
-- `tools/`: instaladores e validadores locais.
+A portfolio repo should not be a demo folder. Each project must prove one concrete claim with a number that can be reproduced from a clean checkout.
 
-## Fluxo recomendado
+This kit provides the shared contract:
 
-1. Escolha um projeto no `catalog/projects.yaml`.
-2. Crie uma pasta nova a partir dos templates.
-3. Preencha `sdd/spec.md` antes de implementar.
-4. Rode o benchmark com `harness/bench.py` ou um script especifico.
-5. Grave o resultado em `benchmarks/results/`.
-6. Abra o README com o numero do projeto e o principal resultado.
+- one visible project number
+- one measurable claim
+- one Docker path
+- one benchmark result in JSON
+- one reuse/reference policy
+- one set of skills for Codex and Claude Code
 
-## Regras dos 30 rochedos
+## Quickstart
 
-- Um comando Docker documentado.
-- Um benchmark reproduzivel.
-- Um numero no topo do README.
-- Um `REFERENCES.md` com repos e docs usados como referencia.
-- Nada vazio, nada pinado sem resultado.
-
-## Skills
-
-As skills estao duplicadas em `.codex/skills` e `.claude/skills` para uso por projeto. Para instalar em outro repo, copie essas pastas para a raiz do repo alvo, ou use:
+Create a new scaffold:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 -TargetRepo C:\path\to\repo
+powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
+  -Id 3 `
+  -Name rag-knowledge-base `
+  -TargetDir C:\Users\Guilherme\Desktop\repos-github `
+  -InstallSkills `
+  -InitializeGit
 ```
 
-Para instalacao pessoal, copie cada skill para:
+Install the shared skills into an existing repo:
 
-- Codex: `~/.codex/skills/<skill-name>/SKILL.md`
-- Claude Code: `~/.claude/skills/<skill-name>/SKILL.md`
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
+  -TargetRepo C:\Users\Guilherme\Desktop\repos-github\rag-knowledge-base
+```
 
-As skills usam somente `name` e `description` no frontmatter para manter compatibilidade simples.
+Validate this kit:
 
-## Ordem inicial
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/validate-kit.ps1
+```
 
-1. `rag-knowledge-base`
-2. `spring-hexagonal-payments`
-3. `mini-aws-emulator`
-4. `mlops-end2end`
-5. `yolo-training-pipeline`
+Run a generic benchmark wrapper:
+
+```powershell
+python harness/bench.py --project kit-smoke --metric latency_ms --unit ms --repeat 3 python --version
+```
+
+## Repository Layout
+
+| Path | Purpose |
+|---|---|
+| `catalog/` | Source of truth for the 30 projects, stacks, claims, and benchmark targets. |
+| `sdd/` | Specification Driven Development templates. |
+| `harness/` | Reusable benchmark scripts and result schema. |
+| `templates/` | README, Dockerfile, CI, and references templates. |
+| `.codex/skills/` | Codex skills copied into each project. |
+| `.claude/skills/` | Claude Code skills copied into each project. |
+| `tools/` | Local project creation, skill installation, and validation scripts. |
+| `docs/` | Human-readable operating model and repository standard. |
+
+## The Rochedo Standard
+
+Every portfolio project must ship with:
+
+- README opening with `# #<id> <project-name>`
+- one-sentence claim under `Proves`
+- benchmark result in the first screen of the README
+- Docker build/run instructions
+- `sdd/spec.md` and `sdd/benchmark-plan.md`
+- `REFERENCES.md` explaining clean reuse
+- JSON benchmark output under `benchmarks/results/`
+- no paid credential required for the default demo path
+
+Detailed rules live in [docs/repository-standard.md](docs/repository-standard.md).
+
+## Skills Included
+
+The same three skills are provided for Codex and Claude Code:
+
+| Skill | Use |
+|---|---|
+| `portfolio-rochedo` | Build or review one portfolio repository against the full standard. |
+| `sdd-rochedo` | Write spec, benchmark plan, ADRs, and acceptance criteria. |
+| `benchmark-harness` | Add or validate reproducible metrics, JSON results, and README tables. |
+
+## First Six Projects
+
+Recommended build order:
+
+1. `llm-eval-harness`
+2. `rag-knowledge-base`
+3. `spring-hexagonal-payments`
+4. `mini-aws-emulator`
+5. `mlops-end2end`
+6. `yolo-training-pipeline`
+
+The full catalog is in [catalog/projects.md](catalog/projects.md) and [catalog/projects.yaml](catalog/projects.yaml).
+
+## Reuse Policy
+
+Use public repositories as references, not as disguised copies. Reuse dependencies, architecture ideas, benchmark patterns, and documentation structure. Project-specific implementation, fixtures, benchmark scripts, and results must be original.
+
+See [catalog/reuse-policy.md](catalog/reuse-policy.md).
+
+## License
+
+MIT.
