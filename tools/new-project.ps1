@@ -38,6 +38,7 @@ Copy-Item (Join-Path $root "templates\REFERENCES.md") (Join-Path $target "REFERE
 Copy-Item (Join-Path $root "sdd\templates\spec.md") (Join-Path $target "sdd\spec.md")
 Copy-Item (Join-Path $root "sdd\templates\benchmark-plan.md") (Join-Path $target "sdd\benchmark-plan.md")
 Copy-Item (Join-Path $root "sdd\templates\architecture-decision.md") (Join-Path $target "sdd\architecture-decision.md")
+Copy-Item (Join-Path $root "sdd\templates\technical-decision.md") (Join-Path $target "sdd\technical-decision.md")
 Copy-Item (Join-Path $root "sdd\templates\release-checklist.md") (Join-Path $target "sdd\release-checklist.md")
 Copy-Item (Join-Path $root "LICENSE") (Join-Path $target "LICENSE")
 Copy-Item (Join-Path $root ".gitignore") (Join-Path $target ".gitignore")

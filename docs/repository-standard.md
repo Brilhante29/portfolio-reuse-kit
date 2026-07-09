@@ -16,7 +16,7 @@ It captures:
 - primary benchmark
 - release criteria
 
-The manifest should match `contracts/project.schema.json`.
+The manifest should match `contracts/project.schema.json`. It must include `decision_brain` for stack, messaging, database/runtime, library policy, and rejected options.
 
 ## 2. First Screen
 
@@ -88,6 +88,8 @@ Good reuse:
 
 - library dependency
 - architecture reference
+- technical decision reference
+- stack/messaging/library decision reference
 - benchmark idea
 - API contract reference
 

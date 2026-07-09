@@ -27,7 +27,7 @@ New-Item -ItemType Directory -Force -Path $portfolioTarget | Out-Null
 Copy-Item -Recurse -Force -Path (Join-Path $codexSource "*") -Destination $codexTarget
 Copy-Item -Recurse -Force -Path (Join-Path $claudeSource "*") -Destination $claudeTarget
 
-$standardDirs = @("architecture", "design-system", "language-profiles")
+$standardDirs = @("architecture", "decision-brain", "design-system", "language-profiles")
 foreach ($dir in $standardDirs) {
   $source = Join-Path $root $dir
   if (Test-Path -LiteralPath $source) {

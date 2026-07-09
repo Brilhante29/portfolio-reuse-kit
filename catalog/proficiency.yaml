@@ -16,6 +16,23 @@ reference_styles:
       - notebooks
       - images
       - repository-specific implementation
+backend:
+  spring-kotlin-backend:
+    use_when:
+      - enterprise backend signal matters
+      - transactional domain, consistency, payments, orders, multi-tenant, outbox, saga, or CQRS are central
+      - Kotlin fluency should be visible with Spring ecosystem depth
+    public_signal: "Kotlin + Spring backend with architecture, transactions, tests, and observability"
+  fastapi-backend:
+    use_when:
+      - Python backend is connected to ML, data, RAG, CV, model serving, or evaluation
+      - OpenAPI, Pydantic contracts, async I/O, and fast API iteration are part of the proof
+    public_signal: "FastAPI backend for AI/data products with typed contracts and benchmarks"
+  go-backend:
+    use_when:
+      - gateways, rate limiters, emulators, protocol benchmarks, networking, or low overhead services are central
+      - performance should be proven with p95/p99, allocation, pprof, or throughput evidence
+    public_signal: "Go backend for low-overhead services and measured performance"
 front_end:
   angular:
     use_when:
@@ -63,5 +80,5 @@ stack_decision_order:
   - portfolio_program
   - public_proficiency_signal
   - architecture
-  - language_or_framework_profile
+  - decision_brain_stack_profile
   - benchmark_and_post_angle

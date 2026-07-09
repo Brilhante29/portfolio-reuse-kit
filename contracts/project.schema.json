@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "PortfolioProjectManifest",
   "type": "object",
-  "required": ["id", "name", "program", "status", "claim", "stack", "language_profile", "architecture", "design_system", "benchmark", "release"],
+  "required": ["id", "name", "program", "status", "claim", "stack", "language_profile", "decision_brain", "architecture", "design_system", "benchmark", "release"],
   "properties": {
     "id": { "type": "integer", "minimum": 1, "maximum": 30 },
     "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
@@ -31,9 +31,60 @@
       "type": "object",
       "required": ["primary", "reason"],
       "properties": {
-        "primary": { "type": "string", "enum": ["python", "java", "go", "typescript", "angular", "nextjs", "terraform"] },
+        "primary": {
+          "type": "string",
+          "enum": [
+            "python",
+            "java",
+            "go",
+            "typescript",
+            "angular",
+            "nextjs",
+            "terraform",
+            "spring-kotlin-backend",
+            "fastapi-backend",
+            "go-backend"
+          ]
+        },
         "secondary": { "type": "array", "items": { "type": "string" } },
         "reason": { "type": "string", "minLength": 10 }
+      }
+    },
+    "decision_brain": {
+      "type": "object",
+      "required": ["stack_profile", "messaging", "database", "library_policy", "record_path"],
+      "properties": {
+        "stack_profile": {
+          "type": "string",
+          "enum": [
+            "spring-kotlin-backend",
+            "fastapi-backend",
+            "go-backend",
+            "angular",
+            "nextjs",
+            "python-ml",
+            "terraform"
+          ]
+        },
+        "messaging": {
+          "type": "string",
+          "enum": ["none", "outbox-only", "rabbitmq", "kafka", "redis-streams", "nats"]
+        },
+        "database": { "type": "string" },
+        "runtime": { "type": "string" },
+        "library_policy": { "type": "string", "minLength": 10 },
+        "record_path": { "type": "string" },
+        "rejected_options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["option", "reason"],
+            "properties": {
+              "option": { "type": "string" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "architecture": {
