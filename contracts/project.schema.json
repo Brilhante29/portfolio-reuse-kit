@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PortfolioProjectManifest",
+  "type": "object",
+  "required": ["id", "name", "status", "claim", "stack", "benchmark", "release"],
+  "properties": {
+    "id": { "type": "integer", "minimum": 1, "maximum": 30 },
+    "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "status": { "type": "string", "enum": ["scaffold", "implemented", "benchmarked", "published"] },
+    "claim": { "type": "string", "minLength": 10 },
+    "stack": { "type": "array", "items": { "type": "string" } },
+    "reuse": { "type": "object" },
+    "benchmark": {
+      "type": "object",
+      "required": ["primary_metric", "unit", "command", "result_path"],
+      "properties": {
+        "primary_metric": { "type": "string" },
+        "unit": { "type": "string" },
+        "command": { "type": "string" },
+        "result_path": { "type": "string" }
+      }
+    },
+    "release": {
+      "type": "object",
+      "required": ["docker", "no_secret_default_path", "readme_has_number", "references_documented"],
+      "properties": {
+        "docker": { "type": "string" },
+        "no_secret_default_path": { "type": "boolean" },
+        "readme_has_number": { "type": "boolean" },
+        "references_documented": { "type": "boolean" }
+      }
+    }
+  }
+}

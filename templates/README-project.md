@@ -1,8 +1,10 @@
 # #<id> <project-name>
 
-**Proves:** <one sentence>
+**Status:** scaffold
 
-**Benchmark:** `<metric> = <value> <unit>` on `<date>`.
+**Proves:** <one sentence claim>
+
+**Benchmark:** `<metric> = pending <unit>`.
 
 ## Run
 
@@ -17,15 +19,13 @@ docker run --rm <project-name>
 docker run --rm <project-name> benchmark
 ```
 
-| Metric | Value | Unit |
-|---|---:|---|
-| <metric> | <value> | <unit> |
+| Metric | Value | Unit | Notes |
+|---|---:|---|---|
+| <metric> | pending | <unit> | first reproducible baseline pending |
 
 ## Architecture
 
-```txt
-<brief diagram>
-```
+Defined in `sdd/spec.md` before implementation.
 
 ## Reproduce
 
@@ -36,8 +36,4 @@ docker run --rm <project-name> benchmark
 
 ## References
 
-This project was informed by:
-
-- <reference>: <what was reused>
-
-Implementation, fixtures, benchmark scripts and reported results are project-specific.
+See `REFERENCES.md`.

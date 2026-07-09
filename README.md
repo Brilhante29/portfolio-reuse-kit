@@ -1,25 +1,62 @@
 # Portfolio Reuse Kit
 
-Reusable engineering kit for building a 30-repository technical portfolio with the same release standard: specification first, Docker path, reproducible benchmark, clear references, and agent-readable skills.
+Reusable engineering layer for a 30-repository technical portfolio.
 
-This repository is not one of the 30 portfolio projects. It is the factory that keeps them consistent.
+This repository is the shared operating system for the portfolio: it defines project contracts, scaffolding, metrics, benchmark harnesses, documentation standards, agent skills, validation rules, and GitHub publication automation.
 
-## Why This Exists
+It is intentionally not one of the portfolio projects. It exists so every project can be created, evaluated, documented, and published with the same level of rigor.
 
-A portfolio repo should not be a demo folder. Each project must prove one concrete claim with a number that can be reproduced from a clean checkout.
+## What Problem This Solves
 
-This kit provides the shared contract:
+Without a reuse layer, each repository tends to drift:
 
-- one visible project number
-- one measurable claim
-- one Docker path
-- one benchmark result in JSON
-- one reuse/reference policy
-- one set of skills for Codex and Claude Code
+- different README structure
+- missing benchmark command
+- inconsistent Docker path
+- unclear reuse attribution
+- weak acceptance criteria
+- agent prompts rewritten from scratch
+- repeated CI and benchmark boilerplate
+
+This kit solves that by making every portfolio project follow the same contract.
+
+## Core Contract
+
+Every completed project must provide:
+
+- a `project.yaml` manifest
+- README opening with project number, claim, and benchmark result
+- `sdd/spec.md` and `sdd/benchmark-plan.md`
+- Docker build/run path
+- benchmark JSON compatible with `contracts/benchmark-result.schema.json`
+- `REFERENCES.md` with clean reuse attribution
+- validation before commit or publication
+- no paid secret required for the default demo path
+
+## Architecture
+
+```txt
+portfolio-reuse-kit
+  catalog/       -> portfolio source of truth
+  contracts/     -> schemas every project must satisfy
+  templates/     -> reusable project scaffolding
+  sdd/           -> specification-driven development templates
+  harness/       -> benchmark runners and result comparison
+  metrics/       -> metric registry and units
+  skills/        -> Codex and Claude Code operating instructions
+  tools/         -> create, validate, install, publish
+  docs/          -> human operating model
+```
+
+The intended flow is:
+
+```txt
+catalog entry -> scaffold -> project.yaml -> SDD -> implementation -> benchmark -> validation -> publication
+```
 
 ## Quickstart
 
-Create a new scaffold:
+Create a new project scaffold:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
@@ -30,14 +67,7 @@ powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
   -InitializeGit
 ```
 
-Install the shared skills into an existing repo:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
-  -TargetRepo C:\Users\Guilherme\Desktop\repos-github\rag-knowledge-base
-```
-
-Validate this kit:
+Validate the kit:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools/validate-kit.ps1
@@ -49,43 +79,42 @@ Run a generic benchmark wrapper:
 python harness/bench.py --project kit-smoke --metric latency_ms --unit ms --repeat 3 python --version
 ```
 
+Publish a repository:
+
+```powershell
+$env:GH_TOKEN = "<token>"
+powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
+  -RepoPath . `
+  -Owner Brilhante29 `
+  -RepoName portfolio-reuse-kit `
+  -Visibility public
+Remove-Item Env:\GH_TOKEN
+```
+
 ## Repository Layout
 
-| Path | Purpose |
+| Path | Responsibility |
 |---|---|
-| `catalog/` | Source of truth for the 30 projects, stacks, claims, and benchmark targets. |
-| `sdd/` | Specification Driven Development templates. |
-| `harness/` | Reusable benchmark scripts and result schema. |
-| `templates/` | README, Dockerfile, CI, and references templates. |
-| `.codex/skills/` | Codex skills copied into each project. |
-| `.claude/skills/` | Claude Code skills copied into each project. |
-| `tools/` | Local project creation, skill installation, and validation scripts. |
-| `docs/` | Human-readable operating model and repository standard. |
-
-## The Rochedo Standard
-
-Every portfolio project must ship with:
-
-- README opening with `# #<id> <project-name>`
-- one-sentence claim under `Proves`
-- benchmark result in the first screen of the README
-- Docker build/run instructions
-- `sdd/spec.md` and `sdd/benchmark-plan.md`
-- `REFERENCES.md` explaining clean reuse
-- JSON benchmark output under `benchmarks/results/`
-- no paid credential required for the default demo path
-
-Detailed rules live in [docs/repository-standard.md](docs/repository-standard.md).
+| `catalog/` | Source of truth for all 30 projects: id, stack, claim, benchmark, reuse references. |
+| `contracts/` | JSON schemas for project manifests and benchmark results. |
+| `templates/` | Files copied into new projects: README, manifest, references, Dockerfiles, CI. |
+| `sdd/` | Specification templates: spec, benchmark plan, ADR, release checklist. |
+| `harness/` | Benchmark runner, comparison script, k6 smoke script, benchmark schema. |
+| `metrics/` | Metric names, units, and optimization direction. |
+| `.codex/skills/` | Codex skills installed into generated projects. |
+| `.claude/skills/` | Claude Code skills installed into generated projects. |
+| `tools/` | Automation for project creation, validation, skill install, and GitHub publishing. |
+| `docs/` | Operating model for humans and agents. |
 
 ## Skills Included
 
-The same three skills are provided for Codex and Claude Code:
+The same skills are provided for Codex and Claude Code:
 
 | Skill | Use |
 |---|---|
-| `portfolio-rochedo` | Build or review one portfolio repository against the full standard. |
-| `sdd-rochedo` | Write spec, benchmark plan, ADRs, and acceptance criteria. |
-| `benchmark-harness` | Add or validate reproducible metrics, JSON results, and README tables. |
+| `portfolio-project` | Build, review, harden, validate, or publish one portfolio project. |
+| `spec-driven-project` | Write project manifest, SDD, benchmark plan, ADRs, and release criteria. |
+| `benchmark-harness` | Add or validate metrics, benchmark JSON, k6 checks, and README tables. |
 
 ## First Six Projects
 
@@ -100,28 +129,20 @@ Recommended build order:
 
 The full catalog is in [catalog/projects.md](catalog/projects.md) and [catalog/projects.yaml](catalog/projects.yaml).
 
+## Documentation
+
+- [Reuse layer architecture](docs/reuse-layer.md)
+- [Project lifecycle](docs/project-lifecycle.md)
+- [Repository standard](docs/repository-standard.md)
+- [Usage](docs/usage.md)
+- [Publish](PUBLISH.md)
+
 ## Reuse Policy
 
 Use public repositories as references, not as disguised copies. Reuse dependencies, architecture ideas, benchmark patterns, and documentation structure. Project-specific implementation, fixtures, benchmark scripts, and results must be original.
 
 See [catalog/reuse-policy.md](catalog/reuse-policy.md).
 
-
-## Publish to GitHub
-
-Use the built-in publisher instead of creating repositories by hand:
-
-```powershell
-$env:GH_TOKEN = "<token>"
-powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
-  -RepoPath . `
-  -Owner Brilhante29 `
-  -RepoName portfolio-reuse-kit `
-  -Visibility public
-Remove-Item Env:\GH_TOKEN
-```
-
-For bulk publishing, see [PUBLISH.md](PUBLISH.md).
 ## License
 
 MIT.

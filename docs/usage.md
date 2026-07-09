@@ -13,6 +13,7 @@ powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
 
 The generated repo contains:
 
+- `project.yaml`
 - `README.md`
 - `REFERENCES.md`
 - `sdd/spec.md`

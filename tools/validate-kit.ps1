@@ -28,16 +28,23 @@ $requiredFiles = @(
   "catalog/projects.yaml",
   "catalog/projects.md",
   "catalog/reuse-policy.md",
+  "contracts/project.schema.json",
+  "contracts/benchmark-result.schema.json",
+  "docs/reuse-layer.md",
+  "docs/project-lifecycle.md",
   "docs/repository-standard.md",
   "docs/usage.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
   "harness/k6/http-smoke.js",
+  "metrics/registry.yaml",
   "sdd/templates/spec.md",
   "sdd/templates/benchmark-plan.md",
   "sdd/templates/adr.md",
   "sdd/templates/release-checklist.md",
+  "templates/README-project.md",
+  "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
   "tools/publish-github.ps1",
@@ -48,11 +55,11 @@ $requiredFiles = @(
 foreach ($file in $requiredFiles) { Require-File $file }
 
 $requiredDirs = @(
-  ".codex/skills/portfolio-rochedo",
-  ".codex/skills/sdd-rochedo",
+  ".codex/skills/portfolio-project",
+  ".codex/skills/spec-driven-project",
   ".codex/skills/benchmark-harness",
-  ".claude/skills/portfolio-rochedo",
-  ".claude/skills/sdd-rochedo",
+  ".claude/skills/portfolio-project",
+  ".claude/skills/spec-driven-project",
   ".claude/skills/benchmark-harness"
 )
 
@@ -78,6 +85,8 @@ if ($projectCount -ne 30) {
 }
 
 python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null
+python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null
+python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null
 python -c "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')" | Out-Null
 
 $powerShellScripts = @(
@@ -95,6 +104,13 @@ foreach ($script in $powerShellScripts) {
   if ($errors.Count -gt 0) {
     foreach ($err in $errors) { $failures.Add("PowerShell parse error in ${script}: $($err.Message)") }
   }
+}
+
+$legacy = ("ro" + "che" + "do")
+$pattern = "$legacy|$($legacy.Substring(0,1).ToUpper() + $legacy.Substring(1))"
+$forbidden = rg -n $pattern $root 2>$null
+if ($LASTEXITCODE -eq 0) {
+  $failures.Add("Forbidden legacy project nickname found")
 }
 
 if ($failures.Count -gt 0) {

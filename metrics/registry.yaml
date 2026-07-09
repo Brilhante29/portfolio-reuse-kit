@@ -1,0 +1,46 @@
+metrics:
+  retrieval:
+    - name: recall_at_k
+      unit: ratio
+      higher_is_better: true
+    - name: latency_ms
+      unit: ms
+      higher_is_better: false
+    - name: cost_per_query
+      unit: usd
+      higher_is_better: false
+  llm_eval:
+    - name: exact_match
+      unit: ratio
+      higher_is_better: true
+    - name: f1
+      unit: ratio
+      higher_is_better: true
+    - name: task_success_rate
+      unit: ratio
+      higher_is_better: true
+  backend:
+    - name: p95_latency_ms
+      unit: ms
+      higher_is_better: false
+    - name: p99_latency_ms
+      unit: ms
+      higher_is_better: false
+    - name: throughput_rps
+      unit: requests_per_second
+      higher_is_better: true
+  mlops:
+    - name: time_to_production_minutes
+      unit: minutes
+      higher_is_better: false
+    - name: drift_alarm_vs_baseline
+      unit: decision
+      higher_is_better: true
+  data:
+    - name: rejected_rows_percent
+      unit: percent
+      higher_is_better: context_dependent
+  infra:
+    - name: provision_time_seconds
+      unit: seconds
+      higher_is_better: false

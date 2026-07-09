@@ -1,12 +1,12 @@
 # SDD
 
-SDD aqui significa Specification Driven Development.
+SDD means Specification Driven Development.
 
-Antes de implementar um rochedo, preencha:
+Before implementing a portfolio project, fill:
 
 1. `templates/spec.md`
 2. `templates/benchmark-plan.md`
-3. `templates/adr.md` quando houver decisao arquitetural relevante
-4. `templates/release-checklist.md` antes de publicar
+3. `templates/adr.md` when an architectural decision matters
+4. `templates/release-checklist.md` before publishing
 
-O objetivo e forcar cada repo a provar uma tese mensuravel.
+The goal is to force each repository to prove one measurable claim.

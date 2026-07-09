@@ -1,22 +1,40 @@
 # Repository Standard
 
-This is the minimum bar for each portfolio repository.
+This is the minimum bar for each portfolio repository generated or maintained through this kit.
 
-## 1. First Screen
+## 1. Manifest
+
+Every project must have `project.yaml`.
+
+It captures:
+
+- id and name
+- status
+- claim
+- stack
+- reused kit components
+- primary benchmark
+- release criteria
+
+The manifest should match `contracts/project.schema.json`.
+
+## 2. First Screen
 
 The README must open with:
 
 ```md
 # #<id> <project-name>
 
+**Status:** <scaffold|implemented|benchmarked|published>
+
 **Proves:** <one sentence claim>
 
 **Benchmark:** `<metric> = <value> <unit>` on `<date>`.
 ```
 
-If the project is only scaffolded, mark it clearly as `Status: scaffold` and do not pin or promote it.
+If the project is only scaffolded, keep `Status: scaffold` and do not present it as finished.
 
-## 2. Docker Path
+## 3. Docker Path
 
 Every completed repo needs a clean path:
 
@@ -25,11 +43,11 @@ docker build -t <project-name> .
 docker run --rm <project-name>
 ```
 
-If a service needs multiple dependencies, use Docker Compose but still document the one command that starts the default path.
+If a service needs dependencies, Docker Compose is acceptable, but the README must still document the default command path.
 
-## 3. Benchmark Contract
+## 4. Benchmark Contract
 
-A benchmark is valid only when it has:
+A valid benchmark has:
 
 - command
 - fixture or dataset description
@@ -44,16 +62,22 @@ Output path:
 benchmarks/results/*.json
 ```
 
-## 4. SDD Before Code
+Schema:
+
+```txt
+contracts/benchmark-result.schema.json
+```
+
+## 5. SDD Before Code
 
 Each repo starts with:
 
 - `sdd/spec.md`
 - `sdd/benchmark-plan.md`
 
-Add ADRs when choosing architecture, storage, model, protocol, benchmark methodology, or a major dependency.
+Add ADRs when choosing architecture, storage, model, protocol, benchmark methodology, or major dependency.
 
-## 5. Clean Reuse
+## 6. Clean Reuse
 
 Each repo must include `REFERENCES.md` with:
 
@@ -73,7 +97,7 @@ Bad reuse:
 - copied internals without attribution
 - AGPL code copied into a served project without understanding obligations
 
-## 6. Done Means Measured
+## 7. Done Means Measured
 
 A repo is done only when:
 

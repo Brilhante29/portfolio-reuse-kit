@@ -32,7 +32,8 @@ New-Item -ItemType Directory -Force -Path $target | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "sdd") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "benchmarks\results") | Out-Null
 
-Copy-Item (Join-Path $root "templates\README-rochedo.md") (Join-Path $target "README.md")
+Copy-Item (Join-Path $root "templates\README-project.md") (Join-Path $target "README.md")
+Copy-Item (Join-Path $root "templates\project.yaml") (Join-Path $target "project.yaml")
 Copy-Item (Join-Path $root "templates\REFERENCES.md") (Join-Path $target "REFERENCES.md")
 Copy-Item (Join-Path $root "sdd\templates\spec.md") (Join-Path $target "sdd\spec.md")
 Copy-Item (Join-Path $root "sdd\templates\benchmark-plan.md") (Join-Path $target "sdd\benchmark-plan.md")
@@ -46,6 +47,11 @@ $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<id>", $Id `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "README.md") -Content $readmeContent
+
+$manifestContent = (Get-Content (Join-Path $target "project.yaml") -Raw) `
+  -replace "<id>", $Id `
+  -replace "<project-name>", $Name
+Write-Utf8NoBom -Path (Join-Path $target "project.yaml") -Content $manifestContent
 
 $specContent = (Get-Content (Join-Path $target "sdd\spec.md") -Raw) `
   -replace "<id>", $Id `

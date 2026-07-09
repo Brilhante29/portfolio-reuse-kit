@@ -1,0 +1,23 @@
+id: <id>
+name: <project-name>
+status: scaffold
+claim: <one sentence claim>
+stack: []
+reuse:
+  kit_version: local
+  uses:
+    - catalog
+    - sdd
+    - harness
+    - templates
+    - skills
+benchmark:
+  primary_metric: <metric>
+  unit: <unit>
+  command: pending
+  result_path: benchmarks/results/*.json
+release:
+  docker: pending
+  no_secret_default_path: true
+  readme_has_number: true
+  references_documented: true
