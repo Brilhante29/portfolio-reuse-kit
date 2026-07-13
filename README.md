@@ -2,7 +2,7 @@
 
 Reusable decision brain and engineering layer for a 30-repository technical portfolio.
 
-This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, the agent graph, architecture decision rules, engineering principles, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
+This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, the agent graph, reuse-improvement loop, architecture decision rules, engineering principles, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
 
 It is intentionally not one of the portfolio projects. It exists so every project can be created, evaluated, documented, and published with the same level of rigor.
 
@@ -22,6 +22,7 @@ Without a reuse layer, each repository tends to drift:
 - weak acceptance criteria
 - agent prompts rewritten from scratch
 - no explicit graph for principal agents, specialist subagents, local-first execution, validation, and publication
+- no systematic feedback loop to improve the reuse kit while projects are built
 - repeated CI and benchmark boilerplate
 
 This kit solves that by making every portfolio project follow the same contract and decision flow.
@@ -37,7 +38,7 @@ Every completed project must provide:
 - a primary language/framework profile
 - shared design-system components
 - README opening with project number, claim, and benchmark result
-- `sdd/spec.md`, `sdd/benchmark-plan.md`, `sdd/architecture-decision.md`, `sdd/technical-decision.md`, and `sdd/agent-handoff.md`
+- `sdd/spec.md`, `sdd/benchmark-plan.md`, `sdd/architecture-decision.md`, `sdd/technical-decision.md`, and `sdd/agent-handoff.md`, `sdd/reuse-improvement-review.md`
 - Docker build/run path
 - benchmark JSON compatible with `contracts/benchmark-result.schema.json`
 - `REFERENCES.md` with clean reuse attribution
@@ -50,7 +51,7 @@ Every completed project must provide:
 portfolio-reuse-kit
   catalog/           -> portfolio source of truth and program grouping
   architecture/      -> decision matrix for MVC, modular, Clean, Hexagonal, MVVM, pipeline, etc.
-  decision-brain/    -> agent graph, engineering principles, stack, API style, messaging, cloud, database/runtime, and library decision matrices
+  decision-brain/    -> agent graph, reuse-improvement loop, engineering principles, stack, API style, messaging, cloud, database/runtime, and library decision matrices
   language-profiles/ -> language/framework-specific repo standards
   design-system/     -> README, diagram, dashboard, and benchmark presentation standards
   contracts/         -> schemas every project must satisfy
@@ -117,7 +118,7 @@ Remove-Item Env:\GH_TOKEN
 | `design-system/` | Shared README, diagram, badge, benchmark, and dashboard standards. |
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
 | `templates/` | Files copied into new projects: README, manifest, AGENTS, references, Dockerfiles, CI. |
-| `sdd/` | Specification templates: spec, benchmark plan, ADR, technical decision, agent handoff, release checklist. |
+| `sdd/` | Specification templates: spec, benchmark plan, ADR, technical decision, agent handoff, reuse improvement review, release checklist. |
 | `harness/` | Benchmark runner, comparison script, k6 smoke script, benchmark schema. |
 | `metrics/` | Metric names, units, and optimization direction. |
 | `.codex/skills/` | Codex skills installed into generated projects. |
@@ -134,6 +135,7 @@ The same skills are provided for Codex and Claude Code:
 | `portfolio-project` | Build, review, harden, validate, or publish one portfolio project. |
 | `spec-driven-project` | Write project manifest, SDD, benchmark plan, ADRs, and release criteria. |
 | `agent-orchestration` | Coordinate principal agent, subagents, local-first runtime, benchmark evidence, validation, and publication gates. |
+| `reuse-improvement-review` | Question whether project work should improve the reuse kit and patch/backlog/reject improvements. |
 | `architecture-selector` | Choose MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, or microservices for the specific problem. |
 | `engineering-principles` | Enforce decoupling, SOLID, LSP, KISS, YAGNI, DRY, dependency inversion, and testability evidence. |
 | `stack-decision` | Choose concrete stack profile from the decision brain. |
@@ -179,6 +181,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Architecture decision guide](docs/architecture-decision-guide.md)
 - [Decision brain](docs/decision-brain.md)
 - [Agent graph](docs/agent-graph.md)
+- [Reuse improvement loop](docs/reuse-improvement-loop.md)
 - [Engineering principles](docs/engineering-principles.md)
 - [API style decision](docs/api-style-decision.md)
 - [Cloud local-first](docs/cloud-local-first.md)

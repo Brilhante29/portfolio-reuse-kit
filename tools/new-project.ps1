@@ -42,6 +42,7 @@ Copy-Item (Join-Path $root "sdd\templates\benchmark-plan.md") (Join-Path $target
 Copy-Item (Join-Path $root "sdd\templates\architecture-decision.md") (Join-Path $target "sdd\architecture-decision.md")
 Copy-Item (Join-Path $root "sdd\templates\technical-decision.md") (Join-Path $target "sdd\technical-decision.md")
 Copy-Item (Join-Path $root "sdd\templates\agent-handoff.md") (Join-Path $target "sdd\agent-handoff.md")
+Copy-Item (Join-Path $root "sdd\templates\reuse-improvement-review.md") (Join-Path $target "sdd\reuse-improvement-review.md")
 Copy-Item (Join-Path $root "sdd\templates\release-checklist.md") (Join-Path $target "sdd\release-checklist.md")
 Copy-Item (Join-Path $root "LICENSE") (Join-Path $target "LICENSE")
 Copy-Item (Join-Path $root ".gitignore") (Join-Path $target ".gitignore")
@@ -67,6 +68,11 @@ $handoffContent = (Get-Content (Join-Path $target "sdd\agent-handoff.md") -Raw) 
   -replace "<id>", $Id `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "sdd\agent-handoff.md") -Content $handoffContent
+
+$reuseReviewContent = (Get-Content (Join-Path $target "sdd\reuse-improvement-review.md") -Raw) `
+  -replace "<id>", $Id `
+  -replace "<project-name>", $Name
+Write-Utf8NoBom -Path (Join-Path $target "sdd\reuse-improvement-review.md") -Content $reuseReviewContent
 
 Write-Utf8NoBom -Path (Join-Path $target "benchmarks\results\.gitkeep") -Content ""
 

@@ -45,6 +45,7 @@ flowchart TD
   O --> BH["Benchmark Harness Agent"]
   O --> DS["Design System Agent"]
   O --> SR["Security + Reuse Reviewer"]
+  O --> RI["Reuse Improvement Reviewer"]
   O --> RP["Release / CI Publisher"]
 
   CL --> LF["Local-first runtime: Docker + Kumo + local services"]
@@ -72,6 +73,7 @@ flowchart TD
 | `benchmark-harness-agent` | What number proves the claim? | Benchmark plan, command, JSON result, README table. |
 | `design-system-agent` | Does the repo look consistent with the portfolio? | README structure, diagram style, metric presentation. |
 | `security-reuse-reviewer` | Are secrets, paid paths, and reuse attribution clean? | `REFERENCES.md`, release checklist, no-token review. |
+| `reuse-improvement-reviewer` | Should this project improve the reuse kit? | `sdd/reuse-improvement-review.md`, optional kit patch. |
 | `release-ci-publisher` | Is the repo publishable? | Validation, commit, push, CI status. |
 
 ## Local-First Runtime
@@ -98,6 +100,7 @@ Before implementation starts, the principal agent must produce or update:
 - `sdd/technical-decision.md`
 - `sdd/benchmark-plan.md`
 - `sdd/agent-handoff.md`
+- `sdd/reuse-improvement-review.md`
 
 Before publication, the release path must prove:
 

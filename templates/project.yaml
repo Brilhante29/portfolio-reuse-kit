@@ -18,6 +18,10 @@ decision_brain:
     source: .portfolio/decision-brain/agent-graph.yaml
     handoff: sdd/agent-handoff.md
     local_first_runtime: docker+kumo-when-cloud-behavior-is-needed
+  reuse_improvement_loop:
+    source: .portfolio/decision-brain/reuse-improvement-loop.yaml
+    review_path: sdd/reuse-improvement-review.md
+    current_status: pending
   principles:
     coupling_rule: <domain/use cases do not depend on framework, database, broker, cloud SDK, transport, or UI>
     solid: [srp, ocp, lsp, isp, dip]
@@ -76,6 +80,7 @@ reuse:
     - proficiency-map
     - decision-brain
     - agent-graph
+    - reuse-improvement-loop
     - architecture
     - language-profiles
     - design-system

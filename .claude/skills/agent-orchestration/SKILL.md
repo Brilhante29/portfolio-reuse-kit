@@ -1,6 +1,6 @@
 ---
 name: agent-orchestration
-description: Use the portfolio agent graph to coordinate principal-agent work, specialist subagent responsibilities, local-first execution, benchmark evidence, validation, and publication gates for generated portfolio repositories.
+description: Use the portfolio agent graph to coordinate principal-agent work, specialist subagent responsibilities, local-first execution, benchmark evidence, validation, reuse improvement, and publication gates for generated portfolio repositories.
 ---
 
 # Agent Orchestration
@@ -11,7 +11,7 @@ Read `decision-brain/agent-graph.yaml` in this kit, or `.portfolio/decision-brai
 
 ## Operating Rule
 
-The principal agent owns the user objective, sequencing, conflict resolution, validation, and publication decision.
+The principal agent owns the user objective, sequencing, conflict resolution, validation, reuse improvement, and publication decision.
 
 Specialist subagents own narrow decisions:
 
@@ -26,9 +26,10 @@ Specialist subagents own narrow decisions:
 9. `benchmark-harness-agent`
 10. `design-system-agent`
 11. `security-reuse-reviewer`
-12. `release-ci-publisher`
+12. `reuse-improvement-reviewer`
+13. `release-ci-publisher`
 
-If a runtime cannot spawn subagents, execute the same roles sequentially and record the outputs in `sdd/agent-handoff.md`.
+If a runtime cannot spawn subagents, execute the same roles sequentially and record the outputs in `sdd/agent-handoff.md` and `sdd/reuse-improvement-review.md`.
 
 ## Required Decision Order
 
@@ -43,7 +44,8 @@ If a runtime cannot spawn subagents, execute the same roles sequentially and rec
 9. Benchmark plan.
 10. Design-system presentation.
 11. Security and reuse review.
-12. Release validation.
+12. Reuse improvement review.
+13. Release validation.
 
 ## Local-First Rule
 
@@ -59,6 +61,7 @@ Do not publish or call a project finished until these exist:
 - `sdd/technical-decision.md`
 - `sdd/benchmark-plan.md`
 - `sdd/agent-handoff.md`
+- `sdd/reuse-improvement-review.md`
 - Docker run path
 - benchmark JSON
 - README number, claim, and result

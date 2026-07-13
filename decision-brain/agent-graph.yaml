@@ -29,6 +29,7 @@ source_of_truth:
   language_profiles: language-profiles/*.yaml
   design_system: design-system/tokens.yaml
   metric_registry: metrics/registry.yaml
+  reuse_improvement_loop: decision-brain/reuse-improvement-loop.yaml
   schemas:
     - contracts/project.schema.json
     - contracts/benchmark-result.schema.json
@@ -48,6 +49,7 @@ orchestrator:
     - stack decision
     - local-first decision
     - benchmark plan
+    - reuse improvement review
     - release gates
   outputs:
     - project.yaml
@@ -57,6 +59,7 @@ orchestrator:
     - sdd/technical-decision.md
     - sdd/benchmark-plan.md
     - sdd/agent-handoff.md
+    - sdd/reuse-improvement-review.md
 
 subagents:
   - id: program-planner
@@ -204,6 +207,20 @@ subagents:
       - default-demo-has-no-paid-secret
       - reuse-is-attributed-as-pattern-dependency-or-reference
 
+  - id: reuse-improvement-reviewer
+    mission: Ask whether project work should improve the portfolio reuse kit, then patch, backlog, or reject the improvement.
+    reads:
+      - decision-brain/reuse-improvement-loop.yaml
+      - project evidence
+      - validation failures
+    writes:
+      - sdd/reuse-improvement-review.md
+      - optional portfolio-reuse-kit patch
+    checks:
+      - patch-low-risk-reusable-improvements-now
+      - backlog-broad-or-risky-improvements
+      - reject-project-specific-or-premature-abstractions
+
   - id: release-ci-publisher
     mission: Validate, commit, push, and keep the repository publishable.
     reads:
@@ -259,8 +276,11 @@ edges:
     to: security-reuse-reviewer
     handoff: docs-and-reuse-surface
   - from: security-reuse-reviewer
+    to: reuse-improvement-reviewer
+    handoff: docs-reuse-and-validation-surface
+  - from: reuse-improvement-reviewer
     to: release-ci-publisher
-    handoff: release-readiness-evidence
+    handoff: kit-improvement-status-and-release-readiness
   - from: release-ci-publisher
     to: principal-agent
     handoff: validation-result-and-publish-status
@@ -301,14 +321,17 @@ handoff_contract:
     - sdd/technical-decision.md
     - sdd/benchmark-plan.md
     - sdd/agent-handoff.md
+    - sdd/reuse-improvement-review.md
   required_before_publication:
     - docker-run-path
     - benchmark-json
     - README-number-claim-result
     - REFERENCES.md
+    - reuse-improvement-review-complete
     - validation-passing
   conflict_resolution:
     - Prefer the simpler option that still proves the claim.
     - Prefer local-first execution unless real cloud is the benchmark subject.
     - Prefer explicit ports/adapters when substituting local and real infrastructure.
     - Reject architecture or tooling that hides the concept the repository exists to prove.
+    - Patch the reuse kit proactively when the project reveals a low-risk reusable improvement.

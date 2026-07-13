@@ -17,6 +17,7 @@ This repository is a reusable decision platform for the portfolio. It should ans
 | Portfolio registry | `catalog/` | Defines the 30 projects, program groups, proficiency signals, and intended evidence. |
 | Project contract | `contracts/` | Defines required shape for `project.yaml` and benchmark JSON. |
 | Agent graph | `decision-brain/agent-graph.yaml` and `docs/agent-graph.md` | Defines principal agent, subagents, local-first runtime, handoff contract, validation, and publication flow. |
+| Reuse improvement | `decision-brain/reuse-improvement-loop.yaml` and `docs/reuse-improvement-loop.md` | Forces every project to patch, backlog, or reject improvements to the reuse kit. |
 | Architecture selection | `architecture/` | Provides the decision matrix for MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, and microservices. |
 | Decision brain | `decision-brain/` | Provides engineering principles, stack, API style, messaging, cloud local-first, runtime/database, and library decision matrices. |
 | Language standards | `language-profiles/` | Provides language/framework-specific layout, testing, lint, Docker, and benchmark expectations. |
@@ -38,6 +39,7 @@ Owned by this kit:
 - README structure
 - manifest schema
 - agent orchestration graph
+- reuse improvement loop
 - architecture decision matrix
 - engineering principles matrix
 - stack, API style, cloud, and messaging decision matrices
@@ -79,6 +81,7 @@ sdd/benchmark-plan.md
 sdd/architecture-decision.md
 sdd/technical-decision.md
 sdd/agent-handoff.md
+sdd/reuse-improvement-review.md
 .portfolio/*
 benchmarks/results/.gitkeep
 .codex/skills/*

@@ -19,7 +19,8 @@ Read `.portfolio/decision-brain/agent-graph.yaml` first. The principal agent coo
 9. `benchmark-harness-agent`
 10. `design-system-agent`
 11. `security-reuse-reviewer`
-12. `release-ci-publisher`
+12. `reuse-improvement-reviewer`
+13. `release-ci-publisher`
 
 If the runtime cannot spawn subagents, the principal agent executes the roles sequentially and records the same outputs.
 
@@ -31,10 +32,15 @@ If the runtime cannot spawn subagents, the principal agent executes the roles se
 - Fill `sdd/technical-decision.md`.
 - Fill `sdd/benchmark-plan.md`.
 - Fill `sdd/agent-handoff.md`.
+- Fill `sdd/reuse-improvement-review.md`.
 
 ## Local-First Rule
 
 The default demo must run without paid credentials. Use Docker for the runnable path. Use Kumo for AWS-like local cloud behavior. Real cloud providers must stay behind ports/adapters and must not be imported by domain or use-case code.
+
+## Reuse Improvement Loop
+
+At each major milestone, ask whether this project exposed a reusable improvement for `portfolio-reuse-kit`. Patch low-risk reusable improvements immediately; otherwise record backlog or rejection in `sdd/reuse-improvement-review.md`.
 
 ## Publication Gate
 
@@ -45,4 +51,5 @@ Do not present this repository as portfolio-ready until it has:
 - benchmark JSON in `benchmarks/results/`
 - README opening with project number, claim, and result
 - complete `REFERENCES.md`
+- complete `sdd/reuse-improvement-review.md`
 - passing validation

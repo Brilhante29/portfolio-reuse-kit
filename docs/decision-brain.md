@@ -35,6 +35,7 @@ agent graph
   -> cloud mode
   -> database/runtime/library policy
   -> benchmark
+  -> reuse improvement review
   -> README/post evidence
 ```
 
@@ -47,6 +48,15 @@ agent graph
 | Local-first | Docker and Kumo are the default proof path for AWS-like behavior. |
 | Handoff | `sdd/agent-handoff.md` records decisions, risks, local runtime, benchmark, and release gates. |
 | Fallback | If subagents are not available, the principal agent executes the roles sequentially. |
+
+## Reuse Improvement Rules
+
+| Concern | Rule |
+|---|---|
+| Trigger | Review after scaffold, architecture decision, first working slice, benchmark, CI failure, and before publication. |
+| Patch now | Apply low-risk reusable improvements to `portfolio-reuse-kit` immediately. |
+| Backlog | Record useful but broad changes in `sdd/reuse-improvement-review.md`. |
+| Reject | Reject project-specific or premature abstractions. |
 
 ## Engineering Principles Rules
 
@@ -122,6 +132,7 @@ Every non-trivial project must include:
 
 - `project.yaml` with `decision_brain`
 - `sdd/agent-handoff.md` with subagent decisions
+- `sdd/reuse-improvement-review.md` with kit improvement decisions
 - `sdd/technical-decision.md`
 - rejected alternatives
 - Docker default path
