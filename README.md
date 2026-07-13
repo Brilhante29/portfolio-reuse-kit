@@ -42,7 +42,7 @@ Every completed project must provide:
 - Docker build/run path
 - benchmark JSON compatible with `contracts/benchmark-result.schema.json`
 - `REFERENCES.md` with clean reuse attribution
-- validation before commit or publication
+- project validation through `tools/validate-project.ps1` before commit or publication
 - no paid secret required for the default demo path
 
 ## Architecture
@@ -117,7 +117,7 @@ Remove-Item Env:\GH_TOKEN
 | `language-profiles/` | Language/framework-specific conventions for Python, Java, Go, TypeScript, Angular, Next.js, Spring Kotlin, FastAPI, Go backend, and Terraform. |
 | `design-system/` | Shared README, diagram, badge, benchmark, and dashboard standards. |
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
-| `templates/` | Files copied into new projects: README, manifest, AGENTS, references, Dockerfiles, CI. |
+| `templates/` | Files copied into new projects: README, manifest, AGENTS, references, Dockerfiles, validation script, CI. |
 | `sdd/` | Specification templates: spec, benchmark plan, ADR, technical decision, agent handoff, reuse improvement review, release checklist. |
 | `harness/` | Benchmark runner, comparison script, k6 smoke script, benchmark schema. |
 | `metrics/` | Metric names, units, and optimization direction. |

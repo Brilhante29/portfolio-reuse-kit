@@ -83,6 +83,7 @@ $requiredFiles = @(
   "sdd/templates/release-checklist.md",
   "templates/README-project.md",
   "templates/AGENTS.md",
+  "templates/validate-project.ps1",
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",

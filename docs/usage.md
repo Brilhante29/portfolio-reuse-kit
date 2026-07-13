@@ -23,6 +23,7 @@ The generated repo contains:
 - `sdd/technical-decision.md`
 - `sdd/agent-handoff.md`
 - `sdd/reuse-improvement-review.md`
+- `tools/validate-project.ps1`
 - `benchmarks/results/.gitkeep`
 - `.codex/skills/*`
 - `.claude/skills/*`
@@ -36,6 +37,14 @@ powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
 ```
 
 This installs agent skills and a local `.portfolio/` snapshot with agent graph, reuse-improvement loop, program catalog, proficiency map, decision brain, architecture matrix, API style matrix, Kumo cloud local-first rules, language/framework profiles, design system, and schemas.
+
+## Validate One Project
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/validate-project.ps1
+```
+
+Use `-SkipDocker` while iterating quickly.
 
 ## Validate The Kit
 
