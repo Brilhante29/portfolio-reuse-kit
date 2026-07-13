@@ -2,7 +2,7 @@
 
 This repository is the decision brain for the portfolio.
 
-It does not only scaffold files. It decides, records, and standardizes the engineering choices that every generated repository must follow: program, public proficiency signal, architecture, stack, API style, messaging, cloud mode, database, runtime, libraries, design system, benchmark, and release evidence.
+It does not only scaffold files. It decides, records, and standardizes the engineering choices that every generated repository must follow: agent orchestration, program, public proficiency signal, architecture, stack, API style, messaging, cloud mode, database, runtime, libraries, design system, benchmark, and release evidence.
 
 ## What This Solves
 
@@ -17,13 +17,15 @@ Without a decision brain, agents tend to make isolated choices:
 - RabbitMQ because queues sound useful
 - real AWS because the project says cloud
 - random libraries because they are familiar
+- subagents acting without a shared handoff contract
 
 That is not enough for a serious portfolio. Every choice must prove something.
 
 ## Mandatory Decision Flow
 
 ```txt
-portfolio program
+agent graph
+  -> portfolio program
   -> proficiency signal
   -> architecture
   -> engineering principles and coupling boundaries
@@ -36,6 +38,16 @@ portfolio program
   -> README/post evidence
 ```
 
+## Agent Graph Rules
+
+| Concern | Rule |
+|---|---|
+| Principal agent | Owns objective, sequencing, conflict resolution, validation, and publication decision. |
+| Subagents | Own narrow decisions and must leave evidence in SDD/project files. |
+| Local-first | Docker and Kumo are the default proof path for AWS-like behavior. |
+| Handoff | `sdd/agent-handoff.md` records decisions, risks, local runtime, benchmark, and release gates. |
+| Fallback | If subagents are not available, the principal agent executes the roles sequentially. |
+
 ## Engineering Principles Rules
 
 | Concern | Rule |
@@ -47,6 +59,7 @@ portfolio program
 | YAGNI | Do not add extension points for futures the repo does not prove. |
 | DRY | Remove duplicated business knowledge, not incidental similarity. |
 | Testability | Use cases must run without transport and infrastructure. |
+
 ## Backend Stack Rules
 
 | Problem | Default Stack | Why |
@@ -108,6 +121,7 @@ Real cloud providers are adapters. Domain and use cases must not call cloud SDKs
 Every non-trivial project must include:
 
 - `project.yaml` with `decision_brain`
+- `sdd/agent-handoff.md` with subagent decisions
 - `sdd/technical-decision.md`
 - rejected alternatives
 - Docker default path

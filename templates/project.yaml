@@ -13,6 +13,11 @@ language_profile:
   secondary: []
   reason: <why this profile governs the repo>
 decision_brain:
+  agent_graph:
+    mode: principal-agent-orchestrated
+    source: .portfolio/decision-brain/agent-graph.yaml
+    handoff: sdd/agent-handoff.md
+    local_first_runtime: docker+kumo-when-cloud-behavior-is-needed
   principles:
     coupling_rule: <domain/use cases do not depend on framework, database, broker, cloud SDK, transport, or UI>
     solid: [srp, ocp, lsp, isp, dip]
@@ -70,6 +75,7 @@ reuse:
     - programs
     - proficiency-map
     - decision-brain
+    - agent-graph
     - architecture
     - language-profiles
     - design-system
