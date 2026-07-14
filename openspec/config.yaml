@@ -1,0 +1,28 @@
+schema: portfolio-system
+context: |
+  Repository: portfolio-reuse-kit
+  Role: central planning store, reusable decision brain, component-pack catalog, SDD templates, benchmark harness, and validation layer for a 30-repository technical portfolio.
+  Core rules:
+    - Every project must prove one measurable claim.
+    - Every project must belong to a portfolio program.
+    - Every architecture, stack, API, messaging, cloud, and library choice must be problem-driven.
+    - Domain/use-case code must not depend on framework, database, broker, cloud SDK, transport, or UI.
+    - Kumo is the preferred local-first AWS-like layer; real cloud stays behind adapters.
+    - Reuse improvements discovered during project work must be patched, backlogged, or rejected explicitly.
+rules:
+  intent:
+    - State the measurable claim in one sentence.
+    - Name what is out of scope.
+  portfolio-impact:
+    - Identify the macro program and how this repo strengthens that system story.
+    - Identify the public proficiency signal.
+  architecture-record:
+    - Include rejected alternatives and dependency direction.
+    - Mention SOLID, LSP, KISS, YAGNI, and testability.
+  component-pack:
+    - Choose one pack from component-packs/manifest.yaml.
+    - Do not recommend machine-level installs without explicit approval.
+  reuse-delta:
+    - End with patch-now, backlog, or reject.
+  benchmark-proof:
+    - Include metric, command, fixture, result path, and README number.

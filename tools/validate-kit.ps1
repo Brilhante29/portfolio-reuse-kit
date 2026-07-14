@@ -11,6 +11,11 @@ function Require-File {
   }
 }
 
+function Require-Pattern {
+  param([string]$RelativePath, [string]$Pattern)
+  if (-not (Select-String -Path (Join-Path $root $RelativePath) -Pattern $Pattern -Quiet)) { $script:failures.Add("Missing pattern '$Pattern' in $RelativePath") }
+}
+
 function Require-Directory {
   param([string]$RelativePath)
   $path = Join-Path $root $RelativePath
@@ -22,6 +27,7 @@ function Require-Directory {
 $requiredFiles = @(
   "README.md",
   "PUBLISH.md",
+  ".openspec-store/store.yaml",
   "LICENSE",
   ".editorconfig",
   ".gitattributes",
@@ -31,8 +37,10 @@ $requiredFiles = @(
   "catalog/proficiency.yaml",
   "catalog/reuse-policy.md",
   "architecture/decision-matrix.yaml",
+  "component-packs/manifest.yaml",
   "decision-brain/README.md",
   "decision-brain/agent-graph.yaml",
+  "decision-brain/agentic-spec-governance.yaml",
   "decision-brain/reuse-improvement-loop.yaml",
   "decision-brain/engineering-principles.yaml",
   "decision-brain/stack-matrix.yaml",
@@ -64,6 +72,7 @@ $requiredFiles = @(
   "docs/api-style-decision.md",
   "docs/cloud-local-first.md",
   "docs/portfolio-operating-model.md",
+  "docs/agentic-spec-governance.md",
   "docs/proficiency-map.md",
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
@@ -81,6 +90,17 @@ $requiredFiles = @(
   "sdd/templates/agent-handoff.md",
   "sdd/templates/reuse-improvement-review.md",
   "sdd/templates/release-checklist.md",
+  "openspec/config.yaml",
+  "openspec/schemas/portfolio-system/schema.yaml",
+  "openspec/schemas/portfolio-system/templates/intent.md",
+  "openspec/schemas/portfolio-system/templates/portfolio-impact.md",
+  "openspec/schemas/portfolio-system/templates/architecture-record.md",
+  "openspec/schemas/portfolio-system/templates/component-pack.md",
+  "openspec/schemas/portfolio-system/templates/reuse-delta.md",
+  "openspec/schemas/portfolio-system/templates/benchmark-proof.md",
+  "openspec/schemas/portfolio-system/templates/tasks.md",
+  "openspec/schemas/portfolio-system/templates/verification.md",
+  "templates/openspec-config.yaml",
   "templates/README-project.md",
   "templates/AGENTS.md",
   "templates/validate-project.ps1",
@@ -102,6 +122,7 @@ $requiredDirs = @(
   ".codex/skills/agent-orchestration",
   ".codex/skills/reuse-improvement-review",
   ".codex/skills/spec-driven-project",
+  ".codex/skills/agentic-spec-governance",
   ".codex/skills/benchmark-harness",
   ".codex/skills/architecture-selector",
   ".codex/skills/engineering-principles",
@@ -119,6 +140,7 @@ $requiredDirs = @(
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
   ".claude/skills/spec-driven-project",
+  ".claude/skills/agentic-spec-governance",
   ".claude/skills/benchmark-harness",
   ".claude/skills/architecture-selector",
   ".claude/skills/engineering-principles",
@@ -158,6 +180,17 @@ if ($projectCount -ne 30) {
 if ($programCount -lt 5) {
   $failures.Add("Expected at least 5 programs in catalog/programs.yaml; found $programCount")
 }
+
+Require-Pattern "component-packs/manifest.yaml" "^base_pack:"
+Require-Pattern "component-packs/manifest.yaml" "id: ai-evaluation-retrieval"
+Require-Pattern "decision-brain/agentic-spec-governance.yaml" "^artifact_graph:"
+Require-Pattern "decision-brain/agentic-spec-governance.yaml" "id: benchmark-proof"
+Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: intent"
+Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: component-pack"
+Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: verification"
+Require-Pattern "templates/project.yaml" "agentic_spec:"
+Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
+Require-Pattern "tools/install-project-skills.ps1" "component-packs"
 
 python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null
 python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null

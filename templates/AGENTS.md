@@ -8,6 +8,8 @@ Agents must use the local `.portfolio/` snapshot as the source of truth when it 
 
 Read `.portfolio/decision-brain/agent-graph.yaml` first. The principal agent coordinates these roles:
 
+0. `agentic-spec-governance`
+0. `component-pack-selector`
 1. `program-planner`
 2. `architecture-selector`
 3. `engineering-principles-reviewer`
@@ -27,6 +29,8 @@ If the runtime cannot spawn subagents, the principal agent executes the roles se
 ## Required Before Implementation
 
 - Update `project.yaml`.
+- Select the component pack from `.portfolio/component-packs/manifest.yaml`.
+- Keep `openspec/config.yaml` coherent with the project decision; if OpenSpec is not installed, follow the same artifact graph manually in `sdd/`.
 - Fill `sdd/spec.md`.
 - Fill `sdd/architecture-decision.md`.
 - Fill `sdd/technical-decision.md`.

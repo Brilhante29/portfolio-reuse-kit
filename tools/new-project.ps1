@@ -33,6 +33,7 @@ New-Item -ItemType Directory -Force -Path $target | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "sdd") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "tools") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "benchmarks\results") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $target "openspec") | Out-Null
 
 Copy-Item (Join-Path $root "templates\README-project.md") (Join-Path $target "README.md")
 Copy-Item (Join-Path $root "templates\project.yaml") (Join-Path $target "project.yaml")
@@ -50,6 +51,7 @@ Copy-Item (Join-Path $root "LICENSE") (Join-Path $target "LICENSE")
 Copy-Item (Join-Path $root ".gitignore") (Join-Path $target ".gitignore")
 Copy-Item (Join-Path $root ".gitattributes") (Join-Path $target ".gitattributes")
 Copy-Item (Join-Path $root ".editorconfig") (Join-Path $target ".editorconfig")
+Copy-Item (Join-Path $root "templates\openspec-config.yaml") (Join-Path $target "openspec\config.yaml")
 
 $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<id>", $Id `
@@ -75,6 +77,11 @@ $reuseReviewContent = (Get-Content (Join-Path $target "sdd\reuse-improvement-rev
   -replace "<id>", $Id `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "sdd\reuse-improvement-review.md") -Content $reuseReviewContent
+
+$openSpecConfigContent = (Get-Content (Join-Path $target "openspec\config.yaml") -Raw) `
+  -replace "<id>", $Id `
+  -replace "<project-name>", $Name
+Write-Utf8NoBom -Path (Join-Path $target "openspec\config.yaml") -Content $openSpecConfigContent
 
 Write-Utf8NoBom -Path (Join-Path $target "benchmarks\results\.gitkeep") -Content ""
 

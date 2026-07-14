@@ -1,0 +1,6 @@
+id: portfolio-reuse-kit
+name: Portfolio Reuse Kit Planning Store
+identity: "I am the planning store and reuse decision brain for the 30-repository portfolio."
+remote: https://github.com/Brilhante29/portfolio-reuse-kit.git
+scope: portfolio-wide
+status: active

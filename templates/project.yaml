@@ -13,6 +13,16 @@ language_profile:
   secondary: []
   reason: <why this profile governs the repo>
 decision_brain:
+  agentic_spec:
+    source: .portfolio/decision-brain/agentic-spec-governance.yaml
+    spec_store: portfolio-reuse-kit
+    schema: portfolio-system
+    project_config: openspec/config.yaml
+    component_pack: <default-portfolio-project|ai-evaluation-retrieval|applied-computer-vision|backend-reliability-platform|mlops-data-platform|delivery-observability-infra>
+    artifact_graph:
+      - intent->portfolio-impact->architecture-record
+      - architecture-record+portfolio-impact->component-pack
+      - component-pack->reuse-delta->benchmark-proof->tasks->verification
   agent_graph:
     mode: principal-agent-orchestrated
     source: .portfolio/decision-brain/agent-graph.yaml
@@ -78,6 +88,8 @@ reuse:
     - catalog
     - programs
     - proficiency-map
+    - component-packs
+    - openspec-schema
     - decision-brain
     - agent-graph
     - reuse-improvement-loop
