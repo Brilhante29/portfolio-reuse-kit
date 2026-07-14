@@ -87,6 +87,7 @@ $requiredFiles = @(
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
+  "tools/sync-project-reuse.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
@@ -166,6 +167,7 @@ python -c "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='u
 $powerShellScripts = @(
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
+  "tools/sync-project-reuse.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",

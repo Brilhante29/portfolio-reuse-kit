@@ -40,7 +40,7 @@ The default demo must run without paid credentials. Use Docker for the runnable 
 
 ## Reuse Improvement Loop
 
-At each major milestone, ask whether this project exposed a reusable improvement for `portfolio-reuse-kit`. Patch low-risk reusable improvements immediately; otherwise record backlog or rejection in `sdd/reuse-improvement-review.md`.
+At each major milestone, ask whether this project exposed a reusable improvement for `portfolio-reuse-kit`. Patch low-risk reusable improvements immediately; otherwise record backlog or rejection in `sdd/reuse-improvement-review.md`. Do not leave the review as a template: every ready project must remove placeholder rows and complete the final gate with explicit `[x]` checks.
 
 ## Publication Gate
 
@@ -51,5 +51,5 @@ Do not present this repository as portfolio-ready until it has:
 - benchmark JSON in `benchmarks/results/`
 - README opening with project number, claim, and result
 - complete `REFERENCES.md`
-- complete `sdd/reuse-improvement-review.md`
+- complete `sdd/reuse-improvement-review.md` with all final gate checks marked
 - passing validation

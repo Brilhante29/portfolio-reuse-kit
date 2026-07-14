@@ -42,6 +42,7 @@ Every completed project must provide:
 - Docker build/run path
 - benchmark JSON compatible with `contracts/benchmark-result.schema.json`
 - `REFERENCES.md` with clean reuse attribution
+- completed reuse-improvement review with patch-now, backlog, or rejected improvements recorded
 - project validation through `tools/validate-project.ps1` before commit or publication
 - no paid secret required for the default demo path
 
@@ -60,7 +61,7 @@ portfolio-reuse-kit
   harness/           -> benchmark runners and result comparison
   metrics/           -> metric registry and units
   skills/            -> Codex and Claude Code operating instructions
-  tools/             -> create, validate, install, publish
+  tools/             -> create, sync, validate, install, publish
   docs/              -> human operating model
 ```
 
@@ -122,7 +123,7 @@ powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
 | `metrics/` | Metric names, units, and optimization direction. |
 | `.codex/skills/` | Codex skills installed into generated projects. |
 | `.claude/skills/` | Claude Code skills installed into generated projects. |
-| `tools/` | Automation for project creation, validation, skill install, and GitHub publishing. |
+| `tools/` | Automation for project creation, reuse sync, validation, skill install, and GitHub publishing. |
 | `docs/` | Operating model for humans and agents. |
 
 ## Skills Included

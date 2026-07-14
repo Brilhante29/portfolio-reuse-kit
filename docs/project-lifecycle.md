@@ -67,7 +67,7 @@ Required state:
 
 - README first screen is strong
 - `REFERENCES.md` is honest
-- validation passes
+- validation passes, including the completed reuse-improvement final gate
 - GitHub remote exists
 - push completed
 
@@ -80,4 +80,4 @@ Use only these status values in `project.yaml`:
 - `benchmarked`
 - `published`
 
-A project should not be pinned or promoted before `benchmarked`.
+A project should not be pinned or promoted before `benchmarked`. A project should not be published before the reuse-improvement review records patch-now, backlog, or rejected improvements and marks the final gate complete.

@@ -29,6 +29,14 @@ The generated repo contains:
 - `.claude/skills/*`
 - `.portfolio/*` standards snapshot when `-InstallSkills` is used
 
+## Sync Reuse Into Existing Projects
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/sync-project-reuse.ps1 `
+  -RepoRoot C:\Users\Guilherme\Desktop\repos-github
+```
+
+This updates each project repo with current Codex/Claude skills, `.portfolio/` standards, and `tools/validate-project.ps1`. Use `-UpdateAgents` when the root `AGENTS.md` should also be refreshed from the kit template.
 ## Install Skills Later
 
 ```powershell
