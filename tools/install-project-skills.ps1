@@ -20,9 +20,21 @@ foreach ($path in @($codexSource, $claudeSource)) {
   }
 }
 
-New-Item -ItemType Directory -Force -Path $codexTarget | Out-Null
-New-Item -ItemType Directory -Force -Path $claudeTarget | Out-Null
-New-Item -ItemType Directory -Force -Path $portfolioTarget | Out-Null
+function Reset-GeneratedDirectory {
+  param([string]$Path)
+  if (Test-Path -LiteralPath $Path) {
+    $resolvedPath = (Resolve-Path -LiteralPath $Path).Path
+    if (-not $resolvedPath.StartsWith($target.Path, [System.StringComparison]::OrdinalIgnoreCase)) {
+      throw "Refusing to remove path outside target repository: $resolvedPath"
+    }
+    Remove-Item -LiteralPath $resolvedPath -Recurse -Force
+  }
+  New-Item -ItemType Directory -Force -Path $Path | Out-Null
+}
+
+Reset-GeneratedDirectory -Path $codexTarget
+Reset-GeneratedDirectory -Path $claudeTarget
+Reset-GeneratedDirectory -Path $portfolioTarget
 
 Copy-Item -Recurse -Force -Path (Join-Path $codexSource "*") -Destination $codexTarget
 Copy-Item -Recurse -Force -Path (Join-Path $claudeSource "*") -Destination $claudeTarget
