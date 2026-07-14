@@ -89,6 +89,8 @@ $requiredFiles = @(
   "tools/install-project-skills.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
+  "tools/set-github-token.ps1",
+  "tools/clear-github-token.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -166,6 +168,8 @@ $powerShellScripts = @(
   "tools/install-project-skills.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
+  "tools/set-github-token.ps1",
+  "tools/clear-github-token.ps1",
   "tools/validate-kit.ps1"
 )
 

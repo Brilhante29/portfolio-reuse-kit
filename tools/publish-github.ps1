@@ -15,6 +15,17 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+function Get-EnvironmentSecret {
+  param([string]$Name)
+
+  foreach ($scope in @("Process", "User", "Machine")) {
+    $value = [Environment]::GetEnvironmentVariable($Name, $scope)
+    if ($value) { return $value }
+  }
+
+  return $null
+}
+
 function Invoke-Git {
   param([string[]]$Arguments)
   & git @Arguments
@@ -50,6 +61,10 @@ function Invoke-GitHubJson {
   }
 
   return Invoke-RestMethod -Method $Method -Uri $Uri -Headers $headers -Body ($Body | ConvertTo-Json -Depth 10) -ContentType "application/json"
+}
+
+if (-not $Token) {
+  $Token = Get-EnvironmentSecret "GH_TOKEN"
 }
 
 if (-not $Token) {

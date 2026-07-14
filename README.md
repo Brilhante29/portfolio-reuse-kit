@@ -95,16 +95,15 @@ Run a generic benchmark wrapper:
 python harness/bench.py --project kit-smoke --metric latency_ms --unit ms --repeat 3 python --version
 ```
 
-Publish a repository:
+Set GitHub auth once and publish a repository:
 
 ```powershell
-$env:GH_TOKEN = "<token>"
+powershell -ExecutionPolicy Bypass -File tools/set-github-token.ps1 -Scope User
 powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
   -RepoPath . `
   -Owner Brilhante29 `
   -RepoName portfolio-reuse-kit `
   -Visibility public
-Remove-Item Env:\GH_TOKEN
 ```
 
 ## Repository Layout

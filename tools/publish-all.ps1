@@ -12,6 +12,21 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+function Get-EnvironmentSecret {
+  param([string]$Name)
+
+  foreach ($scope in @("Process", "User", "Machine")) {
+    $value = [Environment]::GetEnvironmentVariable($Name, $scope)
+    if ($value) { return $value }
+  }
+
+  return $null
+}
+
+if (-not $Token) {
+  $Token = Get-EnvironmentSecret "GH_TOKEN"
+}
+
 if (-not $Token) {
   $secure = Read-Host "GitHub token" -AsSecureString
   $ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
