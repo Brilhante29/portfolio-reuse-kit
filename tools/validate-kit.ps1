@@ -182,8 +182,11 @@ if ($programCount -lt 5) {
 }
 
 Require-Pattern "component-packs/manifest.yaml" "^base_pack:"
+Require-Pattern "component-packs/manifest.yaml" "^reuse_priority_order:"
 Require-Pattern "component-packs/manifest.yaml" "id: ai-evaluation-retrieval"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "^artifact_graph:"
+Require-Pattern "decision-brain/agentic-spec-governance.yaml" "user-owned skills"
+Require-Pattern "catalog/reuse-policy.md" "Priorize as skills"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "id: benchmark-proof"
 Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: intent"
 Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: component-pack"

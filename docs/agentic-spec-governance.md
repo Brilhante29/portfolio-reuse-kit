@@ -19,6 +19,17 @@ Before a project is implemented, the agent must select:
 
 That makes a repo less likely to become an isolated demo. It must explain which system it belongs to and what reusable capability it adds.
 
+## Priority Rule
+
+The portfolio uses your skills first:
+
+1. Use the repo-local `.codex/skills/` and `.claude/skills/`.
+2. Use the local `.portfolio/` snapshot and upstream `portfolio-reuse-kit`.
+3. Use external repositories as references for organization, schemas, workflows, tests, benchmarks, docs, and proven patterns.
+4. Use external code/components only with license compatibility, attribution, and a decision record.
+
+When an external repo exposes a better repeatable pattern, update this kit or record the improvement backlog before spreading the pattern across portfolio projects.
+
 ## Why Component Packs
 
 AI-agent projects tend to fail when every repo invents its own prompt stack. The component-pack layer solves that by declaring a program-specific bundle:

@@ -18,6 +18,20 @@ runtime_targets:
     tool-specific files may differ by destination, but the decision source
     and validation gates must remain the same.
 
+reuse_priority_order:
+  - level: 1
+    source: user-owned-skills
+    rule: Use `.codex/skills/` and `.claude/skills/` as the primary operating layer.
+  - level: 2
+    source: portfolio-reuse-kit
+    rule: Use decision brain, component packs, SDD templates, language profiles, harness, and design system before external references.
+  - level: 3
+    source: external-reference-repositories
+    rule: Reuse organization patterns, workflow shape, schema ideas, benchmark style, testing strategy, and docs structure when they improve the project.
+  - level: 4
+    source: external-code-or-components
+    rule: Use only with license compatibility, attribution, problem fit, and explicit decision record; never replace the local kit silently.
+
 component_types:
   skill:
     description: Agent-operating instruction loaded by Codex or Claude Code.

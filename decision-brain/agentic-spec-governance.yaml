@@ -5,6 +5,28 @@ purpose: >
   component pack selected by the problem, not by the current agent's habits.
 
 inspirations:
+  reuse_priority:
+    rule: >
+      User-owned skills and the local portfolio-reuse-kit are the primary
+      operating system. External repositories are reference material and
+      accelerators when they improve a concrete portfolio outcome.
+    order:
+      - user-owned skills in `.codex/skills/` and `.claude/skills/`
+      - local `.portfolio/` snapshot and upstream `portfolio-reuse-kit`
+      - approved public repositories for organization, schema, workflow, tests, benchmarks, and docs
+      - external libraries/components with license, attribution, and decision record
+    external_reference_policy:
+      use_for:
+        - repository organization
+        - workflow and agent orchestration ideas
+        - SDD/OpenSpec-style artifact shape
+        - benchmark harness structure
+        - test strategy
+        - documentation and DX patterns
+      do_not_use_for:
+        - replacing local skills silently
+        - copying project implementation without problem-specific adaptation
+        - importing license risk into portfolio projects
   ai_tmpl:
     adopted:
       - component taxonomy: skills, commands, MCPs, hooks, settings, templates
