@@ -10,7 +10,7 @@ Store a short-lived GitHub token as a Windows environment variable once:
 powershell -ExecutionPolicy Bypass -File tools/set-github-token.ps1 -Scope User
 ```
 
-The script prompts for the token with hidden input and writes `GH_TOKEN` to the Windows user environment. Open a new terminal after setting it so new processes inherit the variable.
+The script prompts for the token with hidden input, validates it against GitHub, and writes `GH_TOKEN` to the Windows user environment. Open a new terminal after setting it so new processes inherit the variable.
 
 The publish scripts read `GH_TOKEN` from the process, user, or machine environment. They do not save the token in the Git remote URL.
 

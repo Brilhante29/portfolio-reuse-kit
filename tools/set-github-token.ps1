@@ -1,7 +1,8 @@
 param(
   [ValidateSet("User", "Process")]
   [string]$Scope = "User",
-  [string]$Name = "GH_TOKEN"
+  [string]$Name = "GH_TOKEN",
+  [switch]$SkipValidation
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,6 +17,23 @@ try {
 
 if (-not $token) {
   throw "Token vazio. Nenhuma variavel foi gravada."
+}
+
+if (-not $SkipValidation) {
+  try {
+    $user = Invoke-RestMethod `
+      -Method GET `
+      -Uri "https://api.github.com/user" `
+      -Headers @{
+        Authorization = "Bearer $token"
+        Accept = "application/vnd.github+json"
+        "X-GitHub-Api-Version" = "2022-11-28"
+      }
+    Write-Host "github_auth=ok login=$($user.login)"
+  } catch {
+    $token = $null
+    throw "Token recusado pelo GitHub. Gere um token novo/completo e tente novamente."
+  }
 }
 
 [Environment]::SetEnvironmentVariable($Name, $token, $Scope)
