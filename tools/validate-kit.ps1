@@ -218,6 +218,8 @@ if (Select-String -Path (Join-Path $root "tools/plan-project.ps1") -Pattern "pro
 }
 Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
 Require-Pattern "templates/validate-project.ps1" "go test ./..."
+Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/verification.md"
+Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/voice-check.md"
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }

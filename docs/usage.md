@@ -58,6 +58,8 @@ pwsh -NoProfile -File tools/validate-project.ps1
 
 Use `-SkipDocker` while iterating quickly.
 
+Final validation requires `openspec/config.yaml` and the complete generated artifact graph under `openspec/artifacts/`. Run `tools/plan-project.ps1` after the implementation and benchmark stabilize, then review the generated evidence before publication.
+
 ## Validate The Kit
 
 ```powershell
