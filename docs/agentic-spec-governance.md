@@ -80,6 +80,12 @@ This is deliberately iterative. If implementation reveals that the architecture,
 - Treat every repeated project pain as a possible kit improvement.
 - Before publication, resolve the reuse delta as patch-now, backlog, or rejected.
 
+## Automation
+
+Use `tools/plan-project.ps1` to generate the first OpenSpec-style artifact set for an existing project. The tool reads `project.yaml`, selects the component pack, reads the benchmark result when present, writes planning artifacts under `openspec/artifacts/`, generates an `article-draft.md`, and creates a deterministic `voice-check.md` against the existing README/SDD voice.
+
+The generated files are starting evidence, not a replacement for engineering judgment. Update them when implementation changes the architecture, benchmark, or reuse decision.
+
 ## Source Ideas
 
 The component-pack layer is inspired by the AI Tmpl / Claude Code Templates model of reusable agents, commands, MCPs, hooks, settings, templates, workflows, and health checks.

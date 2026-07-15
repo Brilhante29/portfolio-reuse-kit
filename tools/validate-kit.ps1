@@ -16,6 +16,19 @@ function Require-Pattern {
   if (-not (Select-String -Path (Join-Path $root $RelativePath) -Pattern $Pattern -Quiet)) { $script:failures.Add("Missing pattern '$Pattern' in $RelativePath") }
 }
 
+function Invoke-Checked {
+  param(
+    [string]$Label,
+    [scriptblock]$Command
+  )
+  & $Command
+  $exitCode = $LASTEXITCODE
+  if ($exitCode -ne 0) {
+    $script:failures.Add("$Label failed with exit code $exitCode")
+  }
+  $global:LASTEXITCODE = 0
+}
+
 function Require-Directory {
   param([string]$RelativePath)
   $path = Join-Path $root $RelativePath
@@ -107,6 +120,7 @@ $requiredFiles = @(
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
+  "tools/plan-project.ps1",
   "tools/sync-project-reuse.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
@@ -194,16 +208,19 @@ Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: verificatio
 Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
+Require-Pattern "tools/plan-project.ps1" "voice_verdict"
 
-python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null
-python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null
-python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null
-python -c "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')" | Out-Null
+Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
+Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
+Invoke-Checked "benchmark schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null }
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')"
+Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 
 $powerShellScripts = @(
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
   "tools/sync-project-reuse.ps1",
+  "tools/plan-project.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",

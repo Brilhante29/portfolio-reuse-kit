@@ -102,6 +102,13 @@ Run a generic benchmark wrapper:
 python harness/bench.py --project kit-smoke --metric latency_ms --unit ms --repeat 3 python --version
 ```
 
+Generate an OpenSpec-style plan and article draft for an existing project:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/plan-project.ps1 `
+  -RepoPath C:\Users\Guilherme\Desktop\repos-github\rag-knowledge-base
+```
+
 Set GitHub auth once and publish a repository:
 
 ```powershell
@@ -127,7 +134,7 @@ powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
 | `templates/` | Files copied into new projects: README, manifest, AGENTS, references, Dockerfiles, validation script, CI. |
 | `openspec/` | OpenSpec-compatible portfolio schema and config for intent, impact, architecture, reuse, benchmark, tasks, and verification artifacts. |
 | `sdd/` | Specification templates: spec, benchmark plan, ADR, technical decision, agent handoff, reuse improvement review, release checklist. |
-| `harness/` | Benchmark runner, comparison script, k6 smoke script, benchmark schema. |
+| `harness/` | Benchmark runner, result comparison script, plan/article generator support, k6 smoke script, benchmark schema. |
 | `metrics/` | Metric names, units, and optimization direction. |
 | `.codex/skills/` | Codex skills installed into generated projects. |
 | `.claude/skills/` | Claude Code skills installed into generated projects. |
@@ -198,6 +205,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Agentic spec governance](docs/agentic-spec-governance.md)
 - [Proficiency map](docs/proficiency-map.md)
 - [Project lifecycle](docs/project-lifecycle.md)
+- [Plan project generator](docs/plan-project-generator.md)
 - [Repository standard](docs/repository-standard.md)
 - [Usage](docs/usage.md)
 - [Publish](PUBLISH.md)
