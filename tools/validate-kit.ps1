@@ -201,6 +201,8 @@ Require-Pattern "component-packs/manifest.yaml" "^base_pack:"
 Require-Pattern "component-packs/manifest.yaml" "^reuse_priority_order:"
 Require-Pattern "component-packs/manifest.yaml" "id: ai-evaluation-retrieval"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "^artifact_graph:"
+Require-Pattern "decision-brain/cloud-matrix.yaml" "image_digest:"
+Require-Pattern "templates/validate-project.ps1" "Mutable Kumo image reference found"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "user-owned skills"
 Require-Pattern "catalog/reuse-policy.md" "Priorize as skills"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "id: benchmark-proof"
@@ -280,6 +282,12 @@ $searchFiles = Get-ChildItem -Path $root -Recurse -File | Where-Object {
 $forbidden = Select-String -Path $searchFiles.FullName -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
 if ($forbidden) {
   $failures.Add("Forbidden legacy project nickname found")
+}
+
+$mutableKumoPattern = "ghcr.io/sivchari/kumo:" + "latest"
+$mutableKumo = Select-String -Path $searchFiles.FullName -Pattern $mutableKumoPattern -SimpleMatch -ErrorAction SilentlyContinue
+if ($mutableKumo) {
+  $failures.Add("Mutable Kumo image reference found; pin a reviewed tag and digest")
 }
 
 $slash = [char]92

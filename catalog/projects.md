@@ -14,7 +14,7 @@
 | 10 | `prompt-ab-testing` | prompt-eval | python, typer, duckdb, scipy, docker | comparacao estatistica de prompts | score_by_variant, confidence_interval |
 | 11 | `spring-hexagonal-payments` | backend | java21, spring-boot, postgresql, flyway, testcontainers, k6, docker | arquitetura hexagonal em pagamentos | coverage_percent, p99_latency_ms |
 | 12 | `go-rate-limiter` | backend | go, redis, chi, k6, docker | rate limiter distribuido | accepted_rps, rejected_rps, p95_latency_ms |
-| 13 | `mini-aws-emulator` | cloud-emulation | go, sqlite, aws-sdk, docker | emulacao minima de APIs AWS | conformance_tests_passed |
+| 13 | `mini-aws-emulator` | cloud-emulation | go-1.25, aws-sdk-go-v2, kumo-0.25.3, docker | paridade local AWS para S3, SQS e DynamoDB com adaptadores desacoplados | conformance_rate_percent, p95_operation_latency_ms, operations_per_second |
 | 14 | `event-sourcing-orders` | backend | java21, spring-boot, postgresql, redpanda, docker | event sourcing e CQRS | events_per_second |
 | 15 | `grpc-vs-rest-bench` | protocol-benchmark | go, grpc, chi, ghz, k6, docker | comparacao REST vs gRPC | latency_ms_by_protocol |
 | 16 | `saga-orchestrator` | distributed-systems | java21, spring-boot, postgresql, docker | transacoes distribuidas com compensacao | consistency_rate |

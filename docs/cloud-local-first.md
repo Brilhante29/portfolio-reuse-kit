@@ -2,45 +2,58 @@
 
 Cloud-backed portfolio projects must run locally first.
 
-For AWS-like services, the default local provider is [sivchari/kumo](https://github.com/sivchari/kumo). Kumo is a lightweight AWS service emulator written in Go, runs as a single Docker container on port `4566`, supports optional persistence through `KUMO_DATA_DIR`, and exposes many AWS-like services including S3, SQS, DynamoDB, Lambda, API Gateway, SNS, EventBridge, Kinesis, MSK, Secrets Manager, CloudWatch, and more.
+For AWS-compatible services, the default local provider is [sivchari/kumo](https://github.com/sivchari/kumo). Real AWS remains pluggable through the same SDK-facing adapter boundary.
 
 ## Rule
 
-Use Kumo as the local-first cloud adapter whenever the project touches AWS-like cloud capabilities.
-
-Real cloud must be pluggable behind the same application ports:
+Use Kumo when a project needs AWS-like behavior without a cloud account. Keep the provider switch at composition/configuration boundaries:
 
 ```txt
 application use case
-  -> CloudStoragePort / QueuePort / SecretStorePort / EventBusPort
-  -> local adapter: Kumo endpoint http://localhost:4566
-  -> real adapter: AWS default endpoint and real credentials
+  -> ObjectStorage / Queue / KeyValue ports
+  -> AWS SDK adapter
+  -> local: Kumo endpoint override
+  -> real: AWS default endpoint and credentials
 ```
+
+The domain and application layers must not import AWS SDK packages.
+
+## Reviewed Provider Snapshot
+
+The kit's reviewed snapshot on 2026-07-15 is:
+
+- Kumo release: `v0.25.3`
+- Container tag: `0.25.3`
+- OCI version label: `0.25.3`
+- Manifest digest: `sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b`
+
+The release tag includes a leading `v`, while Kumo's GoReleaser image tag does not. Pin both the readable image tag and immutable digest:
+
+```powershell
+docker run -p 4566:4566 ghcr.io/sivchari/kumo:0.25.3@sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b
+```
+
+Do not use a mutable `:latest` reference in committed Dockerfiles, Compose files, CI, README commands, or benchmark evidence. It is acceptable only during an explicit dependency-update investigation.
 
 ## Required Project Artifacts
 
-- `docker-compose.yml` or documented `docker run` command for Kumo.
-- Local endpoint configuration: `http://localhost:4566`.
-- Local credentials: static `test/test` or equivalent non-secret values.
-- Adapter interface for each cloud capability.
-- Kumo adapter for local/CI path.
-- Real cloud adapter or documented extension point.
-- Parity test for core behavior.
-- README section explaining local-first and real-cloud switch.
+- A one-command Docker path with the Kumo image pinned by tag and digest.
+- Static local credentials such as `test/test`; no secret on the default path.
+- Narrow ports for each capability and SDK calls contained in adapters.
+- `CLOUD_PROVIDER=kumo|aws` or an equivalent explicit switch.
+- A destructive-action guard before real AWS can be selected.
+- Scoped parity/conformance checks for every claimed service behavior.
+- Provider release, digest, SDK version, and region in benchmark JSON.
+- Numeric compatibility diagnostics when an SDK warning is intentionally handled.
+- Documented unsupported Kumo or real-cloud behaviors.
 
-## Default Docker
-
-```powershell
-docker run -p 4566:4566 ghcr.io/sivchari/kumo:latest
-```
-
-With persistence:
+## Persistent Local Path
 
 ```powershell
-docker run -p 4566:4566 -e KUMO_DATA_DIR=/data -v kumo-data:/data ghcr.io/sivchari/kumo:latest
+docker run -p 4566:4566 -e KUMO_DATA_DIR=/data -v kumo-data:/data ghcr.io/sivchari/kumo:0.25.3@sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b
 ```
 
-## Config Pattern
+## Configuration Pattern
 
 ```txt
 CLOUD_PROVIDER=kumo|aws
@@ -48,8 +61,20 @@ CLOUD_ENDPOINT=http://localhost:4566
 AWS_REGION=us-east-1
 AWS_ACCESS_KEY_ID=test
 AWS_SECRET_ACCESS_KEY=test
+ALLOW_REAL_AWS=false
+RUN_ID=explicit-unique-id-for-real-cloud
 ```
 
-## Design Rule
+Local mode supplies non-secret credentials and an endpoint override. Real mode uses the SDK's default endpoint and credential chain only after an explicit opt-in.
 
-Do not put cloud SDK calls in domain entities or use cases. Cloud SDK usage belongs in adapters only.
+## Conformance Scope
+
+Do not claim full AWS conformance from a small suite. Name the exact services and operations measured, fail on functional mismatches, and keep optional protocol/SDK warnings visible as numeric diagnostics. A local emulator is a development substitute, not proof of IAM, quotas, multi-region behavior, managed durability, or production failure semantics.
+
+## Dependency Update Procedure
+
+1. Review the official Kumo release and `.goreleaser.yml`.
+2. Pull the version tag without the release's leading `v`.
+3. Inspect `org.opencontainers.image.version` and the repository digest.
+4. Run the project's parity suite and benchmark twice.
+5. Update the kit snapshot, project lock, benchmark JSON, and reuse review together.

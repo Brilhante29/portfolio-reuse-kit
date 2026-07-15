@@ -300,6 +300,12 @@ if ($forbidden) {
   Add-Failure "Forbidden legacy project nickname found"
 }
 
+$mutableKumoPattern = "ghcr.io/sivchari/kumo:" + "latest"
+$mutableKumo = Select-String -Path $searchFiles.FullName -Pattern $mutableKumoPattern -SimpleMatch -ErrorAction SilentlyContinue
+if ($mutableKumo) {
+  Add-Failure "Mutable Kumo image reference found; pin a reviewed tag and digest"
+}
+
 if (-not $SkipDocker -and (Test-Path -LiteralPath (Join-Path $root "Dockerfile") -PathType Leaf)) {
   $imageName = (Split-Path -Leaf $root).ToLowerInvariant()
   Invoke-Checked "docker build" { docker build -t $imageName $root | Out-Null }
