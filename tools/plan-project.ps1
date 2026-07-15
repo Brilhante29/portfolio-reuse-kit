@@ -226,7 +226,7 @@ $primaryMetric = Read-SectionScalar -Content $manifest -Section "benchmark" -Key
 $unit = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "unit"
 $benchmarkCommand = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "command"
 $benchmarkResultPath = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "result_path"
-$componentPack = Read-MatchValue -Content $manifest -Pattern "(?ms)agentic_spec:\s*\r?\n(?:\s{4}.+\r?\n)*?\s{4}component_pack:\s*(.+)$" -Default $programId
+$componentPack = Read-MatchValue -Content $manifest -Pattern "(?m)^\s{2}agentic_spec:\s*\r?\n(?:\s{4}[^\r\n]*\r?\n)*?\s{4}component_pack:\s*(.+)$" -Default $programId
 if ($componentPack -like "<*") { $componentPack = $programId }
 if ($componentPack -eq "unknown") { $componentPack = $programId }
 if ($componentPack -eq "unknown") { $componentPack = "default-portfolio-project" }
@@ -276,9 +276,17 @@ if ($resultObject) {
   $jsonValue = if ($null -ne $resultObject.value) { $resultObject.value } elseif ($resultObject.$primaryMetric) { $resultObject.$primaryMetric } else { "recorded" }
   $jsonUnit = if ($resultObject.unit) { $resultObject.unit } else { $unit }
   $benchmarkLine = Join-MetricLine -Metric (Format-MetricName -Metric $jsonMetric) -Value (Format-MetricValue -Value $jsonValue) -Unit $jsonUnit
-  if ($resultObject.summary -and $null -ne $resultObject.summary.avg_latency_ms) {
-    $latencyLine = "Average latency: $([math]::Round([double]$resultObject.summary.avg_latency_ms, 2)) ms. P95 latency: $([math]::Round([double]$resultObject.summary.p95_latency_ms, 2)) ms."
-  } elseif ($null -ne $resultObject.avg_latency_ms) {
+  if ($resultObject.summary) {
+    $latencyParts = New-Object System.Collections.Generic.List[string]
+    if ($null -ne $resultObject.summary.avg_latency_ms) {
+      $latencyParts.Add("Average latency: $([math]::Round([double]$resultObject.summary.avg_latency_ms, 2)) ms.")
+    }
+    if ($null -ne $resultObject.summary.p95_latency_ms) {
+      $latencyParts.Add("P95 latency: $([math]::Round([double]$resultObject.summary.p95_latency_ms, 2)) ms.")
+    }
+    $latencyLine = $latencyParts -join " "
+  }
+  if ($latencyLine -eq "" -and $null -ne $resultObject.avg_latency_ms) {
     $latencyLine = "Average latency: $([math]::Round([double]$resultObject.avg_latency_ms, 2)) ms."
   }
 } else {
