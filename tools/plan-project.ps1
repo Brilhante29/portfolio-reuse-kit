@@ -535,6 +535,7 @@ The README/post number must come from the committed benchmark JSON, not from man
 ## Publication
 
 - [ ] Validate project.
+- [ ] Confirm published CI is green.
 - [ ] Confirm article uses committed benchmark result.
 - [ ] Confirm ``voice-check.md`` verdict is aligned or intentionally overridden.
 "@
