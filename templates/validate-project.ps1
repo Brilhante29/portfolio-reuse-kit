@@ -58,6 +58,55 @@ $requiredFiles = @(
 )
 foreach ($file in $requiredFiles) { Require-File $file }
 
+$manifestPath = Join-Path $root "project.yaml"
+$manifestPrimaryMetric = ""
+$manifestResultPath = ""
+if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
+  $manifestText = Get-Content -Raw -LiteralPath $manifestPath
+  if ($manifestText.Contains("`t")) {
+    Add-Failure "project.yaml must not contain tab indentation"
+  }
+
+  $requiredTopLevelKeys = @("id", "name", "program", "status", "stack", "benchmark", "release")
+  foreach ($key in $requiredTopLevelKeys) {
+    if ($manifestText -notmatch "(?m)^$([regex]::Escape($key)):\s*") {
+      Add-Failure "project.yaml is missing top-level key: $key"
+    }
+  }
+
+  foreach ($line in ($manifestText -split "`r?`n")) {
+    if ($line -match "^( +)\S" -and ($Matches[1].Length % 2) -ne 0) {
+      Add-Failure "project.yaml indentation must use multiples of two spaces"
+      break
+    }
+  }
+
+  $primaryMetricMatch = [regex]::Match($manifestText, "(?m)^\s+primary_metric:\s*([^\r\n#]+)")
+  if ($primaryMetricMatch.Success) {
+    $manifestPrimaryMetric = $primaryMetricMatch.Groups[1].Value.Trim().Trim('"').Trim("'")
+  } else {
+    Add-Failure "project.yaml is missing benchmark.primary_metric"
+  }
+
+  $resultPathMatch = [regex]::Match($manifestText, "(?m)^\s+result_path:\s*([^\r\n#]+)")
+  if ($resultPathMatch.Success) {
+    $manifestResultPath = $resultPathMatch.Groups[1].Value.Trim().Trim('"').Trim("'")
+  } else {
+    Add-Failure "project.yaml is missing benchmark.result_path"
+  }
+
+  $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+  if ($pythonCommand) {
+    & python -c "import yaml" 2>$null
+    $yamlAvailable = $LASTEXITCODE -eq 0
+    $global:LASTEXITCODE = 0
+    if ($yamlAvailable) {
+      Invoke-Checked "project YAML parsing" { python -c "import pathlib, sys, yaml; data = yaml.safe_load(pathlib.Path(sys.argv[1]).read_text(encoding='utf-8')); assert isinstance(data, dict)" $manifestPath }
+    } else {
+      Write-Host "yaml_parser=not_found; structural manifest validation applied"
+    }
+  }
+}
 $reuseReviewPath = Join-Path $root "sdd/reuse-improvement-review.md"
 if (Test-Path -LiteralPath $reuseReviewPath -PathType Leaf) {
   $reuseReview = Get-Content -Raw -LiteralPath $reuseReviewPath
@@ -88,6 +137,52 @@ if ($benchmarkFiles.Count -eq 0) {
   Add-Failure "Missing benchmark JSON under benchmarks/results"
 }
 
+if ($manifestResultPath -ne "") {
+  $primaryResultPath = $root
+  foreach ($part in ($manifestResultPath -split "[/\\]")) {
+    if ($part -ne "") {
+      $primaryResultPath = Join-Path $primaryResultPath $part
+    }
+  }
+
+  if (-not (Test-Path -LiteralPath $primaryResultPath -PathType Leaf)) {
+    Add-Failure "Manifest benchmark result does not exist: $manifestResultPath"
+  } else {
+    try {
+      $primaryResult = Get-Content -Raw -LiteralPath $primaryResultPath | ConvertFrom-Json
+      $resultMetric = ""
+      $resultValue = $null
+      if ($primaryResult.PSObject.Properties.Name -contains "metric") {
+        $resultMetric = [string]$primaryResult.metric
+        $resultValue = $primaryResult.value
+      } elseif ($primaryResult.PSObject.Properties.Name -contains "primary_metric") {
+        $resultMetric = [string]$primaryResult.primary_metric
+        $metricProperty = $primaryResult.PSObject.Properties[$resultMetric]
+        if ($null -ne $metricProperty) {
+          $resultValue = $metricProperty.Value
+        }
+      }
+
+      if ($resultMetric -eq "" -or $null -eq $resultValue) {
+        Add-Failure "Benchmark result must expose metric/value or primary_metric with its value"
+      } else {
+        if ($manifestPrimaryMetric -ne "" -and $resultMetric -ne $manifestPrimaryMetric) {
+          Add-Failure "Benchmark metric mismatch: project.yaml=$manifestPrimaryMetric result=$resultMetric"
+        }
+        $readmePath = Join-Path $root "README.md"
+        if (Test-Path -LiteralPath $readmePath -PathType Leaf) {
+          $readmeOpening = ((Get-Content -LiteralPath $readmePath -TotalCount 8) -join "`n").Replace(",", "")
+          $valueText = [Convert]::ToString($resultValue, [System.Globalization.CultureInfo]::InvariantCulture)
+          if (-not $readmeOpening.Contains($valueText)) {
+            Add-Failure "README opening does not include primary benchmark value: $valueText"
+          }
+        }
+      }
+    } catch {
+      Add-Failure "Cannot read primary benchmark result: $($_.Exception.Message)"
+    }
+  }
+}
 Push-Location -LiteralPath $root
 try {
   foreach ($file in $benchmarkFiles) {

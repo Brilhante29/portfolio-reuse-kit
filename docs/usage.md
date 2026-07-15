@@ -60,6 +60,8 @@ Use `-SkipDocker` while iterating quickly.
 
 Final validation requires `openspec/config.yaml` and the complete generated artifact graph under `openspec/artifacts/`. Run `tools/plan-project.ps1` after the implementation and benchmark stabilize, then review the generated evidence before publication.
 
+The same gate checks top-level manifest structure, performs full YAML parsing when PyYAML is available, matches the manifest primary metric to the committed JSON result, and requires that measured value near the top of the README.
+
 ## Validate The Kit
 
 ```powershell

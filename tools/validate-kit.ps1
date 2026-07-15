@@ -220,6 +220,9 @@ Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
 Require-Pattern "templates/validate-project.ps1" "go test ./..."
 Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/verification.md"
 Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/voice-check.md"
+Require-Pattern "templates/validate-project.ps1" "project YAML parsing"
+Require-Pattern "templates/validate-project.ps1" "Benchmark metric mismatch"
+Require-Pattern "templates/validate-project.ps1" "README opening does not include primary benchmark value"
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
