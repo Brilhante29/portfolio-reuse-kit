@@ -1,7 +1,7 @@
 schema: portfolio-system
 context: |
   Repository: portfolio-reuse-kit
-  Role: central planning store, reusable decision brain, component-pack catalog, SDD templates, benchmark harness, and validation layer for a 30-repository technical portfolio.
+  Role: central planning store, reusable decision brain, component-pack catalog, SDD templates, benchmark harness, and validation layer for an extensible technical portfolio whose initial roadmap contains 30 repositories.
   Core rules:
     - Every project must prove one measurable claim.
     - Every project must belong to a portfolio program.

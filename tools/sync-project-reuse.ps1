@@ -2,6 +2,7 @@ param(
   [string]$RepoRoot = "",
   [string[]]$Exclude = @("portfolio-reuse-kit"),
   [switch]$UpdateAgents,
+  [switch]$BackfillMissing,
   [switch]$DryRun
 )
 
@@ -10,6 +11,7 @@ $ErrorActionPreference = "Stop"
 $kitRoot = Split-Path -Parent $PSScriptRoot
 $resolvedRepoRoot = Resolve-Path -LiteralPath $RepoRoot
 $installScript = Join-Path $PSScriptRoot "install-project-skills.ps1"
+$backfillScript = Join-Path $PSScriptRoot "backfill-project-standard.ps1"
 $validatorSource = Join-Path $kitRoot "templates/validate-project.ps1"
 $agentsSource = Join-Path $kitRoot "templates/AGENTS.md"
 
@@ -20,6 +22,11 @@ $repos = Get-ChildItem -Directory -LiteralPath $resolvedRepoRoot | Where-Object 
 
 foreach ($repo in $repos) {
   Write-Host "syncing=$($repo.Name)"
+
+  if ($BackfillMissing) {
+    & $backfillScript -RepoPath $repo.FullName -DryRun:$DryRun
+  }
+
   if ($DryRun) { continue }
 
   & $installScript -TargetRepo $repo.FullName

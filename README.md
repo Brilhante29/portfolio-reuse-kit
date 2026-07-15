@@ -1,6 +1,6 @@
 # Portfolio Reuse Kit
 
-Reusable decision brain, component-pack catalog, and spec governance layer for a 30-repository technical portfolio.
+Reusable decision brain, component-pack catalog, and spec governance layer for an extensible technical portfolio whose initial roadmap contains 30 repositories.
 
 This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, the agent graph, reuse-improvement loop, architecture decision rules, engineering principles, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
 
@@ -113,6 +113,15 @@ pwsh -NoProfile -File tools/plan-project.ps1 `
   -RepoPath (Join-Path $repoRoot "rag-knowledge-base")
 ```
 
+Repair older project scaffolds without overwriting project decisions:
+
+```powershell
+$repoRoot = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/sync-project-reuse.ps1 `
+  -RepoRoot $repoRoot `
+  -BackfillMissing
+```
+
 Publish a repository:
 
 ```powershell
@@ -129,7 +138,7 @@ Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 
 | Path | Responsibility |
 |---|---|
-| `catalog/` | Source of truth for all 30 projects, program grouping, stack, claim, benchmark, and references. |
+| `catalog/` | Source of truth for the initial 30 projects and future additions, including program grouping, stack, claim, benchmark, and references. |
 | `component-packs/` | Program-specific bundles of skills, decision sources, benchmark assets, and publication gates inspired by component catalogs. |
 | `architecture/` | Decision matrix for choosing software architecture by problem forces. |
 | `decision-brain/` | Central decision matrices for agent orchestration, engineering principles, stack profiles, API style, messaging, cloud local-first, runtime/database, and library selection. |

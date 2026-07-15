@@ -121,6 +121,7 @@ $requiredFiles = @(
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
+  "tools/backfill-project-standard.ps1",
   "tools/plan-project.ps1",
   "tools/sync-project-reuse.ps1",
   "tools/publish-github.ps1",
@@ -189,8 +190,8 @@ foreach ($skill in $skillFiles) {
 
 $projectCount = (Select-String -Path (Join-Path $root "catalog/projects.yaml") -Pattern "^  - id: ").Count
 $programCount = (Select-String -Path (Join-Path $root "catalog/programs.yaml") -Pattern "^  - id: ").Count
-if ($projectCount -ne 30) {
-  $failures.Add("Expected 30 projects in catalog/projects.yaml; found $projectCount")
+if ($projectCount -lt 30) {
+  $failures.Add("Expected at least the initial 30 projects in catalog/projects.yaml; found $projectCount")
 }
 if ($programCount -lt 5) {
   $failures.Add("Expected at least 5 programs in catalog/programs.yaml; found $programCount")
@@ -210,6 +211,7 @@ Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
+Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
@@ -222,6 +224,7 @@ $powerShellScripts = @(
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
   "tools/sync-project-reuse.ps1",
+  "tools/backfill-project-standard.ps1",
   "tools/plan-project.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
