@@ -228,6 +228,14 @@ Require-Pattern "templates/validate-project.ps1" "project YAML parsing"
 Require-Pattern "templates/validate-project.ps1" "Benchmark metric mismatch"
 Require-Pattern "templates/validate-project.ps1" "README opening does not include primary benchmark value"
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
+Require-Pattern "language-profiles/spring-kotlin.yaml" "spring_boot_4:"
+Require-Pattern "language-profiles/spring-kotlin.yaml" "spring-boot-starter-flyway"
+Require-Pattern "language-profiles/spring-kotlin.yaml" "tools.jackson.module:jackson-module-kotlin"
+Require-Pattern "language-profiles/spring-kotlin.yaml" "summaryTrendStats"
+Require-Pattern ".codex/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers for Windows and POSIX"
+Require-Pattern ".claude/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers for Windows and POSIX"
+Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
+Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
