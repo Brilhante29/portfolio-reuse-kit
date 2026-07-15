@@ -1,5 +1,5 @@
 param(
-  [string]$RepoRoot = "C:\Users\Guilherme\Desktop\repos-github",
+  [string]$RepoRoot = "",
   [string[]]$Exclude = @("portfolio-reuse-kit"),
   [switch]$UpdateAgents,
   [switch]$DryRun
@@ -10,8 +10,8 @@ $ErrorActionPreference = "Stop"
 $kitRoot = Split-Path -Parent $PSScriptRoot
 $resolvedRepoRoot = Resolve-Path -LiteralPath $RepoRoot
 $installScript = Join-Path $PSScriptRoot "install-project-skills.ps1"
-$validatorSource = Join-Path $kitRoot "templates\validate-project.ps1"
-$agentsSource = Join-Path $kitRoot "templates\AGENTS.md"
+$validatorSource = Join-Path $kitRoot "templates/validate-project.ps1"
+$agentsSource = Join-Path $kitRoot "templates/AGENTS.md"
 
 $repos = Get-ChildItem -Directory -LiteralPath $resolvedRepoRoot | Where-Object {
   $Exclude -notcontains $_.Name -and

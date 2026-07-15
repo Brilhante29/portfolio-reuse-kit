@@ -17,10 +17,10 @@ function Write-Utf8NoBom {
   [System.IO.File]::WriteAllText($Path, $Content, (New-Object System.Text.UTF8Encoding($false)))
 }
 
-$codexSource = Join-Path $root ".codex\skills"
-$claudeSource = Join-Path $root ".claude\skills"
-$codexTarget = Join-Path $target ".codex\skills"
-$claudeTarget = Join-Path $target ".claude\skills"
+$codexSource = Join-Path $root ".codex/skills"
+$claudeSource = Join-Path $root ".claude/skills"
+$codexTarget = Join-Path $target ".codex/skills"
+$claudeTarget = Join-Path $target ".claude/skills"
 $portfolioTarget = Join-Path $target ".portfolio"
 
 foreach ($path in @($codexSource, $claudeSource)) {
@@ -56,7 +56,7 @@ foreach ($dir in $standardDirs) {
   }
 }
 
-$openspecSchemasSource = Join-Path $root "openspec\schemas"
+$openspecSchemasSource = Join-Path $root "openspec/schemas"
 if (Test-Path -LiteralPath $openspecSchemasSource) {
   $openspecTarget = Join-Path $portfolioTarget "openspec"
   New-Item -ItemType Directory -Force -Path $openspecTarget | Out-Null
@@ -64,13 +64,13 @@ if (Test-Path -LiteralPath $openspecSchemasSource) {
 }
 
 New-Item -ItemType Directory -Force -Path (Join-Path $portfolioTarget "catalog") | Out-Null
-Copy-Item -Force -Path (Join-Path $root "catalog\programs.yaml") -Destination (Join-Path $portfolioTarget "catalog\programs.yaml")
-Copy-Item -Force -Path (Join-Path $root "catalog\projects.yaml") -Destination (Join-Path $portfolioTarget "catalog\projects.yaml")
-Copy-Item -Force -Path (Join-Path $root "catalog\proficiency.yaml") -Destination (Join-Path $portfolioTarget "catalog\proficiency.yaml")
+Copy-Item -Force -Path (Join-Path $root "catalog/programs.yaml") -Destination (Join-Path $portfolioTarget "catalog/programs.yaml")
+Copy-Item -Force -Path (Join-Path $root "catalog/projects.yaml") -Destination (Join-Path $portfolioTarget "catalog/projects.yaml")
+Copy-Item -Force -Path (Join-Path $root "catalog/proficiency.yaml") -Destination (Join-Path $portfolioTarget "catalog/proficiency.yaml")
 
 New-Item -ItemType Directory -Force -Path (Join-Path $portfolioTarget "contracts") | Out-Null
-Copy-Item -Force -Path (Join-Path $root "contracts\project.schema.json") -Destination (Join-Path $portfolioTarget "contracts\project.schema.json")
-Copy-Item -Force -Path (Join-Path $root "contracts\benchmark-result.schema.json") -Destination (Join-Path $portfolioTarget "contracts\benchmark-result.schema.json")
+Copy-Item -Force -Path (Join-Path $root "contracts/project.schema.json") -Destination (Join-Path $portfolioTarget "contracts/project.schema.json")
+Copy-Item -Force -Path (Join-Path $root "contracts/benchmark-result.schema.json") -Destination (Join-Path $portfolioTarget "contracts/benchmark-result.schema.json")
 
 $projectId = "unknown"
 $projectName = Split-Path -Leaf $target.Path
@@ -86,7 +86,7 @@ $projectOpenSpecDir = Join-Path $target "openspec"
 $projectOpenSpecConfig = Join-Path $projectOpenSpecDir "config.yaml"
 if (-not (Test-Path -LiteralPath $projectOpenSpecConfig)) {
   New-Item -ItemType Directory -Force -Path $projectOpenSpecDir | Out-Null
-  $configContent = (Get-Content -LiteralPath (Join-Path $root "templates\openspec-config.yaml") -Raw) -replace "<id>", $projectId -replace "<project-name>", $projectName
+  $configContent = (Get-Content -LiteralPath (Join-Path $root "templates/openspec-config.yaml") -Raw) -replace "<id>", $projectId -replace "<project-name>", $projectName
   Write-Utf8NoBom -Path $projectOpenSpecConfig -Content $configContent
 }
 

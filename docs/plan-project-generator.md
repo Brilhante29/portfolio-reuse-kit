@@ -7,8 +7,9 @@ It does not require OpenSpec to be installed. It uses the schema and component-p
 ## Command
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/plan-project.ps1 `
-  -RepoPath C:\Users\Guilherme\Desktop\repos-github\rag-knowledge-base
+$repoRoot = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/plan-project.ps1 `
+  -RepoPath (Join-Path $repoRoot "rag-knowledge-base")
 ```
 
 Default output:

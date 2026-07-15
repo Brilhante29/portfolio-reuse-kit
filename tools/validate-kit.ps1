@@ -87,6 +87,7 @@ $requiredFiles = @(
   "docs/portfolio-operating-model.md",
   "docs/agentic-spec-governance.md",
   "docs/proficiency-map.md",
+  "docs/cross-platform.md",
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
   "docs/usage.md",
@@ -209,6 +210,7 @@ Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
+Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
@@ -240,13 +242,26 @@ foreach ($script in $powerShellScripts) {
 $legacy = ("ro" + "che" + "do")
 $patterns = @($legacy, ($legacy.Substring(0,1).ToUpper() + $legacy.Substring(1)))
 $searchFiles = Get-ChildItem -Path $root -Recurse -File | Where-Object {
-  $_.FullName -notmatch "\\.git\\" -and
-  $_.FullName -notmatch "\\benchmarks\\results\\" -and
+  $normalized = $_.FullName -replace "\\", "/"
+  $normalized -notmatch "/.git/" -and
+  $normalized -notmatch "/benchmarks/results/" -and
   $_.Extension -in @(".md", ".yaml", ".yml", ".json", ".ps1", ".py", ".js", ".ts", ".tsx", ".go", ".kt", ".java")
 }
 $forbidden = Select-String -Path $searchFiles.FullName -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
 if ($forbidden) {
   $failures.Add("Forbidden legacy project nickname found")
+}
+
+$slash = [char]92
+$hardcodedPathPatterns = @(
+  ("C:" + $slash + "Users" + $slash + "Guilherme"),
+  ("Desktop" + $slash + "repos-github"),
+  ("/" + "Users/Guilherme"),
+  ("/" + "home/guilherme")
+)
+$hardcodedPaths = Select-String -Path $searchFiles.FullName -Pattern $hardcodedPathPatterns -SimpleMatch -ErrorAction SilentlyContinue
+if ($hardcodedPaths) {
+  $failures.Add("User-specific absolute path found in reusable files")
 }
 
 if ($failures.Count -gt 0) {

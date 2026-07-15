@@ -2,11 +2,14 @@
 
 ## Create One Project
 
+Use PowerShell 7+ (`pwsh`) on Windows, Linux, and macOS.
+
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
+$repoRoot = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/new-project.ps1 `
   -Id 11 `
   -Name spring-hexagonal-payments `
-  -TargetDir C:\Users\Guilherme\Desktop\repos-github `
+  -TargetDir $repoRoot `
   -InstallSkills `
   -InitializeGit
 ```
@@ -32,16 +35,17 @@ The generated repo contains:
 ## Sync Reuse Into Existing Projects
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/sync-project-reuse.ps1 `
-  -RepoRoot C:\Users\Guilherme\Desktop\repos-github
+$env:PORTFOLIO_REPO_ROOT = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/sync-project-reuse.ps1
 ```
 
 This updates each project repo with current Codex/Claude skills, `.portfolio/` standards, and `tools/validate-project.ps1`. Use `-UpdateAgents` when the root `AGENTS.md` should also be refreshed from the kit template.
 ## Install Skills Later
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/install-project-skills.ps1 `
-  -TargetRepo C:\path\to\repo
+$repoPath = Join-Path (Join-Path $HOME "repos-github") "my-project"
+pwsh -NoProfile -File tools/install-project-skills.ps1 `
+  -TargetRepo $repoPath
 ```
 
 This installs agent skills and a local `.portfolio/` snapshot with agent graph, reuse-improvement loop, program catalog, proficiency map, decision brain, architecture matrix, API style matrix, Kumo cloud local-first rules, language/framework profiles, design system, and schemas.
@@ -49,7 +53,7 @@ This installs agent skills and a local `.portfolio/` snapshot with agent graph, 
 ## Validate One Project
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/validate-project.ps1
+pwsh -NoProfile -File tools/validate-project.ps1
 ```
 
 Use `-SkipDocker` while iterating quickly.
@@ -57,14 +61,14 @@ Use `-SkipDocker` while iterating quickly.
 ## Validate The Kit
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/validate-kit.ps1
+pwsh -NoProfile -File tools/validate-kit.ps1
 ```
 
 The validator checks required files, agent graph assets, reuse-improvement assets, decision brain assets, architecture assets, program catalog, proficiency map, language/framework profiles, design-system assets, skill frontmatter, JSON schema syntax, Python syntax, PowerShell syntax, forbidden legacy wording, and catalog count.
 
 ## Benchmark A Command
 
-```powershell
+```bash
 python harness/bench.py --project my-project --metric latency_ms --unit ms --repeat 5 python --version
 ```
 
@@ -72,7 +76,7 @@ The wrapper measures wall-clock command runtime and writes JSON to `benchmarks/r
 
 ## Compare Results
 
-```powershell
+```bash
 python harness/compare_results.py old.json new.json
 ```
 
@@ -80,31 +84,32 @@ Use this for before/after optimization posts.
 
 ## Publish To GitHub
 
-Set the GitHub token once as a Windows user environment variable:
+Use a session-only token for maximum portability:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/set-github-token.ps1 -Scope User
+$env:GH_TOKEN = "<short-lived-token>"
 ```
 
-Open a new terminal after setting it. The publish scripts read `GH_TOKEN` from the process, user, or machine environment and do not save the token in the remote URL.
+The publish scripts read `GH_TOKEN` from the process, user, or machine environment when the platform supports those scopes. They do not save the token in the remote URL.
 
 Publish the current repo:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
-  -RepoPath C:\Users\Guilherme\Desktop\repos-github\portfolio-reuse-kit `
+pwsh -NoProfile -File tools/publish-github.ps1 `
+  -RepoPath . `
   -Owner Brilhante29 `
   -RepoName portfolio-reuse-kit `
   -Description "Reusable engineering kit for benchmark-driven portfolio repos" `
   -Visibility public `
-  -CommitMessage "Polish portfolio reuse kit"
+  -CommitMessage "Publish portfolio reuse kit"
 ```
 
 Publish every initialized repo under a folder:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/publish-all.ps1 `
-  -RepoRoot C:\Users\Guilherme\Desktop\repos-github `
+$repoRoot = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/publish-all.ps1 `
+  -RepoRoot $repoRoot `
   -Owner Brilhante29 `
   -Visibility public
 ```
@@ -112,7 +117,7 @@ powershell -ExecutionPolicy Bypass -File tools/publish-all.ps1 `
 Clear the stored token when needed:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/clear-github-token.ps1
+Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 ```
 
 Use a token that can create repositories. If the token cannot create repositories, create the empty repository once in GitHub and rerun the script; it will configure `origin` and push.

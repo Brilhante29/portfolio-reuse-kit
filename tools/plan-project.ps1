@@ -1,8 +1,8 @@
 param(
   [Parameter(Mandatory=$true)]
   [string]$RepoPath,
-  [string]$OutputDir = "openspec\artifacts",
-  [string[]]$StyleReferences = @("README.md", "sdd\spec.md", "sdd\technical-decision.md"),
+  [string]$OutputDir = "openspec/artifacts",
+  [string[]]$StyleReferences = @("README.md", "sdd/spec.md", "sdd/technical-decision.md"),
   [switch]$Force,
   [switch]$DryRun
 )
@@ -170,9 +170,10 @@ function Get-RelativePath {
     [string]$BasePath,
     [string]$TargetPath
   )
-  $baseUri = [System.Uri]((Resolve-Path -LiteralPath $BasePath).Path.TrimEnd("\") + "\")
-  $targetUri = [System.Uri]((Resolve-Path -LiteralPath $TargetPath).Path)
-  return [System.Uri]::UnescapeDataString($baseUri.MakeRelativeUri($targetUri).ToString()).Replace("/", "\")
+  $baseResolved = (Resolve-Path -LiteralPath $BasePath).Path
+  $targetResolved = (Resolve-Path -LiteralPath $TargetPath).Path
+  $relative = [System.IO.Path]::GetRelativePath($baseResolved, $targetResolved)
+  return ($relative -replace "\\", "/")
 }
 
 function Format-MetricName {
@@ -230,7 +231,7 @@ if ($componentPack -like "<*") { $componentPack = $programId }
 if ($componentPack -eq "unknown") { $componentPack = $programId }
 if ($componentPack -eq "unknown") { $componentPack = "default-portfolio-project" }
 
-$programsPath = Join-Path $kitRoot "catalog\programs.yaml"
+$programsPath = Join-Path $kitRoot "catalog/programs.yaml"
 $programName = $programId
 if (Test-Path -LiteralPath $programsPath) {
   $programs = Get-Content -Raw -LiteralPath $programsPath
@@ -238,7 +239,7 @@ if (Test-Path -LiteralPath $programsPath) {
   $programName = Read-PackScalar -Block $programBlock -Key "name" -Default $programId
 }
 
-$componentPackPath = Join-Path $kitRoot "component-packs\manifest.yaml"
+$componentPackPath = Join-Path $kitRoot "component-packs/manifest.yaml"
 $packName = $componentPack
 $packProblem = "unknown"
 $packBenchmarkFocus = @()

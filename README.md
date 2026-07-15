@@ -79,13 +79,16 @@ program -> component pack -> agent graph -> spec artifacts -> proficiency signal
 
 ## Quickstart
 
+Use PowerShell 7+ (`pwsh`) on Windows, Linux, and macOS.
+
 Create a new project scaffold:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
+$repoRoot = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/new-project.ps1 `
   -Id 3 `
   -Name rag-knowledge-base `
-  -TargetDir C:\Users\Guilherme\Desktop\repos-github `
+  -TargetDir $repoRoot `
   -InstallSkills `
   -InitializeGit
 ```
@@ -93,31 +96,33 @@ powershell -ExecutionPolicy Bypass -File tools/new-project.ps1 `
 Validate the kit:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/validate-kit.ps1
+pwsh -NoProfile -File tools/validate-kit.ps1
 ```
 
 Run a generic benchmark wrapper:
 
-```powershell
+```bash
 python harness/bench.py --project kit-smoke --metric latency_ms --unit ms --repeat 3 python --version
 ```
 
 Generate an OpenSpec-style plan and article draft for an existing project:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/plan-project.ps1 `
-  -RepoPath C:\Users\Guilherme\Desktop\repos-github\rag-knowledge-base
+$repoRoot = Join-Path $HOME "repos-github"
+pwsh -NoProfile -File tools/plan-project.ps1 `
+  -RepoPath (Join-Path $repoRoot "rag-knowledge-base")
 ```
 
-Set GitHub auth once and publish a repository:
+Publish a repository:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools/set-github-token.ps1 -Scope User
-powershell -ExecutionPolicy Bypass -File tools/publish-github.ps1 `
+$env:GH_TOKEN = "<short-lived-token>"
+pwsh -NoProfile -File tools/publish-github.ps1 `
   -RepoPath . `
   -Owner Brilhante29 `
   -RepoName portfolio-reuse-kit `
   -Visibility public
+Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 ```
 
 ## Repository Layout
@@ -204,6 +209,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Portfolio operating model](docs/portfolio-operating-model.md)
 - [Agentic spec governance](docs/agentic-spec-governance.md)
 - [Proficiency map](docs/proficiency-map.md)
+- [Cross-platform operation](docs/cross-platform.md)
 - [Project lifecycle](docs/project-lifecycle.md)
 - [Plan project generator](docs/plan-project-generator.md)
 - [Repository standard](docs/repository-standard.md)

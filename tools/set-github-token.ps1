@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("User", "Process")]
+  [ValidateSet("User", "Process", "Machine")]
   [string]$Scope = "User",
   [string]$Name = "GH_TOKEN",
   [switch]$SkipValidation
