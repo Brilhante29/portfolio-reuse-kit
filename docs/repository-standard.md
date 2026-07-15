@@ -103,7 +103,8 @@ Bad reuse:
 
 A repo is done only when:
 
-- language-specific quality gates run when their project manifest is present; Go modules require gofmt, tests, and vet
+- language-specific quality gates match detected source files: Python runs compile/tests, Go modules run gofmt/tests/vet, and Gradle projects require the wrapper and run `gradle check`
+- Gradle repositories commit `gradlew`, `gradlew.bat`, and `gradle/wrapper/*` so Linux, macOS, and Windows use the same version
 - Docker path works
 - tests or smoke checks pass
 - benchmark writes JSON

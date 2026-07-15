@@ -189,22 +189,37 @@ try {
     Invoke-Checked "benchmark JSON validation: $($file.Name)" { python -m json.tool $file.FullName | Out-Null }
   }
 
-  if (Test-Path -LiteralPath (Join-Path $root "src") -PathType Container) {
-    $previousPythonPath = $env:PYTHONPATH
-    $srcPath = Join-Path $root "src"
-    if ($previousPythonPath) {
-      $env:PYTHONPATH = $srcPath + [System.IO.Path]::PathSeparator + $previousPythonPath
-    } else {
-      $env:PYTHONPATH = $srcPath
-    }
-    Invoke-Checked "python compile src" { python -m compileall -q (Join-Path $root "src") }
-    if (Test-Path -LiteralPath (Join-Path $root "tests") -PathType Container) {
-      Invoke-Checked "python compile tests" { python -m compileall -q (Join-Path $root "tests") }
-      Invoke-Checked "python unittest" { python -m unittest discover -s (Join-Path $root "tests") -v }
-    }
-    $env:PYTHONPATH = $previousPythonPath
+  $srcRoot = Join-Path $root "src"
+  $pythonFiles = @()
+  if (Test-Path -LiteralPath $srcRoot -PathType Container) {
+    $pythonFiles = @(Get-ChildItem -Path $srcRoot -Recurse -Filter *.py -File)
   }
-
+  if ($pythonFiles.Count -gt 0) {
+    $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+    if ($pythonCommand) {
+      $previousPythonPath = $env:PYTHONPATH
+      if ($previousPythonPath) {
+        $env:PYTHONPATH = $srcRoot + [System.IO.Path]::PathSeparator + $previousPythonPath
+      } else {
+        $env:PYTHONPATH = $srcRoot
+      }
+      Invoke-Checked "python compile src" { python -m compileall -q $srcRoot }
+      $testsRoot = Join-Path $root "tests"
+      $pythonTests = @()
+      if (Test-Path -LiteralPath $testsRoot -PathType Container) {
+        $pythonTests = @(Get-ChildItem -Path $testsRoot -Recurse -Filter *.py -File)
+      }
+      if ($pythonTests.Count -gt 0) {
+        Invoke-Checked "python compile tests" { python -m compileall -q $testsRoot }
+        Invoke-Checked "python unittest" { python -m unittest discover -s $testsRoot -v }
+      }
+      $env:PYTHONPATH = $previousPythonPath
+    } elseif ($SkipDocker) {
+      Add-Failure "Python toolchain is required to validate Python source when Docker validation is skipped"
+    } else {
+      Write-Host "python_toolchain=not_found; relying on Docker build for Python validation"
+    }
+  }
   $goModPath = Join-Path $root "go.mod"
   if (Test-Path -LiteralPath $goModPath -PathType Leaf) {
     $goCommand = Get-Command go -ErrorAction SilentlyContinue
@@ -230,6 +245,42 @@ try {
       Add-Failure "Go toolchain is required to validate go.mod projects when Docker validation is skipped"
     } else {
       Write-Host "go_toolchain=not_found; relying on Docker build for Go validation"
+    }
+  }
+  $gradleBuild = @(
+    (Join-Path $root "build.gradle.kts"),
+    (Join-Path $root "build.gradle")
+  ) | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf }
+  if ($gradleBuild.Count -gt 0) {
+    $wrapperFiles = @(
+      "gradlew",
+      "gradlew.bat",
+      "gradle/wrapper/gradle-wrapper.jar",
+      "gradle/wrapper/gradle-wrapper.properties"
+    )
+    $missingWrapper = @($wrapperFiles | Where-Object {
+      -not (Test-Path -LiteralPath (Join-Path $root $_) -PathType Leaf)
+    })
+    foreach ($missing in $missingWrapper) {
+      Add-Failure "Gradle project is missing wrapper file: $missing"
+    }
+
+    if ($missingWrapper.Count -eq 0) {
+      $javaCommand = Get-Command java -ErrorAction SilentlyContinue
+      if ($javaCommand) {
+        $isWindowsHost = [System.Environment]::OSVersion.Platform -eq [System.PlatformID]::Win32NT
+        if ($isWindowsHost) {
+          $gradleWrapper = Join-Path $root "gradlew.bat"
+          Invoke-Checked "gradle check" { & $gradleWrapper check --no-daemon }
+        } else {
+          $gradleWrapper = Join-Path $root "gradlew"
+          Invoke-Checked "gradle check" { & $gradleWrapper check --no-daemon }
+        }
+      } elseif ($SkipDocker) {
+        Add-Failure "Java toolchain is required to validate Gradle projects when Docker validation is skipped"
+      } else {
+        Write-Host "java_toolchain=not_found; relying on Docker build for Gradle validation"
+      }
     }
   }
 } finally {

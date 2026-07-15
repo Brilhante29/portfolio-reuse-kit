@@ -219,6 +219,9 @@ if (Select-String -Path (Join-Path $root "tools/plan-project.ps1") -Pattern "pro
 }
 Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
 Require-Pattern "templates/validate-project.ps1" "go test ./..."
+Require-Pattern "templates/validate-project.ps1" "gradle check"
+Require-Pattern "templates/validate-project.ps1" "Gradle project is missing wrapper file"
+Require-Pattern "templates/validate-project.ps1" "pythonFiles.Count"
 Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/verification.md"
 Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/voice-check.md"
 Require-Pattern "templates/validate-project.ps1" "project YAML parsing"
