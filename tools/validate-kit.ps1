@@ -211,6 +211,9 @@ Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
+if (Select-String -Path (Join-Path $root "tools/plan-project.ps1") -Pattern "prove the retrieval layer" -SimpleMatch -Quiet) {
+  $failures.Add("Project planner contains a domain-specific default narrative")
+}
 Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 

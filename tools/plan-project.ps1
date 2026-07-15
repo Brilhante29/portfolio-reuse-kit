@@ -315,7 +315,7 @@ $article = @"
 
 $claim
 
-This repository belongs to the $programName program. Its job is narrow: prove the retrieval layer before adding generation, managed services, or distributed infrastructure.
+This repository belongs to the $programName program. Its job is narrow: prove the measurable claim through the selected component pack before adding unrelated infrastructure or features.
 
 The benchmark is the proof. $benchmarkLine. $latencyLine The result is stored in ``$benchmarkResultPath`` and can be reproduced from the Docker/local path.
 
