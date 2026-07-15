@@ -214,6 +214,10 @@ Require-Pattern "tools/plan-project.ps1" "voice_verdict"
 Require-Pattern "tools/plan-project.ps1" 'Read ``project.yaml``'
 Require-Pattern "tools/plan-project.ps1" 'Keep ``tools/plan-project.ps1`` in the kit.'
 Require-Pattern "tools/plan-project.ps1" "Confirm published CI is green."
+Require-Pattern "tools/plan-project.ps1" '\$implementationCheck = if \(\$status -in'
+Require-Pattern "tools/plan-project.ps1" '\$benchmarkCheck = if \(\$status -in'
+Require-Pattern "tools/plan-project.ps1" '\$publicationCheck = if \(\$status -eq "published"\)'
+Require-Pattern "tools/plan-project.ps1" '- \[\$publicationCheck\] Confirm published CI is green\.'
 if (Select-String -Path (Join-Path $root "tools/plan-project.ps1") -Pattern "prove the retrieval layer" -SimpleMatch -Quiet) {
   $failures.Add("Project planner contains a domain-specific default narrative")
 }

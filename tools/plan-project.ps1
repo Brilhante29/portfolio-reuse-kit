@@ -352,6 +352,9 @@ if ($articleStats.EvidenceWords -ge 6) { $score++; $checks.Add("PASS: evidence-w
 $voiceVerdict = if ($score -ge 6) { "aligned" } elseif ($score -ge 4) { "mostly aligned" } else { "needs rewrite" }
 $checksText = ($checks | ForEach-Object { "- $_" }) -join "`n"
 
+$implementationCheck = if ($status -in @("implemented", "benchmarked", "published")) { "x" } else { " " }
+$benchmarkCheck = if ($status -in @("benchmarked", "published")) { "x" } else { " " }
+$publicationCheck = if ($status -eq "published") { "x" } else { " " }
 $files = [ordered]@{
   "intent.md" = @"
 # Intent: $name
@@ -528,16 +531,17 @@ The README/post number must come from the committed benchmark JSON, not from man
 
 ## Implementation
 
-- [ ] Update generated artifacts if the architecture or benchmark changes.
-- [ ] Keep local skills and ``.portfolio/`` as primary.
-- [ ] Record any external reference in ``REFERENCES.md``.
+- [$implementationCheck] Implement the measurable claim without breaking the recorded architecture boundary.
+- [$implementationCheck] Keep local skills and ``.portfolio/`` as primary.
+- [$implementationCheck] Record external references in ``REFERENCES.md``.
+- [$benchmarkCheck] Commit benchmark JSON and the matching README number.
 
 ## Publication
 
-- [ ] Validate project.
-- [ ] Confirm published CI is green.
-- [ ] Confirm article uses committed benchmark result.
-- [ ] Confirm ``voice-check.md`` verdict is aligned or intentionally overridden.
+- [$publicationCheck] Validate project.
+- [$publicationCheck] Confirm published CI is green.
+- [$publicationCheck] Confirm article uses committed benchmark result.
+- [$publicationCheck] Confirm ``voice-check.md`` verdict is aligned or intentionally overridden.
 "@
   "verification.md" = @"
 # Verification: $name
