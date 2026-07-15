@@ -215,6 +215,7 @@ if (Select-String -Path (Join-Path $root "tools/plan-project.ps1") -Pattern "pro
   $failures.Add("Project planner contains a domain-specific default narrative")
 }
 Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
+Require-Pattern "templates/validate-project.ps1" "go test ./..."
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }

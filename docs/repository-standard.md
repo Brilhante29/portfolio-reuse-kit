@@ -103,6 +103,7 @@ Bad reuse:
 
 A repo is done only when:
 
+- language-specific quality gates run when their project manifest is present; Go modules require gofmt, tests, and vet
 - Docker path works
 - tests or smoke checks pass
 - benchmark writes JSON

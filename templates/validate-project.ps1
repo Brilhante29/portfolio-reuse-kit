@@ -98,6 +98,34 @@ try {
     }
     $env:PYTHONPATH = $previousPythonPath
   }
+
+  $goModPath = Join-Path $root "go.mod"
+  if (Test-Path -LiteralPath $goModPath -PathType Leaf) {
+    $goCommand = Get-Command go -ErrorAction SilentlyContinue
+    if ($goCommand) {
+      $goFiles = @(Get-ChildItem -Path $root -Recurse -Filter *.go -File | Where-Object {
+        $normalized = $_.FullName -replace "\\", "/"
+        $normalized -notmatch "/.git/" -and
+        $normalized -notmatch "/.portfolio/" -and
+        $normalized -notmatch "/vendor/"
+      })
+      if ($goFiles.Count -gt 0) {
+        $unformatted = @(& gofmt -l $goFiles.FullName)
+        if ($LASTEXITCODE -ne 0) {
+          Add-Failure "gofmt failed with exit code $LASTEXITCODE"
+          $global:LASTEXITCODE = 0
+        } elseif ($unformatted.Count -gt 0) {
+          Add-Failure "Go files require gofmt: $($unformatted -join ', ')"
+        }
+      }
+      Invoke-Checked "go test" { go test ./... }
+      Invoke-Checked "go vet" { go vet ./... }
+    } elseif ($SkipDocker) {
+      Add-Failure "Go toolchain is required to validate go.mod projects when Docker validation is skipped"
+    } else {
+      Write-Host "go_toolchain=not_found; relying on Docker build for Go validation"
+    }
+  }
 } finally {
   Pop-Location
 }
