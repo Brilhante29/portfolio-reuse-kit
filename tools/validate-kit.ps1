@@ -91,6 +91,7 @@ $requiredFiles = @(
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
   "docs/usage.md",
+  "docs/ai-evaluation-retrieval.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",

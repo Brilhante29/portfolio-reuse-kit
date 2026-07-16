@@ -209,6 +209,8 @@ The 30 repositories are grouped into portfolio programs:
 
 The program catalog is in [catalog/programs.yaml](catalog/programs.yaml).
 
+The first program operating guide is [AI Evaluation and Retrieval Systems](docs/ai-evaluation-retrieval.md).
+
 ## First Six Projects
 
 Recommended build order:
