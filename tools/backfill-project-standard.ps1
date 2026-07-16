@@ -147,6 +147,8 @@ $templateFiles = @(
   @{ Source = "templates/project.yaml"; Destination = "project.yaml"; Expand = $true },
   @{ Source = "templates/REFERENCES.md"; Destination = "REFERENCES.md"; Expand = $false },
   @{ Source = "templates/AGENTS.md"; Destination = "AGENTS.md"; Expand = $false },
+  @{ Source = "templates/CLAUDE.md"; Destination = "CLAUDE.md"; Expand = $false },
+  @{ Source = "templates/aitmpl-config.yaml"; Destination = ".aitmpl/config.yaml"; Expand = $false },
   @{ Source = "templates/validate-project.ps1"; Destination = "tools/validate-project.ps1"; Expand = $false },
   @{ Source = "templates/openspec-config.yaml"; Destination = "openspec/config.yaml"; Expand = $true },
   @{ Source = "sdd/templates/spec.md"; Destination = "sdd/spec.md"; Expand = $true },

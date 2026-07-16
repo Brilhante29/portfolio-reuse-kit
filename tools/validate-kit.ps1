@@ -117,12 +117,20 @@ $requiredFiles = @(
   "templates/openspec-config.yaml",
   "templates/README-project.md",
   "templates/AGENTS.md",
+  "templates/CLAUDE.md",
+  "templates/aitmpl-config.yaml",
+  "templates/aitmpl-context-card.md",
+  "templates/openspec-change-proposal.md",
+  "templates/openspec-change-design.md",
+  "templates/openspec-change-tasks.md",
+  "templates/openspec-change-spec.md",
   "templates/validate-project.ps1",
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
   "tools/backfill-project-standard.ps1",
   "tools/plan-project.ps1",
+  "tools/prepare-project.ps1",
   "tools/sync-project-reuse.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
@@ -213,6 +221,10 @@ Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
+Require-Pattern "tools/prepare-project.ps1" "OpenSpec CLI was requested"
+Require-Pattern "tools/prepare-project.ps1" "UseAitmpl requires explicit"
+Require-Pattern "templates/CLAUDE.md" "Read"
+Require-Pattern "templates/aitmpl-config.yaml" "External components are optional"
 Require-Pattern "tools/plan-project.ps1" 'Read ``project.yaml``'
 Require-Pattern "tools/plan-project.ps1" 'Keep ``tools/plan-project.ps1`` in the kit.'
 Require-Pattern "tools/plan-project.ps1" "Confirm published CI is green."

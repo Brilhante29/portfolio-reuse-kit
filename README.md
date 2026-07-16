@@ -113,6 +113,22 @@ pwsh -NoProfile -File tools/plan-project.ps1 `
   -RepoPath (Join-Path $repoRoot "rag-knowledge-base")
 ```
 
+Prepare the complete agent context and one OpenSpec change package:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/prepare-project.ps1 `
+  -RepoPath (Join-Path $repoRoot "rag-knowledge-base") `
+  -ChangeId improve-retrieval-benchmark `
+  -Force `
+  -Validate
+```
+
+This command is the universal entry point for Codex and Claude Code. It runs
+the local planner, writes `.aitmpl/context-card.md`, creates
+`openspec/changes/<change-id>/`, and keeps SDD, the project manifest, and the
+benchmark contract aligned. `openspec validate --strict` and external AITmpl
+components are optional adapters, enabled only with explicit flags.
+
 Repair older project scaffolds without overwriting project decisions:
 
 ```powershell
@@ -147,6 +163,7 @@ Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
 | `templates/` | Files copied into new projects: README, manifest, AGENTS, references, Dockerfiles, validation script, CI. |
 | `openspec/` | OpenSpec-compatible portfolio schema and config for intent, impact, architecture, reuse, benchmark, tasks, and verification artifacts. |
+| `.aitmpl/` | Generated agent context card and optional AITmpl adapter configuration. |
 | `sdd/` | Specification templates: spec, benchmark plan, ADR, technical decision, agent handoff, reuse improvement review, release checklist. |
 | `harness/` | Benchmark runner, result comparison script, plan/article generator support, k6 smoke script, benchmark schema. |
 | `metrics/` | Metric names, units, and optimization direction. |

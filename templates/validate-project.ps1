@@ -38,6 +38,8 @@ $requiredFiles = @(
   "project.yaml",
   "REFERENCES.md",
   "AGENTS.md",
+  "CLAUDE.md",
+  ".aitmpl/config.yaml",
   "openspec/config.yaml",
   "openspec/artifacts/intent.md",
   "openspec/artifacts/portfolio-impact.md",
