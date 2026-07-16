@@ -2,7 +2,8 @@ param(
   [string]$RepoPath = "",
   [string]$RepoRoot = "",
   [string[]]$Exclude = @("portfolio-reuse-kit"),
-  [switch]$DryRun
+  [switch]$DryRun,
+  [switch]$SyncSharedArtifacts
 )
 
 $ErrorActionPreference = "Stop"
@@ -142,6 +143,28 @@ function Copy-TemplateIfMissing {
   return $true
 }
 
+function Sync-SharedArtifact {
+  param(
+    [string]$Repo,
+    [string]$SourceRelative,
+    [string]$DestinationRelative
+  )
+
+  $source = Join-PortablePath -BasePath $kitRoot -RelativePath $SourceRelative
+  $destination = Join-PortablePath -BasePath $Repo -RelativePath $DestinationRelative
+  if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+    throw "Missing shared kit artifact: $SourceRelative"
+  }
+  if ($DryRun) {
+    Write-Host "would_sync=$DestinationRelative"
+    return
+  }
+
+  $parent = Split-Path -Parent $destination
+  New-Item -ItemType Directory -Force -Path $parent | Out-Null
+  Copy-Item -LiteralPath $source -Destination $destination -Force
+}
+
 $templateFiles = @(
   @{ Source = "templates/README-project.md"; Destination = "README.md"; Expand = $true },
   @{ Source = "templates/project.yaml"; Destination = "project.yaml"; Expand = $true },
@@ -194,6 +217,17 @@ foreach ($repo in $repos) {
       -Project $project `
       -ExpandTokens:([bool]$item.Expand)
     if ($created) { $totalFiles++ }
+  }
+
+  if ($SyncSharedArtifacts) {
+    foreach ($shared in @(
+      @{ Source = ".claude/skills/cloud-local-first/SKILL.md"; Destination = ".claude/skills/cloud-local-first/SKILL.md" },
+      @{ Source = ".codex/skills/cloud-local-first/SKILL.md"; Destination = ".codex/skills/cloud-local-first/SKILL.md" },
+      @{ Source = "decision-brain/cloud-matrix.yaml"; Destination = ".portfolio/decision-brain/cloud-matrix.yaml" }
+    )) {
+      Sync-SharedArtifact -Repo $repo -SourceRelative $shared.Source -DestinationRelative $shared.Destination
+      $totalFiles++
+    }
   }
 
   $gitkeep = Join-PortablePath -BasePath $repo -RelativePath "benchmarks/results/.gitkeep"
