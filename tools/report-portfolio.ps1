@@ -43,6 +43,7 @@ $rows = @(
       $benchmark = (@(Get-ChildItem (Join-Path $repo "benchmarks/results") -Filter *.json -File -ErrorAction SilentlyContinue)).Count -gt 0
       $control = Test-Path (Join-Path $repo ".portfolio-control/QUALITY_GATES.md") -PathType Leaf
       $readme = if (Test-Path (Join-Path $repo "README.md") -PathType Leaf) { Get-Content (Join-Path $repo "README.md") -TotalCount 1 } else { "" }
+      $remote = Text (git -C $repo config --get remote.origin.url 2>$null)
       $upstream = ""
       try {
         $upstream = Text (git -C $repo rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>$null)
@@ -60,7 +61,7 @@ $rows = @(
         cloud = Scalar $manifest '(?ms)^\s{2}cloud:\s*\r?\n\s{4}mode:\s*([^\r\n]+)' "unassigned"
         database = Scalar $manifest '(?m)^\s{2}database:\s*([^\r\n]+)' "unassigned"
         branch = Text (git -C $repo branch --show-current 2>$null)
-        remote_configured = (Text (git -C $repo config --get remote.origin.url 2>$null) -ne "")
+        remote_configured = [bool]$remote
         upstream = if ($upstream) { $upstream } else { "none" }
         dirty_files = @(git -C $repo status --porcelain 2>$null).Count
         docker = $docker
