@@ -1,4 +1,4 @@
-﻿param(
+param(
   [Parameter(Mandatory=$true)] [string]$RepoRoot,
   [string]$MarkdownPath = "",
   [string]$JsonPath = ""
@@ -99,6 +99,3 @@ if ($MarkdownPath) {
   Write-Utf8 $MarkdownPath (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
 }
 $summary | ConvertTo-Json -Depth 8
-
-
-
