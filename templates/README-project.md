@@ -6,6 +6,8 @@
 
 **Benchmark:** `<metric> = pending <unit>`.
 
+**Control:** `.portfolio-control/` is the project-level map of reuse, decisions, agent handoffs, critical path, and quality gates.
+
 ## Run
 
 ```bash

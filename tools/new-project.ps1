@@ -36,6 +36,7 @@ New-Item -ItemType Directory -Force -Path (Join-Path $target "benchmarks/results
 New-Item -ItemType Directory -Force -Path (Join-Path $target "openspec") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "openspec/changes") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target ".aitmpl") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $target ".portfolio-control/AGENT_HANDOFFS") | Out-Null
 
 Copy-Item (Join-Path $root "templates/README-project.md") (Join-Path $target "README.md")
 Copy-Item (Join-Path $root "templates/project.yaml") (Join-Path $target "project.yaml")
@@ -56,11 +57,25 @@ Copy-Item (Join-Path $root ".gitignore") (Join-Path $target ".gitignore")
 Copy-Item (Join-Path $root ".gitattributes") (Join-Path $target ".gitattributes")
 Copy-Item (Join-Path $root ".editorconfig") (Join-Path $target ".editorconfig")
 Copy-Item (Join-Path $root "templates/openspec-config.yaml") (Join-Path $target "openspec/config.yaml")
+Copy-Item (Join-Path $root "templates/portfolio-control/INVENTORY.md") (Join-Path $target ".portfolio-control/INVENTORY.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/REUSE_MAP.md") (Join-Path $target ".portfolio-control/REUSE_MAP.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/CRITICAL_PATH.md") (Join-Path $target ".portfolio-control/CRITICAL_PATH.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/DECISIONS.md") (Join-Path $target ".portfolio-control/DECISIONS.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/QUALITY_GATES.md") (Join-Path $target ".portfolio-control/QUALITY_GATES.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/AGENT_HANDOFFS/README.md") (Join-Path $target ".portfolio-control/AGENT_HANDOFFS/README.md")
 
 $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<id>", $Id `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "README.md") -Content $readmeContent
+
+foreach ($controlFile in @("INVENTORY.md", "REUSE_MAP.md", "CRITICAL_PATH.md", "DECISIONS.md", "QUALITY_GATES.md")) {
+  $controlPath = Join-Path $target ".portfolio-control/$controlFile"
+  $controlContent = (Get-Content $controlPath -Raw) `
+    -replace "<id>", $Id `
+    -replace "<project-name>", $Name
+  Write-Utf8NoBom -Path $controlPath -Content $controlContent
+}
 
 $manifestContent = (Get-Content (Join-Path $target "project.yaml") -Raw) `
   -replace "<id>", $Id `

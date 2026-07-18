@@ -174,6 +174,12 @@ $templateFiles = @(
   @{ Source = "templates/aitmpl-config.yaml"; Destination = ".aitmpl/config.yaml"; Expand = $false },
   @{ Source = "templates/validate-project.ps1"; Destination = "tools/validate-project.ps1"; Expand = $false },
   @{ Source = "templates/openspec-config.yaml"; Destination = "openspec/config.yaml"; Expand = $true },
+  @{ Source = "templates/portfolio-control/INVENTORY.md"; Destination = ".portfolio-control/INVENTORY.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/REUSE_MAP.md"; Destination = ".portfolio-control/REUSE_MAP.md"; Expand = $false },
+  @{ Source = "templates/portfolio-control/CRITICAL_PATH.md"; Destination = ".portfolio-control/CRITICAL_PATH.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/DECISIONS.md"; Destination = ".portfolio-control/DECISIONS.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/QUALITY_GATES.md"; Destination = ".portfolio-control/QUALITY_GATES.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/AGENT_HANDOFFS/README.md"; Destination = ".portfolio-control/AGENT_HANDOFFS/README.md"; Expand = $false },
   @{ Source = "sdd/templates/spec.md"; Destination = "sdd/spec.md"; Expand = $true },
   @{ Source = "sdd/templates/benchmark-plan.md"; Destination = "sdd/benchmark-plan.md"; Expand = $false },
   @{ Source = "sdd/templates/architecture-decision.md"; Destination = "sdd/architecture-decision.md"; Expand = $false },
@@ -198,7 +204,7 @@ foreach ($repo in $repos) {
   }
 
   Write-Host "checking=$repoName"
-  foreach ($directory in @("sdd", "tools", "benchmarks/results", "openspec")) {
+  foreach ($directory in @("sdd", "tools", "benchmarks/results", "openspec", ".portfolio-control", ".portfolio-control/AGENT_HANDOFFS")) {
     $targetDirectory = Join-PortablePath -BasePath $repo -RelativePath $directory
     if ($DryRun) {
       if (-not (Test-Path -LiteralPath $targetDirectory -PathType Container)) {

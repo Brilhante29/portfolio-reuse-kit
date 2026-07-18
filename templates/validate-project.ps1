@@ -39,6 +39,12 @@ $requiredFiles = @(
   "REFERENCES.md",
   "AGENTS.md",
   "CLAUDE.md",
+  ".portfolio-control/INVENTORY.md",
+  ".portfolio-control/REUSE_MAP.md",
+  ".portfolio-control/CRITICAL_PATH.md",
+  ".portfolio-control/DECISIONS.md",
+  ".portfolio-control/QUALITY_GATES.md",
+  ".portfolio-control/AGENT_HANDOFFS/README.md",
   ".aitmpl/config.yaml",
   "openspec/config.yaml",
   "openspec/artifacts/intent.md",
@@ -59,6 +65,14 @@ $requiredFiles = @(
   "sdd/reuse-improvement-review.md"
 )
 foreach ($file in $requiredFiles) { Require-File $file }
+
+$readmePath = Join-Path $root "README.md"
+if (Test-Path -LiteralPath $readmePath -PathType Leaf) {
+  $readmeFirstLine = (Get-Content -LiteralPath $readmePath -TotalCount 1)
+  if ($readmeFirstLine -notmatch '^#\s*#?\d+\s+') {
+    Add-Failure "README first line must start with #<project number> <name>"
+  }
+}
 
 $manifestPath = Join-Path $root "project.yaml"
 $manifestPrimaryMetric = ""

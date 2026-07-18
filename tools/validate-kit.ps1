@@ -115,8 +115,17 @@ $requiredFiles = @(
   "openspec/schemas/portfolio-system/templates/benchmark-proof.md",
   "openspec/schemas/portfolio-system/templates/tasks.md",
   "openspec/schemas/portfolio-system/templates/verification.md",
+  ".portfolio-control/README.md",
+  ".portfolio-control/control.yaml",
+  ".portfolio-control/AGENT_HANDOFFS/README.md",
   "templates/openspec-config.yaml",
   "templates/README-project.md",
+  "templates/portfolio-control/INVENTORY.md",
+  "templates/portfolio-control/REUSE_MAP.md",
+  "templates/portfolio-control/CRITICAL_PATH.md",
+  "templates/portfolio-control/DECISIONS.md",
+  "templates/portfolio-control/QUALITY_GATES.md",
+  "templates/portfolio-control/AGENT_HANDOFFS/README.md",
   "templates/AGENTS.md",
   "templates/CLAUDE.md",
   "templates/aitmpl-config.yaml",
@@ -137,6 +146,7 @@ $requiredFiles = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/validate-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -272,6 +282,7 @@ $powerShellScripts = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/validate-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 

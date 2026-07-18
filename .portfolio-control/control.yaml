@@ -1,0 +1,26 @@
+version: 1
+source_of_truth: portfolio-reuse-kit
+portfolio_root: ..
+principles:
+  architecture_by_problem: true
+  local_first_cloud_pluggable: true
+  benchmark_before_publication: true
+  no_mutable_dependencies: true
+  no_secrets_in_repository: true
+quality_gates:
+  - numbered_readme
+  - sdd_and_openspec
+  - docker_reproducibility
+  - ci_checks
+  - benchmark_json
+  - reuse_review
+  - independent_review
+agent_roles:
+  - reuse-architect
+  - repository-auditor
+  - sdd-spec-agent
+  - implementation-agent
+  - docker-ci-agent
+  - benchmark-agent
+  - documentation-agent
+  - independent-reviewer
