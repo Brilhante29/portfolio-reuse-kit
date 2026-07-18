@@ -10,7 +10,9 @@ param(
   [string]$CommitMessage = "Publish repository",
   [string]$Token = $env:GH_TOKEN,
   [switch]$NoCommit,
-  [switch]$NoPush
+  [switch]$NoPush,
+  [switch]$AllowIncomplete,
+  [switch]$AllowDirty
 )
 
 $ErrorActionPreference = "Stop"
@@ -82,6 +84,20 @@ if (-not $Token) {
 }
 
 $resolvedRepo = Resolve-Path -LiteralPath $RepoPath
+$isKit = ((Split-Path -Leaf $resolvedRepo) -eq "portfolio-reuse-kit")
+if (-not $isKit -and -not $AllowIncomplete) {
+  $manifestText = Get-Content -Raw -LiteralPath "project.yaml"
+  $projectStatus = [regex]::Match($manifestText, "(?m)^status:\s*(.+)$").Groups[1].Value.Trim()
+  if ($projectStatus -notin @("benchmarked", "published")) { throw "Refusing to publish incomplete project status=$projectStatus" }
+  $required = @("Dockerfile", "README.md", "sdd/spec.md", "sdd/benchmark-plan.md", "sdd/reuse-improvement-review.md", ".portfolio-control/QUALITY_GATES.md")
+  $missing = @($required | Where-Object { -not (Test-Path -LiteralPath $_ -PathType Leaf) })
+  if ($missing.Count -gt 0) { throw "Refusing to publish incomplete project; missing=$($missing -join ',')" }
+  if (-not (Test-Path -LiteralPath ".github/workflows" -PathType Container)) { throw "Refusing to publish project without CI workflow" }
+  $benchmarkCount = @(Get-ChildItem -LiteralPath "benchmarks/results" -Filter *.json -File -ErrorAction SilentlyContinue).Count
+  if ($benchmarkCount -eq 0) { throw "Refusing to publish project without benchmark evidence" }
+  $firstLine = Get-Content -LiteralPath "README.md" -TotalCount 1
+  if ($firstLine -notmatch "^#\s*#?\d+\s+") { throw "Refusing to publish project without a numbered README" }
+}
 Set-Location $resolvedRepo
 
 if (-not $RepoName) {
@@ -139,6 +155,7 @@ if ($existingRemote) {
 }
 
 $status = Get-GitOutput @("status", "--porcelain")
+if ($status -and -not $AllowDirty) { throw "Refusing to publish a dirty tree; review, commit, or pass -AllowDirty explicitly" }
 $hasCommit = $true
 try { Get-GitOutput @("rev-parse", "--verify", "HEAD") | Out-Null } catch { $hasCommit = $false }
 
