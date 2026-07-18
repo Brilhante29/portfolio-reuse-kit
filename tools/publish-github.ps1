@@ -5,7 +5,7 @@ param(
   [string]$Description = "",
   [ValidateSet("public", "private")]
   [string]$Visibility = "public",
-  [string]$Branch = "main",
+  [string]$Branch = "",
   [string]$RemoteName = "origin",
   [string]$CommitMessage = "Publish repository",
   [string]$Token = $env:GH_TOKEN,
@@ -84,6 +84,10 @@ if (-not $Token) {
 }
 
 $resolvedRepo = Resolve-Path -LiteralPath $RepoPath
+if (-not $Branch) {
+  $Branch = ((git branch --show-current 2>$null) -join "").Trim()
+  if (-not $Branch) { $Branch = "main" }
+}
 $isKit = ((Split-Path -Leaf $resolvedRepo) -eq "portfolio-reuse-kit")
 if (-not $isKit -and -not $AllowIncomplete) {
   $manifestText = Get-Content -Raw -LiteralPath "project.yaml"
