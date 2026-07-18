@@ -1,4 +1,4 @@
-param(
+﻿param(
   [Parameter(Mandatory=$true)] [string]$RepoRoot,
   [string]$MarkdownPath = "",
   [string]$JsonPath = ""
@@ -43,6 +43,7 @@ $rows = @(
       $benchmark = (@(Get-ChildItem (Join-Path $repo "benchmarks/results") -Filter *.json -File -ErrorAction SilentlyContinue)).Count -gt 0
       $control = Test-Path (Join-Path $repo ".portfolio-control/QUALITY_GATES.md") -PathType Leaf
       $readme = if (Test-Path (Join-Path $repo "README.md") -PathType Leaf) { Get-Content (Join-Path $repo "README.md") -TotalCount 1 } else { "" }
+      $status = Scalar $manifest '(?m)^status:\s*([^\r\n]+)' 'missing'
       $remote = Text (git -C $repo config --get remote.origin.url 2>$null)
       $upstream = ""
       try {
@@ -68,7 +69,7 @@ $rows = @(
         ci = $ci
         benchmark = $benchmark
         control = $control
-        complete_candidate = ($docker -and $ci -and $benchmark -and $control -and ($readme -match '^#\s*#?\d+\s+') -and (Test-Path (Join-Path $repo "sdd") -PathType Container))
+        complete_candidate = ($status -in @("benchmarked", "published") -and $docker -and $ci -and $benchmark -and $control -and ($readme -match '^#\s*#?\d+\s+') -and (Test-Path (Join-Path $repo "sdd") -PathType Container))
       }
     } | Sort-Object id, name
 )
@@ -98,3 +99,6 @@ if ($MarkdownPath) {
   Write-Utf8 $MarkdownPath (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
 }
 $summary | ConvertTo-Json -Depth 8
+
+
+
