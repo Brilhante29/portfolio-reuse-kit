@@ -147,6 +147,7 @@ $requiredFiles = @(
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
   "tools/validate-portfolio.ps1",
+  "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -283,6 +284,7 @@ $powerShellScripts = @(
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
   "tools/validate-portfolio.ps1",
+  "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 
