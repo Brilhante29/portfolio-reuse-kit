@@ -76,6 +76,7 @@ $requiredFiles = @(
   "language-profiles/terraform.yaml",
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
+  "contracts/monitoring-batch.schema.json",
   "docs/reuse-layer.md",
   "docs/architecture-decision-guide.md",
   "docs/decision-brain.md",
@@ -270,6 +271,7 @@ Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
 Invoke-Checked "benchmark schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null }
+Invoke-Checked "monitoring batch schema JSON" { python -m json.tool (Join-Path $root "contracts/monitoring-batch.schema.json") | Out-Null }
 $pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 
