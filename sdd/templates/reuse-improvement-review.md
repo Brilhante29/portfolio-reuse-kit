@@ -19,15 +19,15 @@ Project: `<id> - <project-name>`
 
 ## Patch Now Decisions
 
-- 
+-
 
 ## Backlog Decisions
 
-- 
+-
 
 ## Rejected Improvements
 
-- 
+-
 
 ## Final Gate
 
