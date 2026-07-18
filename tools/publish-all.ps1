@@ -1,58 +1,53 @@
 param(
-  [Parameter(Mandatory=$true)]
-  [string]$RepoRoot,
+  [Parameter(Mandatory=$true)] [string]$RepoRoot,
   [string]$Owner = "Brilhante29",
-  [ValidateSet("public", "private")]
-  [string]$Visibility = "public",
-  [string]$Branch = "main",
+  [ValidateSet("public", "private")] [string]$Visibility = "public",
   [string]$Token = $env:GH_TOKEN,
-  [switch]$NoCommit,
-  [switch]$NoPush
+  [switch]$NoPush,
+  [switch]$IncludeDirty,
+  [switch]$DryRun
 )
 
 $ErrorActionPreference = "Stop"
+$root = (Resolve-Path -LiteralPath $RepoRoot).Path
+$kit = Split-Path -Parent $PSScriptRoot
+$validator = Join-Path $PSScriptRoot "validate-portfolio.ps1"
+$publisher = Join-Path $PSScriptRoot "publish-github.ps1"
+$reportPath = Join-Path ([System.IO.Path]::GetTempPath()) ("portfolio-status-{0}.json" -f $PID)
 
-function Get-EnvironmentSecret {
-  param([string]$Name)
+try {
+  & $validator -RepoRoot $root -JsonPath $reportPath | Out-Host
+  $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json
+  $reportRows = if ($report.repositories) { $report.repositories } else { $report.rows }
+  $candidates = @($reportRows | Where-Object complete_candidate | Sort-Object id)
+  if ($candidates.Count -eq 0) { throw "No complete candidate is eligible for publication" }
 
-  foreach ($scope in @("Process", "User", "Machine")) {
-    $value = [Environment]::GetEnvironmentVariable($Name, $scope)
-    if ($value) { return $value }
+  foreach ($candidate in $candidates) {
+    $repoPath = Join-Path $root $candidate.name
+    if ($candidate.dirty_files -gt 0 -and -not $IncludeDirty) {
+      Write-Warning ("skip={0}; dirty_files={1}; use -IncludeDirty only after reviewing the tree" -f $candidate.name,$candidate.dirty_files)
+      continue
+    }
+    $branch = ((git -C $repoPath branch --show-current 2>$null) -join "").Trim()
+    if (-not $branch) { throw "Cannot determine current branch for $($candidate.name)" }
+    if ($DryRun) {
+      Write-Host ("eligible={0}; branch={1}; status={2}; benchmark={3}" -f $candidate.name,$branch,$candidate.status,$candidate.benchmark)
+      continue
+    }
+    Write-Host ("publishing={0}; branch={1}" -f $candidate.name,$branch)
+    $args = @(
+      "-RepoPath", $repoPath,
+      "-Owner", $Owner,
+      "-RepoName", $candidate.name,
+      "-Visibility", $Visibility,
+      "-Branch", $branch,
+      "-Token", $Token,
+      "-NoCommit"
+    )
+    if ($NoPush) { $args += "-NoPush" }
+    & $publisher @args
   }
-
-  return $null
+} finally {
+  if (Test-Path -LiteralPath $reportPath) { Remove-Item -LiteralPath $reportPath -Force }
+  $Token = $null
 }
-
-if (-not $Token) {
-  $Token = Get-EnvironmentSecret "GH_TOKEN"
-}
-
-if (-not $Token) {
-  $secure = Read-Host "GitHub token" -AsSecureString
-  $ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
-  try {
-    $Token = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr)
-  } finally {
-    [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr)
-  }
-}
-
-$root = Resolve-Path -LiteralPath $RepoRoot
-$script = Join-Path $PSScriptRoot "publish-github.ps1"
-$repos = Get-ChildItem -Directory -LiteralPath $root | Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName ".git") }
-
-foreach ($repo in $repos) {
-  Write-Host "Publishing $($repo.Name)"
-  & $script `
-    -RepoPath $repo.FullName `
-    -Owner $Owner `
-    -RepoName $repo.Name `
-    -Visibility $Visibility `
-    -Branch $Branch `
-    -Token $Token `
-    -CommitMessage "Publish $($repo.Name)" `
-    -NoCommit:$NoCommit `
-    -NoPush:$NoPush
-}
-
-$Token = $null
