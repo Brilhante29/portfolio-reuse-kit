@@ -1,15 +1,15 @@
 # Execution Efficiency
 
-Generated: 2026-07-21T21:33:15.9708999Z
+Generated: 2026-07-21T21:51:40.7484226Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **4** | wait timeouts: **13** | avoidable occurrences: **56** | tracked duration: **2920,55 s**
+Hard limits: **4** | wait timeouts: **13** | avoidable occurrences: **59** | tracked duration: **2923,55 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
-| tool-failure | 8 | 18 | 17,7 |
-| invalid-command | 7 | 13 | 12,7 |
+| tool-failure | 10 | 20 | 19,9 |
+| invalid-command | 8 | 14 | 13,5 |
 | wait-timeout | 2 | 13 | 1580 |
 | command-timeout | 6 | 10 | 1041,15 |
 | invalid-diagnostic | 1 | 6 | 0 |
@@ -23,6 +23,7 @@ Hard limits: **4** | wait timeouts: **13** | avoidable occurrences: **56** | tra
 - Always resolve and use the full commit SHA for local-clone integration.
 - Budget repository-wide Git scans from a one-repository timing sample.
 - Collect read-only Git snapshots through a bounded cross-version runspace pool.
+- Create destination parents for every sparse-overlay copy or use the official full clone after switching to an isolated branch.
 - Delegate read-only audits outside writable roots and reserve edits for writable worktrees.
 - Fetch the source clone first, then perform ff-only merge or compare FETCH_HEAD.
 - Finalize defaults before Docker and verify argument wiring with a tiny smoke workload.
@@ -32,6 +33,8 @@ Hard limits: **4** | wait timeouts: **13** | avoidable occurrences: **56** | tra
 - Pilot one agent after writable-scope preflight; keep external-workspace agents read-only and apply changes from the principal agent.
 - Pilot one minimal edit and one failing native Git call before applying a workspace-wide script.
 - Pilot the patch wrapper once, then use one supported staged edit path without retrying the same failure.
+- Prefer a short-path git worktree for local repository isolation on Windows.
+- Preflight tracked build caches with git ls-files, reject them in validation, and use a short C:\tmp worktree for cleanup.
 - Read PSVersion first and use Stopwatch plus a PowerShell-5.1-compatible runspace pool.
 - Read the parameter block before invoking repository scripts and reuse the corrected command.
 - Resolve the absolute interpreter once before running tests.

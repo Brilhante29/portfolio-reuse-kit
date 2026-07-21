@@ -28,6 +28,7 @@ Goal: complete the existing portfolio with truthful evidence and expand to 33 re
   - `prompt-ab-testing` `2bf01bd`: blinded deterministic scoring without fixture multipliers.
   - `cost-aware-inference` `91da259`: provider port, measured local adapter, optional OpenAI-compatible adapter, and separated pricing assumptions.
   - `rag-knowledge-base` `0c248f9`: correct Recall@k, injected ports, safe data/result roots, six tests, strict OpenSpec, repeated benchmark, and Docker validation.
+- All six AI Evaluation repair branches passed pull-request CI and were squash-merged into their `main` branches; local clones now track `origin/main`.
 - `multi-tenant-starter` commit `d46c176` repairs invalid YAML and truthfully marks the current in-memory implementation as a prototype. PostgreSQL and Flyway are no longer claimed as current stack.
 
 ## Approved Expansion
@@ -58,6 +59,11 @@ RabbitMQ is conditional inside `saga-orchestrator`; it enters only with routing,
 - JVM language decision matrix, technology coverage matrix, and interoperability architecture document.
 - Publication remains V2 plus current-head remote CI evidence; V1 is local compatibility only.
 
+## Active Work
+
+- `portfolio-evidence-api` is being implemented in `new-project-worktrees/portfolio-evidence-api`; it is not published and must remain local until tests, HTTP benchmark, Docker, SDD, and handoff pass.
+- `saga-orchestrator` repair is isolated at `C:\tmp\saga-kotlin` on `agent/kotlin-saga-repair`. The preflight found 111 tracked `.gradle` cache files; the agent must remove them before semantic repair and Kotlin migration.
+- Reuse kit branch `agent/reject-tracked-build-caches` adds a validator gate for `.gradle`, `node_modules`, `.venv`, `.terraform`, root build outputs, Next output, and coverage. Local kit validation passed; commit/PR/merge remain.
 ## Remaining P0
 
 - `saga-orchestrator`: empty compensation logic and false consistency benchmark. Repair semantics before Kotlin conversion.
@@ -72,17 +78,17 @@ Excluded: all work on 2026-07-20, attributed by the user to Antigravity/OpenCode
 - Hard authorization limits: 4.
 - Wait timeouts: 13.
 - Command timeouts: 10 occurrences.
-- Avoidable occurrences: 56.
-- Tracked duration: 2920.55 seconds.
+- Avoidable occurrences: 59.
+- Tracked duration: 2923.55 seconds.
 - Exact history: `.portfolio-control/EXECUTION_EVENTS.jsonl`.
 
 Do not repeat equivalent Docker strategies after one isolated passing path. Read script parameters before invocation. For source-block edits, use delimiter-based replacement and parse immediately.
 
 ## Continuation Order
 
-1. Commit the validated contract/token materialization patch in the kit, push, and verify GitHub Actions.
-2. Continue the active `portfolio-evidence-api` implementation in `new-project-worktrees`; do not publish an empty scaffold.
-3. Migrate three producers first: one Python, one Go, and one Kotlin repository to benchmark V2 golden compatibility.
+1. Commit and merge `agent/reject-tracked-build-caches` after GitHub CI.
+2. Review, integrate, and publish `portfolio-evidence-api` only after its full local and remote gates pass.
+3. Review and integrate the saga semantic repair/Kotlin migration, then migrate one Python, one Go, and one Kotlin producer to V2.
 4. Repair saga, multi-tenant, and outbox P0 semantics; apply the JVM decisions above.
 5. Implement `portfolio-evidence-console`, then `portfolio-operations-console` after the API contracts stabilize.
 6. Repair the YOLO-to-serving artifact path and the data-quality to drift path.

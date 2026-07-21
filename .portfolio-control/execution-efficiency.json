@@ -1,26 +1,26 @@
 {
-    "generated_at":  "2026-07-21T21:33:15.9708999Z",
+    "generated_at":  "2026-07-21T21:51:40.7484226Z",
     "excluded_windows":  [
                              "2026-07-20: user-operated Antigravity/OpenCode activity"
                          ],
-    "event_records":  27,
-    "occurrence_count":  69,
+    "event_records":  30,
+    "occurrence_count":  72,
     "hard_limit_occurrences":  4,
     "wait_timeout_occurrences":  13,
-    "avoidable_occurrences":  56,
-    "tracked_duration_seconds":  2920.55,
+    "avoidable_occurrences":  59,
+    "tracked_duration_seconds":  2923.55,
     "categories":  [
                        {
                            "category":  "tool-failure",
-                           "events":  8,
-                           "occurrences":  18,
-                           "duration_seconds":  17.7
+                           "events":  10,
+                           "occurrences":  20,
+                           "duration_seconds":  19.9
                        },
                        {
                            "category":  "invalid-command",
-                           "events":  7,
-                           "occurrences":  13,
-                           "duration_seconds":  12.7
+                           "events":  8,
+                           "occurrences":  14,
+                           "duration_seconds":  13.5
                        },
                        {
                            "category":  "wait-timeout",

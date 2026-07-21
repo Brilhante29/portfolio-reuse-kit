@@ -12,6 +12,28 @@ function Add-Failure {
   $script:failures.Add($Message)
 }
 
+$trackedFiles = @(& git -C $root ls-files 2>$null)
+$gitListExit = $LASTEXITCODE
+$global:LASTEXITCODE = 0
+if ($gitListExit -ne 0) {
+  Add-Failure "Repository must be a readable Git worktree"
+} else {
+  $forbiddenTrackedPatterns = @(
+    '(^|/)\.gradle/',
+    '(^|/)node_modules/',
+    '(^|/)(__pycache__|\.pytest_cache|\.ruff_cache)/',
+    '(^|/)\.venv/',
+    '(^|/)\.terraform/',
+    '^(target|build|dist|coverage|\.next)/'
+  )
+  $trackedBuildArtifacts = @($trackedFiles | Where-Object {
+    $normalized = $_ -replace '\\', '/'
+    $forbiddenTrackedPatterns | Where-Object { $normalized -match $_ } | Select-Object -First 1
+  })
+  if ($trackedBuildArtifacts.Count -gt 0) {
+    Add-Failure "Tracked build/cache artifacts must be removed: $($trackedBuildArtifacts -join ', ')"
+  }
+}
 function Require-File {
   param([string]$RelativePath)
   $path = Join-Path $root $RelativePath
