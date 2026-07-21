@@ -55,7 +55,7 @@ Project: `<id> - <project-name>`
 
 ## Open Risks
 
-- 
+-
 
 ## Publication Gates
 

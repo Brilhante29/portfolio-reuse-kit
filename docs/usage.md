@@ -20,6 +20,8 @@ The generated repo contains:
 - `README.md`
 - `REFERENCES.md`
 - `AGENTS.md`
+- `CLAUDE.md`
+- `.aitmpl/config.yaml`
 - `sdd/spec.md`
 - `sdd/benchmark-plan.md`
 - `sdd/architecture-decision.md`
@@ -31,6 +33,25 @@ The generated repo contains:
 - `.codex/skills/*`
 - `.claude/skills/*`
 - `.portfolio/*` standards snapshot when `-InstallSkills` is used
+
+## Prepare A Project For Agents
+
+After the manifest and first architecture decision are ready, run one command:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/prepare-project.ps1 `
+  -RepoPath (Join-Path $repoRoot "spring-hexagonal-payments") `
+  -ChangeId baseline `
+  -Force `
+  -Validate
+```
+
+It generates the context card for Codex and Claude Code, the OpenSpec change
+package, the reusable planning artifacts, the article draft, and the voice
+check. The default path has no dependency on external CLIs. Add
+`-OpenSpecValidate` only when the OpenSpec CLI is installed. Add
+`-UseAitmpl -AitmplArgs ...` only when deliberately installing external Claude
+Code Templates components.
 
 ## Sync Reuse Into Existing Projects
 

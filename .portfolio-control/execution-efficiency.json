@@ -1,0 +1,62 @@
+{
+    "generated_at":  "2026-07-21T21:33:15.9708999Z",
+    "excluded_windows":  [
+                             "2026-07-20: user-operated Antigravity/OpenCode activity"
+                         ],
+    "event_records":  27,
+    "occurrence_count":  69,
+    "hard_limit_occurrences":  4,
+    "wait_timeout_occurrences":  13,
+    "avoidable_occurrences":  56,
+    "tracked_duration_seconds":  2920.55,
+    "categories":  [
+                       {
+                           "category":  "tool-failure",
+                           "events":  8,
+                           "occurrences":  18,
+                           "duration_seconds":  17.7
+                       },
+                       {
+                           "category":  "invalid-command",
+                           "events":  7,
+                           "occurrences":  13,
+                           "duration_seconds":  12.7
+                       },
+                       {
+                           "category":  "wait-timeout",
+                           "events":  2,
+                           "occurrences":  13,
+                           "duration_seconds":  1580
+                       },
+                       {
+                           "category":  "command-timeout",
+                           "events":  6,
+                           "occurrences":  10,
+                           "duration_seconds":  1041.15
+                       },
+                       {
+                           "category":  "invalid-diagnostic",
+                           "events":  1,
+                           "occurrences":  6,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "authorization-limit",
+                           "events":  1,
+                           "occurrences":  4,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "agent-no-progress",
+                           "events":  1,
+                           "occurrences":  3,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "redundant-work",
+                           "events":  1,
+                           "occurrences":  2,
+                           "duration_seconds":  269
+                       }
+                   ]
+}

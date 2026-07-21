@@ -39,6 +39,7 @@ function Require-Directory {
 
 $requiredFiles = @(
   "README.md",
+  "requirements-ci.txt",
   "PUBLISH.md",
   ".openspec-store/store.yaml",
   "LICENSE",
@@ -48,6 +49,7 @@ $requiredFiles = @(
   "catalog/projects.md",
   "catalog/programs.yaml",
   "catalog/proficiency.yaml",
+  "catalog/technology-coverage.yaml",
   "catalog/reuse-policy.md",
   "architecture/decision-matrix.yaml",
   "component-packs/manifest.yaml",
@@ -57,12 +59,17 @@ $requiredFiles = @(
   "decision-brain/reuse-improvement-loop.yaml",
   "decision-brain/engineering-principles.yaml",
   "decision-brain/stack-matrix.yaml",
+  "decision-brain/jvm-language-matrix.yaml",
   "decision-brain/api-style-matrix.yaml",
   "decision-brain/cloud-matrix.yaml",
   "decision-brain/messaging-matrix.yaml",
   "decision-brain/library-selection.yaml",
   "design-system/README.md",
   "design-system/tokens.yaml",
+  "design-system/generated/tokens.css",
+  "design-system/generated/tokens.scss",
+  "design-system/generated/tokens.ts",
+  "design-system/generated/manifest.json",
   "language-profiles/python.yaml",
   "language-profiles/java.yaml",
   "language-profiles/go.yaml",
@@ -76,6 +83,12 @@ $requiredFiles = @(
   "language-profiles/terraform.yaml",
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
+  "contracts/benchmark-result-v2.schema.json",
+  "contracts/fixtures/benchmark-result-v2.valid.json",
+  "contracts/fixtures/benchmark-result-v2.invalid.json",
+  "contracts/monitoring-batch.schema.json",
+  "contracts/execution-event.schema.json",
+  "contracts/publication-evidence.schema.json",
   "docs/reuse-layer.md",
   "docs/architecture-decision-guide.md",
   "docs/decision-brain.md",
@@ -91,6 +104,7 @@ $requiredFiles = @(
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
   "docs/usage.md",
+  "docs/ai-evaluation-retrieval.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
@@ -114,20 +128,54 @@ $requiredFiles = @(
   "openspec/schemas/portfolio-system/templates/benchmark-proof.md",
   "openspec/schemas/portfolio-system/templates/tasks.md",
   "openspec/schemas/portfolio-system/templates/verification.md",
+  ".portfolio-control/README.md",
+  ".portfolio-control/control.yaml",
+  ".portfolio-control/AGENT_HANDOFFS/README.md",
+  ".portfolio-control/CURRENT_HANDOFF.md",
+  ".portfolio-control/EXECUTION_EVENTS.jsonl",
+  ".portfolio-control/EXECUTION_EFFICIENCY.md",
+  ".portfolio-control/execution-efficiency.json",
+  ".portfolio-control/portfolio-audit.json",
+  ".portfolio-control/PORTFOLIO_STATUS.md",
+  ".portfolio-control/PORTFOLIO_STATUS.json",
+  "docs/audits/portfolio-implementation-audit-2026-07-21.md",
+  "docs/architecture/technology-coverage-and-interoperability.md",
   "templates/openspec-config.yaml",
   "templates/README-project.md",
+  "templates/portfolio-control/INVENTORY.md",
+  "templates/portfolio-control/REUSE_MAP.md",
+  "templates/portfolio-control/CRITICAL_PATH.md",
+  "templates/portfolio-control/DECISIONS.md",
+  "templates/portfolio-control/QUALITY_GATES.md",
+  "templates/portfolio-control/AGENT_HANDOFFS/README.md",
   "templates/AGENTS.md",
+  "templates/CLAUDE.md",
+  "templates/aitmpl-config.yaml",
+  "templates/aitmpl-context-card.md",
+  "templates/openspec-change-proposal.md",
+  "templates/openspec-change-design.md",
+  "templates/openspec-change-tasks.md",
+  "templates/openspec-change-spec.md",
   "templates/validate-project.ps1",
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
   "tools/backfill-project-standard.ps1",
   "tools/plan-project.ps1",
+  "tools/prepare-project.ps1",
   "tools/sync-project-reuse.ps1",
   "tools/publish-github.ps1",
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/validate-portfolio.ps1",
+  "tools/validate-contracts.py",
+  "tools/generate-design-tokens.py",
+  "tools/sync-catalog-stacks.py",
+  "tools/record-execution-event.ps1",
+  "tools/report-execution-efficiency.ps1",
+  "tools/verify-github-publication.ps1",
+  "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -147,6 +195,7 @@ $requiredDirs = @(
   ".codex/skills/cloud-local-first",
   ".codex/skills/messaging-decision",
   ".codex/skills/language-standards",
+  ".codex/skills/jvm-language-decision",
   ".codex/skills/design-system",
   ".codex/skills/spring-kotlin-backend",
   ".codex/skills/fastapi-backend",
@@ -165,6 +214,7 @@ $requiredDirs = @(
   ".claude/skills/cloud-local-first",
   ".claude/skills/messaging-decision",
   ".claude/skills/language-standards",
+  ".claude/skills/jvm-language-decision",
   ".claude/skills/design-system",
   ".claude/skills/spring-kotlin-backend",
   ".claude/skills/fastapi-backend",
@@ -188,13 +238,13 @@ foreach ($skill in $skillFiles) {
   }
 }
 
-$projectCount = (Select-String -Path (Join-Path $root "catalog/projects.yaml") -Pattern "^  - id: ").Count
-$programCount = (Select-String -Path (Join-Path $root "catalog/programs.yaml") -Pattern "^  - id: ").Count
-if ($projectCount -lt 30) {
-  $failures.Add("Expected at least the initial 30 projects in catalog/projects.yaml; found $projectCount")
+$projectCount = (Select-String -Path (Join-Path $root "catalog/projects.yaml") -Pattern "^\s*- id: ").Count
+$programCount = (Select-String -Path (Join-Path $root "catalog/programs.yaml") -Pattern "^\s*- id: ").Count
+if ($projectCount -lt 33) {
+  $failures.Add("Expected the approved 33 projects in catalog/projects.yaml; found $projectCount")
 }
-if ($programCount -lt 5) {
-  $failures.Add("Expected at least 5 programs in catalog/programs.yaml; found $programCount")
+if ($programCount -lt 6) {
+  $failures.Add("Expected at least 6 programs in catalog/programs.yaml; found $programCount")
 }
 
 Require-Pattern "component-packs/manifest.yaml" "^base_pack:"
@@ -212,7 +262,13 @@ Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: verificatio
 Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
+Require-Pattern "tools/install-project-skills.ps1" 'contracts/\*'
+Require-Pattern "tools/new-project.ps1" 'design-system/\*'
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
+Require-Pattern "tools/prepare-project.ps1" "OpenSpec CLI was requested"
+Require-Pattern "tools/prepare-project.ps1" "UseAitmpl requires explicit"
+Require-Pattern "templates/CLAUDE.md" "Read"
+Require-Pattern "templates/aitmpl-config.yaml" "External components are optional"
 Require-Pattern "tools/plan-project.ps1" 'Read ``project.yaml``'
 Require-Pattern "tools/plan-project.ps1" 'Keep ``tools/plan-project.ps1`` in the kit.'
 Require-Pattern "tools/plan-project.ps1" "Confirm published CI is green."
@@ -242,11 +298,36 @@ Require-Pattern ".codex/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers 
 Require-Pattern ".claude/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers for Windows and POSIX"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
+Require-Pattern ".codex/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
+Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
+Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
+Require-Pattern "decision-brain/jvm-language-matrix.yaml" "outbox-pattern:"
+Require-Pattern "docs/architecture/technology-coverage-and-interoperability.md" "portfolio-evidence-api"
+Require-Pattern "catalog/programs.yaml" "id: portfolio-evidence-platform"
+Require-Pattern "catalog/technology-coverage.yaml" "planned_repository: portfolio-evidence-api"
+Require-Pattern ".portfolio-control/CURRENT_HANDOFF.md" "## Continuation Order"
+Require-Pattern "contracts/benchmark-result-v2.schema.json" '"clean_tree": \{ "const": true \}'
+Require-Pattern "tools/publish-all.ps1" "publication_candidate"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
 Invoke-Checked "benchmark schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null }
-$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')"
+Invoke-Checked "benchmark v2 schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result-v2.schema.json") | Out-Null }
+Invoke-Checked "monitoring batch schema JSON" { python -m json.tool (Join-Path $root "contracts/monitoring-batch.schema.json") | Out-Null }
+Invoke-Checked "execution event schema JSON" { python -m json.tool (Join-Path $root "contracts/execution-event.schema.json") | Out-Null }
+Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Path $root "contracts/publication-evidence.schema.json") | Out-Null }
+Invoke-Checked "YAML and benchmark V2 contracts" { python (Join-Path $root "tools/validate-contracts.py") | Out-Null }
+Invoke-Checked "generated design tokens" { python (Join-Path $root "tools/generate-design-tokens.py") --check | Out-Null }
+$executionLine = 0
+foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/EXECUTION_EVENTS.jsonl")) {
+  $executionLine++
+  if (-not $line.Trim()) { continue }
+  try { $event = $line | ConvertFrom-Json } catch { $failures.Add("Invalid execution JSONL at line $executionLine"); continue }
+  foreach ($field in @("schema_version","event_id","recorded_at","actor","phase","category","outcome","occurrences","duration_seconds","avoidable","excluded_from_efficiency","evidence","cause","remediation")) {
+    if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
+  }
+}
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 
 $powerShellScripts = @(
@@ -259,6 +340,11 @@ $powerShellScripts = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/validate-portfolio.ps1",
+  "tools/record-execution-event.ps1",
+  "tools/report-execution-efficiency.ps1",
+  "tools/verify-github-publication.ps1",
+  "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 

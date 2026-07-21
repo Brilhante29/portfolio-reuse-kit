@@ -2,7 +2,8 @@ param(
   [string]$RepoPath = "",
   [string]$RepoRoot = "",
   [string[]]$Exclude = @("portfolio-reuse-kit"),
-  [switch]$DryRun
+  [switch]$DryRun,
+  [switch]$SyncSharedArtifacts
 )
 
 $ErrorActionPreference = "Stop"
@@ -142,13 +143,43 @@ function Copy-TemplateIfMissing {
   return $true
 }
 
+function Sync-SharedArtifact {
+  param(
+    [string]$Repo,
+    [string]$SourceRelative,
+    [string]$DestinationRelative
+  )
+
+  $source = Join-PortablePath -BasePath $kitRoot -RelativePath $SourceRelative
+  $destination = Join-PortablePath -BasePath $Repo -RelativePath $DestinationRelative
+  if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+    throw "Missing shared kit artifact: $SourceRelative"
+  }
+  if ($DryRun) {
+    Write-Host "would_sync=$DestinationRelative"
+    return
+  }
+
+  $parent = Split-Path -Parent $destination
+  New-Item -ItemType Directory -Force -Path $parent | Out-Null
+  Copy-Item -LiteralPath $source -Destination $destination -Force
+}
+
 $templateFiles = @(
   @{ Source = "templates/README-project.md"; Destination = "README.md"; Expand = $true },
   @{ Source = "templates/project.yaml"; Destination = "project.yaml"; Expand = $true },
   @{ Source = "templates/REFERENCES.md"; Destination = "REFERENCES.md"; Expand = $false },
   @{ Source = "templates/AGENTS.md"; Destination = "AGENTS.md"; Expand = $false },
+  @{ Source = "templates/CLAUDE.md"; Destination = "CLAUDE.md"; Expand = $false },
+  @{ Source = "templates/aitmpl-config.yaml"; Destination = ".aitmpl/config.yaml"; Expand = $false },
   @{ Source = "templates/validate-project.ps1"; Destination = "tools/validate-project.ps1"; Expand = $false },
   @{ Source = "templates/openspec-config.yaml"; Destination = "openspec/config.yaml"; Expand = $true },
+  @{ Source = "templates/portfolio-control/INVENTORY.md"; Destination = ".portfolio-control/INVENTORY.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/REUSE_MAP.md"; Destination = ".portfolio-control/REUSE_MAP.md"; Expand = $false },
+  @{ Source = "templates/portfolio-control/CRITICAL_PATH.md"; Destination = ".portfolio-control/CRITICAL_PATH.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/DECISIONS.md"; Destination = ".portfolio-control/DECISIONS.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/QUALITY_GATES.md"; Destination = ".portfolio-control/QUALITY_GATES.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/AGENT_HANDOFFS/README.md"; Destination = ".portfolio-control/AGENT_HANDOFFS/README.md"; Expand = $false },
   @{ Source = "sdd/templates/spec.md"; Destination = "sdd/spec.md"; Expand = $true },
   @{ Source = "sdd/templates/benchmark-plan.md"; Destination = "sdd/benchmark-plan.md"; Expand = $false },
   @{ Source = "sdd/templates/architecture-decision.md"; Destination = "sdd/architecture-decision.md"; Expand = $false },
@@ -173,7 +204,7 @@ foreach ($repo in $repos) {
   }
 
   Write-Host "checking=$repoName"
-  foreach ($directory in @("sdd", "tools", "benchmarks/results", "openspec")) {
+  foreach ($directory in @("sdd", "tools", "benchmarks/results", "openspec", ".portfolio-control", ".portfolio-control/AGENT_HANDOFFS")) {
     $targetDirectory = Join-PortablePath -BasePath $repo -RelativePath $directory
     if ($DryRun) {
       if (-not (Test-Path -LiteralPath $targetDirectory -PathType Container)) {
@@ -192,6 +223,17 @@ foreach ($repo in $repos) {
       -Project $project `
       -ExpandTokens:([bool]$item.Expand)
     if ($created) { $totalFiles++ }
+  }
+
+  if ($SyncSharedArtifacts) {
+    foreach ($shared in @(
+      @{ Source = ".claude/skills/cloud-local-first/SKILL.md"; Destination = ".claude/skills/cloud-local-first/SKILL.md" },
+      @{ Source = ".codex/skills/cloud-local-first/SKILL.md"; Destination = ".codex/skills/cloud-local-first/SKILL.md" },
+      @{ Source = "decision-brain/cloud-matrix.yaml"; Destination = ".portfolio/decision-brain/cloud-matrix.yaml" }
+    )) {
+      Sync-SharedArtifact -Repo $repo -SourceRelative $shared.Source -DestinationRelative $shared.Destination
+      $totalFiles++
+    }
   }
 
   $gitkeep = Join-PortablePath -BasePath $repo -RelativePath "benchmarks/results/.gitkeep"

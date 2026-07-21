@@ -1,6 +1,6 @@
 # Portfolio Reuse Kit
 
-Reusable decision brain, component-pack catalog, and spec governance layer for an extensible technical portfolio whose initial roadmap contains 30 repositories.
+Reusable decision brain, component-pack catalog, and spec governance layer for an extensible technical portfolio whose approved roadmap contains 33 repositories across six connected programs.
 
 This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, the agent graph, reuse-improvement loop, architecture decision rules, engineering principles, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
 
@@ -44,7 +44,8 @@ Every completed project must provide:
 - README opening with project number, claim, and benchmark result
 - `sdd/spec.md`, `sdd/benchmark-plan.md`, `sdd/architecture-decision.md`, `sdd/technical-decision.md`, and `sdd/agent-handoff.md`, `sdd/reuse-improvement-review.md`
 - Docker build/run path
-- benchmark JSON compatible with `contracts/benchmark-result.schema.json`
+- local benchmark JSON compatible with `contracts/benchmark-result.schema.json`
+- publication benchmark JSON compatible with `contracts/benchmark-result-v2.schema.json`, including provenance and comparability
 - `REFERENCES.md` with clean reuse attribution
 - completed reuse-improvement review with patch-now, backlog, or rejected improvements recorded
 - project validation through `tools/validate-project.ps1` before commit or publication
@@ -96,6 +97,7 @@ pwsh -NoProfile -File tools/new-project.ps1 `
 Validate the kit:
 
 ```powershell
+python -m pip install --requirement requirements-ci.txt
 pwsh -NoProfile -File tools/validate-kit.ps1
 ```
 
@@ -112,6 +114,22 @@ $repoRoot = Join-Path $HOME "repos-github"
 pwsh -NoProfile -File tools/plan-project.ps1 `
   -RepoPath (Join-Path $repoRoot "rag-knowledge-base")
 ```
+
+Prepare the complete agent context and one OpenSpec change package:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/prepare-project.ps1 `
+  -RepoPath (Join-Path $repoRoot "rag-knowledge-base") `
+  -ChangeId improve-retrieval-benchmark `
+  -Force `
+  -Validate
+```
+
+This command is the universal entry point for Codex and Claude Code. It runs
+the local planner, writes `.aitmpl/context-card.md`, creates
+`openspec/changes/<change-id>/`, and keeps SDD, the project manifest, and the
+benchmark contract aligned. `openspec validate --strict` and external AITmpl
+components are optional adapters, enabled only with explicit flags.
 
 Repair older project scaffolds without overwriting project decisions:
 
@@ -138,15 +156,16 @@ Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 
 | Path | Responsibility |
 |---|---|
-| `catalog/` | Source of truth for the initial 30 projects and future additions, including program grouping, stack, claim, benchmark, and references. |
+| `catalog/` | Source of truth for the 30 initial projects and the approved evidence-platform repositories, including program grouping, stack, claim, benchmark, and references. |
 | `component-packs/` | Program-specific bundles of skills, decision sources, benchmark assets, and publication gates inspired by component catalogs. |
 | `architecture/` | Decision matrix for choosing software architecture by problem forces. |
 | `decision-brain/` | Central decision matrices for agent orchestration, engineering principles, stack profiles, API style, messaging, cloud local-first, runtime/database, and library selection. |
 | `language-profiles/` | Language/framework-specific conventions for Python, Java, Go, TypeScript, Angular, Next.js, Spring Kotlin, FastAPI, Go backend, and Terraform. |
-| `design-system/` | Shared README, diagram, badge, benchmark, and dashboard standards. |
+| `design-system/` | Shared standards plus generated CSS, SCSS, and TypeScript tokens with SHA-256 manifest. |
 | `contracts/` | JSON schemas for project manifests and benchmark results. |
 | `templates/` | Files copied into new projects: README, manifest, AGENTS, references, Dockerfiles, validation script, CI. |
 | `openspec/` | OpenSpec-compatible portfolio schema and config for intent, impact, architecture, reuse, benchmark, tasks, and verification artifacts. |
+| `.aitmpl/` | Generated agent context card and optional AITmpl adapter configuration. |
 | `sdd/` | Specification templates: spec, benchmark plan, ADR, technical decision, agent handoff, reuse improvement review, release checklist. |
 | `harness/` | Benchmark runner, result comparison script, plan/article generator support, k6 smoke script, benchmark schema. |
 | `metrics/` | Metric names, units, and optimization direction. |
@@ -169,6 +188,7 @@ The same skills are provided for Codex and Claude Code:
 | `agentic-spec-governance` | Select component pack and OpenSpec-style artifact graph before implementation. |
 | `engineering-principles` | Enforce decoupling, SOLID, LSP, KISS, YAGNI, DRY, dependency inversion, and testability evidence. |
 | `stack-decision` | Choose concrete stack profile from the decision brain. |
+| `jvm-language-decision` | Choose Java, Kotlin, or a mixed JVM boundary from problem forces and evidence. |
 | `api-style-decision` | Decide REST/HTTP, GraphQL, gRPC, WebSocket, SSE, or CLI. |
 | `cloud-local-first` | Apply Kumo local-first cloud and real-cloud adapter rules. |
 | `messaging-decision` | Decide no broker, outbox, RabbitMQ, Kafka, Redis Streams, or NATS. |
@@ -189,19 +209,22 @@ The 30 repositories are grouped into portfolio programs:
 - Backend Reliability and Architecture Platform
 - MLOps and Data Platform
 - Delivery, Observability, and Infrastructure
+- Portfolio Evidence and Operations Platform
 
 The program catalog is in [catalog/programs.yaml](catalog/programs.yaml).
+
+The first program operating guide is [AI Evaluation and Retrieval Systems](docs/ai-evaluation-retrieval.md).
 
 ## First Six Projects
 
 Recommended build order:
 
-1. `llm-eval-harness`
-2. `rag-knowledge-base`
-3. `spring-hexagonal-payments`
-4. `mini-aws-emulator`
-5. `mlops-end2end`
-6. `yolo-training-pipeline`
+1. `portfolio-evidence-api`
+2. integrate benchmark V2 producers in Python, Go, and Kotlin
+3. repair `saga-orchestrator`, `multi-tenant-starter`, and `outbox-pattern`
+4. `portfolio-evidence-console`
+5. `portfolio-operations-console`
+6. migrate the remaining repositories to verified publication evidence
 
 The full project catalog is in [catalog/projects.md](catalog/projects.md) and [catalog/projects.yaml](catalog/projects.yaml).
 
@@ -223,6 +246,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Plan project generator](docs/plan-project-generator.md)
 - [Repository standard](docs/repository-standard.md)
 - [Usage](docs/usage.md)
+- [Technology coverage and interoperability](docs/architecture/technology-coverage-and-interoperability.md)
 - [Publish](PUBLISH.md)
 
 ## Reuse Policy

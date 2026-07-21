@@ -1,0 +1,44 @@
+version: 1
+source_of_truth: portfolio-reuse-kit
+portfolio_root: ..
+initial_repository_count: 30
+approved_repository_count: 33
+principles:
+  architecture_by_problem: true
+  local_first_cloud_pluggable: true
+  benchmark_before_publication: true
+  no_mutable_dependencies: true
+  interoperability_by_versioned_contract: true
+  language_migration_requires_problem_value: true
+  no_secrets_in_repository: true
+  publication_requires_remote_ci_evidence: true
+  benchmark_contract_v2_for_publication: true
+quality_gates:
+  - numbered_readme
+  - sdd_and_openspec
+  - docker_reproducibility
+  - ci_checks
+  - benchmark_json
+  - reuse_review
+  - independent_review
+  - tracked_contract_valid_benchmark
+  - verified_publication
+agent_roles:
+  - reuse-architect
+  - repository-auditor
+  - sdd-spec-agent
+  - implementation-agent
+  - docker-ci-agent
+  - benchmark-agent
+  - documentation-agent
+  - independent-reviewer
+execution_telemetry:
+  event_log: .portfolio-control/EXECUTION_EVENTS.jsonl
+  report: .portfolio-control/EXECUTION_EFFICIENCY.md
+  handoff: .portfolio-control/CURRENT_HANDOFF.md
+  schema: contracts/execution-event.schema.json
+  excluded_windows:
+    - date: 2026-07-20
+      owner: user
+      tools: [Antigravity, OpenCode]
+      reason: Excluded from Codex efficiency accounting at the user request.
