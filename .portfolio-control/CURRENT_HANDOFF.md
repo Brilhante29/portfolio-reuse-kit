@@ -2,71 +2,89 @@
 
 Updated: 2026-07-21
 Owner: principal agent
-Goal: finish the 30-repository portfolio with truthful, reproducible evidence and keep the reuse kit as the decision and continuation brain.
+Goal: complete the existing portfolio with truthful evidence and expand to 33 repositories only through one interoperable evidence platform.
 
 ## Current State
 
-- 30 repositories detected; all declare `published`.
-- Structural truth: Docker 30/30, CI workflow 30/30, tracked benchmark 22/30, shared benchmark contract 15/30.
-- Only 9/30 pass the current local structural gates; 0/30 have verified publication evidence.
-- All 30 `published` declarations are currently unverified.
-- 20 repositories have no `origin`; none of the 30 has an upstream branch.
-- Eight repositories have benchmark JSON only in ignored/local files.
-- Fourteen repositories contain stale or placeholder SDD/OpenSpec evidence.
-- Credentialed `pushurl` values were removed from six local Git configs. Previously exposed PATs still require revocation in GitHub.
+- Existing repositories: 30. Approved catalog size: 33.
+- Existing structural truth: Docker 30/30, CI workflow 30/30, tracked declared primary benchmark 19/30, contract V1 19/30, contract V2 0/30.
+- Local structural candidates: 12/30. Publication candidates: 0/30. Verified publications: 0/30.
+- Origins: 10/30. Upstreams: 10/30.
+- All repository statuses now declare `implemented` or `benchmarked`; none is accepted as published without current-head CI evidence.
+- Credentialed `pushurl` values were removed from local Git configs. Previously exposed PATs still require revocation in GitHub.
 
-## Audit Verdict
+## Completed
 
-The portfolio has substantial implementation, but it is not 30 finished products. The main defect is claim-to-evidence mismatch: multiple benchmarks are tautological, fixture-only, circular, or do not execute the technology named by the repository. Scaffold uniformity currently exceeds technical reuse and cross-repository integration.
+- Reuse kit commit `f368601` was pushed to `agent/automate-agent-context`; GitHub Actions run `29856286092` passed.
+- The kit has truthful status gates, execution telemetry, permanent handoff, implementation audit, publication evidence, and automatic GitHub CI verification.
+- `load-test-suite` commit `016e084` fixed clean-clone build inputs, readiness, fail-closed k6 checks, and GOARCH handling. Go tests, Docker build, and calibrated k6 smoke passed.
+- Twenty-three non-AI repositories received isolated status-audit commits. Four configured remotes were pushed: `alpr-mercosul`, `go-rate-limiter`, `mini-aws-emulator`, and `spring-hexagonal-payments`.
+- AI Evaluation commits integrated and pushed:
+  - `embeddings-benchmark` `df381a8`: deterministic vectorizers and correct Recall@k.
+  - `llm-eval-harness` `8c156cf`: prediction artifact contract and strict ID validation.
+  - `llm-agent-eval` `c92b0d2`: supplied trace evaluation with outcome, tools, latency, and cost.
+  - `prompt-ab-testing` `2bf01bd`: blinded deterministic scoring without fixture multipliers.
+  - `cost-aware-inference` `91da259`: provider port, measured local adapter, optional OpenAI-compatible adapter, and separated pricing assumptions.
+  - `rag-knowledge-base` `0c248f9`: correct Recall@k, injected ports, safe data/result roots, six tests, strict OpenSpec, repeated benchmark, and Docker validation.
+- `multi-tenant-starter` commit `d46c176` repairs invalid YAML and truthfully marks the current in-memory implementation as a prototype. PostgreSQL and Flyway are no longer claimed as current stack.
 
-### P0
+## Approved Expansion
 
-- `saga-orchestrator`: empty compensation logic and tautological consistency benchmark.
-- `multi-tenant-starter`: in-memory maps presented as PostgreSQL/Flyway tenant isolation.
-- `outbox-pattern`: no business write and outbox write in one real transaction; failure benchmark is guaranteed by construction.
-- `load-test-suite`: required `internal/target` source is ignored, so a clean clone cannot build.
-- Security: PATs were stored in local Git push URLs; local copies were removed, remote revocation remains mandatory.
+The missing technologies are real gaps: Node/TypeScript/NestJS, GraphQL, Next.js/React, Angular, and RabbitMQ have no executable proof in the initial 30. The approved solution is one macro system with three independently deployable repositories, not isolated technology demos:
 
-### P1 Programs
+31. `portfolio-evidence-api`: NestJS/Fastify, REST ingestion and commands, GraphQL queries, Ajv, Kysely, SQLite local-first, PostgreSQL and Kumo adapters.
+32. `portfolio-evidence-console`: Next.js/React public evidence and AI evaluation experience.
+33. `portfolio-operations-console`: Angular operational workflows for quarantine, revalidation, remediation, publication gates, and CI incidents.
 
-- AI Evaluation and Retrieval: only RAG is close to a functional product; Recall@k is wrong in RAG and embeddings, four evaluators measure fixtures/heuristics, and five results break the common contract.
-- Applied CV: YOLO is a useful training foundation; serving does not load its artifact, ALPR uses the label as prediction, melanoma is circular synthetic data, and stroke is tabular ML rather than CV.
-- Backend Reliability: payments, rate limiter, and Kumo emulator are the strongest components. Event sourcing, saga, multi-tenant, and outbox overstate in-memory demos.
-- MLOps/Data/Delivery: repositories are not connected by versioned artifacts; Airflow is not exercised as an orchestrator, CI guardrails report 20 high and 14 medium findings, and several README metrics diverge from tracked baselines.
+RabbitMQ is conditional inside `saga-orchestrator`; it enters only with routing, acknowledgements, retries, DLQ recovery, and a measured failure case. No broker-only repository is approved.
 
-## Reuse-Kit Changes In Progress
+## JVM Decision
 
-- Add execution-event schema, recorder, and efficiency report.
-- Add a permanent handoff contract for any next AI.
-- Separate `local_candidate` from `published_verified`.
-- Require tracked benchmark JSON and the shared benchmark contract.
-- Require upstream plus CI evidence before accepting `published`.
-- Add agent preflight, one-agent pilot, 60-second progress gate, benchmark calibration, and static-before-Docker rules.
-- Fix publisher validation order and make portfolio reporting consume the same source of truth.
+- Keep Kotlin: `spring-hexagonal-payments`, `kafka-streams-demo`.
+- Convert after semantic repair: `saga-orchestrator` to Kotlin sealed state/outcome modeling.
+- Keep Java: `event-sourcing-orders`, `multi-tenant-starter`, `cache-strategies-bench`.
+- Mixed interoperability: `outbox-pattern` uses a framework-free Java core/contracts and Kotlin Spring runtime/adapters after atomic persistence is implemented.
+- Every JVM repository requires Gradle Wrapper, `build.gradle.kts`, explicit toolchain, equal quality gates, and Docker.
+- Do not publish Java-versus-Kotlin microbenchmarks unless implementation variables are controlled.
+
+## Applied Reuse-Kit Changes Awaiting Commit
+
+- Strong benchmark V2 contract with run/workload identity, metric arrays, failure counts, execution metadata, environment, clean commit, image and lockfile digests, artifact digest, and comparability key.
+- Valid and invalid golden fixtures plus JSON Schema validation.
+- YAML parsing gate; this caught and repaired the malformed `agent-graph.yaml` before publication.
+- Catalog expanded to 33 and stack values synchronized from project manifests; the previous catalog had 24 stack drifts.
+- JVM language decision matrix, technology coverage matrix, and interoperability architecture document.
+- Publication remains V2 plus current-head remote CI evidence; V1 is local compatibility only.
+
+## Remaining P0
+
+- `saga-orchestrator`: empty compensation logic and false consistency benchmark. Repair semantics before Kotlin conversion.
+- `multi-tenant-starter`: implement real PostgreSQL schema routing, Flyway, rollback, HTTP context cleanup, and leakage tests.
+- `outbox-pattern`: atomically write business data and outbox, add concurrent claim/retry, and prove broker outage recovery.
+- Security: PATs removed locally but GitHub revocation remains mandatory.
 
 ## Efficiency Baseline
 
 Excluded: all work on 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
 - Hard authorization limits: 4.
-- Wait timeouts: 11, totaling about 1510 seconds.
-- No-progress agents taken over: 3.
-- Command timeouts: 4, totaling 226 seconds.
-- Redundant expensive runs: 2, totaling 269 seconds.
-- Tracked duration lost or consumed by these events: 2005 seconds.
-- Exact machine-readable history: `.portfolio-control/EXECUTION_EVENTS.jsonl`.
+- Wait timeouts: 13.
+- Command timeouts: 10 occurrences.
+- Avoidable occurrences: 56.
+- Tracked duration: 2920.55 seconds.
+- Exact history: `.portfolio-control/EXECUTION_EVENTS.jsonl`.
+
+Do not repeat equivalent Docker strategies after one isolated passing path. Read script parameters before invocation. For source-block edits, use delimiter-based replacement and parse immediately.
 
 ## Continuation Order
 
-1. Finish and validate the reuse-kit control-plane changes.
-2. Commit and push the reuse kit only after `tools/validate-kit.ps1` passes.
-3. Downgrade unverified `published` statuses and attach audit verdicts without deleting implementation.
-4. Fix P0 security/reproducibility defects first.
-5. Repair AI Evaluation and Retrieval as the first macro system: common contracts, correct Recall@k, real embedding model adapter, real tool traces, unbiased prompt evaluation, and cross-repo integration test.
-6. Repair the YOLO-to-serving artifact path.
-7. Fix backend transactional claims with real local PostgreSQL/Redpanda paths.
-8. Connect `data-quality -> feature-store -> mlops -> monitoring-batch -> drift`, then add observability and load tests.
-9. Publish only repositories with current-head CI success and store central publication evidence.
+1. Commit the validated official kit changes, push, and verify GitHub Actions.
+2. Create and fully implement `portfolio-evidence-api` through `tools/new-project.ps1`; do not publish an empty scaffold.
+3. Migrate three producers first: one Python, one Go, and one Kotlin repository to benchmark V2 golden compatibility.
+4. Repair saga, multi-tenant, and outbox P0 semantics; apply the JVM decisions above.
+5. Implement `portfolio-evidence-console`, then `portfolio-operations-console` after the API contracts stabilize.
+6. Repair the YOLO-to-serving artifact path and the data-quality to drift path.
+7. Migrate remaining primary baselines to V2 and publish only current-head green CI evidence.
 
 ## Restart Commands
 
@@ -75,6 +93,7 @@ Excluded: all work on 2026-07-20, attributed by the user to Antigravity/OpenCode
 ./tools/validate-portfolio.ps1 -RepoRoot <portfolio-root> -JsonPath .portfolio-control/portfolio-audit.json
 ./tools/report-execution-efficiency.ps1
 ./tools/report-portfolio.ps1 -RepoRoot <portfolio-root> -MarkdownPath .portfolio-control/PORTFOLIO_STATUS.md -JsonPath .portfolio-control/PORTFOLIO_STATUS.json
+python ./tools/sync-catalog-stacks.py --repo-root <portfolio-root> --catalog ./catalog/projects.yaml --markdown ./catalog/projects.md --check
 ```
 
-Do not repeat the full structural scan unless repository heads changed. Read the machine reports and this handoff first.
+Do not repeat the full static audit unless repository heads changed. Read the machine reports, dated audit, technology coverage matrix, JVM decision matrix, and this handoff first.

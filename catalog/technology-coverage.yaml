@@ -1,0 +1,71 @@
+version: 1
+generated_at: 2026-07-21
+classifications: [real-benchmarked, real-weak-evidence, present-unverified, absent-planned, conditional]
+technologies:
+  spring-kotlin:
+    classification: real-benchmarked
+    repositories: [spring-hexagonal-payments]
+  gradle-kotlin-dsl-wrapper:
+    classification: real-weak-evidence
+    repositories: [spring-hexagonal-payments, event-sourcing-orders, saga-orchestrator, multi-tenant-starter, cache-strategies-bench, outbox-pattern]
+    gap: "Only payments currently proves the complete wrapper and Kotlin build path; Kafka Streams lacks a complete wrapper."
+  java:
+    classification: real-weak-evidence
+    repositories: [event-sourcing-orders, saga-orchestrator, multi-tenant-starter, cache-strategies-bench, outbox-pattern]
+  python:
+    classification: real-benchmarked
+    repositories: [yolo-training-pipeline, llm-eval-harness, rag-knowledge-base, embeddings-benchmark, llm-agent-eval, prompt-ab-testing, cost-aware-inference]
+  fastapi:
+    classification: real-weak-evidence
+    repositories: [rag-knowledge-base, vision-serving-fastapi, mlops-end2end, observability-stack]
+    gap: "Several benchmarks bypass the real HTTP path."
+  go:
+    classification: real-benchmarked
+    repositories: [go-rate-limiter, mini-aws-emulator]
+  node-typescript-nestjs:
+    classification: absent-planned
+    planned_repository: portfolio-evidence-api
+  graphql:
+    classification: absent-planned
+    planned_repository: portfolio-evidence-api
+  angular:
+    classification: absent-planned
+    planned_repository: portfolio-operations-console
+  react-nextjs:
+    classification: absent-planned
+    planned_repository: portfolio-evidence-console
+  grpc:
+    classification: real-weak-evidence
+    repositories: [grpc-vs-rest-bench]
+  mlflow:
+    classification: real-benchmarked
+    repositories: [mlops-end2end]
+  airflow:
+    classification: real-weak-evidence
+    repositories: [mlops-end2end]
+    gap: "The benchmark executes Python directly instead of proving scheduler execution."
+  kafka-streams:
+    classification: real-weak-evidence
+    repositories: [kafka-streams-demo]
+  rabbitmq:
+    classification: conditional
+    planned_repository: saga-orchestrator
+    gate: "Add only with real routing, acknowledgements, retry, DLQ, recovery, and measured failure semantics."
+  kumo:
+    classification: real-benchmarked
+    repositories: [mini-aws-emulator]
+  terraform:
+    classification: real-benchmarked
+    repositories: [terraform-aws-baseline]
+  aws-real:
+    classification: present-unverified
+    repositories: [terraform-aws-baseline, mini-aws-emulator]
+  docker:
+    classification: real-weak-evidence
+    gap: "All 30 repositories contain a Dockerfile, but build evidence is uneven."
+  github-actions:
+    classification: real-weak-evidence
+    gap: "All 30 repositories contain workflows, but remote green evidence is not established portfolio-wide."
+  observability:
+    classification: real-weak-evidence
+    repositories: [observability-stack, spring-hexagonal-payments, go-rate-limiter, api-gateway-lite]

@@ -73,3 +73,22 @@ A file-presence gate previously reported 30/30. That number was a false positive
 ## Security Action
 
 Credentialed Git push URLs were removed locally. Any PAT exposed in conversation or local config must be revoked in GitHub; deleting the local value does not invalidate the credential.
+## Correction Snapshot
+
+After the first repair wave, the current machine report is: 30 existing repositories, Docker 30/30, CI files 30/30, tracked declared primary benchmark 19/30, contract V1 19/30, contract V2 0/30, local candidates 12/30, publication candidates 0/30, verified publications 0/30, origins 10/30, and upstreams 10/30. The initial table above remains historical evidence of the false-positive state that triggered the audit.
+
+Completed repairs include truthful status correction, load-test clean-clone recovery, six AI Evaluation implementations, RAG retrieval correction, credential cleanup, publication evidence gates, and an honest multi-tenant manifest. These repairs do not clear the remaining P0 semantic failures.
+
+## JVM And Technology Decision
+
+The approved JVM distribution preserves three public signals instead of converting everything to Kotlin:
+
+- Kotlin: payments, saga after compensation repair, and Kafka Streams.
+- Java: event sourcing, multi-tenant, and cache strategies.
+- Mixed: outbox Java core/contracts with Kotlin Spring runtime/adapters after atomic business-plus-outbox persistence exists.
+
+All JVM builds require a committed Gradle Wrapper, Kotlin DSL build scripts, explicit toolchains, equal validation gates, and Docker. Language conversion is rejected when it does not improve the domain model or evidence.
+
+Node/TypeScript/NestJS, GraphQL, Next.js/React, and Angular are absent from executable repositories. The catalog therefore expands to 33 through one macro system: `portfolio-evidence-api`, `portfolio-evidence-console`, and `portfolio-operations-console`. RabbitMQ is conditional inside the saga repair, not a standalone technology demo.
+
+The previous catalog differed from 24 current project manifests. Stack values are now synchronized from parseable `project.yaml` files, and CI adds real YAML plus benchmark V2 schema validation. The malformed agent graph and multi-tenant manifest were caught during this correction.

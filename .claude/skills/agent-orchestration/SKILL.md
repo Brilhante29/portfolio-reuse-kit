@@ -80,5 +80,5 @@ Do not publish or call a project finished until these exist:
 - README number, claim, and result
 - `REFERENCES.md`
 - passing validation
-- tracked benchmark evidence that validates against the shared contract
+- tracked primary benchmark evidence that validates against contract v1 locally and v2 before publication
 - verified remote, upstream, and successful CI evidence before using `published`

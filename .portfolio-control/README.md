@@ -32,3 +32,5 @@ After pushing and after Actions completes, collect current-head evidence:
 ```powershell
 ./tools/verify-github-publication.ps1 -RepoRoot <portfolio-root>
 ```
+
+Publication candidates must validate their declared primary `benchmark.result_path` against `contracts/benchmark-result-v2.schema.json`, including direction, samples, failures, clean source provenance, fixture digest, and immutable image digest.

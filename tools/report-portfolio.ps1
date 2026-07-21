@@ -12,9 +12,13 @@ function Scalar($body, $pattern, $default = "-") {
   return $default
 }
 function Stack($body) {
-  $match = [regex]::Match($body, '(?ms)^stack:\s*\r?\n(?<items>(?:\s+-[^\r\n]+\r?\n?)+)')
-  if (-not $match.Success) { return "not-selected" }
-  return (([regex]::Matches($match.Groups['items'].Value, '(?m)^\s+-\s*(.+)$') | ForEach-Object { $_.Groups[1].Value.Trim() }) -join ', ')
+  $inline = [regex]::Match($body, '(?m)^stack:\s*\[(?<items>[^\]]*)\]\s*$')
+  if ($inline.Success) {
+    return (($inline.Groups['items'].Value -split ',' | ForEach-Object { $_.Trim().Trim('"').Trim("'") }) -join ', ')
+  }
+  $block = [regex]::Match($body, '(?ms)^stack:\s*\r?\n(?<items>(?:\s+-[^\r\n]+\r?\n?)+)')
+  if (-not $block.Success) { return "not-selected" }
+  return (([regex]::Matches($block.Groups['items'].Value, '(?m)^\s+-\s*(.+)$') | ForEach-Object { $_.Groups[1].Value.Trim() }) -join ', ')
 }
 function Write-Utf8($path, $content) {
   $parent = Split-Path -Parent $path
@@ -53,11 +57,13 @@ $rows = @($audit.repositories | ForEach-Object {
     ci = $_.ci
     benchmark_tracked = $_.benchmark_tracked
     benchmark_contract = $_.benchmark_contract
+    benchmark_contract_v2 = $_.benchmark_contract_v2
     placeholders = $_.placeholders
     dirty_files = $_.dirty_files
     remote_configured = $_.remote_configured
     upstream_configured = $_.upstream_configured
     local_candidate = $_.local_candidate
+    publication_candidate = $_.publication_candidate
     published_verified = $_.published_verified
   }
 } | Sort-Object id,name)
@@ -69,7 +75,9 @@ $summary = [ordered]@{
   ci = @($rows | Where-Object ci).Count
   tracked_benchmarks = @($rows | Where-Object benchmark_tracked).Count
   contract_benchmarks = @($rows | Where-Object benchmark_contract).Count
+  contract_v2_benchmarks = @($rows | Where-Object benchmark_contract_v2).Count
   local_candidates = @($rows | Where-Object local_candidate).Count
+  publication_candidates = @($rows | Where-Object publication_candidate).Count
   published_verified = @($rows | Where-Object published_verified).Count
   remote_configured = @($rows | Where-Object remote_configured).Count
   upstream_configured = @($rows | Where-Object upstream_configured).Count
@@ -82,12 +90,12 @@ if ($MarkdownPath) {
   $lines = @(
     '# Portfolio Status Report', '',
     ("Generated: {0}" -f $summary.generated_at), '',
-    ("Repositories: **{0}** | Docker: **{1}** | CI files: **{2}** | tracked benchmarks: **{3}** | contract-valid benchmarks: **{4}** | local candidates: **{5}** | verified publications: **{6}** | origins: **{7}** | upstreams: **{8}**" -f $summary.repositories,$summary.docker,$summary.ci,$summary.tracked_benchmarks,$summary.contract_benchmarks,$summary.local_candidates,$summary.published_verified,$summary.remote_configured,$summary.upstream_configured), '',
-    '| # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Contract | Placeholders | Local | Published |',
-    '|---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|---:|:---:|:---:|'
+    ("Repositories: **{0}** | Docker: **{1}** | CI files: **{2}** | tracked primary benchmarks: **{3}** | contract v1: **{4}** | contract v2: **{5}** | local candidates: **{6}** | publication candidates: **{7}** | verified publications: **{8}** | origins: **{9}** | upstreams: **{10}**" -f $summary.repositories,$summary.docker,$summary.ci,$summary.tracked_benchmarks,$summary.contract_benchmarks,$summary.contract_v2_benchmarks,$summary.local_candidates,$summary.publication_candidates,$summary.published_verified,$summary.remote_configured,$summary.upstream_configured), '',
+    '| # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Contract v1 | Contract v2 | Placeholders | Local | Publication candidate | Published |',
+    '|---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|'
   )
   foreach ($row in $rows) {
-    $lines += ("| {0} | `{1}` | `{2}` | `{3}` | `{4}` | {5} | `{6}` | `{7}` | `{8}` | `{9}` | `{10}` | {11} | {12} | {13} | {14} | {15} |" -f $row.id,$row.name,$row.program,$row.declared_status,$row.language,$row.stack,$row.architecture,$row.api,$row.messaging,$row.cloud,$row.database,$row.benchmark_tracked,$row.benchmark_contract,$row.placeholders,$row.local_candidate,$row.published_verified)
+    $lines += ("| {0} | `{1}` | `{2}` | `{3}` | `{4}` | {5} | `{6}` | `{7}` | `{8}` | `{9}` | `{10}` | {11} | {12} | {13} | {14} | {15} | {16} | {17} |" -f $row.id,$row.name,$row.program,$row.declared_status,$row.language,$row.stack,$row.architecture,$row.api,$row.messaging,$row.cloud,$row.database,$row.benchmark_tracked,$row.benchmark_contract,$row.benchmark_contract_v2,$row.placeholders,$row.local_candidate,$row.publication_candidate,$row.published_verified)
   }
   Write-Utf8 $MarkdownPath (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
 }

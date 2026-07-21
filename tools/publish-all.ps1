@@ -19,8 +19,8 @@ try {
   & $validator -RepoRoot $root -JsonPath $reportPath | Out-Host
   $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json
   $reportRows = if ($report.repositories) { $report.repositories } else { $report.rows }
-  $candidates = @($reportRows | Where-Object local_candidate | Sort-Object id)
-  if ($candidates.Count -eq 0) { throw "No local candidate is eligible for publication" }
+  $candidates = @($reportRows | Where-Object publication_candidate | Sort-Object id)
+  if ($candidates.Count -eq 0) { throw "No publication candidate is eligible for publication" }
 
   foreach ($candidate in $candidates) {
     $repoPath = Join-Path $root $candidate.name
@@ -31,7 +31,7 @@ try {
     $branch = ((git -C $repoPath branch --show-current 2>$null) -join "").Trim()
     if (-not $branch) { throw "Cannot determine current branch for $($candidate.name)" }
     if ($DryRun) {
-      Write-Host ("eligible={0}; branch={1}; status={2}; benchmark={3}" -f $candidate.name,$branch,$candidate.status,$candidate.benchmark)
+      Write-Host ("eligible={0}; branch={1}; status={2}; benchmark={3}" -f $candidate.name,$branch,$candidate.declared_status,$candidate.benchmark_contract_v2)
       continue
     }
     Write-Host ("publishing={0}; branch={1}" -f $candidate.name,$branch)
