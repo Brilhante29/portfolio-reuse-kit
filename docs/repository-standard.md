@@ -65,7 +65,8 @@ benchmarks/results/*.json
 Schema:
 
 ```txt
-contracts/benchmark-result.schema.json
+contracts/benchmark-result.schema.json for local compatibility
+contracts/benchmark-result-v2.schema.json for publication provenance and comparability
 ```
 
 ## 5. SDD Before Code
@@ -105,6 +106,7 @@ A repo is done only when:
 
 - language-specific quality gates match detected source files: Python runs compile/tests, Go modules run gofmt/tests/vet, and Gradle projects require the wrapper and run `gradle check`
 - Gradle repositories commit `gradlew`, `gradlew.bat`, and `gradle/wrapper/*` so Linux, macOS, and Windows use the same version
+- generated caches and outputs such as `.gradle/`, `node_modules/`, `.venv/`, `.terraform/`, root `target/`, root `build/`, `dist/`, `.next/`, and coverage are never tracked
 - Docker path works
 - tests or smoke checks pass
 - benchmark writes JSON
