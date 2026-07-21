@@ -17,6 +17,8 @@ Goal: complete the existing portfolio with truthful evidence and expand to 33 re
 
 - Reuse kit commit `f368601` was pushed to `agent/automate-agent-context`; GitHub Actions run `29856286092` passed.
 - The kit has truthful status gates, execution telemetry, permanent handoff, implementation audit, publication evidence, and automatic GitHub CI verification.
+- Reuse kit commit `3b52308` added the 33-project catalog, JVM decision matrix, technology coverage, benchmark V2, parsed YAML gates, generated design tokens, and interoperability architecture; GitHub Actions run `29870619438` passed.
+- A follow-up generator patch now materializes all contracts, V2 fixtures, and generated design tokens into new repositories; the isolated scaffold smoke passed and the patch awaits commit.
 - `load-test-suite` commit `016e084` fixed clean-clone build inputs, readiness, fail-closed k6 checks, and GOARCH handling. Go tests, Docker build, and calibrated k6 smoke passed.
 - Twenty-three non-AI repositories received isolated status-audit commits. Four configured remotes were pushed: `alpr-mercosul`, `go-rate-limiter`, `mini-aws-emulator`, and `spring-hexagonal-payments`.
 - AI Evaluation commits integrated and pushed:
@@ -78,8 +80,8 @@ Do not repeat equivalent Docker strategies after one isolated passing path. Read
 
 ## Continuation Order
 
-1. Commit the validated official kit changes, push, and verify GitHub Actions.
-2. Create and fully implement `portfolio-evidence-api` through `tools/new-project.ps1`; do not publish an empty scaffold.
+1. Commit the validated contract/token materialization patch in the kit, push, and verify GitHub Actions.
+2. Continue the active `portfolio-evidence-api` implementation in `new-project-worktrees`; do not publish an empty scaffold.
 3. Migrate three producers first: one Python, one Go, and one Kotlin repository to benchmark V2 golden compatibility.
 4. Repair saga, multi-tenant, and outbox P0 semantics; apply the JVM decisions above.
 5. Implement `portfolio-evidence-console`, then `portfolio-operations-console` after the API contracts stabilize.

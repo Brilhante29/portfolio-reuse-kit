@@ -262,6 +262,8 @@ Require-Pattern "openspec/schemas/portfolio-system/schema.yaml" "id: verificatio
 Require-Pattern "templates/project.yaml" "agentic_spec:"
 Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
+Require-Pattern "tools/install-project-skills.ps1" 'contracts/\*'
+Require-Pattern "tools/new-project.ps1" 'design-system/\*'
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
 Require-Pattern "tools/prepare-project.ps1" "OpenSpec CLI was requested"
 Require-Pattern "tools/prepare-project.ps1" "UseAitmpl requires explicit"
