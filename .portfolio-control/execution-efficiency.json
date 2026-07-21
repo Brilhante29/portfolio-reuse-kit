@@ -1,0 +1,62 @@
+{
+    "generated_at":  "2026-07-21T18:10:38.9984145Z",
+    "excluded_windows":  [
+                             "2026-07-20: user-operated Antigravity/OpenCode activity"
+                         ],
+    "event_records":  13,
+    "occurrence_count":  42,
+    "hard_limit_occurrences":  4,
+    "wait_timeout_occurrences":  11,
+    "avoidable_occurrences":  37,
+    "tracked_duration_seconds":  2005,
+    "categories":  [
+                       {
+                           "category":  "wait-timeout",
+                           "events":  1,
+                           "occurrences":  11,
+                           "duration_seconds":  1510
+                       },
+                       {
+                           "category":  "invalid-command",
+                           "events":  2,
+                           "occurrences":  7,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "invalid-diagnostic",
+                           "events":  1,
+                           "occurrences":  6,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "tool-failure",
+                           "events":  2,
+                           "occurrences":  5,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "authorization-limit",
+                           "events":  1,
+                           "occurrences":  4,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "command-timeout",
+                           "events":  4,
+                           "occurrences":  4,
+                           "duration_seconds":  226
+                       },
+                       {
+                           "category":  "agent-no-progress",
+                           "events":  1,
+                           "occurrences":  3,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "redundant-work",
+                           "events":  1,
+                           "occurrences":  2,
+                           "duration_seconds":  269
+                       }
+                   ]
+}

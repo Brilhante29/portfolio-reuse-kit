@@ -19,8 +19,8 @@ try {
   & $validator -RepoRoot $root -JsonPath $reportPath | Out-Host
   $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json
   $reportRows = if ($report.repositories) { $report.repositories } else { $report.rows }
-  $candidates = @($reportRows | Where-Object complete_candidate | Sort-Object id)
-  if ($candidates.Count -eq 0) { throw "No complete candidate is eligible for publication" }
+  $candidates = @($reportRows | Where-Object local_candidate | Sort-Object id)
+  if ($candidates.Count -eq 0) { throw "No local candidate is eligible for publication" }
 
   foreach ($candidate in $candidates) {
     $repoPath = Join-Path $root $candidate.name

@@ -77,6 +77,8 @@ $requiredFiles = @(
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
   "contracts/monitoring-batch.schema.json",
+  "contracts/execution-event.schema.json",
+  "contracts/publication-evidence.schema.json",
   "docs/reuse-layer.md",
   "docs/architecture-decision-guide.md",
   "docs/decision-brain.md",
@@ -119,6 +121,14 @@ $requiredFiles = @(
   ".portfolio-control/README.md",
   ".portfolio-control/control.yaml",
   ".portfolio-control/AGENT_HANDOFFS/README.md",
+  ".portfolio-control/CURRENT_HANDOFF.md",
+  ".portfolio-control/EXECUTION_EVENTS.jsonl",
+  ".portfolio-control/EXECUTION_EFFICIENCY.md",
+  ".portfolio-control/execution-efficiency.json",
+  ".portfolio-control/portfolio-audit.json",
+  ".portfolio-control/PORTFOLIO_STATUS.md",
+  ".portfolio-control/PORTFOLIO_STATUS.json",
+  "docs/audits/portfolio-implementation-audit-2026-07-21.md",
   "templates/openspec-config.yaml",
   "templates/README-project.md",
   "templates/portfolio-control/INVENTORY.md",
@@ -148,6 +158,9 @@ $requiredFiles = @(
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
   "tools/validate-portfolio.ps1",
+  "tools/record-execution-event.ps1",
+  "tools/report-execution-efficiency.ps1",
+  "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
@@ -267,11 +280,26 @@ Require-Pattern ".codex/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers 
 Require-Pattern ".claude/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers for Windows and POSIX"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
+Require-Pattern ".codex/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
+Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
+Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
+Require-Pattern ".portfolio-control/CURRENT_HANDOFF.md" "## Continuation Order"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
 Invoke-Checked "benchmark schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null }
 Invoke-Checked "monitoring batch schema JSON" { python -m json.tool (Join-Path $root "contracts/monitoring-batch.schema.json") | Out-Null }
+Invoke-Checked "execution event schema JSON" { python -m json.tool (Join-Path $root "contracts/execution-event.schema.json") | Out-Null }
+Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Path $root "contracts/publication-evidence.schema.json") | Out-Null }
+$executionLine = 0
+foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/EXECUTION_EVENTS.jsonl")) {
+  $executionLine++
+  if (-not $line.Trim()) { continue }
+  try { $event = $line | ConvertFrom-Json } catch { $failures.Add("Invalid execution JSONL at line $executionLine"); continue }
+  foreach ($field in @("schema_version","event_id","recorded_at","actor","phase","category","outcome","occurrences","duration_seconds","avoidable","excluded_from_efficiency","evidence","cause","remediation")) {
+    if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
+  }
+}
 $pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 
@@ -286,6 +314,9 @@ $powerShellScripts = @(
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
   "tools/validate-portfolio.ps1",
+  "tools/record-execution-event.ps1",
+  "tools/report-execution-efficiency.ps1",
+  "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
 )

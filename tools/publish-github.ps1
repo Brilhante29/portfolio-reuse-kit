@@ -83,7 +83,8 @@ if (-not $Token) {
   throw "Missing token. Set GH_TOKEN or pass -Token. Prefer a short-lived token; revoke it after publishing."
 }
 
-$resolvedRepo = Resolve-Path -LiteralPath $RepoPath
+$resolvedRepo = (Resolve-Path -LiteralPath $RepoPath).Path
+Set-Location -LiteralPath $resolvedRepo
 if (-not $Branch) {
   $Branch = ((git branch --show-current 2>$null) -join "").Trim()
   if (-not $Branch) { $Branch = "main" }
@@ -96,13 +97,15 @@ if (-not $isKit -and -not $AllowIncomplete) {
   $required = @("Dockerfile", "README.md", "sdd/spec.md", "sdd/benchmark-plan.md", "sdd/reuse-improvement-review.md", ".portfolio-control/QUALITY_GATES.md")
   $missing = @($required | Where-Object { -not (Test-Path -LiteralPath $_ -PathType Leaf) })
   if ($missing.Count -gt 0) { throw "Refusing to publish incomplete project; missing=$($missing -join ',')" }
-  if (-not (Test-Path -LiteralPath ".github/workflows" -PathType Container)) { throw "Refusing to publish project without CI workflow" }
-  $benchmarkCount = @(Get-ChildItem -LiteralPath "benchmarks/results" -Filter *.json -File -ErrorAction SilentlyContinue).Count
-  if ($benchmarkCount -eq 0) { throw "Refusing to publish project without benchmark evidence" }
+  $untrackedRequired = @($required | Where-Object { @(Get-GitOutput @("ls-files", "--", $_)).Count -eq 0 })
+  if ($untrackedRequired.Count -gt 0) { throw "Refusing to publish project with untracked required files: $($untrackedRequired -join ',')" }
+  $workflowCount = @(Get-GitOutput @("ls-files", "--", ".github/workflows/*.yml", ".github/workflows/*.yaml")).Count
+  if ($workflowCount -eq 0) { throw "Refusing to publish project without a tracked CI workflow" }
+  $benchmarkCount = @(Get-GitOutput @("ls-files", "--", "benchmarks/results/*.json", "benchmarks/results/**/*.json") | Sort-Object -Unique).Count
+  if ($benchmarkCount -eq 0) { throw "Refusing to publish project without tracked benchmark evidence" }
   $firstLine = Get-Content -LiteralPath "README.md" -TotalCount 1
   if ($firstLine -notmatch "^#\s*#?\d+\s+") { throw "Refusing to publish project without a numbered README" }
 }
-Set-Location $resolvedRepo
 
 if (-not $RepoName) {
   $RepoName = Split-Path -Leaf $resolvedRepo

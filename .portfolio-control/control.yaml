@@ -7,6 +7,7 @@ principles:
   benchmark_before_publication: true
   no_mutable_dependencies: true
   no_secrets_in_repository: true
+  publication_requires_remote_ci_evidence: true
 quality_gates:
   - numbered_readme
   - sdd_and_openspec
@@ -15,6 +16,8 @@ quality_gates:
   - benchmark_json
   - reuse_review
   - independent_review
+  - tracked_contract_valid_benchmark
+  - verified_publication
 agent_roles:
   - reuse-architect
   - repository-auditor
@@ -24,3 +27,13 @@ agent_roles:
   - benchmark-agent
   - documentation-agent
   - independent-reviewer
+execution_telemetry:
+  event_log: .portfolio-control/EXECUTION_EVENTS.jsonl
+  report: .portfolio-control/EXECUTION_EFFICIENCY.md
+  handoff: .portfolio-control/CURRENT_HANDOFF.md
+  schema: contracts/execution-event.schema.json
+  excluded_windows:
+    - date: 2026-07-20
+      owner: user
+      tools: [Antigravity, OpenCode]
+      reason: Excluded from Codex efficiency accounting at the user request.
