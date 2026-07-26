@@ -86,6 +86,9 @@ $requiredFiles = @(
   "contracts/benchmark-result-v2.schema.json",
   "contracts/fixtures/benchmark-result-v2.valid.json",
   "contracts/fixtures/benchmark-result-v2.invalid.json",
+  "contracts/portfolio-evidence.openapi.yaml",
+  "contracts/portfolio-evidence.graphql",
+  "contracts/manifest.json",
   "contracts/monitoring-batch.schema.json",
   "contracts/execution-event.schema.json",
   "contracts/publication-evidence.schema.json",
@@ -170,6 +173,7 @@ $requiredFiles = @(
   "tools/clear-github-token.ps1",
   "tools/validate-portfolio.ps1",
   "tools/validate-contracts.py",
+  "tools/generate-contract-manifest.py",
   "tools/generate-design-tokens.py",
   "tools/sync-catalog-stacks.py",
   "tools/record-execution-event.ps1",
@@ -309,6 +313,11 @@ Require-Pattern "catalog/programs.yaml" "id: portfolio-evidence-platform"
 Require-Pattern "catalog/technology-coverage.yaml" "planned_repository: portfolio-evidence-api"
 Require-Pattern ".portfolio-control/CURRENT_HANDOFF.md" "## Continuation Order"
 Require-Pattern "contracts/benchmark-result-v2.schema.json" '"clean_tree": \{ "const": true \}'
+Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingestBenchmarkRun"
+Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
+Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.0.0"'
+Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
@@ -318,7 +327,8 @@ Invoke-Checked "benchmark v2 schema JSON" { python -m json.tool (Join-Path $root
 Invoke-Checked "monitoring batch schema JSON" { python -m json.tool (Join-Path $root "contracts/monitoring-batch.schema.json") | Out-Null }
 Invoke-Checked "execution event schema JSON" { python -m json.tool (Join-Path $root "contracts/execution-event.schema.json") | Out-Null }
 Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Path $root "contracts/publication-evidence.schema.json") | Out-Null }
-Invoke-Checked "YAML and benchmark V2 contracts" { python (Join-Path $root "tools/validate-contracts.py") | Out-Null }
+Invoke-Checked "interoperability contracts" { python (Join-Path $root "tools/validate-contracts.py") | Out-Null }
+Invoke-Checked "generated contract manifest" { python (Join-Path $root "tools/generate-contract-manifest.py") --check | Out-Null }
 Invoke-Checked "generated design tokens" { python (Join-Path $root "tools/generate-design-tokens.py") --check | Out-Null }
 $executionLine = 0
 foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/EXECUTION_EVENTS.jsonl")) {
@@ -329,7 +339,7 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
     if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
   }
 }
-$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 
 $powerShellScripts = @(

@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
 import yaml
+from graphql import build_schema, validate_schema
 from jsonschema import Draft202012Validator, FormatChecker
+from openapi_spec_validator import validate as validate_openapi
+from openapi_spec_validator.readers import read_from_filename
 
 
 def main() -> int:
@@ -35,10 +39,40 @@ def main() -> int:
     except Exception as error:
         failures.append(f"benchmark V2 contract validation failed: {error}")
 
+    openapi_path = root / "contracts" / "portfolio-evidence.openapi.yaml"
+    try:
+        openapi_document, base_uri = read_from_filename(str(openapi_path))
+        validate_openapi(openapi_document, base_uri=base_uri)
+    except Exception as error:
+        failures.append(f"OpenAPI contract validation failed: {error}")
+
+    graphql_path = root / "contracts" / "portfolio-evidence.graphql"
+    try:
+        graphql_schema = build_schema(graphql_path.read_text(encoding="utf-8"))
+        graphql_errors = validate_schema(graphql_schema)
+        if graphql_errors:
+            failures.extend(f"GraphQL contract validation failed: {error}" for error in graphql_errors)
+    except Exception as error:
+        failures.append(f"GraphQL contract validation failed: {error}")
+
+    manifest_check = subprocess.run(
+        [sys.executable, str(root / "tools" / "generate-contract-manifest.py"), "--check"],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if manifest_check.returncode != 0:
+        detail = (manifest_check.stdout + manifest_check.stderr).strip()
+        failures.append(f"contract manifest validation failed: {detail}")
+
     if failures:
         print("\n".join(failures), file=sys.stderr)
         return 1
-    print(f"validated {len(yaml_files)} YAML files and benchmark-result-v2 fixtures")
+    print(
+        f"validated {len(yaml_files)} YAML files, benchmark V2 fixtures, "
+        "OpenAPI, GraphQL, and contract manifest"
+    )
     return 0
 
 

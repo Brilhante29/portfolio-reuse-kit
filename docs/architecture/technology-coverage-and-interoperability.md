@@ -66,15 +66,17 @@ Every JVM project uses a committed Gradle Wrapper, Kotlin DSL build scripts, an 
 
 RabbitMQ belongs in `saga-orchestrator` only if command routing, acknowledgement, retry, poison-message handling, and DLQ recovery are implemented and benchmarked. Kafka/Redpanda remains the event-log choice for replay, streaming, CQRS projections, and outbox publication. No new messaging repository is created merely to add a logo.
 
-## Reuse Delta
+## Contract Plane
 
-The reuse kit must generate, version, and hash:
+The reuse kit now generates and validates:
 
-- benchmark V2 JSON Schema and golden fixtures;
-- OpenAPI ingestion/command contract;
-- GraphQL query schema;
+- benchmark V2 JSON Schema and golden positive/negative fixtures;
+- OpenAPI 3.1 ingestion and idempotent command contract;
+- read-only GraphQL query and comparison schema;
 - CSS variables, SCSS variables, and TypeScript design tokens;
-- a manifest containing version and SHA-256 for vendored assets;
-- CI drift checks for every consumer.
+- deterministic manifests with SHA-256 and byte size for every vendored contract;
+- consumer-side drift checks whenever a repository vendors contracts/manifest.json.
 
-Runtime components remain repository-owned. The kit shares contracts, tokens, skills, decision rules, harnesses, and verification, preserving loose coupling and independent deployment.
+OpenAPI owns writes and audited commands. GraphQL owns nested reads and comparisons. The contract manifest is generated from source assets and excludes itself, so clean-clone validation is deterministic.
+
+Runtime components remain repository-owned. Python, Go, Java/Kotlin, Node, Next.js, and Angular depend on schemas and HTTP behavior rather than a shared runtime SDK. This keeps deployments independent and prevents the reuse layer from becoming a distributed monolith.
