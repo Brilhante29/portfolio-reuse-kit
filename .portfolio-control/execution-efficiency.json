@@ -1,26 +1,26 @@
 {
-    "generated_at":  "2026-07-21T21:51:40.7484226Z",
+    "generated_at":  "2026-07-26T03:43:25.4896820Z",
     "excluded_windows":  [
                              "2026-07-20: user-operated Antigravity/OpenCode activity"
                          ],
-    "event_records":  30,
-    "occurrence_count":  72,
-    "hard_limit_occurrences":  4,
+    "event_records":  39,
+    "occurrence_count":  86,
+    "hard_limit_occurrences":  8,
     "wait_timeout_occurrences":  13,
-    "avoidable_occurrences":  59,
-    "tracked_duration_seconds":  2923.55,
+    "avoidable_occurrences":  72,
+    "tracked_duration_seconds":  2940.95,
     "categories":  [
                        {
                            "category":  "tool-failure",
-                           "events":  10,
-                           "occurrences":  20,
-                           "duration_seconds":  19.9
+                           "events":  13,
+                           "occurrences":  23,
+                           "duration_seconds":  35.2
                        },
                        {
                            "category":  "invalid-command",
-                           "events":  8,
-                           "occurrences":  14,
-                           "duration_seconds":  13.5
+                           "events":  12,
+                           "occurrences":  20,
+                           "duration_seconds":  14.8
                        },
                        {
                            "category":  "wait-timeout",
@@ -35,16 +35,16 @@
                            "duration_seconds":  1041.15
                        },
                        {
-                           "category":  "invalid-diagnostic",
-                           "events":  1,
-                           "occurrences":  6,
+                           "category":  "authorization-limit",
+                           "events":  2,
+                           "occurrences":  8,
                            "duration_seconds":  0
                        },
                        {
-                           "category":  "authorization-limit",
-                           "events":  1,
-                           "occurrences":  4,
-                           "duration_seconds":  0
+                           "category":  "invalid-diagnostic",
+                           "events":  2,
+                           "occurrences":  7,
+                           "duration_seconds":  0.8
                        },
                        {
                            "category":  "agent-no-progress",
