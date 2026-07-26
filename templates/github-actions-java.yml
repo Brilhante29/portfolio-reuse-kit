@@ -1,11 +1,14 @@
-name: java
+name: jvm
 
 on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,5 +16,6 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - run: mvn -B test
+      - uses: gradle/actions/setup-gradle@v6
+      - run: ./gradlew --no-daemon clean check
       - run: docker build -t project-under-test .

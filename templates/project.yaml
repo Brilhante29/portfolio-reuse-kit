@@ -1,5 +1,6 @@
 id: <id>
 name: <project-name>
+manifest_version: 2
 program:
   id: <ai-evaluation-retrieval|applied-computer-vision|backend-reliability-platform|mlops-data-platform|delivery-observability-infra>
   narrative_fit: <how this repo strengthens the program story>
@@ -9,9 +10,11 @@ status: scaffold
 claim: <one sentence claim>
 stack: []
 language_profile:
-  primary: <python|java|go|typescript|angular|nextjs|terraform|spring-kotlin-backend|fastapi-backend|go-backend|node-typescript-backend>
+  primary: <python|java|kotlin|go|typescript|angular|nextjs|terraform|kotlin-jvm|java-spring-backend|spring-kotlin-backend|fastapi-backend|go-backend|node-typescript-backend>
   secondary: []
   reason: <why this profile governs the repo>
+# JVM stacks must add the schema-required jvm block from decision-brain/jvm-language-matrix.yaml.
+# Kafka stacks must add messaging_decision and kafka_streams fields from decision-brain/kafka-streams-matrix.yaml.
 decision_brain:
   agentic_spec:
     source: .portfolio/decision-brain/agentic-spec-governance.yaml
@@ -39,7 +42,7 @@ decision_brain:
     testability_rule: <how use cases run without transport/infrastructure>
     rejected_overengineering:
       - <pattern/tool/abstraction rejected>
-  stack_profile: <spring-kotlin-backend|fastapi-backend|go-backend|node-typescript-backend|angular|nextjs|python-ml|terraform>
+  stack_profile: <kotlin-jvm|kafka-streams|spring-kotlin-backend|java-spring-backend|fastapi-backend|go-backend|node-typescript-backend|angular|nextjs|python-ml|terraform>
   api_style: <rest-http|graphql|grpc|websocket|sse|cli>
   messaging: <none|outbox-only|rabbitmq|kafka|redis-streams|nats>
   cloud:

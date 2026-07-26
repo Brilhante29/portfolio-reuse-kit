@@ -25,6 +25,31 @@ def main() -> int:
         except Exception as error:  # report all malformed files in one run
             failures.append(f"invalid YAML {path.relative_to(root)}: {error}")
 
+    project_schema_path = root / "contracts" / "project.schema.json"
+    project_fixtures = root / "contracts" / "fixtures"
+    project_valid_paths = sorted(project_fixtures.glob("project*.valid.json"))
+    project_invalid_paths = sorted(project_fixtures.glob("project*.invalid.json"))
+    try:
+        project_schema = json.loads(project_schema_path.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(project_schema)
+        project_validator = Draft202012Validator(project_schema, format_checker=FormatChecker())
+        for project_valid_path in project_valid_paths:
+            project_validator.validate(
+                json.loads(project_valid_path.read_text(encoding="utf-8"))
+            )
+        for project_invalid_path in project_invalid_paths:
+            invalid_project_errors = list(
+                project_validator.iter_errors(
+                    json.loads(project_invalid_path.read_text(encoding="utf-8"))
+                )
+            )
+            if not invalid_project_errors:
+                failures.append(
+                    f"invalid project fixture was accepted: {project_invalid_path.name}"
+                )
+    except Exception as error:
+        failures.append(f"project contract validation failed: {error}")
+
     schema_path = root / "contracts" / "benchmark-result-v2.schema.json"
     valid_path = root / "contracts" / "fixtures" / "benchmark-result-v2.valid.json"
     invalid_path = root / "contracts" / "fixtures" / "benchmark-result-v2.invalid.json"
@@ -70,7 +95,7 @@ def main() -> int:
         print("\n".join(failures), file=sys.stderr)
         return 1
     print(
-        f"validated {len(yaml_files)} YAML files, benchmark V2 fixtures, "
+        f"validated {len(yaml_files)} YAML files, project and benchmark V2 fixtures, "
         "OpenAPI, GraphQL, and contract manifest"
     )
     return 0

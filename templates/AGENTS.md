@@ -4,6 +4,8 @@ This repository is governed by `portfolio-reuse-kit`.
 
 Agents must use the local `.portfolio/` snapshot as the source of truth when it exists. If `.portfolio/` is not present, consult the upstream kit before making architectural or stack decisions.
 
+Read `.portfolio-control/CURRENT_HANDOFF.md` and `.portfolio-control/CONTINUITY_STATE.md` before editing. Run the continuity checkpoint before quota, context, interruption, or repeated-failure risk.
+
 ## Operating Graph
 
 Read `.portfolio/decision-brain/agent-graph.yaml` first. The principal agent coordinates these roles:

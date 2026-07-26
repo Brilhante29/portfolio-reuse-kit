@@ -1,12 +1,16 @@
-FROM maven:3.9-eclipse-temurin-21 AS build
+ARG JVM_VERSION=21
+FROM eclipse-temurin:${JVM_VERSION}-jdk AS build
 
 WORKDIR /src
-COPY pom.xml .
-RUN mvn -q -DskipTests dependency:go-offline
+COPY gradlew gradlew.bat ./
+COPY gradle gradle
+COPY settings.gradle.kts build.gradle.kts ./
+RUN chmod +x gradlew
 COPY . .
-RUN mvn -q -DskipTests package
+RUN ./gradlew --no-daemon clean check bootJar
 
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:${JVM_VERSION}-jre
 WORKDIR /app
-COPY --from=build /src/target/*.jar app.jar
+COPY --from=build /src/build/libs/*.jar app.jar
+USER 10001
 ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -39,6 +39,8 @@ function Require-Directory {
 
 $requiredFiles = @(
   "README.md",
+  "AGENTS.md",
+  "CLAUDE.md",
   "requirements-ci.txt",
   "PUBLISH.md",
   ".openspec-store/store.yaml",
@@ -57,9 +59,11 @@ $requiredFiles = @(
   "decision-brain/agent-graph.yaml",
   "decision-brain/agentic-spec-governance.yaml",
   "decision-brain/reuse-improvement-loop.yaml",
+  "decision-brain/continuity-protocol.yaml",
   "decision-brain/engineering-principles.yaml",
   "decision-brain/stack-matrix.yaml",
   "decision-brain/jvm-language-matrix.yaml",
+  "decision-brain/kafka-streams-matrix.yaml",
   "decision-brain/api-style-matrix.yaml",
   "decision-brain/cloud-matrix.yaml",
   "decision-brain/messaging-matrix.yaml",
@@ -72,6 +76,8 @@ $requiredFiles = @(
   "design-system/generated/manifest.json",
   "language-profiles/python.yaml",
   "language-profiles/java.yaml",
+  "language-profiles/kotlin-jvm.yaml",
+  "language-profiles/java-spring.yaml",
   "language-profiles/go.yaml",
   "language-profiles/typescript.yaml",
   "language-profiles/angular.yaml",
@@ -84,6 +90,16 @@ $requiredFiles = @(
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
   "contracts/benchmark-result-v2.schema.json",
+  "contracts/fixtures/project.valid.json",
+  "contracts/fixtures/project.non-jvm.valid.json",
+  "contracts/fixtures/project.legacy.valid.json",
+  "contracts/fixtures/project.invalid.json",
+  "contracts/fixtures/project.jvm-profile-missing-jvm.invalid.json",
+  "contracts/fixtures/project.kafka-mode-mismatch.invalid.json",
+  "contracts/fixtures/project.kafka-selected-brain-none.invalid.json",
+  "contracts/fixtures/project.kafka-streams-orphan.invalid.json",
+  "contracts/fixtures/project.unknown-wrapper-checksum.invalid.json",
+  "contracts/fixtures/project.wrapper-pair-mismatch.invalid.json",
   "contracts/fixtures/benchmark-result-v2.valid.json",
   "contracts/fixtures/benchmark-result-v2.invalid.json",
   "contracts/portfolio-evidence.openapi.yaml",
@@ -95,6 +111,8 @@ $requiredFiles = @(
   "docs/reuse-layer.md",
   "docs/architecture-decision-guide.md",
   "docs/decision-brain.md",
+  "docs/kafka-streams-decision.md",
+  "docs/manifest-v2-rollout.md",
   "docs/agent-graph.md",
   "docs/reuse-improvement-loop.md",
   "docs/engineering-principles.md",
@@ -135,6 +153,7 @@ $requiredFiles = @(
   ".portfolio-control/control.yaml",
   ".portfolio-control/AGENT_HANDOFFS/README.md",
   ".portfolio-control/CURRENT_HANDOFF.md",
+  ".portfolio-control/CONTINUITY_STATE.md",
   ".portfolio-control/EXECUTION_EVENTS.jsonl",
   ".portfolio-control/EXECUTION_EFFICIENCY.md",
   ".portfolio-control/execution-efficiency.json",
@@ -148,6 +167,7 @@ $requiredFiles = @(
   "templates/portfolio-control/INVENTORY.md",
   "templates/portfolio-control/REUSE_MAP.md",
   "templates/portfolio-control/CRITICAL_PATH.md",
+  "templates/portfolio-control/CONTINUITY_STATE.md",
   "templates/portfolio-control/DECISIONS.md",
   "templates/portfolio-control/QUALITY_GATES.md",
   "templates/portfolio-control/AGENT_HANDOFFS/README.md",
@@ -160,6 +180,7 @@ $requiredFiles = @(
   "templates/openspec-change-tasks.md",
   "templates/openspec-change-spec.md",
   "templates/validate-project.ps1",
+  "templates/validate-gradle-project.ps1",
   "templates/project.yaml",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
@@ -173,11 +194,14 @@ $requiredFiles = @(
   "tools/clear-github-token.ps1",
   "tools/validate-portfolio.ps1",
   "tools/validate-contracts.py",
+  "tools/audit-manifest-rollout.py",
+  "tools/validate-gradle-project.ps1",
   "tools/generate-contract-manifest.py",
   "tools/generate-design-tokens.py",
   "tools/sync-catalog-stacks.py",
   "tools/record-execution-event.ps1",
   "tools/report-execution-efficiency.ps1",
+  "tools/capture-continuity-state.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
   "tools/validate-kit.ps1"
@@ -189,6 +213,7 @@ $requiredDirs = @(
   ".codex/skills/portfolio-project",
   ".codex/skills/agent-orchestration",
   ".codex/skills/reuse-improvement-review",
+  ".codex/skills/continuity-checkpoint",
   ".codex/skills/spec-driven-project",
   ".codex/skills/agentic-spec-governance",
   ".codex/skills/benchmark-harness",
@@ -200,6 +225,7 @@ $requiredDirs = @(
   ".codex/skills/messaging-decision",
   ".codex/skills/language-standards",
   ".codex/skills/jvm-language-decision",
+  ".codex/skills/kafka-streams",
   ".codex/skills/design-system",
   ".codex/skills/spring-kotlin-backend",
   ".codex/skills/fastapi-backend",
@@ -208,6 +234,7 @@ $requiredDirs = @(
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
+  ".claude/skills/continuity-checkpoint",
   ".claude/skills/spec-driven-project",
   ".claude/skills/agentic-spec-governance",
   ".claude/skills/benchmark-harness",
@@ -219,6 +246,7 @@ $requiredDirs = @(
   ".claude/skills/messaging-decision",
   ".claude/skills/language-standards",
   ".claude/skills/jvm-language-decision",
+  ".claude/skills/kafka-streams",
   ".claude/skills/design-system",
   ".claude/skills/spring-kotlin-backend",
   ".claude/skills/fastapi-backend",
@@ -268,6 +296,9 @@ Require-Pattern "templates/openspec-config.yaml" "schema: portfolio-system"
 Require-Pattern "tools/install-project-skills.ps1" "component-packs"
 Require-Pattern "tools/install-project-skills.ps1" 'contracts/\*'
 Require-Pattern "tools/new-project.ps1" 'design-system/\*'
+Require-Pattern "tools/new-project.ps1" "capture-continuity-state.ps1"
+Require-Pattern "tools/sync-project-reuse.ps1" "validate-gradle-project.ps1"
+Require-Pattern "tools/sync-project-reuse.ps1" "capture-continuity-state.ps1"
 Require-Pattern "tools/plan-project.ps1" "voice_verdict"
 Require-Pattern "tools/prepare-project.ps1" "OpenSpec CLI was requested"
 Require-Pattern "tools/prepare-project.ps1" "UseAitmpl requires explicit"
@@ -285,8 +316,8 @@ if (Select-String -Path (Join-Path $root "tools/plan-project.ps1") -Pattern "pro
 }
 Require-Pattern "tools/sync-project-reuse.ps1" "BackfillMissing"
 Require-Pattern "templates/validate-project.ps1" "go test ./..."
-Require-Pattern "templates/validate-project.ps1" "gradle check"
-Require-Pattern "templates/validate-project.ps1" "Gradle project is missing wrapper file"
+Require-Pattern "templates/validate-gradle-project.ps1" "Gradle clean check failed"
+Require-Pattern "templates/validate-gradle-project.ps1" "Missing Gradle file"
 Require-Pattern "templates/validate-project.ps1" "Tracked build/cache artifacts must be removed"
 Require-Pattern ".gitignore" "^.gradle/"
 Require-Pattern "templates/validate-project.ps1" "pythonFiles.Count"
@@ -310,6 +341,26 @@ Require-Pattern ".codex/skills/agent-orchestration/SKILL.md" "Efficiency and Lim
 Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
 Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
 Require-Pattern "decision-brain/jvm-language-matrix.yaml" "outbox-pattern:"
+Require-Pattern "decision-brain/continuity-protocol.yaml" "exit_loop_rules"
+Require-Pattern "tools/capture-continuity-state.ps1" "Sanitize-Line"
+Require-Pattern "tools/audit-manifest-rollout.py" "v2_ready"
+Require-Pattern "docs/manifest-v2-rollout.md" "legacy compatibility"
+Require-Pattern "AGENTS.md" "CURRENT_HANDOFF.md"
+Require-Pattern "CLAUDE.md" "CURRENT_HANDOFF.md"
+Require-Pattern "decision-brain/kafka-streams-matrix.yaml" "topology_test_driver"
+Require-Pattern "decision-brain/stack-matrix.yaml" "technical_validity_before_portfolio_signal"
+Require-Pattern "templates/validate-gradle-project.ps1" "distributionSha256Sum"
+Require-Pattern "templates/validate-gradle-project.ps1" "gradle/actions/setup-gradle"
+Require-Pattern "templates/Dockerfile.spring" "ARG JVM_VERSION=21"
+Require-Pattern "tools/validate-gradle-project.ps1" "java-version must be static"
+Require-Pattern "tools/validate-gradle-project.ps1" '(?:-\\s*)?run'
+Require-Pattern "tools/plan-project.ps1" "interoperabilityBoundary"
+Require-Pattern "tools/plan-project.ps1" "yaml.safe_load"
+Require-Pattern "tools/plan-project.ps1" "kafkaRebalancePlan"
+Require-Pattern "tools/validate-gradle-project.ps1" "jvm.toolchain_version does not match"
+Require-Pattern "tools/validate-gradle-project.ps1" "wrapper_distribution_sha256 does not match"
+Require-Pattern "contracts/project.schema.json" '"manifest_version"'
+Require-Pattern "contracts/project.schema.json" '"rebalance_plan"'
 Require-Pattern "docs/architecture/technology-coverage-and-interoperability.md" "portfolio-evidence-api"
 Require-Pattern "catalog/programs.yaml" "id: portfolio-evidence-platform"
 Require-Pattern "catalog/technology-coverage.yaml" "planned_repository: portfolio-evidence-api"
@@ -319,8 +370,9 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.1.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.2.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
+Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
@@ -342,7 +394,7 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
     if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
   }
 }
-$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 
 $powerShellScripts = @(
@@ -360,6 +412,10 @@ $powerShellScripts = @(
   "tools/report-execution-efficiency.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
+  "tools/capture-continuity-state.ps1",
+  "tools/validate-gradle-project.ps1",
+  "templates/validate-project.ps1",
+  "templates/validate-gradle-project.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -374,12 +430,25 @@ foreach ($script in $powerShellScripts) {
 
 $legacy = ("ro" + "che" + "do")
 $patterns = @($legacy, ($legacy.Substring(0,1).ToUpper() + $legacy.Substring(1)))
-$searchFiles = Get-ChildItem -Path $root -Recurse -File | Where-Object {
-  $normalized = $_.FullName -replace "\\", "/"
-  $normalized -notmatch "/.git/" -and
-  $normalized -notmatch "/benchmarks/results/" -and
-  $_.Extension -in @(".md", ".yaml", ".yml", ".json", ".ps1", ".py", ".js", ".ts", ".tsx", ".go", ".kt", ".java")
+$publicRelativeFiles = @(& git -C $root ls-files --cached --others --exclude-standard)
+$publicFileExit = $LASTEXITCODE
+$global:LASTEXITCODE = 0
+if ($publicFileExit -ne 0) {
+  $failures.Add("Cannot enumerate public tracked and untracked files")
 }
+$searchExtensions = @(".md", ".yaml", ".yml", ".json", ".ps1", ".py", ".js", ".ts", ".tsx", ".go", ".kt", ".java")
+$searchFiles = @(
+  foreach ($relativePath in $publicRelativeFiles) {
+    $candidate = Join-Path $root ($relativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
+    if (
+      (Test-Path -LiteralPath $candidate -PathType Leaf) -and
+      ([IO.Path]::GetExtension($candidate) -in $searchExtensions) -and
+      ($relativePath -notmatch "^benchmarks/results/")
+    ) {
+      Get-Item -LiteralPath $candidate
+    }
+  }
+)
 $forbidden = Select-String -Path $searchFiles.FullName -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
 if ($forbidden) {
   $failures.Add("Forbidden legacy project nickname found")
@@ -392,17 +461,23 @@ if ($mutableKumo) {
 }
 
 $slash = [char]92
+$forwardSlash = [char]47
 $hardcodedPathPatterns = @(
-  ("C:" + $slash + "Users" + $slash + "Guilherme"),
-  ("Desktop" + $slash + "repos-github"),
-  ("/" + "Users/Guilherme"),
-  ("/" + "home/guilherme")
+  ("C:" + $slash + "Users" + $slash),
+  ("C:" + $forwardSlash + "Users" + $forwardSlash),
+  ($forwardSlash + "Users" + $forwardSlash),
+  ($forwardSlash + "home" + $forwardSlash)
 )
 $hardcodedPaths = Select-String -Path $searchFiles.FullName -Pattern $hardcodedPathPatterns -SimpleMatch -ErrorAction SilentlyContinue
 if ($hardcodedPaths) {
-  $failures.Add("User-specific absolute path found in reusable files")
+  $failures.Add("Personal absolute path found in public repository files")
 }
 
+$liveTokenPattern = "(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})"
+$liveTokens = Select-String -Path $searchFiles.FullName -Pattern $liveTokenPattern -ErrorAction SilentlyContinue
+if ($liveTokens) {
+  $failures.Add("Live GitHub token pattern found in public repository files")
+}
 if ($failures.Count -gt 0) {
   $failures | ForEach-Object { Write-Error $_ }
   exit 1
