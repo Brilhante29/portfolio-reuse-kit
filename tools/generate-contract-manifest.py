@@ -38,7 +38,7 @@ def build_manifest(contracts_dir: Path) -> dict[str, object]:
     return {
         "schema_version": 1,
         "contract_set": "portfolio-interoperability",
-        "contract_set_version": "1.1.0",
+        "contract_set_version": "1.2.0",
         "assets": assets,
     }
 

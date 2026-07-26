@@ -34,6 +34,22 @@ choices:
       - dependencies point from adapters to core
       - public Java APIs avoid Kotlin-only types
       - nullability annotations are explicit at the Java boundary
+interoperability_contract:
+  direction_must_be_decided: true
+  public_api_rules:
+    - Java-facing APIs do not expose Unit, suspend, Kotlin function types, default arguments, value classes, or Kotlin-only collections
+    - Kotlin-facing Java APIs declare nullability and translate checked exceptions deliberately
+    - Java and Kotlin compilation targets equal the declared JVM toolchain
+  compatibility:
+    - binary API changes are detected for published libraries or shared modules
+    - Java-consuming-Kotlin and Kotlin-consuming-Java contract tests are required for mixed repositories
+    - the same semantic contract suite runs against in-memory and infrastructure adapters
+  architecture:
+    - framework and transport adapters depend on stable core contracts
+    - language direction follows ownership and consumer needs, not a fixed Java-core assumption
+  benchmark:
+    - interoperability overhead is measured only when it is material to the claim
+    - Java-versus-Kotlin comparisons require equivalent implementation, workload, warmup, runtime, and environment
 portfolio_decisions:
   spring-hexagonal-payments:
     choice: kotlin

@@ -175,8 +175,23 @@ if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
     $global:LASTEXITCODE = 0
     if ($yamlAvailable) {
       Invoke-Checked "project YAML parsing" { python -c "import pathlib, sys, yaml; data = yaml.safe_load(pathlib.Path(sys.argv[1]).read_text(encoding='utf-8')); assert isinstance(data, dict)" $manifestPath }
+
+      & python -c "import jsonschema, yaml" 2>$null
+      $jsonSchemaAvailable = $LASTEXITCODE -eq 0
+      $global:LASTEXITCODE = 0
+      $projectSchemaPath = Join-Path $root ".portfolio/contracts/project.schema.json"
+      if (-not (Test-Path -LiteralPath $projectSchemaPath -PathType Leaf)) {
+        $projectSchemaPath = Join-Path $root "contracts/project.schema.json"
+      }
+      if ($jsonSchemaAvailable -and (Test-Path -LiteralPath $projectSchemaPath -PathType Leaf)) {
+        Invoke-Checked "project manifest schema" {
+          python -c "import json, pathlib, sys, yaml; from jsonschema import Draft202012Validator; manifest=yaml.safe_load(pathlib.Path(sys.argv[1]).read_text(encoding='utf-8')); schema=json.loads(pathlib.Path(sys.argv[2]).read_text(encoding='utf-8')); errors=sorted(Draft202012Validator(schema).iter_errors(manifest), key=lambda e: list(e.absolute_path)); [print(f'{list(e.absolute_path)}: {e.message}', file=sys.stderr) for e in errors]; raise SystemExit(1 if errors else 0)" $manifestPath $projectSchemaPath
+        }
+      } else {
+        Add-Failure "jsonschema and the vendored project schema are required for manifest validation"
+      }
     } else {
-      Write-Host "yaml_parser=not_found; structural manifest validation applied"
+      Add-Failure "PyYAML is required for project manifest validation"
     }
   }
 }
@@ -333,34 +348,17 @@ try {
     (Join-Path $root "build.gradle")
   ) | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf }
   if ($gradleBuild.Count -gt 0) {
-    $wrapperFiles = @(
-      "gradlew",
-      "gradlew.bat",
-      "gradle/wrapper/gradle-wrapper.jar",
-      "gradle/wrapper/gradle-wrapper.properties"
-    )
-    $missingWrapper = @($wrapperFiles | Where-Object {
-      -not (Test-Path -LiteralPath (Join-Path $root $_) -PathType Leaf)
-    })
-    foreach ($missing in $missingWrapper) {
-      Add-Failure "Gradle project is missing wrapper file: $missing"
-    }
-
-    if ($missingWrapper.Count -eq 0) {
+    $gradleValidator = Join-Path $root "tools/validate-gradle-project.ps1"
+    if (-not (Test-Path -LiteralPath $gradleValidator -PathType Leaf)) {
+      Add-Failure "Gradle project is missing tools/validate-gradle-project.ps1"
+    } else {
       $javaCommand = Get-Command java -ErrorAction SilentlyContinue
       if ($javaCommand) {
-        $isWindowsHost = [System.Environment]::OSVersion.Platform -eq [System.PlatformID]::Win32NT
-        if ($isWindowsHost) {
-          $gradleWrapper = Join-Path $root "gradlew.bat"
-          Invoke-Checked "gradle check" { & $gradleWrapper check --no-daemon }
-        } else {
-          $gradleWrapper = Join-Path $root "gradlew"
-          Invoke-Checked "gradle check" { & $gradleWrapper check --no-daemon }
-        }
+        Invoke-Checked "strict Gradle validation" { & $gradleValidator -RepoPath $root }
       } elseif ($SkipDocker) {
-        Add-Failure "Java toolchain is required to validate Gradle projects when Docker validation is skipped"
+        Add-Failure "Java is required for strict Gradle validation when Docker is skipped"
       } else {
-        Write-Host "java_toolchain=not_found; relying on Docker build for Gradle validation"
+        Invoke-Checked "structural Gradle validation" { & $gradleValidator -RepoPath $root -SkipBuild }
       }
     }
   }

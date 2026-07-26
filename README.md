@@ -192,6 +192,8 @@ The same skills are provided for Codex and Claude Code:
 | `api-style-decision` | Decide REST/HTTP, GraphQL, gRPC, WebSocket, SSE, or CLI. |
 | `cloud-local-first` | Apply Kumo local-first cloud and real-cloud adapter rules. |
 | `messaging-decision` | Decide no broker, outbox, RabbitMQ, Kafka, Redis Streams, or NATS. |
+| `kafka-streams` | Govern topics, keys, topology semantics, state, failures, restoration, and separate driver/broker evidence. |
+| `continuity-checkpoint` | Capture sanitized state, decisions, failures, and exact next actions before limits or handoffs. |
 | `spring-kotlin-backend` | Apply Spring Kotlin backend standards. |
 | `fastapi-backend` | Apply FastAPI backend standards. |
 | `go-backend` | Apply Go backend standards. |
@@ -233,6 +235,8 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Reuse layer architecture](docs/reuse-layer.md)
 - [Architecture decision guide](docs/architecture-decision-guide.md)
 - [Decision brain](docs/decision-brain.md)
+- [Kafka Streams decision guide](docs/kafka-streams-decision.md)
+- [Manifest v2 rollout](docs/manifest-v2-rollout.md)
 - [Agent graph](docs/agent-graph.md)
 - [Reuse improvement loop](docs/reuse-improvement-loop.md)
 - [Engineering principles](docs/engineering-principles.md)

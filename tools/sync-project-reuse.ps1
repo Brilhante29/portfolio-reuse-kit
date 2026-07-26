@@ -13,6 +13,8 @@ $resolvedRepoRoot = Resolve-Path -LiteralPath $RepoRoot
 $installScript = Join-Path $PSScriptRoot "install-project-skills.ps1"
 $backfillScript = Join-Path $PSScriptRoot "backfill-project-standard.ps1"
 $validatorSource = Join-Path $kitRoot "templates/validate-project.ps1"
+$gradleValidatorSource = Join-Path $kitRoot "templates/validate-gradle-project.ps1"
+$continuityScriptSource = Join-Path $kitRoot "tools/capture-continuity-state.ps1"
 $agentsSource = Join-Path $kitRoot "templates/AGENTS.md"
 
 $repos = Get-ChildItem -Directory -LiteralPath $resolvedRepoRoot | Where-Object {
@@ -34,6 +36,8 @@ foreach ($repo in $repos) {
   $toolsDir = Join-Path $repo.FullName "tools"
   New-Item -ItemType Directory -Force -Path $toolsDir | Out-Null
   Copy-Item -Force -Path $validatorSource -Destination (Join-Path $toolsDir "validate-project.ps1")
+  Copy-Item -Force -Path $gradleValidatorSource -Destination (Join-Path $toolsDir "validate-gradle-project.ps1")
+  Copy-Item -Force -Path $continuityScriptSource -Destination (Join-Path $toolsDir "capture-continuity-state.ps1")
 
   if ($UpdateAgents) {
     Copy-Item -Force -Path $agentsSource -Destination (Join-Path $repo.FullName "AGENTS.md")

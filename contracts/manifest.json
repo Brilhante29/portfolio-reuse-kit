@@ -20,6 +20,46 @@
       "bytes": 1749,
       "sha256": "sha256:0074aeacec5abbc6d5938d6ae330160865d5d866237df0ae76d0425b27e1da2e"
     },
+    "fixtures/project.invalid.json": {
+      "bytes": 11193,
+      "sha256": "sha256:c919848407d2eaa974eb461239d6bdab826919f16b0c9d8c585f999c7e79827a"
+    },
+    "fixtures/project.jvm-profile-missing-jvm.invalid.json": {
+      "bytes": 10255,
+      "sha256": "sha256:1b8e3968d8cba729b6bc241e43be05a2ba6d43a792abce275eb9a133a8bb5a21"
+    },
+    "fixtures/project.kafka-mode-mismatch.invalid.json": {
+      "bytes": 11193,
+      "sha256": "sha256:61ac0124f62414961f20e261a25e6d4d1c6461b23404c432abd1717454fe3ae0"
+    },
+    "fixtures/project.kafka-selected-brain-none.invalid.json": {
+      "bytes": 7409,
+      "sha256": "sha256:28908f67fd9172faf316f5dbcc8c28f7d6c2faf78fc110b64027df719cbe352b"
+    },
+    "fixtures/project.kafka-streams-orphan.invalid.json": {
+      "bytes": 10404,
+      "sha256": "sha256:45ef251f2098ce568db7c30df8b3393f623053e7c30d3e95c225997edfaff0e9"
+    },
+    "fixtures/project.legacy.valid.json": {
+      "bytes": 5097,
+      "sha256": "sha256:fc7994fd04769a7b1a8bcabc665a179eb01515b0bfe81ff42b3932db8ec11f58"
+    },
+    "fixtures/project.non-jvm.valid.json": {
+      "bytes": 6373,
+      "sha256": "sha256:193e920ae1f80f337fa3a941c9a1294384fc1c2989e803b5c7d379c7760496b1"
+    },
+    "fixtures/project.unknown-wrapper-checksum.invalid.json": {
+      "bytes": 11195,
+      "sha256": "sha256:24635cbc590d30d144e8dc1b995471a7d5f20042855b1e8697035ecb7efb228a"
+    },
+    "fixtures/project.valid.json": {
+      "bytes": 11195,
+      "sha256": "sha256:09c04f9bfbf63b58d5afcc59044b0431ca16a0eb8a7c8e1b6a1a850518560608"
+    },
+    "fixtures/project.wrapper-pair-mismatch.invalid.json": {
+      "bytes": 11193,
+      "sha256": "sha256:9a40ded483840249752f97e81d8c9b78466f72c0e46940aa63a143530188a85e"
+    },
     "monitoring-batch.schema.json": {
       "bytes": 3153,
       "sha256": "sha256:1684fb18436414e8e2dbf7e0785bae56ea49f5eb18c28d4cad72947f7df9aef4"
@@ -33,8 +73,8 @@
       "sha256": "sha256:cc92dab0c92e95e7ce19feb396706f3d9456a611bbf0704d11c4d4ea20a3583a"
     },
     "project.schema.json": {
-      "bytes": 7419,
-      "sha256": "sha256:200a9656c37cb2acd0917da75cdb51f0db77994f14c5b69f5db0c89b8a5c4a7f"
+      "bytes": 25195,
+      "sha256": "sha256:fd05d067cb1b98119c8d2f1e7b1c5565632710850409cd3ffd94d675288eac12"
     },
     "publication-evidence.schema.json": {
       "bytes": 983,
@@ -42,6 +82,6 @@
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.1.0",
+  "contract_set_version": "1.2.0",
   "schema_version": 1
 }

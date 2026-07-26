@@ -78,7 +78,16 @@ function Read-TopList {
   )
   $pattern = "(?m)^" + [regex]::Escape($Key) + ":\s*\r?\n(?<body>(?:\s{2}- [^\r\n]+\r?\n)+)"
   $match = [regex]::Match($Content, $pattern)
-  if (-not $match.Success) { return @() }
+  if (-not $match.Success) {
+    $inlinePattern = "(?m)^" + [regex]::Escape($Key) + ":\s*\[(?<body>[^\]]*)\]\s*$"
+    $inlineMatch = [regex]::Match($Content, $inlinePattern)
+    if (-not $inlineMatch.Success) { return @() }
+    return @(
+      $inlineMatch.Groups["body"].Value -split "," |
+        ForEach-Object { Clean-Value $_ } |
+        Where-Object { $_ -ne "unknown" }
+    )
+  }
   return @($match.Groups["body"].Value -split "\r?\n" | Where-Object { $_ -match "^\s{2}- " } | ForEach-Object { Clean-Value ($_ -replace "^\s{2}-\s*", "") })
 }
 
@@ -202,31 +211,80 @@ function Join-MetricLine {
   return "$Metric = $Value $Unit"
 }
 
-$manifest = Get-Content -Raw -LiteralPath $manifestPath
-$id = Read-MatchValue -Content $manifest -Pattern "(?m)^id:\s*(.+)$"
-$name = Read-MatchValue -Content $manifest -Pattern "(?m)^name:\s*(.+)$"
-$status = Read-MatchValue -Content $manifest -Pattern "(?m)^status:\s*(.+)$"
-$claim = Read-MatchValue -Content $manifest -Pattern "(?m)^claim:\s*(.+)$"
-$programId = Read-SectionScalar -Content $manifest -Section "program" -Key "id"
-$programFit = Read-SectionScalar -Content $manifest -Section "program" -Key "narrative_fit"
-$languagePrimary = Read-SectionScalar -Content $manifest -Section "language_profile" -Key "primary"
-$languageReason = Read-SectionScalar -Content $manifest -Section "language_profile" -Key "reason"
-$stack = Read-TopList -Content $manifest -Key "stack"
-$stackProfile = Read-SectionScalar -Content $manifest -Section "decision_brain" -Key "stack_profile"
-$apiStyle = Read-SectionScalar -Content $manifest -Section "decision_brain" -Key "api_style"
-$messaging = Read-SectionScalar -Content $manifest -Section "decision_brain" -Key "messaging"
-$database = Read-SectionScalar -Content $manifest -Section "decision_brain" -Key "database"
-$runtime = Read-SectionScalar -Content $manifest -Section "decision_brain" -Key "runtime"
-$libraryPolicy = Read-SectionScalar -Content $manifest -Section "decision_brain" -Key "library_policy"
-$architectureStyle = Read-SectionScalar -Content $manifest -Section "architecture" -Key "style"
-$architectureReason = Read-SectionScalar -Content $manifest -Section "architecture" -Key "reason"
-$dependencyRule = Read-SectionScalar -Content $manifest -Section "architecture" -Key "dependency_rule"
-$boundaries = Read-SectionList -Content $manifest -Section "architecture" -Key "boundaries"
-$primaryMetric = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "primary_metric"
-$unit = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "unit"
-$benchmarkCommand = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "command"
-$benchmarkResultPath = Read-SectionScalar -Content $manifest -Section "benchmark" -Key "result_path"
-$componentPack = Read-MatchValue -Content $manifest -Pattern "(?m)^\s{2}agentic_spec:\s*\r?\n(?:\s{4}[^\r\n]*\r?\n)*?\s{4}component_pack:\s*(.+)$" -Default $programId
+$manifest = [IO.File]::ReadAllText($manifestPath, [Text.Encoding]::UTF8)
+$pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+if (-not $pythonCommand) {
+  throw "Python with PyYAML is required to parse project.yaml"
+}
+$manifestJson = @(& python -c "import json,pathlib,sys,yaml; print(json.dumps(yaml.safe_load(pathlib.Path(sys.argv[1]).read_text(encoding='utf-8'))))" $manifestPath)
+$manifestParseExit = $LASTEXITCODE
+$global:LASTEXITCODE = 0
+if ($manifestParseExit -ne 0) {
+  throw "Cannot parse project.yaml with PyYAML"
+}
+$manifestObject = ($manifestJson -join [Environment]::NewLine) | ConvertFrom-Json
+
+function Object-Scalar {
+  param([AllowNull()] [object]$Value, [string]$Default = "unknown")
+  if ($null -eq $Value) { return $Default }
+  return Clean-Value ([string]$Value)
+}
+
+$id = Object-Scalar $manifestObject.id
+$name = Object-Scalar $manifestObject.name
+$status = Object-Scalar $manifestObject.status
+$claim = Object-Scalar $manifestObject.claim
+$programId = Object-Scalar $manifestObject.program.id
+$programFit = Object-Scalar $manifestObject.program.narrative_fit
+$languagePrimary = Object-Scalar $manifestObject.language_profile.primary
+$languageReason = Object-Scalar $manifestObject.language_profile.reason
+$stack = @($manifestObject.stack | ForEach-Object { [string]$_ })
+$stackProfile = Object-Scalar $manifestObject.decision_brain.stack_profile
+$apiStyle = Object-Scalar $manifestObject.decision_brain.api_style
+$messaging = Object-Scalar $manifestObject.decision_brain.messaging
+$jvmLanguage = Object-Scalar $manifestObject.jvm.language "not-applicable"
+$jvmFramework = Object-Scalar $manifestObject.jvm.framework "not-applicable"
+$jvmToolchain = Object-Scalar $manifestObject.jvm.toolchain_version "not-applicable"
+$gradleWrapperVersion = Object-Scalar $manifestObject.jvm.gradle_wrapper_version "not-applicable"
+$interoperabilityBoundary = Object-Scalar $manifestObject.jvm.interoperability_boundary "not-applicable"
+$deliveryGuarantee = Object-Scalar $manifestObject.messaging_decision.delivery_guarantee "not-applicable"
+$orderingNeed = Object-Scalar $manifestObject.messaging_decision.ordering_need "not-applicable"
+$replayNeed = Object-Scalar $manifestObject.messaging_decision.replay_need "not-applicable"
+$retryDlqStrategy = Object-Scalar $manifestObject.messaging_decision.retry_dlq_strategy "not-applicable"
+$kafkaStreams = $manifestObject.messaging_decision.kafka_streams
+$kafkaProcessingMode = Object-Scalar $kafkaStreams.processing_mode "not-applicable"
+$kafkaInputTopics = @($kafkaStreams.input_topics | ForEach-Object { [string]$_ })
+$kafkaOutputTopics = @($kafkaStreams.output_topics | ForEach-Object { [string]$_ })
+$kafkaKeyStrategy = Object-Scalar $kafkaStreams.key_strategy "not-applicable"
+$kafkaRepartitionStrategy = Object-Scalar $kafkaStreams.repartition_strategy "not-applicable"
+$kafkaSerdeContract = Object-Scalar $kafkaStreams.serde_contract "not-applicable"
+$kafkaTopology = Object-Scalar $kafkaStreams.topology "not-applicable"
+$kafkaJoinSemantics = Object-Scalar $kafkaStreams.stream_table_join_semantics "not-applicable"
+$kafkaWindowPolicy = Object-Scalar $kafkaStreams.window_and_grace_policy "not-applicable"
+$kafkaStateStores = @($kafkaStreams.state_stores | ForEach-Object { [string]$_ })
+$kafkaChangelogPolicy = Object-Scalar $kafkaStreams.changelog_policy "not-applicable"
+$kafkaProcessingGuarantee = Object-Scalar $kafkaStreams.processing_guarantee "not-applicable"
+$kafkaInvalidRecordStrategy = Object-Scalar $kafkaStreams.invalid_record_strategy "not-applicable"
+$kafkaRestorationStrategy = Object-Scalar $kafkaStreams.restoration_strategy "not-applicable"
+$kafkaRebalancePlan = Object-Scalar $kafkaStreams.rebalance_plan "not-applicable"
+$kafkaEvidencePlan = Object-Scalar $kafkaStreams.evidence_plan "not-applicable"
+$kafkaBenchmarkModes = @($kafkaStreams.benchmark_modes | ForEach-Object { [string]$_ })
+$kafkaInputTopicsText = if ($kafkaInputTopics.Count) { $kafkaInputTopics -join ", " } else { "not-applicable" }
+$kafkaOutputTopicsText = if ($kafkaOutputTopics.Count) { $kafkaOutputTopics -join ", " } else { "not-applicable" }
+$kafkaStateStoresText = if ($kafkaStateStores.Count) { $kafkaStateStores -join ", " } else { "not-applicable" }
+$kafkaBenchmarkModesText = if ($kafkaBenchmarkModes.Count) { $kafkaBenchmarkModes -join ", " } else { "not-applicable" }
+$database = Object-Scalar $manifestObject.decision_brain.database
+$runtime = Object-Scalar $manifestObject.decision_brain.runtime
+$libraryPolicy = Object-Scalar $manifestObject.decision_brain.library_policy
+$architectureStyle = Object-Scalar $manifestObject.architecture.style
+$architectureReason = Object-Scalar $manifestObject.architecture.reason
+$dependencyRule = Object-Scalar $manifestObject.architecture.dependency_rule
+$boundaries = @($manifestObject.architecture.boundaries | ForEach-Object { [string]$_ })
+$primaryMetric = Object-Scalar $manifestObject.benchmark.primary_metric
+$unit = Object-Scalar $manifestObject.benchmark.unit
+$benchmarkCommand = Object-Scalar $manifestObject.benchmark.command
+$benchmarkResultPath = Object-Scalar $manifestObject.benchmark.result_path
+$componentPack = Object-Scalar $manifestObject.decision_brain.agentic_spec.component_pack $programId
 if ($componentPack -like "<*") { $componentPack = $programId }
 if ($componentPack -eq "unknown") { $componentPack = $programId }
 if ($componentPack -eq "unknown") { $componentPack = "default-portfolio-project" }
@@ -234,7 +292,7 @@ if ($componentPack -eq "unknown") { $componentPack = "default-portfolio-project"
 $programsPath = Join-Path $kitRoot "catalog/programs.yaml"
 $programName = $programId
 if (Test-Path -LiteralPath $programsPath) {
-  $programs = Get-Content -Raw -LiteralPath $programsPath
+  $programs = [IO.File]::ReadAllText($programsPath, [Text.Encoding]::UTF8)
   $programBlock = Get-ListBlockById -Content $programs -Id $programId
   $programName = Read-PackScalar -Block $programBlock -Key "name" -Default $programId
 }
@@ -246,7 +304,7 @@ $packBenchmarkFocus = @()
 $packArtifacts = @()
 $packRejections = @()
 if (Test-Path -LiteralPath $componentPackPath) {
-  $packManifest = Get-Content -Raw -LiteralPath $componentPackPath
+  $packManifest = [IO.File]::ReadAllText($componentPackPath, [Text.Encoding]::UTF8)
   $packBlock = Get-ListBlockById -Content $packManifest -Id $componentPack
   $packName = Read-PackScalar -Block $packBlock -Key "name" -Default $componentPack
   $packProblem = Read-PackScalar -Block $packBlock -Key "problem" -Default "unknown"
@@ -262,7 +320,7 @@ if ($benchmarkResultPath -ne "unknown" -and $benchmarkResultPath -ne "pending") 
   $resultFile = Get-ChildItem -Path $candidatePattern -File -ErrorAction SilentlyContinue | Sort-Object Name | Select-Object -First 1
   if ($resultFile) {
     try {
-      $resultObject = Get-Content -Raw -LiteralPath $resultFile.FullName | ConvertFrom-Json
+      $resultObject = [IO.File]::ReadAllText($resultFile.FullName, [Text.Encoding]::UTF8) | ConvertFrom-Json
     } catch {
       $resultObject = $null
     }
@@ -298,7 +356,7 @@ $referencePathsUsed = New-Object System.Collections.Generic.List[string]
 foreach ($reference in $StyleReferences) {
   $referencePath = Join-Path $repo $reference
   if (Test-Path -LiteralPath $referencePath -PathType Leaf) {
-    [void]$referenceTextBuilder.AppendLine((Get-Content -Raw -LiteralPath $referencePath))
+    [void]$referenceTextBuilder.AppendLine([IO.File]::ReadAllText($referencePath, [Text.Encoding]::UTF8))
     $referencePathsUsed.Add($reference)
   }
 }
@@ -427,6 +485,20 @@ Open with $benchmarkLine, then explain why the architecture and local-first path
 - API style: ``$apiStyle``
 - Messaging: ``$messaging``
 - Database/runtime: ``$database`` / ``$runtime``
+- JVM: language ``$jvmLanguage``, framework ``$jvmFramework``, toolchain ``$jvmToolchain``, Gradle Wrapper ``$gradleWrapperVersion``
+- JVM interoperability boundary: $interoperabilityBoundary
+- Messaging semantics: delivery ``$deliveryGuarantee``; ordering ``$orderingNeed``; replay ``$replayNeed``; retry/DLQ ``$retryDlqStrategy``
+- Kafka processing model: $kafkaProcessingMode
+- Kafka topics: input $kafkaInputTopicsText; output $kafkaOutputTopicsText
+- Kafka key and repartition: $kafkaKeyStrategy; $kafkaRepartitionStrategy
+- Kafka SerDe contract: $kafkaSerdeContract
+- Kafka topology: $kafkaTopology
+- Kafka stream/table or join semantics: $kafkaJoinSemantics
+- Kafka window/grace policy: $kafkaWindowPolicy
+- Kafka state stores and changelog: $kafkaStateStoresText; $kafkaChangelogPolicy
+- Kafka processing guarantee and invalid-record policy: $kafkaProcessingGuarantee; $kafkaInvalidRecordStrategy
+- Kafka restoration and rebalance: $kafkaRestorationStrategy; $kafkaRebalancePlan
+- Kafka benchmark modes and evidence: $kafkaBenchmarkModesText; $kafkaEvidencePlan
 
 ## Reason
 
