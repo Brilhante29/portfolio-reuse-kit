@@ -12,7 +12,7 @@ function Add-Failure {
   $script:failures.Add($Message)
 }
 
-$trackedFiles = @(& git -C $root ls-files 2>$null)
+$trackedFiles = @(& git -C $root ls-files --cached --others --exclude-standard 2>$null)
 $gitListExit = $LASTEXITCODE
 $global:LASTEXITCODE = 0
 if ($gitListExit -ne 0) {
@@ -234,6 +234,14 @@ if ($manifestResultPath -ne "") {
         if ($null -ne $metricProperty) {
           $resultValue = $metricProperty.Value
         }
+      } elseif ($primaryResult.PSObject.Properties.Name -contains "metrics") {
+        $metricMatch = @($primaryResult.metrics | Where-Object {
+          [string]$_.name -eq $manifestPrimaryMetric
+        } | Select-Object -First 1)
+        if ($metricMatch.Count -eq 1) {
+          $resultMetric = [string]$metricMatch[0].name
+          $resultValue = $metricMatch[0].value
+        }
       }
 
       if ($resultMetric -eq "" -or $null -eq $resultValue) {
@@ -362,12 +370,18 @@ try {
 
 $legacy = ("ro" + "che" + "do")
 $patterns = @($legacy, ($legacy.Substring(0,1).ToUpper() + $legacy.Substring(1)))
-$searchFiles = Get-ChildItem -Path $root -Recurse -File | Where-Object {
-  $normalized = $_.FullName -replace "\\", "/"
-  $normalized -notmatch "/.git/" -and
-  $normalized -notmatch "/data/runtime/" -and
-  $_.Extension -in @(".md", ".yaml", ".yml", ".json", ".ps1", ".py", ".js", ".ts", ".tsx", ".go", ".kt", ".java")
-}
+$searchExtensions = @(".md", ".yaml", ".yml", ".json", ".ps1", ".py", ".js", ".ts", ".tsx", ".go", ".kt", ".java")
+$searchFiles = @(
+  foreach ($relativePath in $trackedFiles) {
+    $candidate = Join-Path $root ($relativePath -replace '/', [System.IO.Path]::DirectorySeparatorChar)
+    if (
+      (Test-Path -LiteralPath $candidate -PathType Leaf) -and
+      ([System.IO.Path]::GetExtension($candidate) -in $searchExtensions)
+    ) {
+      Get-Item -LiteralPath $candidate
+    }
+  }
+)
 $forbidden = Select-String -Path $searchFiles.FullName -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
 if ($forbidden) {
   Add-Failure "Forbidden legacy project nickname found"
