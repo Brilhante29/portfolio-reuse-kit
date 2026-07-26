@@ -294,6 +294,8 @@ Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/verificatio
 Require-Pattern "templates/validate-project.ps1" "openspec/artifacts/voice-check.md"
 Require-Pattern "templates/validate-project.ps1" "project YAML parsing"
 Require-Pattern "templates/validate-project.ps1" "Benchmark metric mismatch"
+Require-Pattern "templates/validate-project.ps1" "ls-files --cached --others --exclude-standard"
+Require-Pattern "templates/validate-project.ps1" '-contains "metrics"'
 Require-Pattern "templates/validate-project.ps1" "README opening does not include primary benchmark value"
 Require-Pattern "docs/cross-platform.md" "Windows, Linux, and macOS"
 Require-Pattern "language-profiles/spring-kotlin.yaml" "spring_boot_4:"
@@ -315,8 +317,9 @@ Require-Pattern ".portfolio-control/CURRENT_HANDOFF.md" "## Continuation Order"
 Require-Pattern "contracts/benchmark-result-v2.schema.json" '"clean_tree": \{ "const": true \}'
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingestBenchmarkRun"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
+Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.0.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.1.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
 

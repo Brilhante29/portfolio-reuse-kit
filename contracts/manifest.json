@@ -29,8 +29,8 @@
       "sha256": "sha256:197a2b067f7a4482c3cab553bb127accc0ba8c27df443f76a8e8611a445e4d09"
     },
     "portfolio-evidence.openapi.yaml": {
-      "bytes": 5631,
-      "sha256": "sha256:04fa9a9397f79f09f0584e776fc3bc1010bb06fff1680508ccce86e5991b3a22"
+      "bytes": 6048,
+      "sha256": "sha256:cc92dab0c92e95e7ce19feb396706f3d9456a611bbf0704d11c4d4ea20a3583a"
     },
     "project.schema.json": {
       "bytes": 7419,
@@ -42,6 +42,6 @@
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.0.0",
+  "contract_set_version": "1.1.0",
   "schema_version": 1
 }

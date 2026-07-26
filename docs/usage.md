@@ -81,7 +81,7 @@ Use `-SkipDocker` while iterating quickly.
 
 Final validation requires `openspec/config.yaml` and the complete generated artifact graph under `openspec/artifacts/`. Run `tools/plan-project.ps1` after the implementation and benchmark stabilize, then review the generated evidence before publication.
 
-The same gate checks top-level manifest structure, performs full YAML parsing when PyYAML is available, matches the manifest primary metric to the committed JSON result, and requires that measured value near the top of the README.
+The same gate checks top-level manifest structure, performs full YAML parsing when PyYAML is available, reads both legacy metric/value results and benchmark-result-v2 metrics arrays, matches the manifest primary metric to the committed JSON result, and requires that measured value near the top of the README. Content scanning is limited to Git tracked and non-ignored project files, so dependency caches do not make validation slower.
 
 ## Validate The Kit
 
