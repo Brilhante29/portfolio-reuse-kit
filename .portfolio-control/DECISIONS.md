@@ -32,3 +32,8 @@
 - #3 produced a separate contract-valid V2 publication result and passed exact-head CI.
 - The central kit now tracks publication evidence by repository and exact HEAD.
 - The next active project is #11; its architecture and evidence must be audited before implementation.
+
+## 2026-07-30 #11 publication closure
+
+- #11 published with Kotlin/Gradle dependency locking and three-run V2 benchmark provenance.
+- The next active project is #13; audit Kumo/local-first boundaries before implementation.

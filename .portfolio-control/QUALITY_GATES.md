@@ -8,10 +8,15 @@ evidence, not from manifest intent.
 - [x] Completed #3 Docker build passes.
 - [x] Completed #3 exact-head remote CI is verified.
 - [x] Completed #3 publication benchmark V2 is produced and schema-valid.
-- [x] Completed #3 status is promoted to `published` only after V2 evidence.
+- [x] Completed #3 status is promoted to published only after V2 evidence.
 - [x] Completed #3 focused release review has no P0/P1 findings.
+- [x] Completed #11 local validator passes through Docker.
+- [x] Completed #11 Gradle dependency lock is committed and used by Docker.
+- [x] Completed #11 three-run publication benchmark V2 is schema-valid.
+- [x] Completed #11 exact-head CI and publication evidence are verified.
+- [x] Completed #11 focused release review has no P0/P1 findings.
 - [ ] Entire portfolio has current verified evidence for every published claim.
-- [ ] Active #11 local validator, Docker, benchmark, and publication gates.
+- [ ] Active #13 local-first/Kumo architecture, Docker, benchmark, CI, and publication gates.
 
 ## Prohibited Shortcuts
 

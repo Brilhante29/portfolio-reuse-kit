@@ -447,3 +447,8 @@ in `yolo-training-pipeline`.
 - Updated the continuity protocol, generator, backfill, and README navigation.
 - Existing current state, counts, blockers, dirty files, and branch facts remain
   authoritative in this handoff and must be refreshed before the next action.
+
+## 2026-07-30 #11 publication closure
+
+- #11 published with Kotlin/Gradle dependency locking and three-run V2 benchmark provenance.
+- The next active project is #13; audit Kumo/local-first boundaries before implementation.

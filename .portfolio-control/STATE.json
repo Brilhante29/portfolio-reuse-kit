@@ -1,8 +1,8 @@
 {
-  "project": "rag-knowledge-base",
+  "project": "spring-hexagonal-payments",
   "status": "published",
   "phase": "portfolio-transition",
-  "last_commit": "f0b37dd9dd09674e0a1066e66ce95da7818380e9",
+  "last_commit": "bdbf919a522f7a7884b087df40fefbc1fe818f6a",
   "completed_gates": [
     "local_project_validation",
     "docker_build",
@@ -14,7 +14,7 @@
   ],
   "failed_gates": [],
   "blockers": [],
-  "next_action": "Audit spring-hexagonal-payments (#11) and apply one generic reuse-kit improvement before implementation.",
-  "reuse_kit_version": "portfolio-reuse-kit@16a939621cbb37256ab85ba39986110844b154e5",
-  "updated_at": "2026-07-30T20:30:00Z"
+  "next_action": "Audit mini-aws-emulator (#13) and apply one generic local-first/Kumo reuse-kit improvement before implementation.",
+  "reuse_kit_version": "portfolio-reuse-kit@9b743580ebe0f8d9f794d75c50060780a3e59e75",
+  "updated_at": "2026-07-30T21:20:00Z"
 }
