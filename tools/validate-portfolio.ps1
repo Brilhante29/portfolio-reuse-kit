@@ -2,7 +2,8 @@ param(
   [string]$RepoRoot = "",
   [switch]$Strict,
   [switch]$RequirePublished,
-  [string]$JsonPath = ""
+  [string]$JsonPath = "",
+  [hashtable]$RepositoryOverrides = @{}
 )
 
 $ErrorActionPreference = "Stop"
@@ -121,34 +122,49 @@ function Test-PublicationEvidence {
 }
 
 $kitTrackedFiles = @(Get-GitLines $kitRoot @('ls-files'))
-$repositories = @(Get-ChildItem -Directory -LiteralPath $resolvedRoot | Where-Object {
+$repositoryDirectories = @(Get-ChildItem -Directory -LiteralPath $resolvedRoot | Where-Object {
   $_.Name -ne 'portfolio-reuse-kit' -and (Test-Path -LiteralPath (Join-Path $_.FullName '.git') -PathType Container)
 } | Sort-Object Name)
+$knownNames = @($repositoryDirectories | ForEach-Object Name)
+foreach ($name in @($RepositoryOverrides.Keys)) {
+  if ([string]$name -notin $knownNames) { throw "Repository override '$name' does not match a canonical portfolio repository." }
+}
+$repositories = @(
+  foreach ($directory in $repositoryDirectories) {
+    $path = $directory.FullName
+    if ($RepositoryOverrides.ContainsKey($directory.Name)) {
+      $path = (Resolve-Path -LiteralPath ([string]$RepositoryOverrides[$directory.Name])).Path
+      $topLevel = @(Get-GitLines $path @('rev-parse','--show-toplevel'))
+      if ($topLevel.Count -ne 1) { throw "Repository override '$($directory.Name)' is not a Git worktree: $path" }
+      $resolvedTopLevel = (Resolve-Path -LiteralPath $topLevel[0]).Path
+      if ($resolvedTopLevel -ne $path) { throw "Repository override '$($directory.Name)' must point to the worktree root: $path" }
+    }
+    [pscustomobject]@{ name = $directory.Name; full_name = $path }
+  }
+)
 $snapshotScript = {
   param($repo,$name)
   $ErrorActionPreference = 'SilentlyContinue'
   $tracked = @(& git -C $repo ls-files 2>$null)
   $statusLines = @(& git -C $repo status --porcelain=v2 --branch 2>$null)
   $head = ''
+  $branch = ''
   $upstream = ''
   $dirty = 0
   foreach ($line in $statusLines) {
     if ($line -match '^# branch\.oid (.+)$') { $head = $matches[1] }
+    elseif ($line -match '^# branch\.head (.+)$') { $branch = $matches[1] }
     elseif ($line -match '^# branch\.upstream (.+)$') { $upstream = $matches[1] }
     elseif (-not $line.StartsWith('#')) { $dirty++ }
   }
-  $config = Get-Content -Raw -LiteralPath (Join-Path $repo '.git/config') -ErrorAction SilentlyContinue
-  $remote = ''
-  $remoteSection = [regex]::Match($config,'(?ms)^\[remote "origin"\]\s*(?<body>.*?)(?=^\[|\z)')
-  if ($remoteSection.Success) {
-    $url = [regex]::Match($remoteSection.Groups['body'].Value,'(?m)^\s*url\s*=\s*(.+)$')
-    if ($url.Success) { $remote = $url.Groups[1].Value.Trim() }
-  }
+  $remote = @(& git -C $repo remote get-url origin 2>$null | Select-Object -First 1)
+  $remote = if ($remote.Count -eq 1) { [string]$remote[0] } else { '' }
   [pscustomobject]@{
     name = $name
     full_name = $repo
     tracked = $tracked
     head = $head
+    branch = $branch
     upstream = $upstream
     dirty_files = $dirty
     remote = $remote
@@ -161,7 +177,7 @@ try {
   foreach ($directory in $repositories) {
     $powerShell = [powershell]::Create()
     $powerShell.RunspacePool = $pool
-    [void]$powerShell.AddScript($snapshotScript.ToString()).AddArgument($directory.FullName).AddArgument($directory.Name)
+    [void]$powerShell.AddScript($snapshotScript.ToString()).AddArgument($directory.full_name).AddArgument($directory.name)
     $pending += [pscustomobject]@{ powerShell = $powerShell; async = $powerShell.BeginInvoke() }
   }
   $snapshots = @($pending | ForEach-Object { $_.powerShell.EndInvoke($_.async) })
@@ -196,7 +212,7 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
     ci = $workflowFiles.Count -gt 0
     sdd = @($requiredSdd | Where-Object { $_ -in $tracked }).Count -eq $requiredSdd.Count
     benchmark_tracked = $benchmarkFiles.Count -gt 0
-    benchmark_contract = $benchmarkContract
+    benchmark_contract = ($benchmarkContract -or $benchmarkContractV2)
     control = @($requiredControl | Where-Object { $_ -in $tracked }).Count -eq $requiredControl.Count
     no_placeholders = $placeholderCount -eq 0
     clean = $gitState.dirty_files -eq 0
@@ -210,6 +226,9 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
   $rows.Add([pscustomobject]@{
     id = Get-Scalar $manifest '(?m)^id:\s*(.+)$' '?'
     name = $snapshot.name
+    head = $gitState.head
+    branch = $gitState.branch
+    upstream = $gitState.upstream
     declared_status = $status
     docker = [bool]$checks.docker
     ci = [bool]$checks.ci

@@ -16,6 +16,23 @@ The control plane is advisory about architecture and strict about evidence. A re
 
 `tools/validate-portfolio.ps1` reports separate `local_candidate` and `published_verified` states. A benchmark only counts when it is tracked and follows the shared result contract. Publication only counts when the repository has an upstream and central CI evidence for its current commit.
 
+Generate the root state and queue from that audit instead of counting file presence:
+
+```powershell
+./tools/checkpoint-portfolio.ps1 -RepoRoot <portfolio-root> -ActiveProject kafka-streams-demo
+```
+
+The checkpoint always emits every audited repository. It uses only `published_verified` for `completed`, preserves the existing queue order, places the active project first, and records head, branch, upstream, pending gates, and the exact next action. It also rewrites the legacy `portfolio-control-status.json` with the same verified completion count. A declared `benchmarked` status, Dockerfile, workflow, or arbitrary benchmark JSON can never produce a completed state.
+
+When the active source is a linked worktree instead of the canonical portfolio directory, pass it explicitly:
+
+```powershell
+$overrides = @{ 'kafka-streams-demo' = '<worktree-path>' }
+./tools/checkpoint-portfolio.ps1 -RepoRoot <portfolio-root> -ActiveProject kafka-streams-demo -RepositoryOverrides $overrides
+```
+
+The override must match an existing canonical repository name and point to a Git worktree root. This prevents a stale checkout from replacing current branch, head, benchmark, and remote facts.
+
 Keep `.portfolio-control/CURRENT_HANDOFF.md` current before expensive work or a possible limit. It must contain state, evidence, decisions, commands already run, remaining work, and exact continuation steps.
 
 Record execution friction as it happens:

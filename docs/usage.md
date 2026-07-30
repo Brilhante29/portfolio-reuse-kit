@@ -71,6 +71,28 @@ pwsh -NoProfile -File tools/install-project-skills.ps1 `
 
 This installs agent skills and a local `.portfolio/` snapshot with agent graph, reuse-improvement loop, program catalog, proficiency map, decision brain, architecture matrix, API style matrix, Kumo cloud local-first rules, language/framework profiles, design system, and schemas.
 
+## Checkpoint The Portfolio
+
+Create an evidence-derived root state and queue:
+
+```powershell
+pwsh -NoProfile -File tools/checkpoint-portfolio.ps1 `
+  -RepoRoot $repoRoot `
+  -ActiveProject kafka-streams-demo
+```
+
+The command writes `.portfolio-control/STATE.json`, `.portfolio-control/PROJECT_QUEUE.md`, and a compatibility `portfolio-control-status.json` under the portfolio root. It preserves the existing queue order, includes all audited repositories, and marks a project `completed` only when current-head publication evidence is verified. Run it at milestones, before a quota or context interruption, and after CI, PR, merge, or publication state changes.
+
+If an active branch lives in another worktree, bind that source explicitly so the checkpoint does not inspect a stale canonical checkout:
+
+```powershell
+$overrides = @{ 'kafka-streams-demo' = '<worktree-path>' }
+pwsh -NoProfile -File tools/checkpoint-portfolio.ps1 `
+  -RepoRoot $repoRoot `
+  -ActiveProject kafka-streams-demo `
+  -RepositoryOverrides $overrides
+```
+
 ## Validate One Project
 
 ```powershell

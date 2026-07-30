@@ -102,6 +102,7 @@ $requiredFiles = @(
   "contracts/fixtures/project.wrapper-pair-mismatch.invalid.json",
   "contracts/fixtures/benchmark-result-v2.valid.json",
   "contracts/fixtures/benchmark-result-v2.invalid.json",
+  "contracts/fixtures/portfolio-audit.valid.json",
   "contracts/portfolio-evidence.openapi.yaml",
   "contracts/portfolio-evidence.graphql",
   "contracts/manifest.json",
@@ -204,6 +205,8 @@ $requiredFiles = @(
   "tools/capture-continuity-state.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
+  "tools/checkpoint-portfolio.ps1",
+  "tools/test-checkpoint-portfolio.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -342,6 +345,12 @@ Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Li
 Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
 Require-Pattern "decision-brain/jvm-language-matrix.yaml" "outbox-pattern:"
 Require-Pattern "decision-brain/continuity-protocol.yaml" "exit_loop_rules"
+Require-Pattern "decision-brain/continuity-protocol.yaml" "completion_requires: published_verified"
+Require-Pattern "tools/checkpoint-portfolio.ps1" "Statuses are derived from tools/validate-portfolio.ps1"
+Require-Pattern "tools/checkpoint-portfolio.ps1" "published_verified"
+Require-Pattern "tools/checkpoint-portfolio.ps1" "RepositoryOverrides"
+Require-Pattern "tools/validate-portfolio.ps1" "remote get-url origin"
+Require-Pattern "tools/validate-portfolio.ps1" 'benchmarkContract -or \$benchmarkContractV2'
 Require-Pattern "tools/capture-continuity-state.ps1" "Sanitize-Line"
 Require-Pattern "tools/audit-manifest-rollout.py" "v2_ready"
 Require-Pattern "docs/manifest-v2-rollout.md" "legacy compatibility"
@@ -385,6 +394,7 @@ Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Pa
 Invoke-Checked "interoperability contracts" { python (Join-Path $root "tools/validate-contracts.py") | Out-Null }
 Invoke-Checked "generated contract manifest" { python (Join-Path $root "tools/generate-contract-manifest.py") --check | Out-Null }
 Invoke-Checked "generated design tokens" { python (Join-Path $root "tools/generate-design-tokens.py") --check | Out-Null }
+Invoke-Checked "portfolio checkpoint fixture" { & (Join-Path $root "tools/test-checkpoint-portfolio.ps1") | Out-Null }
 $executionLine = 0
 foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/EXECUTION_EVENTS.jsonl")) {
   $executionLine++
@@ -412,6 +422,8 @@ $powerShellScripts = @(
   "tools/report-execution-efficiency.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
+  "tools/checkpoint-portfolio.ps1",
+  "tools/test-checkpoint-portfolio.ps1",
   "tools/capture-continuity-state.ps1",
   "tools/validate-gradle-project.ps1",
   "templates/validate-project.ps1",

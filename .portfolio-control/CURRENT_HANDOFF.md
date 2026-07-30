@@ -1,8 +1,33 @@
 # Current Handoff
 
-Updated: 2026-07-26
+Updated: 2026-07-30
 Owner: principal agent
 Purpose: provide an auditable engineering continuation map. This records observations, decisions, evidence, rejected alternatives, failures, and exact next actions. It does not contain private chain-of-thought.
+
+## Current Critical Path - 2026-07-30
+
+Repository 28, `kafka-streams-demo`, is the only active implementation project. Its release branch is `agent/gradle-wrapper-hardening-v2` at `1db8d620d918eda88aa4397c20b9557694c0db37`.
+
+Remote evidence:
+
+- draft PR: https://github.com/Brilhante29/kafka-streams-demo/pull/1
+- pull-request CI run: https://github.com/Brilhante29/kafka-streams-demo/actions/runs/30559317228
+- JVM, contracts, tests, dependency review, broker smoke, Trivy filesystem and image scans, non-root runtime, SPDX SBOM generation, and artifact upload are green on the same head
+- retained SBOM artifact ID: `8766445521`
+- retained SBOM archive digest: `sha256:a1cbbdf832c1c2fe3308fe26665f2b61bd8ed63cd6b746c63ceb3b78e6f40873`
+- the dependency graph was enabled and dependency review passed
+- the PR is mergeable, draft, and unmerged; explicit owner authorization is still required before merge
+
+The legacy root checkpoint is not trustworthy: it reports 30 complete projects from declared status plus file presence and contains only six project entries. The new `tools/checkpoint-portfolio.ps1` derives all 30 states from `tools/validate-portfolio.ps1`, requires `published_verified` for `completed`, and accepts a validated worktree override. With repository 28 bound to its active worktree, the current audit reports 30 repositories, one benchmark contract V2 producer, one release candidate, 29 validation states, and zero completed publications because central current-head publication evidence has not yet been recorded.
+
+Strict continuation order:
+
+1. Do not merge repository 28 without explicit owner authorization.
+2. Publish the truthful-checkpoint kit branch after its own CI is green; do not merge it automatically.
+3. After repository 28 merge authorization, merge PR 1, update the canonical local checkout to the merged main head without discarding local work, and verify default-branch CI.
+4. Run `tools/verify-github-publication.ps1 -RepoRoot <portfolio-root> -Repository kafka-streams-demo`.
+5. Run `tools/checkpoint-portfolio.ps1 -RepoRoot <portfolio-root>` and confirm repository 28 is the only newly completed project backed by current-head publication evidence.
+6. Only then select the next incomplete repository from the evidence-derived queue.
 
 ## Read First
 
@@ -292,12 +317,12 @@ Execution telemetry excludes 2026-07-20, attributed by the user to Antigravity a
 
 Current report after excluding 2026-07-20:
 
-- event records: 45
-- occurrence count: 95
+- event records: 46
+- occurrence count: 97
 - hard-limit occurrences: 8
-- wait-timeout occurrences: 16
-- avoidable occurrences: 78
-- tracked duration: 3,200.95 seconds
+- wait-timeout occurrences: 18
+- avoidable occurrences: 80
+- tracked duration: 3,350.95 seconds
 
 This branch recorded:
 
@@ -307,6 +332,7 @@ This branch recorded:
 - three avoidable reviewer wait timeouts; the reviewer was then interrupted for an immediate bounded verdict
 - one avoidable stale CI smoke fixture; current templates now seed the coherence test
 - one avoidable continuity-count diagnostic; corrected by reading the matched line without rerunning all gates
+- two bounded waits totaling 150 seconds produced no independent-review verdict for the truthful checkpoint; the reviewer was closed and deterministic validation remained authoritative
 - no new weekly or authorization limit hit; exact account quota remains unobservable
 Operating rules:
 
