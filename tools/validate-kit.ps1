@@ -43,6 +43,7 @@ $requiredFiles = @(
   "CLAUDE.md",
   "requirements-ci.txt",
   "PUBLISH.md",
+  ".github/workflows/validate.yml",
   ".openspec-store/store.yaml",
   "LICENSE",
   ".editorconfig",
@@ -383,6 +384,15 @@ Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.2.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
+
+$workflowActionReferences = Select-String -Path (Join-Path $root ".github/workflows/*.yml") -Pattern 'uses:\s*[^@\s]+@(?<ref>[^\s#]+)' -AllMatches
+foreach ($reference in $workflowActionReferences) {
+  foreach ($match in $reference.Matches) {
+    if ($match.Groups['ref'].Value -notmatch '^[0-9a-f]{40}$') {
+      $failures.Add("Mutable GitHub Action reference in $($reference.Path): $($match.Value)")
+    }
+  }
+}
 
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
