@@ -178,6 +178,7 @@ $templateFiles = @(
   @{ Source = "templates/portfolio-control/REUSE_MAP.md"; Destination = ".portfolio-control/REUSE_MAP.md"; Expand = $false },
   @{ Source = "templates/portfolio-control/CRITICAL_PATH.md"; Destination = ".portfolio-control/CRITICAL_PATH.md"; Expand = $true },
   @{ Source = "templates/portfolio-control/DECISIONS.md"; Destination = ".portfolio-control/DECISIONS.md"; Expand = $true },
+  @{ Source = "templates/portfolio-control/DECISION_CONTEXT.md"; Destination = ".portfolio-control/DECISION_CONTEXT.md"; Expand = $true },
   @{ Source = "templates/portfolio-control/QUALITY_GATES.md"; Destination = ".portfolio-control/QUALITY_GATES.md"; Expand = $true },
   @{ Source = "templates/portfolio-control/AGENT_HANDOFFS/README.md"; Destination = ".portfolio-control/AGENT_HANDOFFS/README.md"; Expand = $false },
   @{ Source = "sdd/templates/spec.md"; Destination = "sdd/spec.md"; Expand = $true },

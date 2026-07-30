@@ -39,6 +39,7 @@ Every completed project must provide:
 - an explicit component pack from `component-packs/manifest.yaml`
 - an `openspec/config.yaml` project planning config generated from `templates/openspec-config.yaml`
 - a `decision_brain` section with principles, agent graph, stack, API style, messaging, cloud/Kumo, database/runtime, library policy, and rejected options
+- durable decision lineage in `docs/agent-continuation-map.md` and project context in `.portfolio-control/DECISION_CONTEXT.md`
 - a primary language/framework profile
 - shared design-system components
 - README opening with project number, claim, and benchmark result
@@ -238,6 +239,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Kafka Streams decision guide](docs/kafka-streams-decision.md)
 - [Manifest v2 rollout](docs/manifest-v2-rollout.md)
 - [Agent graph](docs/agent-graph.md)
+- [Agent continuation map](docs/agent-continuation-map.md)
 - [Reuse improvement loop](docs/reuse-improvement-loop.md)
 - [Engineering principles](docs/engineering-principles.md)
 - [API style decision](docs/api-style-decision.md)

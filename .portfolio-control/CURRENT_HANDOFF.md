@@ -1,6 +1,6 @@
 # Current Handoff
 
-Updated: 2026-07-26
+Updated: 2026-07-30
 Owner: principal agent
 Purpose: provide an auditable engineering continuation map. This records observations, decisions, evidence, rejected alternatives, failures, and exact next actions. It does not contain private chain-of-thought.
 
@@ -205,19 +205,13 @@ Outbox acceptance requires:
 - zero atomicity violations, zero missing committed events after recovery, and zero duplicate business effects
 - Kafka or Redpanda is justified when feeding kafka-streams-demo; do not claim exactly once
 
-## Reuse-Kit Branch In Progress
+## Reuse-Kit Branch Status
 
-Worktree:
-
-<reuse-kit-worktree>
-
-Branch:
-
-feat/jvm-kafka-governance
-
-Base:
-
-main at 529caa1666b850f98923160d66a7a60c3ca6e403
+Branch `feat/jvm-kafka-governance` was merged into `main` as commit `16a9396`
+("Govern JVM, Kafka Streams, and manifest v2 rollout (#5)"). Local head and
+`origin/main` both point to `16a9396`. The in-progress section below is kept
+for traceability of what shipped; the "next actions" in this handoff describe
+post-merge work, not the branch itself.
 
 Implemented on this branch:
 
@@ -342,7 +336,7 @@ Do not lower security thresholds, omit advisories, or allowlist real findings to
 
 ## Restart Commands
 
-From the reuse-kit branch worktree:
+From the reuse-kit root:
 
     $env:PATH=(Resolve-Path .venv\Scripts).Path+[IO.Path]::PathSeparator+$env:PATH
     .\tools\validate-kit.ps1
@@ -357,4 +351,99 @@ From repository 28 after the kit branch is merged and synced:
     .\gradlew.bat --no-daemon clean check
     docker build -t kafka-streams-demo .
 
-Do not repeat the full static portfolio audit unless repository heads changed. Update this handoff whenever a decision, benchmark, branch, published head, blocker, or continuation command changes.
+## Post-Merge Snapshot Backlog
+
+The merge added 8 contract files (1.2.0 set) under `portfolio-reuse-kit/contracts/`
+and 3 decision-brain matrices that were NOT yet mirrored in each repo's
+`.portfolio/` snapshot.
+
+### 2026-07-27 Snapshot Sync — Completed
+
+`relay/scripts/_sync-snapshot.ps1` performed an additive, non-overwriting
+copy from `portfolio-reuse-kit/contracts/` and `portfolio-reuse-kit/decision-brain/`
+into each of the 30 repos' `.portfolio/`:
+
+- 209 contract files added (7/repo, 1 pre-existing on `model-drift-detector`)
+- 90 decision-brain files added (3/repo: `continuity-protocol.yaml`,
+  `jvm-language-matrix.yaml`, `kafka-streams-matrix.yaml`)
+- 0 errors
+
+Post-sync verification:
+
+- `python tools/validate-contracts.py` — green
+  ("validated 45 YAML files, project and benchmark V2 fixtures, OpenAPI,
+  GraphQL, and contract manifest")
+- `python relay/scripts/_validate-manifests.py` — **14 manifests valid,
+  16 invalid** (confirms handoff's pre-sync claim)
+
+Pre-existing repo-specific extras preserved: `vision-model-artifact.schema.json`
+in `yolo-training-pipeline`.
+
+### Remaining Backlog (after snapshot sync)
+
+1. **Manifest v2 migration**: 16 of 30 `project.yaml` files fail the current
+   schema. Categories observed:
+   - missing `design_system` block (alpr-mercosul, kafka-streams-demo,
+     melanoma-classifier, stroke-signal-demo, ...)
+   - `decision_brain.stack_profile` using raw language (`python`, `java`,
+     `go`) instead of enum values (`fastapi-backend`, `java-spring-backend`,
+     `kotlin-jvm`, ...)
+   - `decision_brain.api_style` multi-value (`rest-http+grpc`) instead of
+     single enum value
+   - `architecture.boundaries` items as dicts instead of strings
+   - `architecture.problem_forces.data_or_ml_reproducibility: none`
+     not allowed (enum: low/medium/high)
+   - `decision_brain.principles.solid` items as dicts instead of strings
+2. Repo 28 (kafka-streams-demo) — once manifest is valid, repair:
+   `command`/`result_path` contradiction, artificial Kumo/AWS providers,
+   add reviewed Gradle wrapper, split TopologyTestDriver microbenchmark
+   from real-broker benchmark, generate truthful V2 baseline.
+3. Repo 14 (event-sourcing-orders): CI repair (JUnit Platform Launcher,
+   wrapper-only Gradle).
+4. Repo 19 (cache-strategies-bench): wrapper JAR + executable script + CI.
+5. Repo 17 (multi-tenant-starter): executable script + real tenancy semantics.
+6. Repo 16 (saga-orchestrator): resource states, real reverse compensation,
+   durable state.
+7. Repo 20 (outbox-pattern): atomic aggregate + outbox in one PostgreSQL
+   transaction; at-least-once relay with broker confirmation.
+8. Repo 31 (portfolio-evidence-api) npm remediation: BLOCKED until user
+   pastes the exact authorization phrase from handoff L95.
+
+### Manifest Schema-Failure Inventory (16)
+
+- alpr-mercosul — missing design_system
+- api-gateway-lite — boundaries item is dict, not string
+- cache-strategies-bench — stack_profile raw
+- cost-aware-inference — stack_profile raw
+- embeddings-benchmark — stack_profile raw
+- grpc-vs-rest-bench — api_style multi-value
+- kafka-streams-demo — missing design_system
+- llm-agent-eval — stack_profile raw
+- llm-eval-harness — stack_profile raw
+- load-test-suite — boundaries item is dict
+- melanoma-classifier — missing design_system
+- multi-tenant-starter — principles.solid items are dicts
+- outbox-pattern — problem_forces.data_or_ml_reproducibility: none invalid
+- prompt-ab-testing — stack_profile raw
+- saga-orchestrator — boundaries item is dict
+- stroke-signal-demo — missing design_system
+
+### Operating Constraints Reminder
+
+- No bulk write without a per-repo verify step.
+- No claim of `benchmarked` or `published` from a manifest alone — evidence
+  required.
+- Never lower a security gate to make CI green.
+- Never commit secrets or local paths.
+
+### 2026-07-30 Continuity Map
+
+- Added `docs/agent-continuation-map.md` as the durable, reviewable map of
+  portfolio intent, decision order, boundaries, evidence, and continuation.
+- Added `templates/portfolio-control/DECISION_CONTEXT.md`; new scaffolds and
+  backfills now receive a project-level rationale context card.
+- Clarified in `AGENTS.md` and `CLAUDE.md` that continuity artifacts contain
+  observable rationale only and never private chain-of-thought.
+- Updated the continuity protocol, generator, backfill, and README navigation.
+- Existing current state, counts, blockers, dirty files, and branch facts remain
+  authoritative in this handoff and must be refreshed before the next action.

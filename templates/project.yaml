@@ -108,6 +108,7 @@ benchmark:
   unit: <unit>
   command: pending
   result_path: benchmarks/results/*.json
+  publication_result_path: pending
 release:
   docker: pending
   no_secret_default_path: true

@@ -68,6 +68,7 @@ Copy-Item (Join-Path $root "templates/portfolio-control/REUSE_MAP.md") (Join-Pat
 Copy-Item (Join-Path $root "templates/portfolio-control/CRITICAL_PATH.md") (Join-Path $target ".portfolio-control/CRITICAL_PATH.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/CONTINUITY_STATE.md") (Join-Path $target ".portfolio-control/CONTINUITY_STATE.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/DECISIONS.md") (Join-Path $target ".portfolio-control/DECISIONS.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/DECISION_CONTEXT.md") (Join-Path $target ".portfolio-control/DECISION_CONTEXT.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/QUALITY_GATES.md") (Join-Path $target ".portfolio-control/QUALITY_GATES.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/AGENT_HANDOFFS/README.md") (Join-Path $target ".portfolio-control/AGENT_HANDOFFS/README.md")
 
@@ -76,7 +77,7 @@ $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "README.md") -Content $readmeContent
 
-foreach ($controlFile in @("INVENTORY.md", "REUSE_MAP.md", "CRITICAL_PATH.md", "DECISIONS.md", "QUALITY_GATES.md")) {
+foreach ($controlFile in @("INVENTORY.md", "REUSE_MAP.md", "CRITICAL_PATH.md", "DECISIONS.md", "DECISION_CONTEXT.md", "QUALITY_GATES.md")) {
   $controlPath = Join-Path $target ".portfolio-control/$controlFile"
   $controlContent = (Get-Content $controlPath -Raw) `
     -replace "<id>", $Id `

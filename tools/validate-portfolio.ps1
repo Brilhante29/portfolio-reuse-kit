@@ -181,13 +181,14 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
   $manifest = if (Test-Path -LiteralPath $manifestPath -PathType Leaf) { Get-Content -Raw -LiteralPath $manifestPath } else { '' }
   $status = Get-Scalar $manifest '(?m)^status:\s*(.+)$' 'missing'
   $benchmarkResultPath = Get-Scalar $manifest '(?m)^\s{2}result_path:\s*(.+)$' ''
+  $publicationBenchmarkResultPath = Get-Scalar $manifest '(?m)^\s{2}publication_result_path:\s*(.+)$' ''
   $benchmarkFiles = if ($benchmarkResultPath -and $benchmarkResultPath -in $tracked) { @($benchmarkResultPath) } else { @() }
   $workflowFiles = @($tracked | Where-Object { $_ -match '^\.github/workflows/.+\.ya?ml$' })
   $requiredSdd = @('sdd/spec.md','sdd/benchmark-plan.md','sdd/reuse-improvement-review.md')
   $requiredControl = @('.portfolio-control/INVENTORY.md','.portfolio-control/REUSE_MAP.md','.portfolio-control/QUALITY_GATES.md')
   $firstLine = if ('README.md' -in $tracked) { Get-Content -LiteralPath (Join-Path $repo 'README.md') -TotalCount 1 } else { '' }
   $benchmarkContract = Test-BenchmarkContract $repo $benchmarkFiles
-  $benchmarkContractV2 = Test-BenchmarkContractV2 $repo $benchmarkResultPath
+  $benchmarkContractV2 = Test-BenchmarkContractV2 $repo $publicationBenchmarkResultPath
   $placeholderCount = Get-PlaceholderCount $repo $tracked
 
   $checks = [ordered]@{
