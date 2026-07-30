@@ -1,16 +1,16 @@
 # Execution Efficiency
 
-Generated: 2026-07-26T11:32:01.1484990Z
+Generated: 2026-07-30T16:48:35.4150687Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **78** | tracked duration: **3200,95 s**
+Hard limits: **8** | wait timeouts: **18** | avoidable occurrences: **80** | tracked duration: **3350,95 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
 | tool-failure | 15 | 26 | 50,2 |
 | invalid-command | 14 | 22 | 18,8 |
-| wait-timeout | 3 | 16 | 1820 |
+| wait-timeout | 4 | 18 | 1970 |
 | command-timeout | 6 | 10 | 1041,15 |
 | authorization-limit | 2 | 8 | 0 |
 | invalid-diagnostic | 3 | 8 | 1,8 |
@@ -23,6 +23,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **78** | tra
 - Always resolve and use the full commit SHA for local-clone integration.
 - Budget repository-wide Git scans from a one-repository timing sample.
 - Cap heavy write delegation at two; preflight one writer; finish and validate the producer/API contract before starting consumers; preserve a handoff before limits approach.
+- Close the reviewer after the bounded interrupt and rely on deterministic fixture, real portfolio audit, full kit validation, and PR CI.
 - Collect read-only Git snapshots through a bounded cross-version runspace pool.
 - Create destination parents for every sparse-overlay copy or use the official full clone after switching to an isolated branch.
 - Create smoke fixtures under the writable workspace and copy only build, source, Wrapper, Docker, and CI files.

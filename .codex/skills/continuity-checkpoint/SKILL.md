@@ -14,11 +14,13 @@ Run this skill when the user reports quota pressure, before a long-running opera
 ## Procedure
 
 1. Finish the smallest safe unit already in progress.
-2. Run tools/capture-continuity-state.ps1 for every active repository worktree.
-3. Update .portfolio-control/CURRENT_HANDOFF.md with facts, decisions, rejected alternatives, validation, blockers, dirty files, and strict next actions.
-4. Verify the handoff contains no secret and no claim unsupported by a current artifact.
-5. Run git diff --check and the affected validator.
-6. Stop spawning work until the checkpoint is readable by a new agent.
+2. From the kit, run tools/checkpoint-portfolio.ps1 with the portfolio root and active project. Never infer completion from declared status or file presence.
+3. Run tools/capture-continuity-state.ps1 for every active repository worktree.
+4. Update .portfolio-control/CURRENT_HANDOFF.md with facts, decisions, rejected alternatives, validation, blockers, dirty files, and strict next actions.
+5. Verify the generated STATE.json contains every audited repository and marks completed only where published_verified is true.
+6. Verify the handoff contains no secret and no claim unsupported by a current artifact.
+7. Run git diff --check and the affected validator.
+8. Stop spawning work until the checkpoint is readable by a new agent.
 
 ## Output Contract
 

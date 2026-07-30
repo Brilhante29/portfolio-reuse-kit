@@ -36,6 +36,9 @@ execution_telemetry:
   event_log: .portfolio-control/EXECUTION_EVENTS.jsonl
   report: .portfolio-control/EXECUTION_EFFICIENCY.md
   handoff: .portfolio-control/CURRENT_HANDOFF.md
+  portfolio_checkpoint: tools/checkpoint-portfolio.ps1
+  root_state: ../.portfolio-control/STATE.json
+  root_queue: ../.portfolio-control/PROJECT_QUEUE.md
   schema: contracts/execution-event.schema.json
   excluded_windows:
     - date: 2026-07-20

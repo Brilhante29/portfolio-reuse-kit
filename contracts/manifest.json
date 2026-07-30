@@ -20,6 +20,10 @@
       "bytes": 1749,
       "sha256": "sha256:0074aeacec5abbc6d5938d6ae330160865d5d866237df0ae76d0425b27e1da2e"
     },
+    "fixtures/portfolio-audit.valid.json": {
+      "bytes": 2017,
+      "sha256": "sha256:cb123086c3b2d52b74a096796ab34f53ee12ea198582da00e12edb21858e3190"
+    },
     "fixtures/project.invalid.json": {
       "bytes": 11193,
       "sha256": "sha256:c919848407d2eaa974eb461239d6bdab826919f16b0c9d8c585f999c7e79827a"
