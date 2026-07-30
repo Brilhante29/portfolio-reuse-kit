@@ -161,10 +161,20 @@ pwsh -NoProfile -File tools/publish-all.ps1 `
   -Visibility public
 ```
 
-Clear the stored token when needed:
+Clear the environment token and audit local Git configuration without printing credential values:
 
 ```powershell
-Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
+pwsh -NoProfile -File tools/clear-github-token.ps1 `
+  -RepoRoot $repoRoot `
+  -SanitizeGitConfig
 ```
+
+For an audit-only check:
+
+```powershell
+pwsh -NoProfile -File tools/sanitize-git-auth.ps1 -RepoRoot $repoRoot -AuditOnly
+```
+
+The sanitizer strips embedded HTTPS user information from fetch and push URLs, normalizes authenticated branch remotes to `origin`, and removes local HTTP extraheaders. It reports repository names only when credential-like configuration remains; it never prints matched values.
 
 Use a token that can create repositories. If the token cannot create repositories, create the empty repository once in GitHub and rerun the script; it will configure `origin` and push.

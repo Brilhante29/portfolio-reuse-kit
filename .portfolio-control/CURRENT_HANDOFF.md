@@ -6,28 +6,29 @@ Purpose: provide an auditable engineering continuation map. This records observa
 
 ## Current Critical Path - 2026-07-30
 
-Repository 28, `kafka-streams-demo`, is the only active implementation project. Its release branch is `agent/gradle-wrapper-hardening-v2` at `1db8d620d918eda88aa4397c20b9557694c0db37`.
+Repository 3, `rag-knowledge-base`, is the active implementation project. Its branch is `codex/rag-knowledge-base/publication-gates` at the last audited head `e8d00dff29be52340f5c5913b60aa15aa129222f`. The economic audit is in progress; no implementation edit has been accepted yet.
 
-Remote evidence:
+Repository 28, `kafka-streams-demo`, is parked as a release candidate. PR 1 and its pull-request CI are green on head `1db8d620d918eda88aa4397c20b9557694c0db37`. It remains draft and unmerged because explicit owner authorization is required. Do not merge it autonomously.
 
-- draft PR: https://github.com/Brilhante29/kafka-streams-demo/pull/1
-- pull-request CI run: https://github.com/Brilhante29/kafka-streams-demo/actions/runs/30559317228
-- JVM, contracts, tests, dependency review, broker smoke, Trivy filesystem and image scans, non-root runtime, SPDX SBOM generation, and artifact upload are green on the same head
-- retained SBOM artifact ID: `8766445521`
-- retained SBOM archive digest: `sha256:a1cbbdf832c1c2fe3308fe26665f2b61bd8ed63cd6b746c63ceb3b78e6f40873`
-- the dependency graph was enabled and dependency review passed
-- the PR is mergeable, draft, and unmerged; explicit owner authorization is still required before merge
+The truthful-checkpoint reuse-kit work is in PR 6 on branch `codex/portfolio-reuse-kit/truthful-checkpoint`. CI was green on published head `de84916639458123853e69462dc7cc7aa4325057`. A local security follow-up is adding a Git-auth sanitizer and must be committed, pushed, and verified on remote CI before the PR is again release-ready. Do not merge it autonomously.
 
-The legacy root checkpoint is not trustworthy: it reports 30 complete projects from declared status plus file presence and contains only six project entries. The new `tools/checkpoint-portfolio.ps1` derives all 30 states from `tools/validate-portfolio.ps1`, requires `published_verified` for `completed`, and accepts a validated worktree override. With repository 28 bound to its active worktree, the current audit reports 30 repositories, one benchmark contract V2 producer, one release candidate, 29 validation states, and zero completed publications because central current-head publication evidence has not yet been recorded.
+Security remediation completed on the portfolio root:
+
+- 31 direct repository Git configurations were audited without printing credential values
+- 29 configurations contained authenticated URLs or token-like local values
+- all 29 were normalized to clean canonical `origin` URLs and branch remotes named `origin`
+- local HTTP authorization extraheaders were removed
+- the second audit found zero affected configurations
+- exposed conversation tokens must be revoked and rotated; they must never enter repository files, Git URLs, logs, commands, or handoffs
 
 Strict continuation order:
 
-1. Do not merge repository 28 without explicit owner authorization.
-2. Publish the truthful-checkpoint kit branch after its own CI is green; do not merge it automatically.
-3. After repository 28 merge authorization, merge PR 1, update the canonical local checkout to the merged main head without discarding local work, and verify default-branch CI.
-4. Run `tools/verify-github-publication.ps1 -RepoRoot <portfolio-root> -Repository kafka-streams-demo`.
-5. Run `tools/checkpoint-portfolio.ps1 -RepoRoot <portfolio-root>` and confirm repository 28 is the only newly completed project backed by current-head publication evidence.
-6. Only then select the next incomplete repository from the evidence-derived queue.
+1. Finish and fully validate the reusable Git-auth sanitizer.
+2. Commit and push the security follow-up to PR 6 using only ephemeral `GH_TOKEN` authentication; verify current-head remote CI.
+3. Complete the economic P0/P1 audit of repository 3 from code and evidence.
+4. Reuse kit contracts selectively, then close only P0/P1 gaps in repository 3.
+5. Produce a truthful benchmark V2, Docker evidence, security scans, SBOM, documentation, and current-head CI for repository 3.
+6. Keep repository 28 parked until explicit merge authorization arrives.
 
 ## Read First
 
@@ -232,84 +233,54 @@ Outbox acceptance requires:
 
 ## Reuse-Kit Branch In Progress
 
-Worktree:
+Worktree: `<workspace>/reuse-kit-truthful-checkpoint`
 
-<reuse-kit-worktree>
+Branch: `codex/portfolio-reuse-kit/truthful-checkpoint`
 
-Branch:
+Published commits:
 
-feat/jvm-kafka-governance
+- `0e6b036 feat(control): derive truthful portfolio checkpoints`
+- `de84916 fix(ci): enforce immutable action references`
 
-Base:
+Published PR evidence:
 
-main at 529caa1666b850f98923160d66a7a60c3ca6e403
+- PR: https://github.com/Brilhante29/portfolio-reuse-kit/pull/6
+- green CI before the local security follow-up: https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/30563468338
+- mergeable, draft, and unmerged; explicit owner authorization is required
 
-Implemented on this branch:
+Security follow-up in this branch:
 
-- project schema supports dimensional JVM and messaging decisions
-- benchmarked and published statuses require current evidence status
-- cloud mode none rejects artificial Kumo or AWS provider metadata
-- all five SOLID principles and all architecture problem forces are required
-- Kotlin JVM, Java Spring, and Kafka Streams profiles
-- Kafka Streams decision matrix and Codex or Claude skill
-- reviewed Gradle Wrapper distribution and JAR checksum validation for 8.10.2, 8.12, and 9.3.0
-- toolchain and target alignment checks
-- executable gradlew check
-- CI Wrapper validation requirement
-- Gradle-based Spring Docker and Actions templates
-- planner parses project YAML structurally and emits the full Kafka contract: processing mode, topics, keys, repartition, SerDes, topology, joins, windows, stores, changelog, guarantees, invalid records, restoration, rebalance, benchmark modes, and evidence
-- project sync and scaffold copy the Gradle validator and continuity automation with their callers
-- project schema fixtures cover JVM profile, Kafka selection from either side of the decision, orphan Kafka Streams blocks, checksums, non-JVM behavior, and legacy compatibility
-- manifest v2 rollout audit separates current compatibility from v2 readiness
-- contract set bumped from 1.1.0 to 1.2.0
-- continuity protocol, matching Codex and Claude skill, compact multi-worktree snapshot command, and root agent pointers
+- `tools/sanitize-git-auth.ps1` audits or remediates direct child repository Git configurations without printing matched values
+- `tools/test-sanitize-git-auth.ps1` covers credentialized remotes, credentialized branch remotes, and authorization extraheaders
+- `tools/clear-github-token.ps1` can invoke repository-config sanitization
+- `docs/usage.md` documents sanitization and audit-only commands
+- `tools/validate-kit.ps1` requires and runs the sanitizer fixture
+- this handoff records the remediation and current critical path
 
-Local verification completed:
+Local validation completed on this exact security diff:
 
-- all 45 YAML files parsed
-- project schema is Draft 2020-12 valid
-- all valid v2, non-JVM, and legacy fixtures have zero schema errors
-- benchmark, missing JVM, Kafka mismatch, unknown Wrapper checksum, and mismatched Wrapper version/checksum fixtures are rejected
-- the 30 original manifests remain 14 valid and 16 invalid under both old and versioned schemas; compatibility changes: zero
-- rollout audit reports 5 manifests v2-ready and 25 pending explicit migration
-- contract validator passed OpenAPI, GraphQL, project fixtures, benchmark fixtures, and manifest
-- full tools/validate-kit.ps1 passed
-- PowerShell scripts parsed
-- git diff --check passed
-- a minimal reviewed Gradle 8.12 fixture passed the strict structural validator
-- matching manifest/Wrapper/build/Docker/CI JVM 21 passed; manifest JVM 17 against build and Docker 21 was rejected
-- dynamic CI JVM versions, workflow global Gradle using dash-run syntax, and Docker bases not bound to JVM_VERSION were rejected
-- a fixture with global Gradle and non-executable gradlew was rejected with exit code 1
-- planner smoke retained every schema-required Kafka Streams decision after structured PyYAML parsing
-- sync smoke installed contract set 1.2.0 plus validator helpers; new-project smoke selected manifest v2 and included continuity automation
-- continuity snapshot plus every public file, including handoffs, are scanned for personal absolute paths and live GitHub-token shapes
-- the current Kafka repository was rejected for the expected Wrapper, toolchain, Docker, and CI violations
-- the GitHub Actions template uses official gradle/actions/setup-gradle v6, whose wrapper validation is enabled by default
-- final independent re-review reported no remaining merge blockers
+    git diff --check
+    ./tools/test-sanitize-git-auth.ps1
+    ./tools/validate-kit.ps1
 
-Validation environment:
-
-- isolated venv: reuse-kit-jvm-kafka/.venv
-- dependencies come from requirements-ci.txt
-- activate by putting .venv/Scripts first on PATH
-- .venv is ignored and must never be committed
+The expected commit subject is `fix(security): sanitize persisted Git credentials`. Push only with an ephemeral HTTP header derived from `GH_TOKEN`; PR 6 CI must be green on the resulting branch head.
 
 ## Current Worktrees And Safety
 
 Use:
 
-- reuse-kit-jvm-kafka for the active reuse-kit branch
-- jvm-worktrees/kafka-wrapper-hardening-v2 for Kafka repair
-- new-project-worktrees/portfolio-evidence-api for repository 31
-- <saga-worktree> only after reading its dirty state carefully
+- `<workspace>/reuse-kit-truthful-checkpoint` for PR 6 and the Git-auth sanitizer
+- `<portfolio-root>/rag-knowledge-base` for active repository 3
+- the known repository 28 release worktree only when verifying or completing its authorized release
 
-Do not use:
+Safety rules:
 
-- jvm-worktrees/kafka-wrapper-hardening, which starts from stale Kafka main
-- stream28-src or stream28-ready, which are independent dirty copies without remotes
-- scratch-kafka or spring-payments-src as sources of truth
-
-Never revert unrelated or pre-existing changes. The saga worktree contains many user or generated changes and tracked .gradle artifacts; inspect and preserve intent before cleanup.
+- verify branch, head, upstream, and working-tree status before every edit
+- preserve unrelated user or generated changes
+- do not merge PR 1 or PR 6 without explicit owner authorization
+- do not persist credentials in Git configuration; use `GH_TOKEN` only through an ephemeral header
+- do not repeat a full static portfolio audit unless repository heads changed
+- if account or context capacity becomes uncertain, update this handoff, STATE.json, queue, and execution telemetry before stopping
 
 ## Efficiency And Failures
 
@@ -353,34 +324,33 @@ Do not lower security thresholds, omit advisories, or allowlist real findings to
 
 ## Continuation Order
 
-1. Review this branch diff and run the full reuse-kit validation again.
-2. Update contract and kit documentation links if the review finds missing navigation.
-3. Commit feat/jvm-kafka-governance, push it, open a PR, wait for green CI, and merge.
-4. Sync contract set 1.2.0, JVM gates, and Kafka skill into repository 28.
-5. Repair repository 28 SDD and manifest before code.
-6. Add the reviewed Gradle 8.10.2 Wrapper, checksum, toolchain, CI Wrapper validation, and Wrapper-only Docker commands.
-7. Split repository 28 into driver microbenchmark and real-broker benchmark; generate a new truthful V2 baseline.
-8. Publish repository 28 only after clean-source Docker and remote CI pass.
-9. Continue repository 31 security remediation only after the exact npm-registry authorization is received.
-10. Migrate one Python, one Go, and repository 28 as the Kotlin V2 producer before starting repository 32.
-11. Keep repository 33 conditional on real operations workflows.
-12. Repair event-sourcing CI, then saga semantics, multi-tenancy, and outbox atomicity in that order.
+1. Validate, commit, and publish the reuse-kit sanitizer follow-up; verify PR 6 CI on its new head.
+2. Inspect repository 3 implementation, tests, manifests, benchmark, Docker path, CI, dependency reproducibility, and public evidence.
+3. Write the repository 3 P0/P1 audit and reuse map before changing application behavior.
+4. Implement only claim-critical gaps, validating after each logical slice.
+5. Generate benchmark V2 from a clean reproducible path and close release documentation.
+6. Push repository 3 through a draft PR and verify real pull-request CI before any merge request.
+7. Keep repository 28 in release-candidate state until explicit owner authorization.
+8. Update root checkpoint data after every repository head or publication-state change.
 
 ## Restart Commands
 
-From the reuse-kit branch worktree:
+From the reuse-kit worktree:
 
-    $env:PATH=(Resolve-Path .venv\Scripts).Path+[IO.Path]::PathSeparator+$env:PATH
-    .\tools\validate-kit.ps1
-    python .\tools\generate-contract-manifest.py --check
-    python .\tools\validate-contracts.py
-    git diff --check
     git status --short --branch
+    ./tools/test-sanitize-git-auth.ps1
+    ./tools/validate-kit.ps1
+    git diff --check
 
-From repository 28 after the kit branch is merged and synced:
+From repository 3:
 
-    .\tools\validate-gradle-project.ps1 -RepoPath .
-    .\gradlew.bat --no-daemon clean check
-    docker build -t kafka-streams-demo .
+    git status --short --branch
+    git rev-parse HEAD
+    git remote get-url origin
+    python -m unittest discover -s tests -v
+    python benchmarks/run_benchmark.py
+    docker build -t rag-knowledge-base .
 
-Do not repeat the full static portfolio audit unless repository heads changed. Update this handoff whenever a decision, benchmark, branch, published head, blocker, or continuation command changes.
+Do not report a repository complete from declared status or file presence. Completion requires measured evidence, green CI on the published current head, publication verification, and the evidence-derived checkpoint.
+
+Do not include private chain-of-thought in handoffs. Record observations, decisions, rejected options, commands and results, blockers, and the exact next action.

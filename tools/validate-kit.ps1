@@ -194,6 +194,8 @@ $requiredFiles = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/sanitize-git-auth.ps1",
+  "tools/test-sanitize-git-auth.ps1",
   "tools/validate-portfolio.ps1",
   "tools/validate-contracts.py",
   "tools/audit-manifest-rollout.py",
@@ -350,6 +352,9 @@ Require-Pattern "decision-brain/continuity-protocol.yaml" "completion_requires: 
 Require-Pattern "tools/checkpoint-portfolio.ps1" "Statuses are derived from tools/validate-portfolio.ps1"
 Require-Pattern "tools/checkpoint-portfolio.ps1" "published_verified"
 Require-Pattern "tools/checkpoint-portfolio.ps1" "RepositoryOverrides"
+Require-Pattern "tools/clear-github-token.ps1" "SanitizeGitConfig"
+Require-Pattern "tools/sanitize-git-auth.ps1" "affected_after"
+Require-Pattern "tools/sanitize-git-auth.ps1" "Remove-UserInfo"
 Require-Pattern "tools/validate-portfolio.ps1" "remote get-url origin"
 Require-Pattern "tools/validate-portfolio.ps1" 'benchmarkContract -or \$benchmarkContractV2'
 Require-Pattern "tools/capture-continuity-state.ps1" "Sanitize-Line"
@@ -405,6 +410,7 @@ Invoke-Checked "interoperability contracts" { python (Join-Path $root "tools/val
 Invoke-Checked "generated contract manifest" { python (Join-Path $root "tools/generate-contract-manifest.py") --check | Out-Null }
 Invoke-Checked "generated design tokens" { python (Join-Path $root "tools/generate-design-tokens.py") --check | Out-Null }
 Invoke-Checked "portfolio checkpoint fixture" { & (Join-Path $root "tools/test-checkpoint-portfolio.ps1") | Out-Null }
+Invoke-Checked "Git auth sanitizer fixture" { & (Join-Path $root "tools/test-sanitize-git-auth.ps1") | Out-Null }
 $executionLine = 0
 foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/EXECUTION_EVENTS.jsonl")) {
   $executionLine++
@@ -427,6 +433,8 @@ $powerShellScripts = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/sanitize-git-auth.ps1",
+  "tools/test-sanitize-git-auth.ps1",
   "tools/validate-portfolio.ps1",
   "tools/record-execution-event.ps1",
   "tools/report-execution-efficiency.ps1",
