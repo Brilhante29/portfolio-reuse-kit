@@ -98,8 +98,13 @@ def main() -> int:
     parser.add_argument("--project", required=True)
     parser.add_argument("--benchmark-id", required=True)
     parser.add_argument("--image", required=True, help="local image tag that runs the benchmark")
-    parser.add_argument("--v1-result", required=True, type=Path,
+    parser.add_argument("--v1-result", type=Path,
                         help="path (repo-relative) of the v1 JSON the command writes")
+    parser.add_argument("--from-container", metavar="NAME:PATH",
+                        help="copy the v1 JSON out of a container the command left behind, "
+                             "e.g. pub_myrepo:/app/benchmarks/results/latest.json. Use this "
+                             "when the image runs as a non-root user and cannot write into a "
+                             "bind mount owned by the host user.")
     parser.add_argument("--fixture", required=True, type=Path, help="repo-relative fixture path")
     parser.add_argument("--config", required=True, type=Path, help="repo-relative config path")
     parser.add_argument("--lock", required=True, type=Path, help="repo-relative dependency lock path")
@@ -113,6 +118,9 @@ def main() -> int:
     parser.add_argument("--hardware-class", default="docker-local")
     parser.add_argument("--producer", default="local", choices=("local", "github-actions", "other-ci"))
     parser.add_argument("--comparability-key", required=True)
+    parser.add_argument("--timeout-seconds", type=int, default=900,
+                        help="abort if the benchmark does not finish. Without this a command "
+                             "that starts a server instead of a benchmark hangs forever.")
     # The benchmark command comes last, after "--", so its own flags are never
     # confused with this tool's options.
     parser.add_argument("command", nargs=argparse.REMAINDER,
@@ -126,7 +134,14 @@ def main() -> int:
 
     started = datetime.now(timezone.utc)
     clock = time.perf_counter()
-    completed = subprocess.run(command, cwd=repo, capture_output=True, text=True, check=False)
+    try:
+        completed = subprocess.run(command, cwd=repo, capture_output=True, text=True,
+                                   check=False, timeout=args.timeout_seconds)
+    except subprocess.TimeoutExpired:
+        raise SystemExit(
+            f"benchmark did not finish in {args.timeout_seconds}s. If the image's default "
+            f"command starts a server, pass the benchmark subcommand explicitly."
+        )
     duration = time.perf_counter() - clock
 
     if completed.returncode != 0:
@@ -134,7 +149,22 @@ def main() -> int:
         sys.stderr.write(completed.stderr[-2000:])
         raise SystemExit(f"benchmark command exited {completed.returncode}; no result written")
 
-    v1_path = repo / args.v1_result
+    if args.from_container:
+        if not args.v1_result:
+            raise SystemExit("--from-container also needs --v1-result as the destination path")
+        v1_path = repo / args.v1_result
+        v1_path.parent.mkdir(parents=True, exist_ok=True)
+        copy = subprocess.run(
+            ["docker", "cp", args.from_container, str(v1_path)],
+            capture_output=True, text=True, check=False,
+        )
+        if copy.returncode != 0:
+            raise SystemExit(f"cannot copy {args.from_container}: {copy.stderr.strip()}")
+    elif args.v1_result:
+        v1_path = repo / args.v1_result
+    else:
+        raise SystemExit("pass --v1-result (optionally with --from-container)")
+
     if not v1_path.is_file():
         raise SystemExit(f"benchmark did not produce {args.v1_result}")
     v1 = json.loads(v1_path.read_text(encoding="utf-8"))
