@@ -124,6 +124,7 @@ $requiredFiles = @(
   "docs/cross-platform.md",
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
+  "docs/publication-benchmark-evidence.md",
   "docs/usage.md",
   "docs/ai-evaluation-retrieval.md",
   "harness/bench.py",
@@ -198,12 +199,14 @@ $requiredFiles = @(
   "tools/validate-gradle-project.ps1",
   "tools/generate-contract-manifest.py",
   "tools/generate-design-tokens.py",
+  "tools/generate-publication-benchmark.py",
   "tools/sync-catalog-stacks.py",
   "tools/record-execution-event.ps1",
   "tools/report-execution-efficiency.ps1",
   "tools/capture-continuity-state.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
+  "tests/test_generate_publication_benchmark.py",
   "tools/validate-kit.ps1"
 )
 
@@ -231,6 +234,7 @@ $requiredDirs = @(
   ".codex/skills/fastapi-backend",
   ".codex/skills/go-backend",
   ".codex/skills/node-typescript-backend",
+  ".codex/skills/publish-benchmark-evidence",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -251,7 +255,8 @@ $requiredDirs = @(
   ".claude/skills/spring-kotlin-backend",
   ".claude/skills/fastapi-backend",
   ".claude/skills/go-backend",
-  ".claude/skills/node-typescript-backend"
+  ".claude/skills/node-typescript-backend",
+  ".claude/skills/publish-benchmark-evidence"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -337,6 +342,9 @@ Require-Pattern ".codex/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers 
 Require-Pattern ".claude/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers for Windows and POSIX"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
+Require-Pattern ".codex/skills/publish-benchmark-evidence/SKILL.md" "Never derive measured iterations from repeat"
+Require-Pattern ".claude/skills/publish-benchmark-evidence/SKILL.md" "Never derive measured iterations from repeat"
+Require-Pattern "tools/generate-publication-benchmark.py" "infer_measured_iterations"
 Require-Pattern ".codex/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
 Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
 Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
@@ -394,8 +402,9 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
     if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
   }
 }
-$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/generate-publication-benchmark.py', r'$root/tools/sync-catalog-stacks.py', r'$root/tests/test_generate_publication_benchmark.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
+Invoke-Checked "publication benchmark tests" { python -m unittest discover -s (Join-Path $root "tests") -p "test_*.py" | Out-Null }
 
 $powerShellScripts = @(
   "tools/new-project.ps1",

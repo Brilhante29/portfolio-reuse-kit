@@ -49,6 +49,7 @@ Copy-Item (Join-Path $root "templates/aitmpl-config.yaml") (Join-Path $target ".
 Copy-Item (Join-Path $root "templates/validate-project.ps1") (Join-Path $target "tools\validate-project.ps1")
 Copy-Item (Join-Path $root "templates/validate-gradle-project.ps1") (Join-Path $target "tools/validate-gradle-project.ps1")
 Copy-Item (Join-Path $root "tools/capture-continuity-state.ps1") (Join-Path $target "tools/capture-continuity-state.ps1")
+Copy-Item (Join-Path $root "tools/generate-publication-benchmark.py") (Join-Path $target "tools/generate-publication-benchmark.py")
 Copy-Item (Join-Path $root "sdd/templates/spec.md") (Join-Path $target "sdd/spec.md")
 Copy-Item (Join-Path $root "sdd/templates/benchmark-plan.md") (Join-Path $target "sdd/benchmark-plan.md")
 Copy-Item (Join-Path $root "sdd/templates/architecture-decision.md") (Join-Path $target "sdd/architecture-decision.md")

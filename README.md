@@ -47,6 +47,7 @@ Every completed project must provide:
 - Docker build/run path
 - local benchmark JSON compatible with `contracts/benchmark-result.schema.json`
 - publication benchmark JSON compatible with `contracts/benchmark-result-v2.schema.json`, including provenance and comparability
+- a tested publication producer plus mirrored Codex/Claude skill for truthful workload sizing and exact-head evidence
 - `REFERENCES.md` with clean reuse attribution
 - completed reuse-improvement review with patch-now, backlog, or rejected improvements recorded
 - project validation through `tools/validate-project.ps1` before commit or publication

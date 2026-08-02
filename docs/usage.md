@@ -83,6 +83,12 @@ Final validation requires `openspec/config.yaml` and the complete generated arti
 
 The same gate checks top-level manifest structure, performs full YAML parsing when PyYAML is available, reads both legacy metric/value results and benchmark-result-v2 metrics arrays, matches the manifest primary metric to the committed JSON result, and requires that measured value near the top of the README. Content scanning is limited to Git tracked and non-ignored project files, so dependency caches do not make validation slower.
 
+## Generate Publication Evidence
+
+Use `tools/generate-publication-benchmark.py` only after a real V1 benchmark exists. Pass `--measured-iterations` when the raw result does not expose an unambiguous workload count; `repeat` is never treated as workload size. See `docs/publication-benchmark-evidence.md` and the mirrored `publish-benchmark-evidence` skill for producer selection, provenance, validation, and exact-head CI gates.
+
+The tool is copied into new repositories and by `tools/sync-project-reuse.ps1`, so agents do not need to recreate the producer per project.
+
 ## Validate The Kit
 
 ```powershell
