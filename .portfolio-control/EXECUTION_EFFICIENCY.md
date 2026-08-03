@@ -1,22 +1,22 @@
 # Execution Efficiency
 
-Generated: 2026-08-03T02:17:22.3163810Z
+Generated: 2026-08-03T03:33:07.6676655Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **102** | tracked duration: **3386,95 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **113** | tracked duration: **3590,35 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
-| invalid-command | 25 | 37 | 20,8 |
-| tool-failure | 16 | 30 | 50,2 |
+| invalid-command | 28 | 43 | 20,8 |
+| tool-failure | 18 | 32 | 228,2 |
 | wait-timeout | 3 | 16 | 1820 |
 | command-timeout | 7 | 11 | 1225,15 |
-| invalid-diagnostic | 4 | 9 | 1,8 |
+| invalid-diagnostic | 5 | 10 | 27,2 |
 | authorization-limit | 2 | 8 | 0 |
+| avoidable-retry | 2 | 4 | 0 |
 | agent-no-progress | 1 | 3 | 0 |
 | environment-fallback | 1 | 3 | 0 |
-| avoidable-retry | 1 | 2 | 0 |
 | invalid-orchestration | 1 | 2 | 0 |
 | redundant-work | 1 | 2 | 269 |
 
@@ -38,6 +38,8 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **102** | tr
 - Fetch the source clone first, then perform ff-only merge or compare FETCH_HEAD.
 - Finalize defaults before Docker and verify argument wiring with a tiny smoke workload.
 - Give a four-case bounded regression checklist, continue local work, and interrupt once after the first long timeout instead of polling repeatedly.
+- Hash fixture, config, and lock inputs from Git blobs at source_commit; regression-test LF/CRLF invariance.
+- Inspect branch, origin, and upstream together before the first push; set upstream explicitly.
 - Inspect disjoint worktrees and wait only when integration is blocked.
 - Keep PyYAML parsing in CI and count catalog entries independent of valid sequence indentation.
 - Maintain language-specific validation lists and parse generated scripts immediately.
@@ -49,11 +51,13 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **102** | tr
 - Pilot one agent after writable-scope preflight; keep external-workspace agents read-only and apply changes from the principal agent.
 - Pilot one minimal edit and one failing native Git call before applying a workspace-wide script.
 - Pilot the patch wrapper once, then use one supported staged edit path without retrying the same failure.
+- Pipe validator output to Out-Null or use its JSON artifact; never truncate Format-* output with Select-Object.
 - Prefer a short-path git worktree for local repository isolation on Windows.
 - Preflight tracked build caches with git ls-files, reject them in validation, and use a short C:\tmp worktree for cleanup.
 - Probe apply_patch once per worktree; after this known signature, use asserted exact-context transformations and review the resulting git diff instead of retrying.
 - Quote Git revspecs such as '@{upstream}' in PowerShell commands.
 - Read PSVersion first and use Stopwatch plus a PowerShell-5.1-compatible runspace pool.
+- Read requires-python and resolve the project runtime before host-side tests; otherwise validate inside Docker.
 - Read Select-String.Line and strip non-digits; do not rerun the full validation suite for diagnostic-only failures.
 - Read the parameter block before invoking repository scripts and reuse the corrected command.
 - Resolve the absolute interpreter once before running tests.
@@ -68,7 +72,9 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **102** | tr
 - Use ${kumoVersion} in colon-delimited identifiers and inspect semantic fields after schema validation.
 - Use a staged single-root edit path and do not retry the same failing tool after the first confirmed platform failure.
 - Use actual environment newlines or normalize generated text immediately before validation.
+- Use checkout fetch-depth 0 for source-commit verification and run the gate before image build.
 - Use deterministic exact replacements, GitHub REST with GH_TOKEN, and inspect script parameters before invocation.
+- Use exact-context staged edits, inspect git diff immediately, and keep generated document mutations small.
 - Use explicit line-ending normalization plus YAML parsing immediately after generated manifest writes.
 - Use explicit string conversion in structured diagnostics and validate against benchmark-result-v2.schema.json.
 - Use Get-Command preflight and call the existing REST client when gh is unavailable.
@@ -82,5 +88,6 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **102** | tr
 - Use Test-Path and a dated unique worktree directory before git worktree add.
 - Use the approved local-clone path on the first attempt for external repository sources.
 - Use the documented PYTHONPATH=src path before rerunning tests
+- Use the tested writable-stage plus exact-context transformation path immediately in this Windows workspace.
 - Validate one complete patch on a single file before incremental fan-out.
 - Wait once for at most 60 seconds, inspect progress, and take over after two no-progress observations.

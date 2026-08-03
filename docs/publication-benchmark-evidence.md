@@ -10,6 +10,7 @@ A V2 result is publication evidence, not a formatting upgrade from V1. The produ
 | `workload.measured_iterations` | Work items measured in one repetition, such as queries, images, plates, rows, requests, or operations. |
 | `metrics[].samples` | Raw observed metric values used by the stated aggregation. |
 | `provenance.source_commit` | Clean source commit captured before execution. |
+| `workload.fixture_digest`, `workload.config_digest`, `provenance.dependency_lock_digest` | SHA-256 of canonical Git blobs at the source commit, independent of checkout line endings. |
 | `provenance.artifact_digest` | Digest of the raw V1 result consumed by the producer. |
 | `comparability_key` | Stable workload/runtime/provider identity; never a free-form run label. |
 
@@ -47,7 +48,7 @@ Project-specific producers still validate against `contracts/benchmark-result-v2
       --comparability-key <stable-key> \
       -- <benchmark-command>
 
-The repository must be clean before the command. Inputs and outputs must remain inside the repository. The image must already exist locally and is captured by immutable digest. Use `--from-container name:/path` for a non-root container and `--timeout-seconds` to bound the run.
+The repository must be clean before the command. Inputs and outputs must remain inside the repository. Fixture, config, and dependency-lock digests come from canonical Git blobs at the source commit, so CI must fetch that commit; the generated raw artifact is hashed from its actual output bytes. The image must already exist locally and is captured by immutable digest. Use `--from-container name:/path` for a non-root container and `--timeout-seconds` to bound the run.
 
 ## Publication Gates
 

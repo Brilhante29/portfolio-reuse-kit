@@ -1,26 +1,26 @@
 {
-    "generated_at":  "2026-08-03T02:17:22.3163810Z",
+    "generated_at":  "2026-08-03T03:33:07.6676655Z",
     "excluded_windows":  [
                              "2026-07-20: user-operated Antigravity/OpenCode activity"
                          ],
-    "event_records":  62,
-    "occurrence_count":  123,
+    "event_records":  69,
+    "occurrence_count":  134,
     "hard_limit_occurrences":  8,
     "wait_timeout_occurrences":  16,
-    "avoidable_occurrences":  102,
-    "tracked_duration_seconds":  3386.95,
+    "avoidable_occurrences":  113,
+    "tracked_duration_seconds":  3590.35,
     "categories":  [
                        {
                            "category":  "invalid-command",
-                           "events":  25,
-                           "occurrences":  37,
+                           "events":  28,
+                           "occurrences":  43,
                            "duration_seconds":  20.8
                        },
                        {
                            "category":  "tool-failure",
-                           "events":  16,
-                           "occurrences":  30,
-                           "duration_seconds":  50.2
+                           "events":  18,
+                           "occurrences":  32,
+                           "duration_seconds":  228.2
                        },
                        {
                            "category":  "wait-timeout",
@@ -36,14 +36,20 @@
                        },
                        {
                            "category":  "invalid-diagnostic",
-                           "events":  4,
-                           "occurrences":  9,
-                           "duration_seconds":  1.8
+                           "events":  5,
+                           "occurrences":  10,
+                           "duration_seconds":  27.2
                        },
                        {
                            "category":  "authorization-limit",
                            "events":  2,
                            "occurrences":  8,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "avoidable-retry",
+                           "events":  2,
+                           "occurrences":  4,
                            "duration_seconds":  0
                        },
                        {
@@ -56,12 +62,6 @@
                            "category":  "environment-fallback",
                            "events":  1,
                            "occurrences":  3,
-                           "duration_seconds":  0
-                       },
-                       {
-                           "category":  "avoidable-retry",
-                           "events":  1,
-                           "occurrences":  2,
                            "duration_seconds":  0
                        },
                        {

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +15,15 @@ SPEC.loader.exec_module(publication_benchmark)
 
 
 class PublicationBenchmarkTests(unittest.TestCase):
+    @staticmethod
+    def git(repo: Path, *args: str) -> str:
+        return subprocess.run(
+            ["git", "-C", str(repo), *args],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+
     def test_explicit_measured_iterations_wins(self) -> None:
         result = {"summary": {"measured_operations": 25}}
         self.assertEqual(
@@ -75,6 +86,64 @@ class PublicationBenchmarkTests(unittest.TestCase):
         self.assertEqual(metrics[0]["samples"], [2.0, 2.5, 3.0])
         self.assertEqual(metrics[0]["failures"], 1)
         self.assertEqual(metrics[0]["summary"], {"p95": 3.0})
+
+    def test_committed_file_digest_ignores_checkout_line_endings(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory).resolve()
+            self.git(repo, "init")
+            self.git(repo, "config", "user.email", "tests@example.invalid")
+            self.git(repo, "config", "user.name", "Portfolio Tests")
+            fixture = repo / "fixture.txt"
+            fixture.write_bytes(b"first\nsecond\n")
+            self.git(repo, "add", "fixture.txt")
+            self.git(repo, "commit", "-m", "fixture")
+            commit = self.git(repo, "rev-parse", "HEAD")
+
+            fixture.write_bytes(b"first\r\nsecond\r\n")
+            expected = "sha256:" + hashlib.sha256(b"first\nsecond\n").hexdigest()
+            self.assertEqual(
+                publication_benchmark.digest_committed_path(repo, fixture, commit),
+                expected,
+            )
+
+    def test_committed_tree_digest_uses_relative_paths_and_git_blobs(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory).resolve()
+            self.git(repo, "init")
+            self.git(repo, "config", "user.email", "tests@example.invalid")
+            self.git(repo, "config", "user.name", "Portfolio Tests")
+            fixtures = repo / "fixtures"
+            fixtures.mkdir()
+            (fixtures / "a.txt").write_bytes(b"alpha\n")
+            (fixtures / "b.txt").write_bytes(b"beta\n")
+            self.git(repo, "add", "fixtures")
+            self.git(repo, "commit", "-m", "fixtures")
+            commit = self.git(repo, "rev-parse", "HEAD")
+
+            expected_bytes = b"a.txt\0alpha\nb.txt\0beta\n"
+            expected = "sha256:" + hashlib.sha256(expected_bytes).hexdigest()
+            self.assertEqual(
+                publication_benchmark.digest_committed_path(repo, fixtures, commit),
+                expected,
+            )
+
+    def test_untracked_provenance_input_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory).resolve()
+            self.git(repo, "init")
+            self.git(repo, "config", "user.email", "tests@example.invalid")
+            self.git(repo, "config", "user.name", "Portfolio Tests")
+            tracked = repo / "tracked.txt"
+            tracked.write_text("tracked\n", encoding="utf-8")
+            self.git(repo, "add", "tracked.txt")
+            self.git(repo, "commit", "-m", "tracked")
+            untracked = repo / "untracked.txt"
+            untracked.write_text("untracked\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(SystemExit, "git cat-file"):
+                publication_benchmark.digest_committed_path(
+                    repo, untracked, self.git(repo, "rev-parse", "HEAD")
+                )
 
 
 if __name__ == "__main__":

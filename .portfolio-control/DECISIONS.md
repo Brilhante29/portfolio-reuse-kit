@@ -66,3 +66,22 @@ Context: #21 defines an Airflow DAG but its measured path calls Python stages di
 Decision: publication must execute through Airflow task machinery and retain the specified three-run median.
 Rejected: describing function-equivalent execution as Airflow orchestration evidence.
 Evidence: `runner.py`, `dags/mlops_end2end.py`, and `sdd/benchmark-plan.md`.
+## 2026-08-03 - #21 MLOps Publication Closure
+
+Context: the old measured path defined an Airflow DAG but called Python stage functions directly, ran one sample, and started a redundant localhost MLflow HTTP server.
+
+Decision: execute the lifecycle with `airflow dags test`, use direct local SQLite MLflow tracking/registry, retain three independent same-image runs, and publish the median with raw samples.
+
+Rejected: describing function-equivalent execution as Airflow proof; adding distributed infrastructure to a local reproducibility benchmark; collapsing multi-metric project aggregation into the generic producer.
+
+Evidence: source `9e8c76d`, final head `fb77827`, exact-head CI `30781190229`, lifecycle median `58.696 s`.
+
+## 2026-08-03 - Canonical Git Provenance
+
+Context: Windows checkout CRLF bytes produced different digests from Linux CI, and a shallow checkout could not verify the source commit.
+
+Decision: fixture, config, and dependency-lock digests are calculated from canonical Git blobs at `provenance.source_commit`; generated artifacts use actual output bytes. CI fetches source history and performs this gate before expensive Docker work.
+
+Rejected: normalizing arbitrary filesystem bytes after execution or weakening the source-commit check.
+
+Evidence: ten producer tests, including LF/CRLF, committed tree, and untracked-input regressions.

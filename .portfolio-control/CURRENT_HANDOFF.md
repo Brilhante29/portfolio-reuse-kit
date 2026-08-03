@@ -1,64 +1,59 @@
 # Current Handoff
 
-Updated: 2026-08-02
+Updated: 2026-08-03
 Owner: principal agent
 Purpose: observable state for Codex, Claude Code, another AI, or a human. No private chain-of-thought is stored.
 
 ## Continuation Order
 
 1. Read `docs/agent-continuation-map.md`.
-2. Read `.portfolio-control/TRACKER.json` and `PROJECT_QUEUE.md`.
-3. Inspect Git status and the target SDD before editing.
+2. Read `.portfolio-control/TRACKER.json` and `.portfolio-control/PROJECT_QUEUE.md`.
+3. Inspect Git status, project manifest, SDD, benchmark, Docker, and CI before editing.
 4. Execute one critical-path change, validate it, and refresh this handoff.
 
 ## Current Truth
 
 | Scope | State | Evidence |
 |---|---|---|
-| Portfolio | 30 repositories | 30 Docker, 30 CI, 30 tracked benchmarks |
-| Published | #3, #5, #11, #13 | exact-head CI and central publication JSON |
-| Reuse kit | last green head `fffdca4` | run `30775452256` |
-| Active | #21 `mlops-end2end` at clean head `ae7d1e0` | one committed lifecycle run |
-| Blocking defects | framework proof and repetition | direct stage calls; one run where SDD requires three |
+| Portfolio | 30 repositories | 30 Docker, 30 CI, 30 tracked benchmark contracts |
+| Published | #3, #5, #11, #13, #21 | exact-head CI and central publication JSON |
+| Reuse kit | last green head `9049970` | CI `30779025633`; current Git-blob provenance change pending publication |
+| Active | #24 `ci-cd-templates` at clean head `141173e` | deterministic V1 scanner; V2 absent |
+| Blocking defects | none external | #24 requires audit and publication upgrade |
 
-## Closed: #5 alpr-mercosul
+## Closed: #21 mlops-end2end
 
-- Final head `b69ae1d1c3ada4c6aa94b30e51b4404aa89e0a11`; exact-head CI `30778498303`, all steps passed.
-- Result: 100/100 synthetic plates, 700/700 characters, image-only prediction, zero failures.
-- V2: `repeat=1`, `measured_iterations=100`, source `b23be43`, image `sha256:399b8ba8e00b4855fb0d7605682899a7b02345b3e31237a7755aa97f8f748e37`.
-- Limit: synthetic fixed-layout OCR only; no vehicle detection, localization, real-road, or production claim.
+- Final head `fb778279f4462f7f478dc34da87c5d2559d4fd5a`; exact-head CI `30781190229`, every step passed.
+- Three clean source-image runs: `57.373 s`, `59.140 s`, and `58.696 s`; median `58.696 s`.
+- Median ROC AUC `0.928`, accuracy `0.87`, inference p95 `72.733 ms`, throughput `160.275 req/s`.
+- Airflow evidence uses `airflow dags test`; MLflow uses direct local SQLite tracking/registry; FastAPI serves the registry alias.
+- Source image digest: `sha256:5228391a3b888a26c0fa5263d5a2393694ee6f862a80e48d7839ad22a2fb541f`.
+- Generic return to kit: tracked provenance inputs are hashed from source-commit Git blobs; CI fetches source history and runs the provenance gate before expensive builds.
 
-## Active: #21 mlops-end2end
+## Active: #24 ci-cd-templates
 
-Existing strengths: Airflow 3.3, MLflow 3.14, FastAPI, Pandera, scikit-learn, Prometheus, Docker; framework-independent quality policy; registry port; alias-backed serving.
+Known baseline: Python/PyYAML policy pipeline, optional pinned actionlint/zizmor adapters, Docker, GitHub Actions, deterministic fixtures, median scan-time V1.
 
-Current result: one run at `371.941 s`, ROC AUC `0.928441`, inference p95 `285.557 ms`, zero failures.
+Audit order:
 
-Publication blockers:
-
-1. `runner.py` invokes `python -m dags.mlops_end2end`; `__main__` calls stages directly. This does not prove Airflow task execution.
-2. The benchmark plan requires a three-run median with one image; only one V1 result exists and no V2 artifact is tracked.
-
-Smallest valid change:
-
-1. Execute `airflow dags test mlops_end2end <logical-date>` after metadata migration.
-2. Add a focused regression and align benchmark wording.
-3. Build one clean source image; retain three clean runs plus failures; aggregate median/min/max/range; generate V2.
-4. Validate, push, inspect exact-head CI, publish, and refresh central evidence.
+1. Trace README claim through CLI, policy engine, external-tool adapters, tests, Docker, and workflow.
+2. Verify the seven findings are semantic and not fixture-oracle shortcuts.
+3. Decide whether the generic single-result V2 producer is sufficient; use project-specific aggregation only if three independent samples are part of the claim.
+4. Add provenance, strict validation, current README number, and exact-head CI.
+5. Return only generic CI/evidence improvements to the kit.
 
 ## Safety
 
-- Keep domain aggregation local; reuse only generic producer and claim-verification guidance.
-- Do not add Kafka, RabbitMQ, cloud, GraphQL, Kubernetes, or microservices without a measured force.
-- Kumo applies only when AWS behavior enters scope.
+- Do not add services, databases, messaging, cloud, or Kubernetes to a static-analysis CLI.
+- Hash versioned fixture/config/lock inputs from Git blobs, not CRLF/LF-sensitive checkout bytes.
 - Preserve two known timestamp-only dirty files in `rag-knowledge-base`.
 - Never store credentials or private reasoning. Rotate tokens pasted in conversation.
 
 ## Exact Next Commands
 
 ```powershell
-cd $HOME\Desktop\repos-github\mlops-end2end
+cd $HOME\Desktop\repos-github\ci-cd-templates
 git status --short --branch
-rg -n "python.*dags|airflow dags test|three|median" src tests dags sdd README.md
-docker image inspect mlops-end2end
+rg -n "scan_time_ms|findings|benchmark|actionlint|zizmor|validate" src tests tools .github sdd README.md
+docker build -t ci-cd-templates .
 ```

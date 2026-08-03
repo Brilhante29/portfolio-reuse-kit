@@ -304,3 +304,19 @@ schema-valid ALPR evidence
 ```
 
 The next AI should not repeat broad portfolio research. It should make the smallest #21 change that turns the framework claim into executable evidence, then run the expensive benchmark once on a clean source image.
+## 2026-08-03 MLOps Closure And CI Transition
+
+```text
+direct stage execution
+  -> require Airflow task machinery
+  -> remove redundant local MLflow HTTP process
+  -> calibrate one clean run
+  -> publish three same-image runs with median
+  -> discover CRLF/LF provenance mismatch
+  -> hash tracked inputs from source-commit Git blobs
+  -> fetch source history and fail before expensive builds
+  -> close #21 at exact-head CI
+  -> activate #24 ci-cd-templates
+```
+
+Restart at #24 clean head `141173e`. Trace the seven committed findings through real scanner policies before changing code. Choose the generic V2 producer only if one result and one aggregation policy are sufficient; keep project-specific evidence when analyzer diagnostics or multiple independent runs materially define the claim.
