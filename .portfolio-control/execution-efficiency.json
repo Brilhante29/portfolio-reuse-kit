@@ -1,19 +1,19 @@
 {
-    "generated_at":  "2026-08-03T00:50:14.5725506Z",
+    "generated_at":  "2026-08-03T02:17:22.3163810Z",
     "excluded_windows":  [
                              "2026-07-20: user-operated Antigravity/OpenCode activity"
                          ],
-    "event_records":  58,
-    "occurrence_count":  112,
+    "event_records":  62,
+    "occurrence_count":  123,
     "hard_limit_occurrences":  8,
     "wait_timeout_occurrences":  16,
-    "avoidable_occurrences":  94,
+    "avoidable_occurrences":  102,
     "tracked_duration_seconds":  3386.95,
     "categories":  [
                        {
                            "category":  "invalid-command",
-                           "events":  24,
-                           "occurrences":  33,
+                           "events":  25,
+                           "occurrences":  37,
                            "duration_seconds":  20.8
                        },
                        {
@@ -50,6 +50,24 @@
                            "category":  "agent-no-progress",
                            "events":  1,
                            "occurrences":  3,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "environment-fallback",
+                           "events":  1,
+                           "occurrences":  3,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "avoidable-retry",
+                           "events":  1,
+                           "occurrences":  2,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "invalid-orchestration",
+                           "events":  1,
+                           "occurrences":  2,
                            "duration_seconds":  0
                        },
                        {

@@ -1,20 +1,23 @@
 # Execution Efficiency
 
-Generated: 2026-08-03T00:50:14.5725506Z
+Generated: 2026-08-03T02:17:22.3163810Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **94** | tracked duration: **3386,95 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **102** | tracked duration: **3386,95 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
-| invalid-command | 24 | 33 | 20,8 |
+| invalid-command | 25 | 37 | 20,8 |
 | tool-failure | 16 | 30 | 50,2 |
 | wait-timeout | 3 | 16 | 1820 |
 | command-timeout | 7 | 11 | 1225,15 |
 | invalid-diagnostic | 4 | 9 | 1,8 |
 | authorization-limit | 2 | 8 | 0 |
 | agent-no-progress | 1 | 3 | 0 |
+| environment-fallback | 1 | 3 | 0 |
+| avoidable-retry | 1 | 2 | 0 |
+| invalid-orchestration | 1 | 2 | 0 |
 | redundant-work | 1 | 2 | 269 |
 
 ## Prevention Rules
@@ -29,6 +32,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **94** | tra
 - Create destination parents for every sparse-overlay copy or use the official full clone after switching to an isolated branch.
 - Create smoke fixtures under the writable workspace and copy only build, source, Wrapper, Docker, and CI files.
 - Delegate read-only audits outside writable roots and reserve edits for writable worktrees.
+- Detect line endings and tool versions, keep rg arguments native, and enumerate wildcard copies explicitly.
 - Detect the file line ending or use a structured serializer; then run git diff --check and inspect the exact diff before commit.
 - Emit every accumulated validation failure with ErrorAction Continue, then return exit code 1.
 - Fetch the source clone first, then perform ff-only merge or compare FETCH_HEAD.
@@ -56,6 +60,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **94** | tra
 - Resolve the complete pinned validation set in an isolated venv before editing CI requirements.
 - Run a one-percent benchmark calibration and estimate the full timeout before the production workload.
 - Run bounded help output directly; do not truncate a process whose exit code is part of validation.
+- Run formatter and check independently; never stash evidence that will be regenerated.
 - Run one explicit docker build with plain progress to identify dependency resolution or build progress before retrying the full gate
 - Seed coherence smokes directly from the current Docker and GitHub Actions templates.
 - Stage inside one writable worktree and use one supported patch path before starting broad edits.
@@ -63,6 +68,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **94** | tra
 - Use ${kumoVersion} in colon-delimited identifiers and inspect semantic fields after schema validation.
 - Use a staged single-root edit path and do not retry the same failing tool after the first confirmed platform failure.
 - Use actual environment newlines or normalize generated text immediately before validation.
+- Use deterministic exact replacements, GitHub REST with GH_TOKEN, and inspect script parameters before invocation.
 - Use explicit line-ending normalization plus YAML parsing immediately after generated manifest writes.
 - Use explicit string conversion in structured diagnostics and validate against benchmark-result-v2.schema.json.
 - Use Get-Command preflight and call the existing REST client when gh is unavailable.
@@ -70,6 +76,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **94** | tra
 - Use one git ls-files and one porcelain-v2 status snapshot per repository, then filter in memory.
 - Use ordinary quoted strings or structured items for long agent prompts.
 - Use PowerShell-compatible exit handling in Windows workspace commands and keep shell-specific helpers in the kit.
+- Use Promise.allSettled or isolate expected failures from positive gates.
 - Use readable multiline diagnostic source and avoid assignment expressions in shell one-liners.
 - Use staged files and a 30-second floor for multi-file PowerShell edits.
 - Use Test-Path and a dated unique worktree directory before git worktree add.

@@ -8,7 +8,7 @@
 - CI workflows: 30.
 - Tracked benchmark contracts: 30.
 - V2 publication artifacts: 4.
-- Published and centrally verified: 3.
+- Published and centrally verified: 4.
 - Declared published without verification: 0.
 
 ## Project #3
@@ -56,3 +56,12 @@
 - Keep domain-specific aggregation in the project until a second implementation proves a stable reusable abstraction.
 
 Full command output remains in CI and project artifacts. Credential values and private reasoning are intentionally excluded.
+
+## Project #5
+
+- Repository: `Brilhante29/alpr-mercosul`.
+- Final head: `b69ae1d1c3ada4c6aa94b30e51b4404aa89e0a11`; CI `30778498303`.
+- Result: character accuracy `1.0`, plate accuracy `1.0`, 100 plates, 700 characters, zero failures.
+- Provenance: source `b23be43`, evidence `f22c834`, image `sha256:399b8ba8e00b4855fb0d7605682899a7b02345b3e31237a7755aa97f8f748e37`.
+- Semantic proof: `read_plate(image) -> str`; pixel mutation proves prediction follows image content.
+- Limit: synthetic fixed-layout workload, not real-road or production ALPR.

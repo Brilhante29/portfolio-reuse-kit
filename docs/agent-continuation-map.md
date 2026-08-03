@@ -288,3 +288,19 @@ Another AI should challenge any row by checking the linked artifact, Git head,
 or CI run. If evidence disagrees with this checkpoint, update the current
 handoff first, record a new decision, and keep this section as historical
 lineage rather than silently rewriting the past.
+
+## 2026-08-02 ALPR Closure And MLOps Transition
+
+```text
+schema-valid ALPR evidence
+  -> inspect prediction boundary
+  -> discover and remove oracle label leakage
+  -> add image-mutation negative proof
+  -> publish 100-plate V2 and exact-head CI
+  -> audit #21
+  -> preserve pipeline and ports
+  -> require real Airflow task execution
+  -> require the specified three-run median
+```
+
+The next AI should not repeat broad portfolio research. It should make the smallest #21 change that turns the framework claim into executable evidence, then run the expensive benchmark once on a clean source image.

@@ -30,3 +30,7 @@ return only generic improvements.
 Upstream only a pattern that is generic, tested, documented, backward
 compatible, and useful to at least two projects or a complete family. Keep
 retrieval policy, fixtures, and domain behavior in project #3.
+
+## ALPR Reuse Decision
+
+#5 returned generic workload derivation and label-leakage verification guidance to the kit. Its glyph renderer and template matcher remain project-specific until another project proves a stable abstraction.

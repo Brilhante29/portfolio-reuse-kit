@@ -52,3 +52,17 @@
 - Published facts come from committed Git `HEAD`. Dirty worktree files remain a warning signal and are never silently ignored.
 - The active defect family remains open because ALPR V2 reports one measured iteration for a 100-plate workload.
 - Repairing false evidence outranks starting #21; `mlops-end2end` becomes active after ALPR semantic validation closes.
+
+## 2026-08-02 - ALPR Oracle Tautology
+
+Context: the old benchmark returned ground truth, so perfect accuracy did not prove OCR.
+Decision: prediction accepts image pixels only; labels exist only in evaluation; pixel mutation is the negative proof.
+Rejected: publishing oracle accuracy as a placeholder.
+Evidence: #5 source `b23be43`, evidence `f22c834`, final CI `30778498303`.
+
+## 2026-08-02 - MLOps Orchestration Proof
+
+Context: #21 defines an Airflow DAG but its measured path calls Python stages directly.
+Decision: publication must execute through Airflow task machinery and retain the specified three-run median.
+Rejected: describing function-equivalent execution as Airflow orchestration evidence.
+Evidence: `runner.py`, `dags/mlops_end2end.py`, and `sdd/benchmark-plan.md`.
