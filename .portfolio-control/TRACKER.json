@@ -1,28 +1,30 @@
 {
     "schema_version":  1,
     "active_family":  "publication-v2-semantic-integrity",
-    "phase":  "reuse-kit-publication",
+    "phase":  "alpr-semantic-repair",
     "affected":  [
-                     "mini-aws-emulator",
-                     "portfolio-reuse-kit",
-                     "alpr-mercosul"
+                     "alpr-mercosul",
+                     "portfolio-reuse-kit"
                  ],
     "healthy_variants":  [
                              "rag-knowledge-base",
-                             "spring-hexagonal-payments"
+                             "spring-hexagonal-payments",
+                             "mini-aws-emulator"
                          ],
     "unknown":  [
 
                 ],
     "repos_local_verified":  [
-                                 "mini-aws-emulator@33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8",
-                                 "portfolio-reuse-kit@6f557a0"
+                                 "portfolio-reuse-kit@16a36227c6514ff296fabff441f33f69f532017f",
+                                 "mini-aws-emulator@8d3a4f7813b16bb61f9fbbfea19e7e6b41a5abbb"
                              ],
     "repos_pushed":  [
-                         "mini-aws-emulator@33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8"
+                         "portfolio-reuse-kit@16a36227c6514ff296fabff441f33f69f532017f",
+                         "mini-aws-emulator@8d3a4f7813b16bb61f9fbbfea19e7e6b41a5abbb"
                      ],
     "ci_green":  [
-                     "mini-aws-emulator#30772714926"
+                     "portfolio-reuse-kit#30774849915",
+                     "mini-aws-emulator#30774984792"
                  ],
     "blocked":  [
 
@@ -32,7 +34,7 @@
                           "skill-creator",
                           "publish-benchmark-evidence"
                       ],
-    "last_evidence":  "mini-aws-emulator run 30772714926 passed Test, Vet, Docker build, smoke evidence, and portfolio contract on SHA 33387db.",
-    "next_action":  "Push kit main, verify exact-head CI, close mini-aws-emulator metadata, then repair the ALPR measured_iterations=1 semantic artifact.",
-    "updated_at":  "2026-08-02T23:58:48.2598145Z"
+    "last_evidence":  "mini-aws-emulator final head 8d3a4f7 passed all CI steps in run 30774984792; kit head 16a3622 passed run 30774849915.",
+    "next_action":  "Repair alpr-mercosul measured_iterations=1 so the V2 workload truthfully records the 100-plate benchmark, then validate Docker and exact-head CI.",
+    "updated_at":  "2026-08-03T00:47:15.3663518Z"
 }

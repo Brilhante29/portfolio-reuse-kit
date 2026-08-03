@@ -1,17 +1,17 @@
 {
-    "project":  "mini-aws-emulator",
-    "status":  "publication-source-ci-green",
-    "phase":  "reuse-kit-publication",
-    "last_commit":  "33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8",
+    "project":  "alpr-mercosul",
+    "status":  "semantic-repair-required",
+    "phase":  "alpr-semantic-repair",
+    "last_commit":  "8d3a4f7813b16bb61f9fbbfea19e7e6b41a5abbb",
     "completed_gates":  [
-                            "local_project_validation",
-                            "docker_build",
-                            "benchmark_v1",
-                            "benchmark_v2_schema",
-                            "remote_ci_exact_source_head",
+                            "kit_local_validation",
+                            "kit_exact_head_ci",
+                            "mini_aws_local_validation",
+                            "mini_aws_benchmark_v2",
+                            "mini_aws_source_exact_head_ci",
+                            "mini_aws_published_exact_head_ci",
                             "central_publication_evidence",
-                            "focused_release_review",
-                            "reuse_improvement_local_validation"
+                            "reuse_improvement_published"
                         ],
     "failed_gates":  [
 
@@ -19,7 +19,7 @@
     "blockers":  [
 
                  ],
-    "next_action":  "Publish portfolio-reuse-kit commit 6f557a0, verify exact-head CI, then promote mini-aws-emulator metadata to published.",
-    "reuse_kit_version":  "portfolio-reuse-kit@6f557a0",
-    "updated_at":  "2026-08-02T23:58:48.2598145Z"
+    "next_action":  "Inspect alpr-mercosul workload semantics and regenerate V2 evidence with 100 measured plates before starting project #21.",
+    "reuse_kit_version":  "portfolio-reuse-kit@16a3622",
+    "updated_at":  "2026-08-03T00:47:15.3663518Z"
 }

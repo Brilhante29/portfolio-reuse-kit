@@ -241,3 +241,50 @@ logs must be revoked and rotated by the owner.
 
 This document is a map between those sources. It is not a substitute for
 reading the source file that owns a decision.
+
+## 2026-08-02 Observable Decision Checkpoint
+
+This section consolidates the reasoning path that led to the current task. It
+contains reviewable rationale and evidence, not hidden model deliberation.
+
+```text
+need a coherent 30-repository portfolio
+  -> group repositories into macro systems
+  -> use one reuse kit as decision and contract plane
+  -> publish the simplest high-signal systems first (#3, #11, #13)
+  -> require Docker, README number, benchmark artifact, and exact-head CI
+  -> separate V1 execution results from V2 publication provenance
+  -> discover schema-valid but false workload semantics in the generic producer
+  -> correct the reusable producer and preserve project-specific aggregation
+  -> validate published facts from committed HEAD while reporting local churn
+  -> close #13 with Kumo provenance and final exact-head CI
+  -> repair the same semantic defect in ALPR before starting #21
+```
+
+### Decisions And Evidence
+
+| Decision | Why | Evidence | Revisit trigger |
+|---|---|---|---|
+| Publish #3, #11, then #13 | covers Python/RAG, Kotlin/Spring, and Go/local-cloud with increasing integration pressure | central publication JSON and exact-head CI for all three | a published claim becomes stale or false |
+| Keep V1 and V2 separate | runtime output and publication provenance have different ownership and lifecycle | `benchmark-result-v2.schema.json`, producer tests, project artifacts | a versioned contract replaces both without losing provenance |
+| Never infer workload from repeat | repeats measure independent executions; they do not count domain operations | ALPR 100-plate mismatch and producer tests in `6f557a0` | none; semantic invariant |
+| Keep Kumo aggregation local | three-run conformance, diagnostics, and provider semantics are project-specific | #13 V2 artifact and `sdd/reuse-improvement-review.md` | a second provider project proves the same stable aggregation |
+| Validate publication from Git HEAD | exact-head CI proves committed files, not mutable worktree copies | regression test and kit commit `16a3622` | publication system moves to an immutable artifact store |
+| Repair ALPR before #21 | false evidence has higher portfolio risk than adding breadth | `.portfolio-control/TRACKER.json` | ALPR V2 workload is truthful and all gates pass |
+
+### Verified Checkpoint
+
+- Central strict audit: 30 repositories, 30 Docker definitions, 30 CI
+  workflows, 30 benchmark contracts, 4 V2 artifacts, 3 verified published
+  repositories, and zero declared published repositories without evidence.
+- Reuse kit: commit `16a3622`, CI run `30774849915`.
+- #13 final publication: commit `8d3a4f7`, CI run `30774984792`.
+- Active defect: ALPR V2 `measured_iterations=1` for a 100-plate workload.
+- Exact restart state and commands: `.portfolio-control/CURRENT_HANDOFF.md`.
+
+### Review Rule
+
+Another AI should challenge any row by checking the linked artifact, Git head,
+or CI run. If evidence disagrees with this checkpoint, update the current
+handoff first, record a new decision, and keep this section as historical
+lineage rather than silently rewriting the past.

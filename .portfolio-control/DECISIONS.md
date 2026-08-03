@@ -44,3 +44,11 @@
 - The generic producer is selected only for one V1 metric/value result with an explicit or unambiguous workload count.
 - Multi-run, multi-metric, provider-diagnostic, and domain-specific aggregation remain project-owned producers behind the shared V2 contract.
 - A schema pass is necessary but not sufficient; agents inspect workload size, samples, units, aggregation, provider identity, and exact-head CI.
+
+## 2026-08-02 #13 publication closure
+
+- `mini-aws-emulator` is published at `8d3a4f7`; exact-head CI run `30774984792` passed all jobs and steps.
+- The reusable producer correction shipped in `6f557a0`; committed-head publication validation shipped in `16a3622` and passed kit CI `30774849915`.
+- Published facts come from committed Git `HEAD`. Dirty worktree files remain a warning signal and are never silently ignored.
+- The active defect family remains open because ALPR V2 reports one measured iteration for a 100-plate workload.
+- Repairing false evidence outranks starting #21; `mlops-end2end` becomes active after ALPR semantic validation closes.
