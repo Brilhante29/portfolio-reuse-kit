@@ -17,7 +17,7 @@ Purpose: observable state for Codex, Claude Code, another AI, or a human. No pri
 |---|---|---|
 | Portfolio | 30 repositories | 30 Docker, 30 CI, 30 tracked benchmark contracts |
 | Published | #3, #5, #11, #13, #21 | exact-head CI and central publication JSON |
-| Reuse kit | last green head `9049970` | CI `30779025633`; current Git-blob provenance change pending publication |
+| Reuse kit | proven implementation head `129d9b6` | CI `30782110254`; all 12 steps passed |
 | Active | #24 `ci-cd-templates` at clean head `141173e` | deterministic V1 scanner; V2 absent |
 | Blocking defects | none external | #24 requires audit and publication upgrade |
 

@@ -6,9 +6,9 @@ Purpose: concise mechanical checkpoint. Re-run Git commands before editing becau
 ## portfolio-reuse-kit
 
 - Branch: `main`.
-- Last green remote head before this checkpoint: `9049970b36c34bdc3eb0905934efc539100e84fd`.
-- Exact-head CI: `30779025633`, success.
-- Current work: central #21 evidence plus tested Git-blob provenance improvement; commit, push, and exact-head CI still required.
+- Proven implementation head: `129d9b69979b6f5121c3c705ad77e92e03711528`.
+- Exact-head CI: `30782110254`, success; all 12 steps passed.
+- Current work: #21 central evidence and Git-blob provenance improvement are published; #24 is active.
 
 ## mlops-end2end
 

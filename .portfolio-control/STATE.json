@@ -1,32 +1,34 @@
 {
-  "project": "ci-cd-templates",
-  "status": "audit-required",
-  "phase": "ci-cd-templates-baseline-audit",
-  "last_commit": "141173ee57b1446f6820c33edb0269c34beeeaae",
-  "completed_gates": [
-    "alpr_central_publication_evidence",
-    "alpr_exact_head_ci",
-    "alpr_truthful_image_only_ocr",
-    "alpr_v2_measured_iterations_100",
-    "central_publication_evidence",
-    "kit_exact_head_ci",
-    "kit_local_validation",
-    "mini_aws_benchmark_v2",
-    "mini_aws_local_validation",
-    "mini_aws_published_exact_head_ci",
-    "mini_aws_source_exact_head_ci",
-    "reuse_improvement_published",
-    "mlops_airflow_task_execution",
-    "mlops_three_run_v2",
-    "mlops_exact_head_ci",
-    "mlops_central_publication_evidence",
-    "git_blob_provenance_regression"
-  ],
-  "failed_gates": [
-    "ci_templates_v2_publication_missing"
-  ],
-  "blockers": [],
-  "next_action": "Trace the seven-finding benchmark through real scanner policies, then add the smallest truthful V2 provenance path and exact-head CI.",
-  "reuse_kit_version": "portfolio-reuse-kit@9049970",
-  "updated_at": "2026-08-03T03:30:00Z"
+    "project":  "ci-cd-templates",
+    "status":  "audit-required",
+    "phase":  "ci-cd-templates-baseline-audit",
+    "last_commit":  "141173ee57b1446f6820c33edb0269c34beeeaae",
+    "completed_gates":  [
+                            "alpr_central_publication_evidence",
+                            "alpr_exact_head_ci",
+                            "alpr_truthful_image_only_ocr",
+                            "alpr_v2_measured_iterations_100",
+                            "central_publication_evidence",
+                            "kit_exact_head_ci",
+                            "kit_local_validation",
+                            "mini_aws_benchmark_v2",
+                            "mini_aws_local_validation",
+                            "mini_aws_published_exact_head_ci",
+                            "mini_aws_source_exact_head_ci",
+                            "reuse_improvement_published",
+                            "mlops_airflow_task_execution",
+                            "mlops_three_run_v2",
+                            "mlops_exact_head_ci",
+                            "mlops_central_publication_evidence",
+                            "git_blob_provenance_regression"
+                        ],
+    "failed_gates":  [
+                         "ci_templates_v2_publication_missing"
+                     ],
+    "blockers":  [
+
+                 ],
+    "next_action":  "Trace the seven-finding benchmark through real scanner policies, then add the smallest truthful V2 provenance path and exact-head CI.",
+    "reuse_kit_version":  "portfolio-reuse-kit@129d9b6",
+    "updated_at":  "2026-08-03T03:40:00Z"
 }

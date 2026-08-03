@@ -59,11 +59,11 @@
 
 ## Reuse Kit
 
-- Last green head: `9049970b36c34bdc3eb0905934efc539100e84fd`.
-- Exact-head CI: `https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/30779025633`.
+- Proven implementation head: `129d9b69979b6f5121c3c705ad77e92e03711528`.
+- Exact-head CI: `https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/30782110254`.
 - Tests: ten Python producer tests plus the PowerShell published-head regression.
 - Shared skill: `publish-benchmark-evidence` for Codex and Claude.
-- Current improvement pending publication: canonical Git-blob digests for tracked provenance inputs.
+- Published improvement: canonical Git-blob digests for tracked provenance inputs.
 
 ## Learned Reuse
 
