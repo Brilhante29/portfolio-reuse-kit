@@ -207,6 +207,7 @@ $requiredFiles = @(
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
   "tests/test_generate_publication_benchmark.py",
+  "tests/test-validate-portfolio-published-head.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -405,6 +406,7 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
 $pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/generate-publication-benchmark.py', r'$root/tools/sync-catalog-stacks.py', r'$root/tests/test_generate_publication_benchmark.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 Invoke-Checked "publication benchmark tests" { python -m unittest discover -s (Join-Path $root "tests") -p "test_*.py" | Out-Null }
+Invoke-Checked "published HEAD validation regression" { & (Join-Path $root "tests/test-validate-portfolio-published-head.ps1") | Out-Null }
 
 $powerShellScripts = @(
   "tools/new-project.ps1",
@@ -425,6 +427,7 @@ $powerShellScripts = @(
   "tools/validate-gradle-project.ps1",
   "templates/validate-project.ps1",
   "templates/validate-gradle-project.ps1",
+  "tests/test-validate-portfolio-published-head.ps1",
   "tools/validate-kit.ps1"
 )
 

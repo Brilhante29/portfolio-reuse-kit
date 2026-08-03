@@ -60,3 +60,5 @@ The repository must be clean before the command. Inputs and outputs must remain 
 7. Store the publication evidence JSON in the project and central control plane.
 
 Schema validity alone does not prove semantic validity.
+
+For a repository already marked `published`, central validation reads the committed Git `HEAD` for the manifest, README, benchmark artifacts, and placeholders. Uncommitted local files remain visible through `dirty_files` but cannot rewrite or revoke exact-head remote evidence. A `benchmarked` publication candidate still requires a clean working tree.
