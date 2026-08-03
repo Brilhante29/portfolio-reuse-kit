@@ -22,8 +22,8 @@ return only generic improvements.
 | Project | Reusable delta | Decision |
 |---|---|---|
 | #3 `rag-knowledge-base` | deterministic retrieval fixture and a two-contract benchmark path: local v1 result plus publication V2 provenance | `patch_now` for the central validator and templates; keep domain code local |
-
-| #11 spring-hexagonal-payments | Gradle lock plus three-run JVM/k6 V2 provenance pattern | patch_now as generic benchmark/provenance guidance candidate; keep payment policy local |
+| #11 `spring-hexagonal-payments` | Gradle lock plus three-run JVM/k6 V2 provenance pattern | `patch_now` as generic benchmark/provenance guidance; keep payment policy local |
+| #13 `mini-aws-emulator` | pinned-provider provenance, explicit workload sizing, and project-specific multi-run aggregation | `patch_now` in generic producer and mirrored publication skill; keep Kumo conformance semantics local |
 
 ## Reuse Boundary
 

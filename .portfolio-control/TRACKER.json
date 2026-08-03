@@ -1,0 +1,38 @@
+{
+    "schema_version":  1,
+    "active_family":  "publication-v2-semantic-integrity",
+    "phase":  "reuse-kit-publication",
+    "affected":  [
+                     "mini-aws-emulator",
+                     "portfolio-reuse-kit",
+                     "alpr-mercosul"
+                 ],
+    "healthy_variants":  [
+                             "rag-knowledge-base",
+                             "spring-hexagonal-payments"
+                         ],
+    "unknown":  [
+
+                ],
+    "repos_local_verified":  [
+                                 "mini-aws-emulator@33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8",
+                                 "portfolio-reuse-kit@6f557a0"
+                             ],
+    "repos_pushed":  [
+                         "mini-aws-emulator@33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8"
+                     ],
+    "ci_green":  [
+                     "mini-aws-emulator#30772714926"
+                 ],
+    "blocked":  [
+
+                ],
+    "active_skills":  [
+                          "i-have-adhd",
+                          "skill-creator",
+                          "publish-benchmark-evidence"
+                      ],
+    "last_evidence":  "mini-aws-emulator run 30772714926 passed Test, Vet, Docker build, smoke evidence, and portfolio contract on SHA 33387db.",
+    "next_action":  "Push kit main, verify exact-head CI, close mini-aws-emulator metadata, then repair the ALPR measured_iterations=1 semantic artifact.",
+    "updated_at":  "2026-08-02T23:58:48.2598145Z"
+}

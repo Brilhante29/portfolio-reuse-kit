@@ -452,3 +452,13 @@ in `yolo-training-pipeline`.
 
 - #11 published with Kotlin/Gradle dependency locking and three-run V2 benchmark provenance.
 - The next active project is #13; audit Kumo/local-first boundaries before implementation.
+
+## 2026-08-02 #13 source evidence and producer correction
+
+- mini-aws-emulator source/artifact commit `33387db` passed local Docker validation and exact-head CI run `30772714926`.
+- V2 evidence reports 100 percent conformance, median p95 1.704 ms, mean 764.682 ops/s, 81.2 percent coverage, and zero failed operations across three runs.
+- portfolio-reuse-kit commit `6f557a0` fixes a semantic defect in the generic producer: measured workload is no longer inferred from run repetition.
+- The producer now checks clean source, bounded paths, explicit/derived workload size, immutable image digest, and seven unit tests.
+- Codex and Claude receive the same `publish-benchmark-evidence` skill; custom multi-run/Kumo aggregation stays in project #13.
+- `trk` and `ctx` were unavailable. `.portfolio-control/TRACKER.json` is the active fallback.
+- Next action: push kit main, verify exact-head CI, then promote #13 final metadata. After #13 closes, repair the ALPR artifact whose V2 workload currently says one iteration for a 100-plate run.

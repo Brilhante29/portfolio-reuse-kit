@@ -37,3 +37,10 @@
 
 - #11 published with Kotlin/Gradle dependency locking and three-run V2 benchmark provenance.
 - The next active project is #13; audit Kumo/local-first boundaries before implementation.
+
+## 2026-08-02 V2 semantic integrity
+
+- `execution.repeat` records independent run repetitions; it never substitutes for `workload.measured_iterations`.
+- The generic producer is selected only for one V1 metric/value result with an explicit or unambiguous workload count.
+- Multi-run, multi-metric, provider-diagnostic, and domain-specific aggregation remain project-owned producers behind the shared V2 contract.
+- A schema pass is necessary but not sufficient; agents inspect workload size, samples, units, aggregation, provider identity, and exact-head CI.

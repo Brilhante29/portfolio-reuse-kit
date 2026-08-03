@@ -1,20 +1,25 @@
 {
-  "project": "spring-hexagonal-payments",
-  "status": "published",
-  "phase": "portfolio-transition",
-  "last_commit": "bdbf919a522f7a7884b087df40fefbc1fe818f6a",
-  "completed_gates": [
-    "local_project_validation",
-    "docker_build",
-    "benchmark_v1",
-    "benchmark_v2_schema",
-    "remote_ci_exact_head",
-    "publication_evidence",
-    "focused_release_review"
-  ],
-  "failed_gates": [],
-  "blockers": [],
-  "next_action": "Audit mini-aws-emulator (#13) and apply one generic local-first/Kumo reuse-kit improvement before implementation.",
-  "reuse_kit_version": "portfolio-reuse-kit@9b743580ebe0f8d9f794d75c50060780a3e59e75",
-  "updated_at": "2026-07-30T21:20:00Z"
+    "project":  "mini-aws-emulator",
+    "status":  "publication-source-ci-green",
+    "phase":  "reuse-kit-publication",
+    "last_commit":  "33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8",
+    "completed_gates":  [
+                            "local_project_validation",
+                            "docker_build",
+                            "benchmark_v1",
+                            "benchmark_v2_schema",
+                            "remote_ci_exact_source_head",
+                            "central_publication_evidence",
+                            "focused_release_review",
+                            "reuse_improvement_local_validation"
+                        ],
+    "failed_gates":  [
+
+                     ],
+    "blockers":  [
+
+                 ],
+    "next_action":  "Publish portfolio-reuse-kit commit 6f557a0, verify exact-head CI, then promote mini-aws-emulator metadata to published.",
+    "reuse_kit_version":  "portfolio-reuse-kit@6f557a0",
+    "updated_at":  "2026-08-02T23:58:48.2598145Z"
 }

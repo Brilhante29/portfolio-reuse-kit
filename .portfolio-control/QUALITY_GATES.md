@@ -16,7 +16,12 @@ evidence, not from manifest intent.
 - [x] Completed #11 exact-head CI and publication evidence are verified.
 - [x] Completed #11 focused release review has no P0/P1 findings.
 - [ ] Entire portfolio has current verified evidence for every published claim.
-- [ ] Active #13 local-first/Kumo architecture, Docker, benchmark, CI, and publication gates.
+- [x] Active #13 local-first/Kumo architecture and provider boundary are reviewed.
+- [x] Active #13 local Docker validation, three-run V2 schema, and exact-head source CI pass.
+- [x] Active #13 central publication evidence is tied to source/artifact SHA 33387db.
+- [x] Generic V2 producer distinguishes measured workload from run repetition and passes seven tests locally.
+- [ ] Generic V2 producer exact-head kit CI is green.
+- [ ] #13 final metadata status is published and its exact-head CI is green.
 
 ## Prohibited Shortcuts
 

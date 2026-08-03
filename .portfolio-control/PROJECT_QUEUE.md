@@ -8,7 +8,7 @@ reuse evidence must agree.
 
 | Priority | Project | Current evidence | Next action |
 |---:|---|---|---|
-| 1 | mini-aws-emulator (#13) | not audited in the current control cycle | audit Kumo/local-first claims, service boundaries, benchmark, and reusable gaps |
+| 1 | mini-aws-emulator (#13) | V2 source/artifact SHA 33387db passed local Docker validation and exact-head CI run 30772714926 | publish the tested generic producer, then promote final project metadata |
 
 ## Completed In This Cycle
 

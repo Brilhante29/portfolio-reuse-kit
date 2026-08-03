@@ -28,6 +28,19 @@
 - Final release metadata head: bdbf919a522f7a7884b087df40fefbc1fe818f6a.
 - Final release CI: https://github.com/Brilhante29/spring-hexagonal-payments/actions/runs/30582309495.
 
+
+## Project #13
+
+- Repository: Brilhante29/mini-aws-emulator.
+- Current status: source/artifact publication CI is green; final metadata promotion is pending.
+- Stack: Go 1.25.10, AWS SDK Go v2 1.41.9, Smithy Go 1.26.0, pinned Kumo 0.25.3, Docker.
+- V2 result: 100 percent scoped conformance, median p95 1.704 ms, mean 764.682 ops/s, 81.2 percent core coverage, zero failed operations.
+- V2 samples: p95 1.715, 1.605, 1.704 ms; throughput 730.145, 850.726, 713.176 ops/s.
+- Source/artifact head: 33387dbf8c31206bcc5fed4ed8ae8533d27c8fb8.
+- Exact-head CI: https://github.com/Brilhante29/mini-aws-emulator/actions/runs/30772714926.
+- Kumo digest: sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b.
+- Reuse improvement: generic producer and Codex/Claude publication skill at kit commit 6f557a0; remote CI pending.
+- Limit: local Kumo latency is not an AWS production performance claim.
 ## Reuse Learned
 
 - Keep V1 execution and V2 publication artifacts separate.
