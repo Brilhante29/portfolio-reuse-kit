@@ -33,4 +33,4 @@ AI Evaluation and Retrieval Systems remains complete at 6/6 repositories with ex
 
 ## Exact Next Action
 
-Publish this kit branch to `main` and require exact-head CI green. Then start the bounded Backend Traffic and Platform Edge slice (`#12`, `#13`, `#15`, `#17`, `#18`) without reopening the completed transactional core unless CI regresses.
+Audit the clean local heads of Backend Traffic and Platform Edge (`#12`, `#13`, `#15`, `#17`, `#18`) against their GitHub default branches. Fix real implementation/evidence gaps, publish all five to `main`, and require exact-head CI without reopening the completed transactional core unless CI regresses.
