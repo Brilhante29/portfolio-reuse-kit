@@ -1,48 +1,34 @@
 # Current Handoff
 
 Updated: 2026-08-10
-Owner: principal agent
-Purpose: observable continuation state for Codex, Claude Code, another AI, or a human. No private chain-of-thought is stored.
+Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
 
-1. Read this file, `.portfolio-control/TRACKER.json` and `.portfolio-control/PROJECT_QUEUE.md`.
-2. Verify the current kit branch and exact-head GitHub Actions before selecting new work.
-3. Read the selected program, project manifest, SDD, benchmark evidence and reuse review.
-4. Keep one active macro and update the observable handoff after each publication milestone.
+1. Read this file, `TRACKER.json`, `PROJECT_QUEUE.md`, and the active program document.
+2. Verify final `main` SHA and exact-head CI before changing a completed repository.
+3. Keep one macro active and apply only reuse improvements observed in multiple repositories.
 
 ## Current Truth
 
-Applied Computer Vision and Medical AI is closed as four coherent repositories:
+AI Evaluation and Retrieval Systems is complete:
 
-| # | Repository | Published head | Exact-head CI | Measured proof |
-|---:|---|---|---|---|
-| 1 | `yolo-training-pipeline` | `14ecde1` | `31341854246` | median held-out mAP50-95 `0.002420`; warmed p95 `68.303 ms/image`; 3 runs |
-| 5 | `alpr-mercosul` | `fcacf0c` | `31341450011` | character accuracy `1.000000`; 700 chars / 100 synthetic plates |
-| 6 | `melanoma-classifier` | `890e3f1` | `31341853463` | DermaMNIST test AUC `0.736999`; sensitivity `0.762332`; 2,005 images |
-| 7 | `vision-serving-fastapi` | `2966a47` | `31341853937` | real YOLO HTTP `39.200 req/s`; p95 `27.343 ms`; 20/20 successes |
+| # | Repository | `main` head | CI run |
+|---:|---|---|---:|
+| 2 | `llm-eval-harness` | `5aaf544` | `31347740607` |
+| 3 | `rag-knowledge-base` | `ee46136` | `31347697814` |
+| 8 | `embeddings-benchmark` | `bfff98e` | `31347801700` |
+| 9 | `llm-agent-eval` | `6d10362` | `31347790507` |
+| 10 | `prompt-ab-testing` | `0971e12` | `31347782233` |
+| 30 | `cost-aware-inference` | `90f8a0d` | `31347773690` |
 
-Repository #4 `stroke-signal-demo` belongs to `mlops-data-platform`, not this vision program.
+## Decisions
 
-## System Story
-
-`#1` produces a manifest-bound checkpoint. `#7` verifies its bytes and SHA-256 before real Ultralytics inference. `#5` proves label-independent image OCR under a narrow synthetic workload. `#6` proves real-dataset medical evaluation with official splits and validation-only threshold selection.
-
-## Reuse Delta
-
-- Added `python-computer-vision` and `medical-ai-evaluation` skills for Codex and Claude.
-- New scaffolds receive the V2 producer, semantic validator, publication spec and validation lock automatically.
-- Portfolio validation accepts canonical V2 `benchmark.result_path` while retaining legacy V1 compatibility.
-- Medical rules now require source/license/checksum/splits, validation-only thresholds and explicit non-clinical scope.
-- Model consumers must verify manifest schema, bytes and SHA-256 before framework load.
-
-## Safety
-
-- Never store credentials, private reasoning or machine-specific absolute paths in project evidence.
-- Do not describe synthetic ALPR or YOLO metrics as real-domain accuracy.
-- Do not describe the melanoma baseline as clinical safety or diagnosis.
-- Keep cloud, broker, database and model registry out unless their behavior is the measured claim; use Kumo behind ports for AWS-like local behavior.
+- Use exact producer SHA plus versioned artifact for cross-repository edges.
+- Keep provider execution outside evaluator cores; local Ollama/OpenAI-compatible adapters remain replaceable.
+- Preserve ties, low scores, planner errors, and tool errors as evidence.
+- Pin model digest/revision and fail on drift.
 
 ## Exact Next Action
 
-After the reuse-kit branch passes exact-head CI, select and close the next macro as a bounded set. Do not reopen these four repositories unless their CI regresses or a new workload version is approved.
+Publish this kit branch to `main`, require exact-head CI green, then select one next macro. Do not reopen these six unless CI regresses or a new workload version is approved.

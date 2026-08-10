@@ -1,48 +1,45 @@
 {
   "schema_version": 1,
-  "active_family": "applied-computer-vision",
+  "active_family": "ai-evaluation-retrieval",
   "phase": "macro-closed-kit-publication-pending",
   "affected": [
-    "yolo-training-pipeline",
-    "alpr-mercosul",
-    "melanoma-classifier",
-    "vision-serving-fastapi",
+    "llm-eval-harness",
+    "rag-knowledge-base",
+    "embeddings-benchmark",
+    "llm-agent-eval",
+    "prompt-ab-testing",
+    "cost-aware-inference",
     "portfolio-reuse-kit"
   ],
   "healthy_variants": [
-    "yolo-training-pipeline",
-    "alpr-mercosul",
-    "melanoma-classifier",
-    "vision-serving-fastapi"
+    "llm-eval-harness",
+    "rag-knowledge-base",
+    "embeddings-benchmark",
+    "llm-agent-eval",
+    "prompt-ab-testing",
+    "cost-aware-inference"
   ],
   "unknown": [],
   "repos_local_verified": [
-    "yolo-training-pipeline@14ecde16e7c0af0e21bde41878523839390ab1f7",
-    "alpr-mercosul@fcacf0c399896777013d25ed0ff836c5db6e1ead",
-    "melanoma-classifier@890e3f1d3ad8b1df5bc86b03ac9212c9ce42ea4a",
-    "vision-serving-fastapi@2966a478c864c219585ccd27303382dae79df3f6"
+    "llm-eval-harness@5aaf54498e94331dc8d0726b443680b89d8722f4",
+    "rag-knowledge-base@ee461368fc59a94aaf8ea13cf0dadbbaf2ef0203",
+    "embeddings-benchmark@bfff98e3f37db3d396465d61ae239e526f3c5bf6",
+    "llm-agent-eval@6d103629a9b650cdb04c0f8a3d00c4464c4dd6bb",
+    "prompt-ab-testing@0971e12527a7946060e8ffd7413b2c0461a39d15",
+    "cost-aware-inference@90f8a0d387d053e33fdb676cbe61e536d47a841d"
   ],
-  "repos_pushed": [
-    "yolo-training-pipeline@14ecde16e7c0af0e21bde41878523839390ab1f7",
-    "alpr-mercosul@fcacf0c399896777013d25ed0ff836c5db6e1ead",
-    "melanoma-classifier@890e3f1d3ad8b1df5bc86b03ac9212c9ce42ea4a",
-    "vision-serving-fastapi@2966a478c864c219585ccd27303382dae79df3f6"
-  ],
+  "repos_pushed": ["llm-eval-harness", "rag-knowledge-base", "embeddings-benchmark", "llm-agent-eval", "prompt-ab-testing", "cost-aware-inference"],
   "ci_green": [
-    "yolo-training-pipeline#31341854246",
-    "alpr-mercosul#31341450011",
-    "melanoma-classifier#31341853463",
-    "vision-serving-fastapi#31341853937"
+    "llm-eval-harness#31347740607",
+    "rag-knowledge-base#31347697814",
+    "embeddings-benchmark#31347801700",
+    "llm-agent-eval#31347790507",
+    "prompt-ab-testing#31347782233",
+    "cost-aware-inference#31347773690"
   ],
   "blocked": [],
-  "active_skills": [
-    "i-have-adhd",
-    "skill-creator",
-    "publish-benchmark-evidence",
-    "python-computer-vision",
-    "medical-ai-evaluation"
-  ],
-  "last_evidence": "Applied Computer Vision closed 4/4 with provenance-rich V2 evidence and exact-head CI for every repository.",
+  "active_skills": ["i-have-adhd", "publish-benchmark-evidence", "local-first-ai-evidence"],
+  "last_evidence": "AI Evaluation and Retrieval Systems closed 6/6 with real local producers, provenance-bound V2 evidence, and exact-head CI.",
   "next_action": "Publish and verify the portfolio-reuse-kit exact head, then select one bounded next macro.",
-  "updated_at": "2026-08-10T00:00:00Z"
+  "updated_at": "2026-08-10T01:45:00Z"
 }

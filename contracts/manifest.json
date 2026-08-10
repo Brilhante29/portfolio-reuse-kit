@@ -72,6 +72,14 @@
       "bytes": 6048,
       "sha256": "sha256:cc92dab0c92e95e7ce19feb396706f3d9456a611bbf0704d11c4d4ea20a3583a"
     },
+    "prediction-artifact.schema.json": {
+      "bytes": 1390,
+      "sha256": "sha256:113a6bd9783e9a9bbcd66812e1a3c76972fd29d9dc5688dad1277874668deaae"
+    },
+    "producer-lock.schema.json": {
+      "bytes": 827,
+      "sha256": "sha256:409d0e63cf46963deea9f6d09295923093d40dab43dceb1cf51dfe9af64a7f2e"
+    },
     "project.schema.json": {
       "bytes": 25252,
       "sha256": "sha256:5676430723f2f1515ad7815b30a9d3f24325981701414388d8c5a972887027da"
