@@ -5,7 +5,7 @@
     "branch":  "codex/yolo-training-pipeline/publication-gates",
     "remote_url":  "https://github.com/Brilhante29/yolo-training-pipeline.git",
     "ci_conclusion":  "success",
-    "ci_run_url":  "https://github.com/Brilhante29/yolo-training-pipeline/actions/runs/31341854246",
+    "ci_run_url":  "https://github.com/Brilhante29/yolo-training-pipeline/actions/runs/31343897736",
     "workflow":  "validate",
-    "verified_at":  "2026-08-10T00:00:11.0566209Z"
+    "verified_at":  "2026-08-10T14:55:54.9047105Z"
 }

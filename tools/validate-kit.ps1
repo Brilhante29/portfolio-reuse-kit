@@ -43,6 +43,7 @@ $requiredFiles = @(
   "CLAUDE.md",
   "requirements-ci.txt",
   "PUBLISH.md",
+  ".github/workflows/validate.yml",
   ".openspec-store/store.yaml",
   "LICENSE",
   ".editorconfig",
@@ -104,6 +105,7 @@ $requiredFiles = @(
   "contracts/fixtures/project.wrapper-pair-mismatch.invalid.json",
   "contracts/fixtures/benchmark-result-v2.valid.json",
   "contracts/fixtures/benchmark-result-v2.invalid.json",
+  "contracts/fixtures/portfolio-audit.valid.json",
   "contracts/portfolio-evidence.openapi.yaml",
   "contracts/portfolio-evidence.graphql",
   "contracts/manifest.json",
@@ -196,6 +198,8 @@ $requiredFiles = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/sanitize-git-auth.ps1",
+  "tools/test-sanitize-git-auth.ps1",
   "tools/validate-portfolio.ps1",
   "tools/validate-contracts.py",
   "tools/audit-manifest-rollout.py",
@@ -209,6 +213,8 @@ $requiredFiles = @(
   "tools/capture-continuity-state.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
+  "tools/checkpoint-portfolio.ps1",
+  "tools/test-checkpoint-portfolio.ps1",
   "tests/test_generate_publication_benchmark.py",
   "tests/test-validate-portfolio-published-head.ps1",
   "tools/validate-kit.ps1"
@@ -361,6 +367,15 @@ Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Li
 Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
 Require-Pattern "decision-brain/jvm-language-matrix.yaml" "outbox-pattern:"
 Require-Pattern "decision-brain/continuity-protocol.yaml" "exit_loop_rules"
+Require-Pattern "decision-brain/continuity-protocol.yaml" "completion_requires: published_verified"
+Require-Pattern "tools/checkpoint-portfolio.ps1" "Statuses are derived from tools/validate-portfolio.ps1"
+Require-Pattern "tools/checkpoint-portfolio.ps1" "published_verified"
+Require-Pattern "tools/checkpoint-portfolio.ps1" "RepositoryOverrides"
+Require-Pattern "tools/clear-github-token.ps1" "SanitizeGitConfig"
+Require-Pattern "tools/sanitize-git-auth.ps1" "affected_after"
+Require-Pattern "tools/sanitize-git-auth.ps1" "Remove-UserInfo"
+Require-Pattern "tools/validate-portfolio.ps1" "remote get-url origin"
+Require-Pattern "tools/validate-portfolio.ps1" 'benchmarkContract -or \$benchmarkContractV2'
 Require-Pattern "tools/capture-continuity-state.ps1" "Sanitize-Line"
 Require-Pattern "tools/audit-manifest-rollout.py" "v2_ready"
 Require-Pattern "docs/manifest-v2-rollout.md" "legacy compatibility"
@@ -394,6 +409,15 @@ Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
 
+$workflowActionReferences = Select-String -Path (Join-Path $root ".github/workflows/*.yml") -Pattern 'uses:\s*[^@\s]+@(?<ref>[^\s#]+)' -AllMatches
+foreach ($reference in $workflowActionReferences) {
+  foreach ($match in $reference.Matches) {
+    if ($match.Groups['ref'].Value -notmatch '^[0-9a-f]{40}$') {
+      $failures.Add("Mutable GitHub Action reference in $($reference.Path): $($match.Value)")
+    }
+  }
+}
+
 Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $root "harness/result.schema.json") | Out-Null }
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
 Invoke-Checked "benchmark schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null }
@@ -404,6 +428,8 @@ Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Pa
 Invoke-Checked "interoperability contracts" { python (Join-Path $root "tools/validate-contracts.py") | Out-Null }
 Invoke-Checked "generated contract manifest" { python (Join-Path $root "tools/generate-contract-manifest.py") --check | Out-Null }
 Invoke-Checked "generated design tokens" { python (Join-Path $root "tools/generate-design-tokens.py") --check | Out-Null }
+Invoke-Checked "portfolio checkpoint fixture" { & (Join-Path $root "tools/test-checkpoint-portfolio.ps1") | Out-Null }
+Invoke-Checked "Git auth sanitizer fixture" { & (Join-Path $root "tools/test-sanitize-git-auth.ps1") | Out-Null }
 $executionLine = 0
 foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/EXECUTION_EVENTS.jsonl")) {
   $executionLine++
@@ -428,11 +454,15 @@ $powerShellScripts = @(
   "tools/publish-all.ps1",
   "tools/set-github-token.ps1",
   "tools/clear-github-token.ps1",
+  "tools/sanitize-git-auth.ps1",
+  "tools/test-sanitize-git-auth.ps1",
   "tools/validate-portfolio.ps1",
   "tools/record-execution-event.ps1",
   "tools/report-execution-efficiency.ps1",
   "tools/verify-github-publication.ps1",
   "tools/report-portfolio.ps1",
+  "tools/checkpoint-portfolio.ps1",
+  "tools/test-checkpoint-portfolio.ps1",
   "tools/capture-continuity-state.ps1",
   "tools/validate-gradle-project.ps1",
   "templates/validate-project.ps1",

@@ -5,7 +5,7 @@
     "branch":  "codex/alpr-mercosul/publication-gates",
     "remote_url":  "https://github.com/Brilhante29/alpr-mercosul.git",
     "ci_conclusion":  "success",
-    "ci_run_url":  "https://github.com/Brilhante29/alpr-mercosul/actions/runs/31341450011",
-    "workflow":  "validate",
-    "verified_at":  "2026-08-10T00:00:09.4018028Z"
+    "ci_run_url":  "https://github.com/Brilhante29/alpr-mercosul/actions/runs/31343901786",
+    "workflow":  "Graph Update: pip in /. #1515737116",
+    "verified_at":  "2026-08-10T14:55:45.8968202Z"
 }
