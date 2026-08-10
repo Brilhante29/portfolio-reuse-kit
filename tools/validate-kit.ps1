@@ -90,6 +90,8 @@ $requiredFiles = @(
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
   "contracts/benchmark-result-v2.schema.json",
+  "contracts/commerce-event-v1.schema.json",
+  "contracts/backend-reliability-platform.yaml",
   "contracts/fixtures/project.valid.json",
   "contracts/fixtures/project.non-jvm.valid.json",
   "contracts/fixtures/project.legacy.valid.json",
@@ -127,6 +129,7 @@ $requiredFiles = @(
   "docs/publication-benchmark-evidence.md",
   "docs/usage.md",
   "docs/ai-evaluation-retrieval.md",
+  "docs/backend-reliability-platform.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
@@ -236,6 +239,7 @@ $requiredDirs = @(
   ".codex/skills/go-backend",
   ".codex/skills/node-typescript-backend",
   ".codex/skills/publish-benchmark-evidence",
+  ".codex/skills/backend-reliability-evidence",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -257,7 +261,8 @@ $requiredDirs = @(
   ".claude/skills/fastapi-backend",
   ".claude/skills/go-backend",
   ".claude/skills/node-typescript-backend",
-  ".claude/skills/publish-benchmark-evidence"
+  ".claude/skills/publish-benchmark-evidence",
+  ".claude/skills/backend-reliability-evidence"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -288,6 +293,11 @@ if ($programCount -lt 6) {
 Require-Pattern "component-packs/manifest.yaml" "^base_pack:"
 Require-Pattern "component-packs/manifest.yaml" "^reuse_priority_order:"
 Require-Pattern "component-packs/manifest.yaml" "id: ai-evaluation-retrieval"
+Require-Pattern "component-packs/manifest.yaml" "backend-reliability-evidence"
+Require-Pattern "contracts/backend-reliability-platform.yaml" "databases are private to each repository"
+Require-Pattern "contracts/commerce-event-v1.schema.json" '"causationId"'
+Require-Pattern ".codex/skills/backend-reliability-evidence/SKILL.md" "no-op compensation"
+Require-Pattern ".claude/skills/backend-reliability-evidence/SKILL.md" "no-op compensation"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "^artifact_graph:"
 Require-Pattern "decision-brain/cloud-matrix.yaml" "image_digest:"
 Require-Pattern "templates/validate-project.ps1" "Mutable Kumo image reference found"
@@ -379,7 +389,7 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.2.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.3.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"

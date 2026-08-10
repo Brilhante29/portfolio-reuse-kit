@@ -203,6 +203,7 @@ The same skills are provided for Codex and Claude Code:
 | `language-standards` | Apply language/framework layout, tests, linting, Docker, and benchmark conventions. |
 | `design-system` | Apply shared visual and documentation standards across repositories. |
 | `benchmark-harness` | Add or validate metrics, benchmark JSON, k6 checks, and README tables. |
+| `backend-reliability-evidence` | Replace simulated transactional claims with real local infrastructure, failure matrices, and benchmark V2 proof. |
 
 ## Program Groups
 
@@ -218,6 +219,8 @@ The 30 repositories are grouped into portfolio programs:
 The program catalog is in [catalog/programs.yaml](catalog/programs.yaml).
 
 The first program operating guide is [AI Evaluation and Retrieval Systems](docs/ai-evaluation-retrieval.md).
+
+The backend transactional-core guide is [Backend Reliability Platform](docs/backend-reliability-platform.md).
 
 ## First Six Projects
 

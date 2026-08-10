@@ -1,45 +1,51 @@
 {
   "schema_version": 1,
-  "active_family": "ai-evaluation-retrieval",
-  "phase": "macro-closed-kit-publication-pending",
+  "active_family": "backend-reliability-platform",
+  "phase": "transactional-core-closed-kit-publication-pending",
   "affected": [
-    "llm-eval-harness",
-    "rag-knowledge-base",
-    "embeddings-benchmark",
-    "llm-agent-eval",
-    "prompt-ab-testing",
-    "cost-aware-inference",
+    "spring-hexagonal-payments",
+    "event-sourcing-orders",
+    "saga-orchestrator",
+    "cache-strategies-bench",
+    "outbox-pattern",
     "portfolio-reuse-kit"
   ],
   "healthy_variants": [
-    "llm-eval-harness",
-    "rag-knowledge-base",
-    "embeddings-benchmark",
-    "llm-agent-eval",
-    "prompt-ab-testing",
-    "cost-aware-inference"
+    "spring-hexagonal-payments",
+    "event-sourcing-orders",
+    "saga-orchestrator",
+    "cache-strategies-bench",
+    "outbox-pattern"
   ],
   "unknown": [],
   "repos_local_verified": [
-    "llm-eval-harness@5aaf54498e94331dc8d0726b443680b89d8722f4",
-    "rag-knowledge-base@ee461368fc59a94aaf8ea13cf0dadbbaf2ef0203",
-    "embeddings-benchmark@bfff98e3f37db3d396465d61ae239e526f3c5bf6",
-    "llm-agent-eval@6d103629a9b650cdb04c0f8a3d00c4464c4dd6bb",
-    "prompt-ab-testing@0971e12527a7946060e8ffd7413b2c0461a39d15",
-    "cost-aware-inference@90f8a0d387d053e33fdb676cbe61e536d47a841d"
+    "spring-hexagonal-payments@b85f563527ddb29ed27d45225061733a37709cb1",
+    "event-sourcing-orders@ddf17f0b3ef765762e3a3a35dacbb2e2b62eff16",
+    "saga-orchestrator@f213c00ceb6c8552849ff97c74697f592c06c7a0",
+    "cache-strategies-bench@bfddb671498cd7a965a7b252a8c9712f80fded2a",
+    "outbox-pattern@02f7a818e0128ed4bcc2e64c4369f68409414817"
   ],
-  "repos_pushed": ["llm-eval-harness", "rag-knowledge-base", "embeddings-benchmark", "llm-agent-eval", "prompt-ab-testing", "cost-aware-inference"],
+  "repos_pushed": [
+    "spring-hexagonal-payments",
+    "event-sourcing-orders",
+    "saga-orchestrator",
+    "cache-strategies-bench",
+    "outbox-pattern"
+  ],
   "ci_green": [
-    "llm-eval-harness#31347740607",
-    "rag-knowledge-base#31347697814",
-    "embeddings-benchmark#31347801700",
-    "llm-agent-eval#31347790507",
-    "prompt-ab-testing#31347782233",
-    "cost-aware-inference#31347773690"
+    "spring-hexagonal-payments#31359207611",
+    "event-sourcing-orders#31359210209",
+    "saga-orchestrator#31359213207",
+    "cache-strategies-bench#31359781335",
+    "outbox-pattern#31359222289"
   ],
   "blocked": [],
-  "active_skills": ["i-have-adhd", "publish-benchmark-evidence", "local-first-ai-evidence"],
-  "last_evidence": "AI Evaluation and Retrieval Systems closed 6/6 with real local producers, provenance-bound V2 evidence, and exact-head CI.",
-  "next_action": "Publish and verify the portfolio-reuse-kit exact head, then select one bounded next macro.",
-  "updated_at": "2026-08-10T01:45:00Z"
+  "active_skills": [
+    "i-have-adhd",
+    "backend-reliability-evidence",
+    "publish-benchmark-evidence"
+  ],
+  "last_evidence": "Backend Reliability Platform transactional core closed 5/5 with real infrastructure, failure benchmarks, versioned contracts, and exact-head CI.",
+  "next_action": "Publish and verify the portfolio-reuse-kit exact head, then start Backend Traffic and Platform Edge projects 12, 13, 15, 17, and 18.",
+  "updated_at": "2026-08-10T05:51:19Z"
 }

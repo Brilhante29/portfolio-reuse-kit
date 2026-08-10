@@ -1,0 +1,38 @@
+schema_version: 1
+program: backend-reliability-platform
+transactional_core:
+  - project: spring-hexagonal-payments
+    number: 11
+    role: synchronous idempotent payment boundary
+    provides: payment-authorization-v1
+  - project: event-sourcing-orders
+    number: 14
+    role: durable order history, replay, and CQRS projection
+    consumes: payment-authorization-v1
+    produces: commerce-event-v1
+  - project: saga-orchestrator
+    number: 16
+    role: durable coordination and idempotent compensation
+    consumes: commerce-event-v1
+    produces: commerce-event-v1
+  - project: outbox-pattern
+    number: 20
+    role: atomic business change and asynchronous delivery
+    consumes: commerce-event-v1
+    produces: commerce-event-v1
+  - project: cache-strategies-bench
+    number: 19
+    role: accelerated read path with PostgreSQL as source of truth
+rules:
+  - databases are private to each repository
+  - synchronous retries preserve idempotency keys
+  - asynchronous retries preserve eventId and correlationId
+  - local adapters and measured infrastructure adapters implement the same ports
+  - benchmarks regenerate evidence during the measured run
+  - no repository may claim exactly-once external effects
+failure_metrics:
+  - consistency_failures
+  - uncompensated_sagas
+  - lost_messages
+  - duplicate_deliveries
+  - publish_lag_p95_ms

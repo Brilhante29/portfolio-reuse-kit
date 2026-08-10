@@ -32,7 +32,10 @@ programs:
       - contract tests
       - failure scenarios
       - p95/p99 latency dashboards
-    portfolio_story: "From clean boundaries to distributed consistency and resilience patterns."
+      - commerce-event-v1 envelope
+      - payment authorization provider contract
+      - benchmark result v2 failure evidence
+    portfolio_story: "A transactional commerce core: idempotent payments, durable order history, saga compensation, outbox delivery, and an accelerated read path."
   - id: mlops-data-platform
     name: MLOps and Data Platform
     narrative: "Move models and data from experiment to monitored, validated, production-like workflows."

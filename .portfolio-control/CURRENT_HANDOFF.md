@@ -11,24 +11,26 @@ Purpose: observable continuation state; no private chain-of-thought.
 
 ## Current Truth
 
-AI Evaluation and Retrieval Systems is complete:
+The Backend Reliability Platform transactional core is complete:
 
 | # | Repository | `main` head | CI run |
 |---:|---|---|---:|
-| 2 | `llm-eval-harness` | `5aaf544` | `31347740607` |
-| 3 | `rag-knowledge-base` | `ee46136` | `31347697814` |
-| 8 | `embeddings-benchmark` | `bfff98e` | `31347801700` |
-| 9 | `llm-agent-eval` | `6d10362` | `31347790507` |
-| 10 | `prompt-ab-testing` | `0971e12` | `31347782233` |
-| 30 | `cost-aware-inference` | `90f8a0d` | `31347773690` |
+| 11 | `spring-hexagonal-payments` | `b85f563` | `31359207611` |
+| 14 | `event-sourcing-orders` | `ddf17f0` | `31359210209` |
+| 16 | `saga-orchestrator` | `f213c00` | `31359213207` |
+| 19 | `cache-strategies-bench` | `bfddb67` | `31359781335` |
+| 20 | `outbox-pattern` | `02f7a81` | `31359222289` |
+
+AI Evaluation and Retrieval Systems remains complete at 6/6 repositories with exact-head CI.
 
 ## Decisions
 
-- Use exact producer SHA plus versioned artifact for cross-repository edges.
-- Keep provider execution outside evaluator cores; local Ollama/OpenAI-compatible adapters remain replaceable.
-- Preserve ties, low scores, planner errors, and tool errors as evidence.
-- Pin model digest/revision and fail on drift.
+- Treat the five repositories as one commerce reliability system with private database boundaries.
+- Preserve idempotency keys across synchronous retries and `eventId`/correlation across asynchronous retries.
+- Name PostgreSQL, Redis, or Kafka in a claim only when that infrastructure participates in the measured path.
+- Separate committed benchmark evidence from variable CI smoke evidence.
+- Claim at-least-once delivery plus idempotent consumers; do not claim exactly-once external effects.
 
 ## Exact Next Action
 
-Publish this kit branch to `main`, require exact-head CI green, then select one next macro. Do not reopen these six unless CI regresses or a new workload version is approved.
+Publish this kit branch to `main` and require exact-head CI green. Then start the bounded Backend Traffic and Platform Edge slice (`#12`, `#13`, `#15`, `#17`, `#18`) without reopening the completed transactional core unless CI regresses.

@@ -177,6 +177,7 @@ packs:
     program_id: backend-reliability-platform
     problem: Prove backend architecture, reliability, latency, consistency, and failure handling.
     extra_skills:
+      - backend-reliability-evidence
       - spring-kotlin-backend
       - go-backend
       - node-typescript-backend
@@ -195,11 +196,15 @@ packs:
       - failure scenario
       - consistency proof
       - local-cloud parity report
+      - versioned cross-repository contract
+      - benchmark result v2 with failure metrics
     rejection_rules:
       - Reject framework-first architecture with domain depending on infra.
       - Reject RabbitMQ, Kafka, or microservices unless the benchmark needs async scale or fault isolation.
       - Reject "clean architecture" claims without dependency direction tests.
       - Reject mutable cloud emulator images or parity claims without provider metadata.
+      - Reject infrastructure named in README when it is absent from the measured path.
+      - Reject no-op compensation, prewritten benchmark artifacts, and tautological consistency metrics.
 
   - id: mlops-data-platform
     name: MLOps and Data Platform
