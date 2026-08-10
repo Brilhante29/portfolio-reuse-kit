@@ -1,0 +1,11 @@
+{
+    "schema_version": 1,
+    "repository": "kafka-streams-demo",
+    "commit_sha": "9a41c609539513beffbb1f75f45b10cbd7e7da40",
+    "branch": "main",
+    "remote_url": "https://github.com/Brilhante29/kafka-streams-demo.git",
+    "ci_conclusion": "success",
+    "ci_run_url": "https://github.com/Brilhante29/kafka-streams-demo/actions/runs/31402256249",
+    "workflow": "validate",
+    "verified_at": "2026-08-10T15:19:11.583158+00:00"
+}
