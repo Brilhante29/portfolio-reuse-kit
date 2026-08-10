@@ -1,0 +1,11 @@
+{
+    "schema_version":  1,
+    "repository":  "vision-serving-fastapi",
+    "commit_sha":  "2966a478c864c219585ccd27303382dae79df3f6",
+    "branch":  "codex/vision-serving-fastapi/publication-gates",
+    "remote_url":  "https://github.com/Brilhante29/vision-serving-fastapi.git",
+    "ci_conclusion":  "success",
+    "ci_run_url":  "https://github.com/Brilhante29/vision-serving-fastapi/actions/runs/31343901540",
+    "workflow":  "validate",
+    "verified_at":  "2026-08-10T14:55:54.2944287Z"
+}

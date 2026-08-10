@@ -1,0 +1,11 @@
+{
+    "schema_version":  1,
+    "repository":  "yolo-training-pipeline",
+    "commit_sha":  "14ecde16e7c0af0e21bde41878523839390ab1f7",
+    "branch":  "codex/yolo-training-pipeline/publication-gates",
+    "remote_url":  "https://github.com/Brilhante29/yolo-training-pipeline.git",
+    "ci_conclusion":  "success",
+    "ci_run_url":  "https://github.com/Brilhante29/yolo-training-pipeline/actions/runs/31343897736",
+    "workflow":  "validate",
+    "verified_at":  "2026-08-10T14:55:54.9047105Z"
+}
