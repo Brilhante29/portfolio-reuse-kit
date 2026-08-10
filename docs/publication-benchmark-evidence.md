@@ -20,6 +20,8 @@ A V2 result is publication evidence, not a formatting upgrade from V1. The produ
 
 Use `tools/generate-publication-benchmark.py` for a single V1 `metric`/`value` result whose workload count is explicit. Pass `--measured-iterations` when the V1 file does not expose an unambiguous count.
 
+Every project keeps `benchmarks/publication-spec.json` as the machine-readable bridge between V1, V2, README and `project.yaml`. Set optional `v1_project` only when a legacy raw result uses an older identifier such as a numeric prefix; V2 always uses the canonical repository name. `tools/validate-publication.py --require-git` verifies raw/V2 agreement and hashes fixture, configuration and lock inputs from source-commit Git blobs.
+
 Keep a project-specific V2 producer when the publication claim needs:
 
 - three or more independent repetitions with a documented aggregation policy;
@@ -61,5 +63,7 @@ The repository must be clean before the command. Inputs and outputs must remain 
 7. Store the publication evidence JSON in the project and central control plane.
 
 Schema validity alone does not prove semantic validity.
+
+For a published repository, `benchmark.result_path` may point directly to V2. The portfolio validator recognizes either legacy V1 or V2 as the canonical result and treats a separate `publication_result_path` as backward-compatible metadata.
 
 For a repository already marked `published`, central validation reads the committed Git `HEAD` for the manifest, README, benchmark artifacts, and placeholders. Uncommitted local files remain visible through `dirty_files` but cannot rewrite or revoke exact-head remote evidence. A `benchmarked` publication candidate still requires a clean working tree.

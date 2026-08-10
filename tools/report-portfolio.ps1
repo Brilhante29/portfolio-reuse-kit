@@ -90,8 +90,8 @@ if ($MarkdownPath) {
   $lines = @(
     '# Portfolio Status Report', '',
     ("Generated: {0}" -f $summary.generated_at), '',
-    ("Repositories: **{0}** | Docker: **{1}** | CI files: **{2}** | tracked primary benchmarks: **{3}** | contract v1: **{4}** | contract v2: **{5}** | local candidates: **{6}** | publication candidates: **{7}** | verified publications: **{8}** | origins: **{9}** | upstreams: **{10}**" -f $summary.repositories,$summary.docker,$summary.ci,$summary.tracked_benchmarks,$summary.contract_benchmarks,$summary.contract_v2_benchmarks,$summary.local_candidates,$summary.publication_candidates,$summary.published_verified,$summary.remote_configured,$summary.upstream_configured), '',
-    '| # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Contract v1 | Contract v2 | Placeholders | Local | Publication candidate | Published |',
+    ("Repositories: **{0}** | Docker: **{1}** | CI files: **{2}** | tracked primary benchmarks: **{3}** | valid contracts: **{4}** | contract v2: **{5}** | local candidates: **{6}** | publication candidates: **{7}** | verified publications: **{8}** | origins: **{9}** | upstreams: **{10}**" -f $summary.repositories,$summary.docker,$summary.ci,$summary.tracked_benchmarks,$summary.contract_benchmarks,$summary.contract_v2_benchmarks,$summary.local_candidates,$summary.publication_candidates,$summary.published_verified,$summary.remote_configured,$summary.upstream_configured), '',
+    '| # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Valid contract | Contract v2 | Placeholders | Local | Publication candidate | Published |',
     '|---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|'
   )
   foreach ($row in $rows) {

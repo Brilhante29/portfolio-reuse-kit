@@ -1,28 +1,29 @@
 # Portfolio Project Queue
 
-Keep one active project and at most one reusable-kit improvement.
+Keep one active macro and at most one reusable-kit improvement.
 
 ## Active
 
-| Priority | Project | Current evidence | Next action |
-|---:|---|---|---|
-| 1 | ci-cd-templates (#24) | clean head `141173e`; V1 benchmark and deterministic scanner exist; V2 publication is absent | audit claim-to-code path, upgrade evidence, then verify exact-head CI |
+No product repository is active. Applied Computer Vision and Medical AI is complete; only the reuse-kit publication gate remains.
 
 ## Completed And Verified
 
 | Project | Evidence |
 |---|---|
-| rag-knowledge-base (#3) | head `0cb9c6c`; CI `30638261570` |
-| alpr-mercosul (#5) | head `b69ae1d`; CI `30778498303`; image-only 100-plate V2 |
-| spring-hexagonal-payments (#11) | head `71925cf`; CI `30638268558` |
-| mini-aws-emulator (#13) | head `8d3a4f7`; CI `30774984792` |
-| mlops-end2end (#21) | head `fb77827`; CI `30781190229`; Airflow DAG test and three-run V2 |
+| yolo-training-pipeline (#1) | head `14ecde1`; CI `31341854246`; 3-run mAP/latency V2 |
+| rag-knowledge-base (#3) | central publication evidence retained |
+| alpr-mercosul (#5) | head `fcacf0c`; CI `31341450011`; image-only 100-plate V2 |
+| melanoma-classifier (#6) | head `890e3f1`; CI `31341853463`; DermaMNIST V2 |
+| vision-serving-fastapi (#7) | head `2966a47`; CI `31341853937`; verified real-model HTTP V2 |
+| spring-hexagonal-payments (#11) | central publication evidence retained |
+| mini-aws-emulator (#13) | central publication evidence retained |
+| mlops-end2end (#21) | central publication evidence retained |
 
 ## Next
 
-| Priority | Project | Reason |
+| Priority | Scope | Next action |
 |---:|---|---|
-| 2 | yolo-training-pipeline (#1) | applied CV with mAP and latency evidence |
-| 3 | llm-eval-harness (#2) | already initiated; close evaluation contract and publication evidence |
+| 1 | `portfolio-reuse-kit` | push this macro record and require exact-head CI green |
+| 2 | next macro | choose one bounded system from the current 30-repository report; finish it before opening another |
 
-A manifest status is not proof. Repair false or incomplete evidence before adding breadth.
+A manifest status is not proof. V2 provenance plus exact-head CI is the completion rule.

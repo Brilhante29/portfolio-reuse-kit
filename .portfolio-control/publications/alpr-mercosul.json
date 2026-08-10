@@ -1,11 +1,11 @@
 {
     "schema_version":  1,
     "repository":  "alpr-mercosul",
-    "commit_sha":  "b69ae1d1c3ada4c6aa94b30e51b4404aa89e0a11",
-    "branch":  "agent/sync-agent-contract",
+    "commit_sha":  "fcacf0c399896777013d25ed0ff836c5db6e1ead",
+    "branch":  "codex/alpr-mercosul/publication-gates",
     "remote_url":  "https://github.com/Brilhante29/alpr-mercosul.git",
     "ci_conclusion":  "success",
-    "ci_run_url":  "https://github.com/Brilhante29/alpr-mercosul/actions/runs/30778498303",
-    "workflow":  "ci",
-    "verified_at":  "2026-08-03T02:09:19.9500748Z"
+    "ci_run_url":  "https://github.com/Brilhante29/alpr-mercosul/actions/runs/31341450011",
+    "workflow":  "validate",
+    "verified_at":  "2026-08-10T00:00:09.4018028Z"
 }

@@ -6,9 +6,9 @@
 | 2 | `llm-eval-harness` | llm-eval | python, json-schema, jsonl, argparse, unittest, docker | avaliacao objetiva de RAG/LLM | exact_match, f1, latency_ms |
 | 3 | `rag-knowledge-base` | rag | python, fastapi, uvicorn, local-hashing-embeddings, json-vector-store, docker | RAG do zero com busca vetorial | recall_at_k, latency_ms, cost_per_query |
 | 4 | `stroke-signal-demo` | medical-ml | python, pandas, scikit-learn, matplotlib, docker | reproducao de classificador clinico | accuracy, confusion_matrix |
-| 5 | `alpr-mercosul` | ocr | python, opencv, ultralytics, paddleocr, docker | leitura de placa Mercosul | character_accuracy, plate_accuracy |
-| 6 | `melanoma-classifier` | medical-vision | python, scikit-learn, pillow, numpy, scipy, docker | classificacao de lesao de pele | auc, sensitivity |
-| 7 | `vision-serving-fastapi` | model-serving | python, fastapi, onnxruntime, prometheus, k6, docker | servir modelo CV | throughput_rps, p95_latency_ms |
+| 5 | `alpr-mercosul` | ocr | python-3.12, pillow-10.4.0, numpy-1.26.4, pytest, docker | OCR image-only em placas Mercosul sinteticas | character_accuracy, plate_accuracy |
+| 6 | `melanoma-classifier` | medical-vision | python-3.12.13, numpy-2.0.2, scipy-1.15.3, scikit-learn-1.7.2, dermamnist-v2.1, docker | avaliacao melanoma-vs-rest sem leakage | auc, sensitivity, specificity, confusion_matrix |
+| 7 | `vision-serving-fastapi` | model-serving | python-3.12.13, fastapi-0.116.1, ultralytics-8.4.96, pytorch-2.13.0-cpu, prometheus-client-0.22.1, httpx-0.28.1, docker | servir checkpoint YOLO verificado por HTTP real | throughput_rps, p95_latency_ms |
 | 8 | `embeddings-benchmark` | retrieval | python, sparse-vectorizers, tf-idf, feature-hashing, jsonl, docker | comparacao de modelos de embedding | recall_at_k, indexing_time_ms, query_time_ms |
 | 9 | `llm-agent-eval` | agents | python, jsonl, unittest, docker | agentes avaliados por tarefa | task_success_rate, cost_per_task |
 | 10 | `prompt-ab-testing` | prompt-eval | python, statistics, jsonl, unittest, docker | comparacao estatistica de prompts | score_by_variant, confidence_interval |

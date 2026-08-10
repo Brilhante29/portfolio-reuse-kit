@@ -1,46 +1,48 @@
 {
-    "schema_version":  1,
-    "active_family":  "ci-evidence-portability",
-    "phase":  "ci-cd-templates-baseline-audit",
-    "affected":  [
-                     "ci-cd-templates",
-                     "portfolio-reuse-kit"
-                 ],
-    "healthy_variants":  [
-                             "rag-knowledge-base",
-                             "spring-hexagonal-payments",
-                             "mini-aws-emulator",
-                             "alpr-mercosul",
-                             "mlops-end2end"
-                         ],
-    "unknown":  [
-
-                ],
-    "repos_local_verified":  [
-                                 "alpr-mercosul@b69ae1d1c3ada4c6aa94b30e51b4404aa89e0a11",
-                                 "mini-aws-emulator@8d3a4f7813b16bb61f9fbbfea19e7e6b41a5abbb",
-                                 "mlops-end2end@fb778279f4462f7f478dc34da87c5d2559d4fd5a"
-                             ],
-    "repos_pushed":  [
-                         "alpr-mercosul@b69ae1d1c3ada4c6aa94b30e51b4404aa89e0a11",
-                         "mini-aws-emulator@8d3a4f7813b16bb61f9fbbfea19e7e6b41a5abbb",
-                         "mlops-end2end@fb778279f4462f7f478dc34da87c5d2559d4fd5a"
-                     ],
-    "ci_green":  [
-                     "alpr-mercosul#30778498303",
-                     "mini-aws-emulator#30774984792",
-                     "mlops-end2end#30781190229",
-                     "portfolio-reuse-kit#30782110254"
-                 ],
-    "blocked":  [
-
-                ],
-    "active_skills":  [
-                          "i-have-adhd",
-                          "skill-creator",
-                          "publish-benchmark-evidence"
-                      ],
-    "last_evidence":  "MLOps final head fb77827 passed every CI step in run 30781190229; three Airflow/MLflow/FastAPI lifecycle runs produced a 58.696 s median.",
-    "next_action":  "Audit ci-cd-templates claim-to-code path, choose the generic or project-specific V2 producer from measured needs, then publish exact-head evidence.",
-    "updated_at":  "2026-08-03T03:40:00Z"
+  "schema_version": 1,
+  "active_family": "applied-computer-vision",
+  "phase": "macro-closed-kit-publication-pending",
+  "affected": [
+    "yolo-training-pipeline",
+    "alpr-mercosul",
+    "melanoma-classifier",
+    "vision-serving-fastapi",
+    "portfolio-reuse-kit"
+  ],
+  "healthy_variants": [
+    "yolo-training-pipeline",
+    "alpr-mercosul",
+    "melanoma-classifier",
+    "vision-serving-fastapi"
+  ],
+  "unknown": [],
+  "repos_local_verified": [
+    "yolo-training-pipeline@14ecde16e7c0af0e21bde41878523839390ab1f7",
+    "alpr-mercosul@fcacf0c399896777013d25ed0ff836c5db6e1ead",
+    "melanoma-classifier@890e3f1d3ad8b1df5bc86b03ac9212c9ce42ea4a",
+    "vision-serving-fastapi@2966a478c864c219585ccd27303382dae79df3f6"
+  ],
+  "repos_pushed": [
+    "yolo-training-pipeline@14ecde16e7c0af0e21bde41878523839390ab1f7",
+    "alpr-mercosul@fcacf0c399896777013d25ed0ff836c5db6e1ead",
+    "melanoma-classifier@890e3f1d3ad8b1df5bc86b03ac9212c9ce42ea4a",
+    "vision-serving-fastapi@2966a478c864c219585ccd27303382dae79df3f6"
+  ],
+  "ci_green": [
+    "yolo-training-pipeline#31341854246",
+    "alpr-mercosul#31341450011",
+    "melanoma-classifier#31341853463",
+    "vision-serving-fastapi#31341853937"
+  ],
+  "blocked": [],
+  "active_skills": [
+    "i-have-adhd",
+    "skill-creator",
+    "publish-benchmark-evidence",
+    "python-computer-vision",
+    "medical-ai-evaluation"
+  ],
+  "last_evidence": "Applied Computer Vision closed 4/4 with provenance-rich V2 evidence and exact-head CI for every repository.",
+  "next_action": "Publish and verify the portfolio-reuse-kit exact head, then select one bounded next macro.",
+  "updated_at": "2026-08-10T00:00:00Z"
 }

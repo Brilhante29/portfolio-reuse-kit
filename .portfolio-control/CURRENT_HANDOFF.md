@@ -1,59 +1,48 @@
 # Current Handoff
 
-Updated: 2026-08-03
+Updated: 2026-08-10
 Owner: principal agent
-Purpose: observable state for Codex, Claude Code, another AI, or a human. No private chain-of-thought is stored.
+Purpose: observable continuation state for Codex, Claude Code, another AI, or a human. No private chain-of-thought is stored.
 
 ## Continuation Order
 
-1. Read `docs/agent-continuation-map.md`.
-2. Read `.portfolio-control/TRACKER.json` and `.portfolio-control/PROJECT_QUEUE.md`.
-3. Inspect Git status, project manifest, SDD, benchmark, Docker, and CI before editing.
-4. Execute one critical-path change, validate it, and refresh this handoff.
+1. Read this file, `.portfolio-control/TRACKER.json` and `.portfolio-control/PROJECT_QUEUE.md`.
+2. Verify the current kit branch and exact-head GitHub Actions before selecting new work.
+3. Read the selected program, project manifest, SDD, benchmark evidence and reuse review.
+4. Keep one active macro and update the observable handoff after each publication milestone.
 
 ## Current Truth
 
-| Scope | State | Evidence |
-|---|---|---|
-| Portfolio | 30 repositories | 30 Docker, 30 CI, 30 tracked benchmark contracts |
-| Published | #3, #5, #11, #13, #21 | exact-head CI and central publication JSON |
-| Reuse kit | proven implementation head `129d9b6` | CI `30782110254`; all 12 steps passed |
-| Active | #24 `ci-cd-templates` at clean head `141173e` | deterministic V1 scanner; V2 absent |
-| Blocking defects | none external | #24 requires audit and publication upgrade |
+Applied Computer Vision and Medical AI is closed as four coherent repositories:
 
-## Closed: #21 mlops-end2end
+| # | Repository | Published head | Exact-head CI | Measured proof |
+|---:|---|---|---|---|
+| 1 | `yolo-training-pipeline` | `14ecde1` | `31341854246` | median held-out mAP50-95 `0.002420`; warmed p95 `68.303 ms/image`; 3 runs |
+| 5 | `alpr-mercosul` | `fcacf0c` | `31341450011` | character accuracy `1.000000`; 700 chars / 100 synthetic plates |
+| 6 | `melanoma-classifier` | `890e3f1` | `31341853463` | DermaMNIST test AUC `0.736999`; sensitivity `0.762332`; 2,005 images |
+| 7 | `vision-serving-fastapi` | `2966a47` | `31341853937` | real YOLO HTTP `39.200 req/s`; p95 `27.343 ms`; 20/20 successes |
 
-- Final head `fb778279f4462f7f478dc34da87c5d2559d4fd5a`; exact-head CI `30781190229`, every step passed.
-- Three clean source-image runs: `57.373 s`, `59.140 s`, and `58.696 s`; median `58.696 s`.
-- Median ROC AUC `0.928`, accuracy `0.87`, inference p95 `72.733 ms`, throughput `160.275 req/s`.
-- Airflow evidence uses `airflow dags test`; MLflow uses direct local SQLite tracking/registry; FastAPI serves the registry alias.
-- Source image digest: `sha256:5228391a3b888a26c0fa5263d5a2393694ee6f862a80e48d7839ad22a2fb541f`.
-- Generic return to kit: tracked provenance inputs are hashed from source-commit Git blobs; CI fetches source history and runs the provenance gate before expensive builds.
+Repository #4 `stroke-signal-demo` belongs to `mlops-data-platform`, not this vision program.
 
-## Active: #24 ci-cd-templates
+## System Story
 
-Known baseline: Python/PyYAML policy pipeline, optional pinned actionlint/zizmor adapters, Docker, GitHub Actions, deterministic fixtures, median scan-time V1.
+`#1` produces a manifest-bound checkpoint. `#7` verifies its bytes and SHA-256 before real Ultralytics inference. `#5` proves label-independent image OCR under a narrow synthetic workload. `#6` proves real-dataset medical evaluation with official splits and validation-only threshold selection.
 
-Audit order:
+## Reuse Delta
 
-1. Trace README claim through CLI, policy engine, external-tool adapters, tests, Docker, and workflow.
-2. Verify the seven findings are semantic and not fixture-oracle shortcuts.
-3. Decide whether the generic single-result V2 producer is sufficient; use project-specific aggregation only if three independent samples are part of the claim.
-4. Add provenance, strict validation, current README number, and exact-head CI.
-5. Return only generic CI/evidence improvements to the kit.
+- Added `python-computer-vision` and `medical-ai-evaluation` skills for Codex and Claude.
+- New scaffolds receive the V2 producer, semantic validator, publication spec and validation lock automatically.
+- Portfolio validation accepts canonical V2 `benchmark.result_path` while retaining legacy V1 compatibility.
+- Medical rules now require source/license/checksum/splits, validation-only thresholds and explicit non-clinical scope.
+- Model consumers must verify manifest schema, bytes and SHA-256 before framework load.
 
 ## Safety
 
-- Do not add services, databases, messaging, cloud, or Kubernetes to a static-analysis CLI.
-- Hash versioned fixture/config/lock inputs from Git blobs, not CRLF/LF-sensitive checkout bytes.
-- Preserve two known timestamp-only dirty files in `rag-knowledge-base`.
-- Never store credentials or private reasoning. Rotate tokens pasted in conversation.
+- Never store credentials, private reasoning or machine-specific absolute paths in project evidence.
+- Do not describe synthetic ALPR or YOLO metrics as real-domain accuracy.
+- Do not describe the melanoma baseline as clinical safety or diagnosis.
+- Keep cloud, broker, database and model registry out unless their behavior is the measured claim; use Kumo behind ports for AWS-like local behavior.
 
-## Exact Next Commands
+## Exact Next Action
 
-```powershell
-cd $HOME\Desktop\repos-github\ci-cd-templates
-git status --short --branch
-rg -n "scan_time_ms|findings|benchmark|actionlint|zizmor|validate" src tests tools .github sdd README.md
-docker build -t ci-cd-templates .
-```
+After the reuse-kit branch passes exact-head CI, select and close the next macro as a bounded set. Do not reopen these four repositories unless their CI regresses or a new workload version is approved.

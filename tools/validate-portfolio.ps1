@@ -199,8 +199,17 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
   $requiredControl = @('.portfolio-control/INVENTORY.md','.portfolio-control/REUSE_MAP.md','.portfolio-control/QUALITY_GATES.md')
   $readme = if ('README.md' -in $tracked) { Get-GitFileText $repo 'README.md' } else { '' }
   $firstLine = if ($readme) { [regex]::Split($readme, '\r?\n')[0] } else { '' }
-  $benchmarkContract = Test-BenchmarkContract $repo $benchmarkFiles
-  $benchmarkContractV2 = Test-BenchmarkContractV2 $repo $publicationBenchmarkResultPath
+  $benchmarkContractV1 = Test-BenchmarkContract $repo $benchmarkFiles
+  $canonicalBenchmarkV2 = if ($benchmarkResultPath -in $tracked) {
+    Test-BenchmarkContractV2 $repo $benchmarkResultPath
+  } else { $false }
+  $publicationV2Path = if ($publicationBenchmarkResultPath -in $tracked) {
+    $publicationBenchmarkResultPath
+  } elseif ($canonicalBenchmarkV2) {
+    $benchmarkResultPath
+  } else { '' }
+  $benchmarkContractV2 = Test-BenchmarkContractV2 $repo $publicationV2Path
+  $benchmarkContract = $benchmarkContractV1 -or $canonicalBenchmarkV2
   $placeholderCount = Get-PlaceholderCount $repo $tracked
 
   $checks = [ordered]@{

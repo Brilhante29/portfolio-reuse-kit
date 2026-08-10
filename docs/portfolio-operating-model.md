@@ -7,9 +7,9 @@ The portfolio is not 30 unrelated repositories. It is a set of programs. Each pr
 | Program | Projects | Problem Solved |
 |---|---:|---|
 | AI Evaluation and Retrieval Systems | 2, 3, 8, 9, 10, 30 | Measure LLM/RAG quality, cost, latency, prompts, agents, and inference tradeoffs. |
-| Applied Computer Vision and Medical AI | 1, 4, 5, 6, 7 | Train, evaluate, and serve visual models with reproducible metrics. |
+| Applied Computer Vision and Medical AI | 1, 5, 6, 7 | Train, evaluate, and serve visual models with reproducible metrics and explicit evidence scope. |
 | Backend Reliability and Architecture Platform | 11-20 | Prove backend architecture, reliability, performance, consistency, and integration patterns. |
-| MLOps and Data Platform | 21, 22, 23, 26, 28 | Connect training, registry, features, data checks, drift, and streaming. |
+| MLOps and Data Platform | 4, 21, 22, 23, 26, 28 | Connect signal baselines, training, registry, features, data checks, drift, and streaming. |
 | Delivery, Observability, and Infrastructure | 24, 25, 27, 29 | Standardize CI, provisioning, telemetry, load tests, and operational evidence. |
 
 ## How Agents Should Use This
