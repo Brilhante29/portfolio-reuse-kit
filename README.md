@@ -39,6 +39,7 @@ Every completed project must provide:
 - an explicit component pack from `component-packs/manifest.yaml`
 - an `openspec/config.yaml` project planning config generated from `templates/openspec-config.yaml`
 - a `decision_brain` section with principles, agent graph, stack, API style, messaging, cloud/Kumo, database/runtime, library policy, and rejected options
+- durable decision lineage in `docs/agent-continuation-map.md` and project context in `.portfolio-control/DECISION_CONTEXT.md`
 - a primary language/framework profile
 - shared design-system components
 - README opening with project number, claim, and benchmark result
@@ -46,6 +47,7 @@ Every completed project must provide:
 - Docker build/run path
 - local benchmark JSON compatible with `contracts/benchmark-result.schema.json`
 - publication benchmark JSON compatible with `contracts/benchmark-result-v2.schema.json`, including provenance and comparability
+- a tested publication producer plus mirrored Codex/Claude skill for truthful workload sizing and exact-head evidence
 - `REFERENCES.md` with clean reuse attribution
 - completed reuse-improvement review with patch-now, backlog, or rejected improvements recorded
 - project validation through `tools/validate-project.ps1` before commit or publication
@@ -201,6 +203,7 @@ The same skills are provided for Codex and Claude Code:
 | `language-standards` | Apply language/framework layout, tests, linting, Docker, and benchmark conventions. |
 | `design-system` | Apply shared visual and documentation standards across repositories. |
 | `benchmark-harness` | Add or validate metrics, benchmark JSON, k6 checks, and README tables. |
+| `backend-reliability-evidence` | Replace simulated transactional claims with real local infrastructure, failure matrices, and benchmark V2 proof. |
 
 ## Program Groups
 
@@ -216,6 +219,8 @@ The 30 repositories are grouped into portfolio programs:
 The program catalog is in [catalog/programs.yaml](catalog/programs.yaml).
 
 The first program operating guide is [AI Evaluation and Retrieval Systems](docs/ai-evaluation-retrieval.md).
+
+The backend transactional-core guide is [Backend Reliability Platform](docs/backend-reliability-platform.md).
 
 ## First Six Projects
 
@@ -238,6 +243,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Kafka Streams decision guide](docs/kafka-streams-decision.md)
 - [Manifest v2 rollout](docs/manifest-v2-rollout.md)
 - [Agent graph](docs/agent-graph.md)
+- [Agent continuation map](docs/agent-continuation-map.md)
 - [Reuse improvement loop](docs/reuse-improvement-loop.md)
 - [Engineering principles](docs/engineering-principles.md)
 - [API style decision](docs/api-style-decision.md)

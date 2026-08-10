@@ -119,6 +119,8 @@ packs:
     problem: Evaluate LLM, RAG, embeddings, prompts, agents, and inference cost with reproducible evidence.
     extra_skills:
       - fastapi-backend
+      - python-computer-vision
+      - medical-ai-evaluation
       - node-typescript-backend
     benchmark_focus:
       - exact_match
@@ -155,14 +157,19 @@ packs:
       - throughput_rps
     preferred_artifacts:
       - dataset card
+      - dataset source, license, checksum, and split manifest
       - preprocessing manifest
       - model card
+      - checkpoint and model-manifest SHA-256 contract
       - confusion matrix
       - inference latency script
     rejection_rules:
       - Reject health or medical claims without clear demo limitation.
+      - Reject medical thresholds selected on test data.
+      - Reject synthetic scores when labels directly control measured features.
       - Reject training notebooks without Docker path.
       - Reject serving APIs without latency benchmark.
+      - Reject model consumers that load a checkpoint before manifest and SHA-256 verification.
 
   - id: backend-reliability-platform
     name: Backend Reliability and Architecture Platform
@@ -170,6 +177,7 @@ packs:
     program_id: backend-reliability-platform
     problem: Prove backend architecture, reliability, latency, consistency, and failure handling.
     extra_skills:
+      - backend-reliability-evidence
       - spring-kotlin-backend
       - go-backend
       - node-typescript-backend
@@ -188,11 +196,15 @@ packs:
       - failure scenario
       - consistency proof
       - local-cloud parity report
+      - versioned cross-repository contract
+      - benchmark result v2 with failure metrics
     rejection_rules:
       - Reject framework-first architecture with domain depending on infra.
       - Reject RabbitMQ, Kafka, or microservices unless the benchmark needs async scale or fault isolation.
       - Reject "clean architecture" claims without dependency direction tests.
       - Reject mutable cloud emulator images or parity claims without provider metadata.
+      - Reject infrastructure named in README when it is absent from the measured path.
+      - Reject no-op compensation, prewritten benchmark artifacts, and tautological consistency metrics.
 
   - id: mlops-data-platform
     name: MLOps and Data Platform

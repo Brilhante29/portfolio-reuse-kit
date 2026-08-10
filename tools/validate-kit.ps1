@@ -91,6 +91,8 @@ $requiredFiles = @(
   "contracts/project.schema.json",
   "contracts/benchmark-result.schema.json",
   "contracts/benchmark-result-v2.schema.json",
+  "contracts/commerce-event-v1.schema.json",
+  "contracts/backend-reliability-platform.yaml",
   "contracts/fixtures/project.valid.json",
   "contracts/fixtures/project.non-jvm.valid.json",
   "contracts/fixtures/project.legacy.valid.json",
@@ -126,8 +128,10 @@ $requiredFiles = @(
   "docs/cross-platform.md",
   "docs/project-lifecycle.md",
   "docs/repository-standard.md",
+  "docs/publication-benchmark-evidence.md",
   "docs/usage.md",
   "docs/ai-evaluation-retrieval.md",
+  "docs/backend-reliability-platform.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
@@ -202,6 +206,7 @@ $requiredFiles = @(
   "tools/validate-gradle-project.ps1",
   "tools/generate-contract-manifest.py",
   "tools/generate-design-tokens.py",
+  "tools/generate-publication-benchmark.py",
   "tools/sync-catalog-stacks.py",
   "tools/record-execution-event.ps1",
   "tools/report-execution-efficiency.ps1",
@@ -210,6 +215,8 @@ $requiredFiles = @(
   "tools/report-portfolio.ps1",
   "tools/checkpoint-portfolio.ps1",
   "tools/test-checkpoint-portfolio.ps1",
+  "tests/test_generate_publication_benchmark.py",
+  "tests/test-validate-portfolio-published-head.ps1",
   "tools/validate-kit.ps1"
 )
 
@@ -237,6 +244,8 @@ $requiredDirs = @(
   ".codex/skills/fastapi-backend",
   ".codex/skills/go-backend",
   ".codex/skills/node-typescript-backend",
+  ".codex/skills/publish-benchmark-evidence",
+  ".codex/skills/backend-reliability-evidence",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -257,7 +266,9 @@ $requiredDirs = @(
   ".claude/skills/spring-kotlin-backend",
   ".claude/skills/fastapi-backend",
   ".claude/skills/go-backend",
-  ".claude/skills/node-typescript-backend"
+  ".claude/skills/node-typescript-backend",
+  ".claude/skills/publish-benchmark-evidence",
+  ".claude/skills/backend-reliability-evidence"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -288,6 +299,11 @@ if ($programCount -lt 6) {
 Require-Pattern "component-packs/manifest.yaml" "^base_pack:"
 Require-Pattern "component-packs/manifest.yaml" "^reuse_priority_order:"
 Require-Pattern "component-packs/manifest.yaml" "id: ai-evaluation-retrieval"
+Require-Pattern "component-packs/manifest.yaml" "backend-reliability-evidence"
+Require-Pattern "contracts/backend-reliability-platform.yaml" "databases are private to each repository"
+Require-Pattern "contracts/commerce-event-v1.schema.json" '"causationId"'
+Require-Pattern ".codex/skills/backend-reliability-evidence/SKILL.md" "no-op compensation"
+Require-Pattern ".claude/skills/backend-reliability-evidence/SKILL.md" "no-op compensation"
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "^artifact_graph:"
 Require-Pattern "decision-brain/cloud-matrix.yaml" "image_digest:"
 Require-Pattern "templates/validate-project.ps1" "Mutable Kumo image reference found"
@@ -343,6 +359,9 @@ Require-Pattern ".codex/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers 
 Require-Pattern ".claude/skills/spring-kotlin-backend/SKILL.md" "Gradle wrappers for Windows and POSIX"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "setup-inclusive k6 rates"
+Require-Pattern ".codex/skills/publish-benchmark-evidence/SKILL.md" "Never derive measured iterations from repeat"
+Require-Pattern ".claude/skills/publish-benchmark-evidence/SKILL.md" "Never derive measured iterations from repeat"
+Require-Pattern "tools/generate-publication-benchmark.py" "infer_measured_iterations"
 Require-Pattern ".codex/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
 Require-Pattern ".claude/skills/agent-orchestration/SKILL.md" "Efficiency and Limit Gate"
 Require-Pattern "decision-brain/agent-graph.yaml" "execution_efficiency:"
@@ -385,7 +404,7 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.2.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.3.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
@@ -420,8 +439,10 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
     if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
   }
 }
-$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/sync-catalog-stacks.py']]; print('python syntax ok')"
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/generate-publication-benchmark.py', r'$root/tools/sync-catalog-stacks.py', r'$root/tests/test_generate_publication_benchmark.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
+Invoke-Checked "publication benchmark tests" { python -m unittest discover -s (Join-Path $root "tests") -p "test_*.py" | Out-Null }
+Invoke-Checked "published HEAD validation regression" { & (Join-Path $root "tests/test-validate-portfolio-published-head.ps1") | Out-Null }
 
 $powerShellScripts = @(
   "tools/new-project.ps1",
@@ -446,6 +467,7 @@ $powerShellScripts = @(
   "tools/validate-gradle-project.ps1",
   "templates/validate-project.ps1",
   "templates/validate-gradle-project.ps1",
+  "tests/test-validate-portfolio-published-head.ps1",
   "tools/validate-kit.ps1"
 )
 

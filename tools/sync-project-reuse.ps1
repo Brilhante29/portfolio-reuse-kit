@@ -15,6 +15,7 @@ $backfillScript = Join-Path $PSScriptRoot "backfill-project-standard.ps1"
 $validatorSource = Join-Path $kitRoot "templates/validate-project.ps1"
 $gradleValidatorSource = Join-Path $kitRoot "templates/validate-gradle-project.ps1"
 $continuityScriptSource = Join-Path $kitRoot "tools/capture-continuity-state.ps1"
+$publicationBenchmarkSource = Join-Path $kitRoot "tools/generate-publication-benchmark.py"
 $agentsSource = Join-Path $kitRoot "templates/AGENTS.md"
 
 $repos = Get-ChildItem -Directory -LiteralPath $resolvedRepoRoot | Where-Object {
@@ -38,6 +39,7 @@ foreach ($repo in $repos) {
   Copy-Item -Force -Path $validatorSource -Destination (Join-Path $toolsDir "validate-project.ps1")
   Copy-Item -Force -Path $gradleValidatorSource -Destination (Join-Path $toolsDir "validate-gradle-project.ps1")
   Copy-Item -Force -Path $continuityScriptSource -Destination (Join-Path $toolsDir "capture-continuity-state.ps1")
+  Copy-Item -Force -Path $publicationBenchmarkSource -Destination (Join-Path $toolsDir "generate-publication-benchmark.py")
 
   if ($UpdateAgents) {
     Copy-Item -Force -Path $agentsSource -Destination (Join-Path $repo.FullName "AGENTS.md")

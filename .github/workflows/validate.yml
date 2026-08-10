@@ -17,7 +17,9 @@ jobs:
       - name: Validate JSON schema
         run: python -m json.tool harness/result.schema.json > /dev/null
       - name: Validate Python syntax
-        run: python -m py_compile harness/bench.py harness/compare_results.py
+        run: python -m py_compile harness/bench.py harness/compare_results.py tools/generate-publication-benchmark.py tests/test_generate_publication_benchmark.py
+      - name: Test publication benchmark producer
+        run: python -m unittest discover -s tests -p "test_*.py"
       - name: Validate kit structure
         shell: pwsh
         run: ./tools/validate-kit.ps1

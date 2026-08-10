@@ -441,6 +441,7 @@
         "unit": { "type": "string" },
         "command": { "type": "string" },
         "result_path": { "type": "string" },
+        "publication_result_path": { "type": "string" },
         "evidence_status": {
           "type": "string",
           "enum": ["pending", "stale", "current"]

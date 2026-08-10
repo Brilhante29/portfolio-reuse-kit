@@ -30,12 +30,24 @@ function Get-GitLines {
   return @($output | Where-Object { $_ -and $_.Trim() })
 }
 
+function Get-GitFileText {
+  param([string]$Repo, [string]$Path)
+  $previousPreference = $ErrorActionPreference
+  $ErrorActionPreference = 'SilentlyContinue'
+  $output = @(& git -C $Repo show "HEAD:$Path" 2>$null)
+  $code = $LASTEXITCODE
+  $global:LASTEXITCODE = 0
+  $ErrorActionPreference = $previousPreference
+  if ($code -ne 0) { return "" }
+  return ($output -join [Environment]::NewLine)
+}
+
 function Test-BenchmarkContract {
   param([string]$Repo, [string[]]$Files)
   if ($Files.Count -eq 0) { return $false }
   $required = @('project','metric','value','unit','timestamp','command')
   foreach ($file in $Files) {
-    try { $result = Get-Content -Raw -LiteralPath (Join-Path $Repo $file) | ConvertFrom-Json }
+    try { $result = Get-GitFileText $Repo $file | ConvertFrom-Json }
     catch { return $false }
     $names = @($result.PSObject.Properties.Name)
     foreach ($field in $required) { if ($field -notin $names) { return $false } }
@@ -46,7 +58,7 @@ function Test-BenchmarkContract {
 function Test-BenchmarkContractV2 {
   param([string]$Repo, [string]$File)
   if (-not $File) { return $false }
-  try { $result = Get-Content -Raw -LiteralPath (Join-Path $Repo $File) | ConvertFrom-Json }
+  try { $result = Get-GitFileText $Repo $File | ConvertFrom-Json }
   catch { return $false }
   $required = @('schema_version','run_id','project','benchmark_id','workload','metrics','execution','environment','provenance','comparability_key')
   $names = @($result.PSObject.Properties.Name)
@@ -80,9 +92,9 @@ function Get-PlaceholderCount {
   $docs = @($TrackedFiles | Where-Object { $_ -match '^(sdd|openspec)/.*\.md$' })
   $count = 0
   foreach ($doc in $docs) {
-    $path = Join-Path $Repo $doc
-    if (Test-Path -LiteralPath $path -PathType Leaf) {
-      $count += @(Select-String -LiteralPath $path -Pattern '<(scope|problem|metric|implementation|verification)>|\b(TODO|TBD)\b' -AllMatches -ErrorAction SilentlyContinue).Count
+    $content = Get-GitFileText $Repo $doc
+    if ($content) {
+      $count += [regex]::Matches($content, '<(scope|problem|metric|implementation|verification)>|\b(TODO|TBD)\b').Count
     }
   }
   return $count
@@ -193,17 +205,27 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
   $tracked = @($snapshot.tracked)
   $gitState = $snapshot
   $remote = $snapshot.remote
-  $manifestPath = Join-Path $repo 'project.yaml'
-  $manifest = if (Test-Path -LiteralPath $manifestPath -PathType Leaf) { Get-Content -Raw -LiteralPath $manifestPath } else { '' }
+  $manifest = if ('project.yaml' -in $tracked) { Get-GitFileText $repo 'project.yaml' } else { '' }
   $status = Get-Scalar $manifest '(?m)^status:\s*(.+)$' 'missing'
   $benchmarkResultPath = Get-Scalar $manifest '(?m)^\s{2}result_path:\s*(.+)$' ''
+  $publicationBenchmarkResultPath = Get-Scalar $manifest '(?m)^\s{2}publication_result_path:\s*(.+)$' ''
   $benchmarkFiles = if ($benchmarkResultPath -and $benchmarkResultPath -in $tracked) { @($benchmarkResultPath) } else { @() }
   $workflowFiles = @($tracked | Where-Object { $_ -match '^\.github/workflows/.+\.ya?ml$' })
   $requiredSdd = @('sdd/spec.md','sdd/benchmark-plan.md','sdd/reuse-improvement-review.md')
   $requiredControl = @('.portfolio-control/INVENTORY.md','.portfolio-control/REUSE_MAP.md','.portfolio-control/QUALITY_GATES.md')
-  $firstLine = if ('README.md' -in $tracked) { Get-Content -LiteralPath (Join-Path $repo 'README.md') -TotalCount 1 } else { '' }
-  $benchmarkContract = Test-BenchmarkContract $repo $benchmarkFiles
-  $benchmarkContractV2 = Test-BenchmarkContractV2 $repo $benchmarkResultPath
+  $readme = if ('README.md' -in $tracked) { Get-GitFileText $repo 'README.md' } else { '' }
+  $firstLine = if ($readme) { [regex]::Split($readme, '\r?\n')[0] } else { '' }
+  $benchmarkContractV1 = Test-BenchmarkContract $repo $benchmarkFiles
+  $canonicalBenchmarkV2 = if ($benchmarkResultPath -in $tracked) {
+    Test-BenchmarkContractV2 $repo $benchmarkResultPath
+  } else { $false }
+  $publicationV2Path = if ($publicationBenchmarkResultPath -in $tracked) {
+    $publicationBenchmarkResultPath
+  } elseif ($canonicalBenchmarkV2) {
+    $benchmarkResultPath
+  } else { '' }
+  $benchmarkContractV2 = Test-BenchmarkContractV2 $repo $publicationV2Path
+  $benchmarkContract = $benchmarkContractV1 -or $canonicalBenchmarkV2
   $placeholderCount = Get-PlaceholderCount $repo $tracked
 
   $checks = [ordered]@{
@@ -217,8 +239,10 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
     no_placeholders = $placeholderCount -eq 0
     clean = $gitState.dirty_files -eq 0
   }
-  $allLocalGates = -not ($checks.Values -contains $false)
-  $localCandidate = $allLocalGates -and $status -in @('benchmarked','published')
+  $committedChecks = @($checks.GetEnumerator() | Where-Object { $_.Key -ne 'clean' } | ForEach-Object { $_.Value })
+  $allCommittedGates = -not ($committedChecks -contains $false)
+  $cleanGate = $checks.clean -or $status -eq 'published'
+  $localCandidate = $allCommittedGates -and $cleanGate -and $status -in @('benchmarked','published')
   $publicationCandidate = $localCandidate -and $benchmarkContractV2
   $publicationEvidence = Test-PublicationEvidence $snapshot.name $gitState.head $remote $gitState.upstream $kitTrackedFiles
   $publishedVerified = $publicationCandidate -and $publicationEvidence
@@ -265,7 +289,7 @@ $summary = [pscustomobject]@{
   repositories = $rows
 }
 
-$rows | Format-Table id,name,declared_status,benchmark_tracked,benchmark_contract,benchmark_contract_v2,placeholders,local_candidate,publication_candidate,published_verified -AutoSize
+$rows | Format-Table id,name,declared_status,dirty_files,benchmark_tracked,benchmark_contract,benchmark_contract_v2,placeholders,local_candidate,publication_candidate,published_verified -AutoSize
 if ($JsonPath) {
   $parent = Split-Path -Parent $JsonPath
   if ($parent) { New-Item -ItemType Directory -Force -Path $parent | Out-Null }

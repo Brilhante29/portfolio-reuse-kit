@@ -33,6 +33,7 @@ New-Item -ItemType Directory -Force -Path $target | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "sdd") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "tools") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "benchmarks/results") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $target "benchmarks/publication") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "contracts") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "design-system") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $target "openspec") | Out-Null
@@ -49,6 +50,10 @@ Copy-Item (Join-Path $root "templates/aitmpl-config.yaml") (Join-Path $target ".
 Copy-Item (Join-Path $root "templates/validate-project.ps1") (Join-Path $target "tools\validate-project.ps1")
 Copy-Item (Join-Path $root "templates/validate-gradle-project.ps1") (Join-Path $target "tools/validate-gradle-project.ps1")
 Copy-Item (Join-Path $root "tools/capture-continuity-state.ps1") (Join-Path $target "tools/capture-continuity-state.ps1")
+Copy-Item (Join-Path $root "tools/generate-publication-benchmark.py") (Join-Path $target "tools/generate-publication-benchmark.py")
+Copy-Item (Join-Path $root "tools/validate-publication.py") (Join-Path $target "tools/validate-publication.py")
+Copy-Item (Join-Path $root "templates/publication-spec.json") (Join-Path $target "benchmarks/publication-spec.json")
+Copy-Item (Join-Path $root "templates/requirements-validation.lock") (Join-Path $target "requirements-validation.lock")
 Copy-Item (Join-Path $root "sdd/templates/spec.md") (Join-Path $target "sdd/spec.md")
 Copy-Item (Join-Path $root "sdd/templates/benchmark-plan.md") (Join-Path $target "sdd/benchmark-plan.md")
 Copy-Item (Join-Path $root "sdd/templates/architecture-decision.md") (Join-Path $target "sdd/architecture-decision.md")
@@ -68,6 +73,7 @@ Copy-Item (Join-Path $root "templates/portfolio-control/REUSE_MAP.md") (Join-Pat
 Copy-Item (Join-Path $root "templates/portfolio-control/CRITICAL_PATH.md") (Join-Path $target ".portfolio-control/CRITICAL_PATH.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/CONTINUITY_STATE.md") (Join-Path $target ".portfolio-control/CONTINUITY_STATE.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/DECISIONS.md") (Join-Path $target ".portfolio-control/DECISIONS.md")
+Copy-Item (Join-Path $root "templates/portfolio-control/DECISION_CONTEXT.md") (Join-Path $target ".portfolio-control/DECISION_CONTEXT.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/QUALITY_GATES.md") (Join-Path $target ".portfolio-control/QUALITY_GATES.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/AGENT_HANDOFFS/README.md") (Join-Path $target ".portfolio-control/AGENT_HANDOFFS/README.md")
 
@@ -76,7 +82,7 @@ $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "README.md") -Content $readmeContent
 
-foreach ($controlFile in @("INVENTORY.md", "REUSE_MAP.md", "CRITICAL_PATH.md", "DECISIONS.md", "QUALITY_GATES.md")) {
+foreach ($controlFile in @("INVENTORY.md", "REUSE_MAP.md", "CRITICAL_PATH.md", "DECISIONS.md", "DECISION_CONTEXT.md", "QUALITY_GATES.md")) {
   $controlPath = Join-Path $target ".portfolio-control/$controlFile"
   $controlContent = (Get-Content $controlPath -Raw) `
     -replace "<id>", $Id `
@@ -88,6 +94,11 @@ $manifestContent = (Get-Content (Join-Path $target "project.yaml") -Raw) `
   -replace "<id>", $Id `
   -replace "<project-name>", $Name
 Write-Utf8NoBom -Path (Join-Path $target "project.yaml") -Content $manifestContent
+
+$publicationSpecPath = Join-Path $target "benchmarks/publication-spec.json"
+$publicationSpecContent = (Get-Content $publicationSpecPath -Raw) `
+  -replace "<project-name>", $Name
+Write-Utf8NoBom -Path $publicationSpecPath -Content $publicationSpecContent
 
 $specContent = (Get-Content (Join-Path $target "sdd/spec.md") -Raw) `
   -replace "<id>", $Id `

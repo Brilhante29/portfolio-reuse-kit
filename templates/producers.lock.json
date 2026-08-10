@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "producers": {
+    "producer-project": {
+      "repository": "owner/producer-project",
+      "commit": "0000000000000000000000000000000000000000",
+      "artifact_schema": "artifact-name/1.0"
+    }
+  }
+}

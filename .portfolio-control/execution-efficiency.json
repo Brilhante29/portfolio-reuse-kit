@@ -1,38 +1,44 @@
 {
-    "generated_at":  "2026-07-26T03:43:25.4896820Z",
+    "generated_at":  "2026-08-03T03:33:07.6676655Z",
     "excluded_windows":  [
                              "2026-07-20: user-operated Antigravity/OpenCode activity"
                          ],
-    "event_records":  39,
-    "occurrence_count":  86,
+    "event_records":  69,
+    "occurrence_count":  134,
     "hard_limit_occurrences":  8,
-    "wait_timeout_occurrences":  13,
-    "avoidable_occurrences":  72,
-    "tracked_duration_seconds":  2940.95,
+    "wait_timeout_occurrences":  16,
+    "avoidable_occurrences":  113,
+    "tracked_duration_seconds":  3590.35,
     "categories":  [
                        {
-                           "category":  "tool-failure",
-                           "events":  13,
-                           "occurrences":  23,
-                           "duration_seconds":  35.2
+                           "category":  "invalid-command",
+                           "events":  28,
+                           "occurrences":  43,
+                           "duration_seconds":  20.8
                        },
                        {
-                           "category":  "invalid-command",
-                           "events":  12,
-                           "occurrences":  20,
-                           "duration_seconds":  14.8
+                           "category":  "tool-failure",
+                           "events":  18,
+                           "occurrences":  32,
+                           "duration_seconds":  228.2
                        },
                        {
                            "category":  "wait-timeout",
-                           "events":  2,
-                           "occurrences":  13,
-                           "duration_seconds":  1580
+                           "events":  3,
+                           "occurrences":  16,
+                           "duration_seconds":  1820
                        },
                        {
                            "category":  "command-timeout",
-                           "events":  6,
+                           "events":  7,
+                           "occurrences":  11,
+                           "duration_seconds":  1225.15
+                       },
+                       {
+                           "category":  "invalid-diagnostic",
+                           "events":  5,
                            "occurrences":  10,
-                           "duration_seconds":  1041.15
+                           "duration_seconds":  27.2
                        },
                        {
                            "category":  "authorization-limit",
@@ -41,15 +47,27 @@
                            "duration_seconds":  0
                        },
                        {
-                           "category":  "invalid-diagnostic",
+                           "category":  "avoidable-retry",
                            "events":  2,
-                           "occurrences":  7,
-                           "duration_seconds":  0.8
+                           "occurrences":  4,
+                           "duration_seconds":  0
                        },
                        {
                            "category":  "agent-no-progress",
                            "events":  1,
                            "occurrences":  3,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "environment-fallback",
+                           "events":  1,
+                           "occurrences":  3,
+                           "duration_seconds":  0
+                       },
+                       {
+                           "category":  "invalid-orchestration",
+                           "events":  1,
+                           "occurrences":  2,
                            "duration_seconds":  0
                        },
                        {

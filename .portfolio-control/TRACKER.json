@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "active_family": "backend-reliability-platform",
+  "phase": "traffic-platform-edge-audit",
+  "affected": [
+    "go-rate-limiter",
+    "mini-aws-emulator",
+    "grpc-vs-rest-bench",
+    "multi-tenant-starter",
+    "api-gateway-lite",
+    "portfolio-reuse-kit"
+  ],
+  "healthy_variants": [
+    "portfolio-reuse-kit"
+  ],
+  "unknown": [
+    "go-rate-limiter",
+    "mini-aws-emulator",
+    "grpc-vs-rest-bench",
+    "multi-tenant-starter",
+    "api-gateway-lite"
+  ],
+  "repos_local_verified": [
+    "portfolio-reuse-kit@74259066a4c3cf0ccebfb1a0a4978783740b5faa"
+  ],
+  "repos_pushed": [
+    "portfolio-reuse-kit"
+  ],
+  "ci_green": [
+    "portfolio-reuse-kit#31360074015"
+  ],
+  "blocked": [],
+  "active_skills": [
+    "i-have-adhd",
+    "backend-reliability-evidence",
+    "publish-benchmark-evidence",
+    "go-backend",
+    "cloud-local-first"
+  ],
+  "last_evidence": "Backend Reliability Platform transactional core closed 5/5; the reuse kit is published at 7425906 with exact-head CI 31360074015 green.",
+  "next_action": "Audit projects 12, 13, 15, 17, and 18 from their clean local heads, then publish corrected main branches with exact-head CI.",
+  "updated_at": "2026-08-10T05:51:19Z"
+}

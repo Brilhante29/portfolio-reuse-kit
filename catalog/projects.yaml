@@ -5,7 +5,7 @@ projects:
     stack: ["python-3.12.13", "ultralytics-8.4.96", "pytorch-2.13.0-cpu", "torchvision-0.28.0-cpu", "pytest-9.1.1", "ruff-0.15.21", "docker"]
     proves: "treino e inferencia de deteccao"
     benchmark: "mAP e latency_ms_per_image"
-    reuse_from: ["ultralytics", "opencv"]
+    reuse_from: ["ultralytics", "pytorch", "vision-model-artifact", "benchmark-result-v2"]
   - id: 2
     name: "llm-eval-harness"
     domain: "llm-eval"
@@ -30,24 +30,24 @@ projects:
   - id: 5
     name: "alpr-mercosul"
     domain: "ocr"
-    stack: ["python", "opencv", "ultralytics", "paddleocr", "docker"]
-    proves: "leitura de placa Mercosul"
+    stack: ["python-3.12", "pillow-10.4.0", "numpy-1.26.4", "pytest", "docker"]
+    proves: "OCR image-only em placas Mercosul sinteticas com limite explicito"
     benchmark: "character_accuracy, plate_accuracy"
-    reuse_from: ["paddleocr", "ultralytics"]
+    reuse_from: ["benchmark-result-v2", "python-computer-vision"]
   - id: 6
     name: "melanoma-classifier"
     domain: "medical-vision"
-    stack: ["python", "scikit-learn", "pillow", "numpy", "scipy", "docker"]
-    proves: "classificacao de lesao de pele"
-    benchmark: "auc, sensitivity"
-    reuse_from: ["pytorch", "timm"]
+    stack: ["python-3.12.13", "numpy-2.0.2", "scipy-1.15.3", "scikit-learn-1.7.2", "dermamnist-v2.1", "docker"]
+    proves: "avaliacao melanoma-vs-rest sem leakage no DermaMNIST oficial"
+    benchmark: "auc, sensitivity, specificity, confusion_matrix"
+    reuse_from: ["medical-ai-evaluation", "dataset-provenance", "benchmark-result-v2"]
   - id: 7
     name: "vision-serving-fastapi"
     domain: "model-serving"
-    stack: ["python", "fastapi", "onnxruntime", "prometheus", "k6", "docker"]
-    proves: "servir modelo CV"
+    stack: ["python-3.12.13", "fastapi-0.116.1", "ultralytics-8.4.96", "pytorch-2.13.0-cpu", "prometheus-client-0.22.1", "httpx-0.28.1", "docker"]
+    proves: "servir checkpoint YOLO verificado por HTTP real"
     benchmark: "throughput_rps, p95_latency_ms"
-    reuse_from: ["fastapi", "onnxruntime", "k6"]
+    reuse_from: ["yolo-training-pipeline", "vision-model-artifact", "fastapi", "prometheus", "benchmark-result-v2"]
   - id: 8
     name: "embeddings-benchmark"
     domain: "retrieval"
