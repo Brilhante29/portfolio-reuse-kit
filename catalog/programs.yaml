@@ -43,11 +43,12 @@ programs:
     projects: [4, 21, 22, 23, 26, 28]
     shared_assets:
       - model registry conventions
-      - feature schemas
-      - data quality checks
+      - validated batch manifest v1
+      - versioned data and feature schemas
+      - accepted and quarantine artifact protocol
       - drift reports
       - streaming benchmarks
-    portfolio_story: "From training to features, validation, drift, and streaming operation."
+    portfolio_story: "From a fail-closed validated batch to feature serving, training, registry, clinical evaluation, drift detection, and streaming operation through versioned artifact contracts."
   - id: delivery-observability-infra
     name: Delivery, Observability, and Infrastructure
     narrative: "Standardize delivery, telemetry, infrastructure, and performance evidence across repositories."

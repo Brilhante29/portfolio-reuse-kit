@@ -26,7 +26,9 @@ The Backend Reliability and Architecture Platform is complete at 10/10 repositor
 | 19 | `cache-strategies-bench` | `bfddb67` | `31359781335` |
 | 20 | `outbox-pattern` | `02f7a81` | `31359222289` |
 
-Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Vision and Medical AI 4/4, and Backend Reliability and Architecture Platform 10/10. Across the original 30 repositories, 22/30 are publication-complete: those 20 plus `#21 mlops-end2end` and `#28 kafka-streams-demo`. MLOps and Data Platform is 2/6.
+Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Vision and Medical AI 4/4, and Backend Reliability and Architecture Platform 10/10. Across the original 30 repositories, 23/30 are publication-complete: those 20 plus `#21 mlops-end2end`, `#26 data-quality-checks`, and `#28 kafka-streams-demo`. MLOps and Data Platform is 3/6.
+
+`#26 data-quality-checks` is published at `main` `8d6dd2110243123324b97810886463f2385738d2`; exact-head CI `31773506491` passed all steps. Its implemented cross-repository output is `validated-batch-manifest-v1`, with contract identity, quality status, row counts, reason counts, and SHA-256 artifact digests.
 
 ## Decisions
 
@@ -36,7 +38,9 @@ Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Visi
 - Separate committed benchmark evidence from variable CI smoke evidence.
 - Claim at-least-once delivery plus idempotent consumers; do not claim exactly-once external effects.
 - Run Linux benchmark-writer containers with the host UID/GID when writing bind-mounted CI evidence; archive smoke evidence without changing the canonical benchmark.
+- Exchange MLOps data through versioned manifests and artifact digests; never couple repositories through source imports.
+- Encode runtime workload overrides in workload, comparability key, and effective config digest.
 
 ## Exact Next Action
 
-Complete MLOps and Data Platform. Preserve published `#21` and `#28`, then audit `#4`, `#22`, `#23`, and `#26` as one data lifecycle: clinical training evidence, data quality, feature serving, drift detection, and event streaming. Start with `#26 data-quality-checks`, because its data contract is an input to the other three pending repositories.
+Complete `#23 feature-store-lite` next. Consume or faithfully fixture `validated-batch-manifest-v1`, prove point-in-time correctness and online-read latency, publish V2 evidence, and verify exact-head CI. Then close `#22 model-drift-detector` and `#4 stroke-signal-demo`; do not reopen published #21, #26, or #28 unless a versioned integration test exposes a defect.

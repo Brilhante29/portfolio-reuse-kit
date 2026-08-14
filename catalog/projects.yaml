@@ -177,10 +177,10 @@ projects:
   - id: 26
     name: "data-quality-checks"
     domain: "data-quality"
-    stack: ["python-3.12", "pandera-0.32.1", "polars-1.42.1", "docker"]
-    proves: "validacao objetiva de dados"
-    benchmark: "rejected_rows_percent"
-    reuse_from: ["pandera"]
+    stack: ["python-3.12.13", "pandera-0.32.1", "polars-1.42.1", "jsonschema-4.26.0", "pytest-9.1.1", "ruff-0.15.20", "docker"]
+    proves: "gate fail-closed com paridade entre oraculo Python e adapter Polars/Pandera, quarentena e manifesto de lote validado"
+    benchmark: "invalid_row_detection_f1, rejected_rows_percent, throughput_rows_per_second"
+    reuse_from: ["pandera", "polars", "validated-batch-manifest-v1", "benchmark-result-v2"]
   - id: 27
     name: "terraform-aws-baseline"
     domain: "infrastructure"

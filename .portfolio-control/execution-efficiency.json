@@ -1,26 +1,26 @@
 {
-    "generated_at":  "2026-08-03T03:33:07.6676655Z",
+    "generated_at":  "2026-08-14T05:40:03.4738863Z",
     "excluded_windows":  [
                              "2026-07-20: user-operated Antigravity/OpenCode activity"
                          ],
-    "event_records":  69,
-    "occurrence_count":  134,
+    "event_records":  79,
+    "occurrence_count":  147,
     "hard_limit_occurrences":  8,
     "wait_timeout_occurrences":  16,
-    "avoidable_occurrences":  113,
-    "tracked_duration_seconds":  3590.35,
+    "avoidable_occurrences":  126,
+    "tracked_duration_seconds":  4383.05,
     "categories":  [
                        {
                            "category":  "invalid-command",
-                           "events":  28,
-                           "occurrences":  43,
-                           "duration_seconds":  20.8
+                           "events":  31,
+                           "occurrences":  48,
+                           "duration_seconds":  199.5
                        },
                        {
                            "category":  "tool-failure",
-                           "events":  18,
-                           "occurrences":  32,
-                           "duration_seconds":  228.2
+                           "events":  21,
+                           "occurrences":  35,
+                           "duration_seconds":  318.2
                        },
                        {
                            "category":  "wait-timeout",
@@ -36,9 +36,9 @@
                        },
                        {
                            "category":  "invalid-diagnostic",
-                           "events":  5,
-                           "occurrences":  10,
-                           "duration_seconds":  27.2
+                           "events":  6,
+                           "occurrences":  11,
+                           "duration_seconds":  52.2
                        },
                        {
                            "category":  "authorization-limit",
@@ -47,15 +47,15 @@
                            "duration_seconds":  0
                        },
                        {
+                           "category":  "agent-no-progress",
+                           "events":  2,
+                           "occurrences":  5,
+                           "duration_seconds":  170
+                       },
+                       {
                            "category":  "avoidable-retry",
                            "events":  2,
                            "occurrences":  4,
-                           "duration_seconds":  0
-                       },
-                       {
-                           "category":  "agent-no-progress",
-                           "events":  1,
-                           "occurrences":  3,
                            "duration_seconds":  0
                        },
                        {
@@ -63,6 +63,12 @@
                            "events":  1,
                            "occurrences":  3,
                            "duration_seconds":  0
+                       },
+                       {
+                           "category":  "invalid-assumption",
+                           "events":  2,
+                           "occurrences":  2,
+                           "duration_seconds":  329
                        },
                        {
                            "category":  "invalid-orchestration",

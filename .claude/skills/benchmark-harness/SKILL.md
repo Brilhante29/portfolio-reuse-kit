@@ -21,5 +21,7 @@ Use benchmarks as product evidence.
 12. Validate README-to-result consistency against the committed canonical result before running a smoke benchmark. Never require static README text to predict a runner-specific latency value.
 13. Keep V2 workload size and repetition count distinct: `workload.measured_iterations` is the number of domain work items in one repetition, while `execution.repeat` is the number of independent repetitions. When each metric stores one aggregate sample per repetition, its sample count must equal `execution.repeat`.
 14. On Linux, a benchmark container that writes evidence to a bind mount must run with the host UID/GID or use an equivalently explicit ownership setup. Apply this to the short-lived writer only; do not weaken non-root users for long-running services.
+15. Treat command-line workload overrides as evidence inputs. Rows, duration, repetitions, concurrency, and provider overrides must update `workload`, `comparability_key`, and the effective `config_digest`; assert the raw result reports the requested workload. A CI smoke artifact must never inherit canonical workload values it did not execute.
+16. When CI installs an editable Python package before enforcing a clean Git tree, ignore generated `*.egg-info/` and coverage/cache outputs. Keep the clean-tree gate; do not waive it to accommodate generated metadata.
 
 Do not report a benchmark without the command needed to reproduce it, its measured window, warm-up policy, result JSON, and failure gates.

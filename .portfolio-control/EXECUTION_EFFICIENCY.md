@@ -1,21 +1,21 @@
 # Execution Efficiency
 
-Generated: 2026-08-14T04:54:11.9878819Z
+Generated: 2026-08-14T05:40:03.4738863Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tracked duration: **4096,05 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **126** | tracked duration: **4383,05 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
-| invalid-command | 30 | 46 | 197,5 |
-| tool-failure | 18 | 32 | 228,2 |
+| invalid-command | 31 | 48 | 199,5 |
+| tool-failure | 21 | 35 | 318,2 |
 | wait-timeout | 3 | 16 | 1820 |
 | command-timeout | 7 | 11 | 1225,15 |
-| invalid-diagnostic | 5 | 10 | 27,2 |
+| invalid-diagnostic | 6 | 11 | 52,2 |
 | authorization-limit | 2 | 8 | 0 |
+| agent-no-progress | 2 | 5 | 170 |
 | avoidable-retry | 2 | 4 | 0 |
-| agent-no-progress | 1 | 3 | 0 |
 | environment-fallback | 1 | 3 | 0 |
 | invalid-assumption | 2 | 2 | 329 |
 | invalid-orchestration | 1 | 2 | 0 |
@@ -32,7 +32,9 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tr
 - Collect read-only Git snapshots through a bounded cross-version runspace pool.
 - Create destination parents for every sparse-overlay copy or use the official full clone after switching to an isolated branch.
 - Create smoke fixtures under the writable workspace and copy only build, source, Wrapper, Docker, and CI files.
+- Delegate one repository with a 60-second evidence checkpoint; take over after two empty waits.
 - Delegate read-only audits outside writable roots and reserve edits for writable worktrees.
+- Derive an effective configuration from actual command arguments, assert raw work-item counts, and regression-test overrides.
 - Detect line endings and tool versions, keep rg arguments native, and enumerate wildcard copies explicitly.
 - Detect the file line ending or use a structured serializer; then run git diff --check and inspect the exact diff before commit.
 - Emit every accumulated validation failure with ErrorAction Continue, then return exit code 1.
@@ -40,6 +42,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tr
 - Finalize defaults before Docker and verify argument wiring with a tiny smoke workload.
 - Give a four-case bounded regression checklist, continue local work, and interrupt once after the first long timeout instead of polling repeatedly.
 - Hash fixture, config, and lock inputs from Git blobs at source_commit; regression-test LF/CRLF invariance.
+- Ignore generated egg-info, coverage, and cache artifacts while preserving the benchmark clean-tree gate.
 - Inspect branch, origin, and upstream together before the first push; set upstream explicitly.
 - Inspect disjoint worktrees and wait only when integration is blocked.
 - Keep PyYAML parsing in CI and count catalog entries independent of valid sequence indentation.
@@ -58,6 +61,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tr
 - Probe apply_patch once per worktree; after this known signature, use asserted exact-context transformations and review the resulting git diff instead of retrying.
 - Put container validation in a checked-in POSIX script and pilot each dynamic Select-String pattern against a known nonmatching string before repository scans.
 - Quote Git revspecs such as '@{upstream}' in PowerShell commands.
+- Read parameter ValidateSet values once before recording a batch of execution events.
 - Read PSVersion first and use Stopwatch plus a PowerShell-5.1-compatible runspace pool.
 - Read requires-python and resolve the project runtime before host-side tests; otherwise validate inside Docker.
 - Read Select-String.Line and strip non-digits; do not rerun the full validation suite for diagnostic-only failures.
@@ -65,6 +69,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tr
 - Read the V2 semantic contract before producer code and add a unit assertion that measured_iterations equals domain work items while execution.repeat equals independent runs.
 - Resolve the absolute interpreter once before running tests.
 - Resolve the complete pinned validation set in an isolated venv before editing CI requirements.
+- Retain the offline installed wheel and copy only source, tests, and validation tools needed by container gates.
 - Run a one-percent benchmark calibration and estimate the full timeout before the production workload.
 - Run bounded help output directly; do not truncate a process whose exit code is part of validation.
 - Run formatter and check independently; never stash evidence that will be regenerated.
@@ -82,6 +87,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tr
 - Use exact-context staged edits, inspect git diff immediately, and keep generated document mutations small.
 - Use explicit line-ending normalization plus YAML parsing immediately after generated manifest writes.
 - Use explicit string conversion in structured diagnostics and validate against benchmark-result-v2.schema.json.
+- Use fetch-depth 0 in publication workflows and enforce that guard in repository validation.
 - Use Get-Command preflight and call the existing REST client when gh is unavailable.
 - Use index-delimited substring replacement for source blocks and parse PowerShell immediately after every generated edit.
 - Use one git ls-files and one porcelain-v2 status snapshot per repository, then filter in memory.

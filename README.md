@@ -222,6 +222,8 @@ The first program operating guide is [AI Evaluation and Retrieval Systems](docs/
 
 The backend transactional-core guide is [Backend Reliability Platform](docs/backend-reliability-platform.md).
 
+The data lifecycle and artifact-contract guide is [MLOps and Data Platform](docs/mlops-data-platform.md).
+
 ## First Six Projects
 
 Recommended build order:

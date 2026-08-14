@@ -72,6 +72,10 @@
       "bytes": 11193,
       "sha256": "sha256:9a40ded483840249752f97e81d8c9b78466f72c0e46940aa63a143530188a85e"
     },
+    "mlops-data-platform.yaml": {
+      "bytes": 2292,
+      "sha256": "sha256:461bf3b805796df5bde8551ff2b54eb821d40f9b18c549cc96fc84947e7426e4"
+    },
     "monitoring-batch.schema.json": {
       "bytes": 3153,
       "sha256": "sha256:1684fb18436414e8e2dbf7e0785bae56ea49f5eb18c28d4cad72947f7df9aef4"
@@ -99,9 +103,13 @@
     "publication-evidence.schema.json": {
       "bytes": 983,
       "sha256": "sha256:4a69fe3b65b66dde595216d1014e210545a62db3c4d1bcdcf6d2dd1fe42373a3"
+    },
+    "validated-batch-manifest-v1.schema.json": {
+      "bytes": 2458,
+      "sha256": "sha256:21e591d26eab411000b3dca54ea4349c860aafb3e320db50ecb1cadeb0e2cb52"
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.3.0",
+  "contract_set_version": "1.4.0",
   "schema_version": 1
 }

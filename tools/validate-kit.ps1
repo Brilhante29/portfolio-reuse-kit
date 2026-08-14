@@ -93,6 +93,8 @@ $requiredFiles = @(
   "contracts/benchmark-result-v2.schema.json",
   "contracts/commerce-event-v1.schema.json",
   "contracts/backend-reliability-platform.yaml",
+  "contracts/mlops-data-platform.yaml",
+  "contracts/validated-batch-manifest-v1.schema.json",
   "contracts/fixtures/project.valid.json",
   "contracts/fixtures/project.non-jvm.valid.json",
   "contracts/fixtures/project.legacy.valid.json",
@@ -132,6 +134,7 @@ $requiredFiles = @(
   "docs/usage.md",
   "docs/ai-evaluation-retrieval.md",
   "docs/backend-reliability-platform.md",
+  "docs/mlops-data-platform.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
@@ -314,6 +317,13 @@ Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "host UID/GID"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "host UID/GID"
 Require-Pattern "docs/publication-benchmark-evidence.md" "Stable Publication And CI Smoke Evidence"
 Require-Pattern "docs/publication-benchmark-evidence.md" "short-lived benchmark writer.*host UID/GID"
+Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "workload overrides.*comparability_key.*config_digest"
+Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "workload overrides.*comparability_key.*config_digest"
+Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "editable Python package.*egg-info"
+Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "editable Python package.*egg-info"
+Require-Pattern "docs/publication-benchmark-evidence.md" "Effective Workload Overrides"
+Require-Pattern "contracts/mlops-data-platform.yaml" "validated-batch-manifest-v1"
+Require-Pattern "contracts/validated-batch-manifest-v1.schema.json" '"status".*"passed"'
 Require-Pattern "decision-brain/agentic-spec-governance.yaml" "^artifact_graph:"
 Require-Pattern "decision-brain/cloud-matrix.yaml" "image_digest:"
 Require-Pattern "templates/validate-project.ps1" "Mutable Kumo image reference found"
@@ -414,7 +424,7 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.3.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.4.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"

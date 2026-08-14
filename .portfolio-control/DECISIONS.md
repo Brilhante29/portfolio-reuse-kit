@@ -95,3 +95,13 @@ Decision: close the ten repositories as one system with private data boundaries 
 Rejected: presenting the ten repositories as unrelated pattern demos; claiming PostgreSQL, Redis, Kumo, OpenTelemetry, REST/gRPC parity, or distributed quota without those components in the measured path; weakening container users globally to solve artifact permissions.
 
 Evidence: all ten public `main` heads have exact-head CI success. Edge runs: #12 `31770932954`, #13 `31770435198`, #15 `31770456018`, #17 `31770435136`, and #18 `31770456130`.
+
+## 2026-08-14 - #26 Data Quality Publication Closure
+
+Context: the data-quality component detected labeled defects correctly, but lacked a versioned cross-repository output manifest, transitive dependency lock, and truthful V2 identity for runtime workload overrides.
+
+Decision: publish accepted and quarantine artifacts through `validated-batch-manifest-v1`, including data-contract identity, row counts, reason counts, and SHA-256 digests. Keep the reference engine as the LSP oracle for the Polars/Pandera adapter. Every workload override changes workload identity, comparability key, and effective configuration digest.
+
+Rejected: direct source imports between MLOps repositories; feature ingestion without a passed quality status; weakening clean-tree provenance for editable Python installs; CI smoke artifacts that report canonical row counts.
+
+Evidence: final `main` `8d6dd2110243123324b97810886463f2385738d2`; exact-head CI `31773506491`; canonical F1 `1.0`; median throughput `717607.9778021169 rows/s`; 26 tests and 94.99% coverage.

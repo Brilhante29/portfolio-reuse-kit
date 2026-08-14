@@ -28,6 +28,7 @@
 | #17 `multi-tenant-starter` | real PostgreSQL isolation, executable Gradle wrapper, and stable CI evidence | `patch_now` in backend/Gradle gates; tenant SQL stays local |
 | #18 `api-gateway-lite` | canonical-versus-smoke evidence, shared quota, and upstream trace observation | `patch_now` in benchmark and backend evidence packs; gateway policy stays local |
 | #21 `mlops-end2end` | source-commit Git-blob provenance, early CI gate, framework execution proof | `patch_now` in generic producer and mirrored skills; lifecycle aggregation stays local |
+| #26 `data-quality-checks` | versioned validated-batch manifest, effective workload overrides, editable-install cleanliness, and shallow-history provenance guard | `patch_now` in MLOps contracts and benchmark gates; order policy and Polars/Pandera engines stay local |
 
 ## Reuse Boundary
 
@@ -44,3 +45,6 @@ Upstream a pattern only when it is generic, tested, documented, backward compati
 - Benchmark skills distinguish domain work items from independent repetitions and align repetition-level sample counts with `execution.repeat`.
 - CI smoke benchmarks write to temporary artifact paths and never replace committed publication evidence.
 - Linux benchmark-writer containers use the runner UID/GID for bind-mounted evidence while service containers retain non-root image users.
+- Runtime workload overrides alter workload identity, comparability key, and effective configuration digest; smoke evidence cannot inherit canonical row counts.
+- Python editable-install metadata is isolated from clean-tree provenance checks instead of weakening the checks.
+- MLOps repositories exchange versioned artifact manifests with SHA-256 identity rather than importing one another's domain code.

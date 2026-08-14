@@ -75,3 +75,11 @@ The canonical result named by `project.yaml` is stable publication evidence. Val
 A CI smoke run must write to a different path, such as `benchmarks/results/<benchmark>-ci-smoke.json`, and upload that file as a workflow artifact. Validate the smoke file independently for schema, source SHA, workload, failure gates, and infrastructure participation. Do not overwrite the canonical result and then compare its runner-specific latency with static README text.
 
 On Linux, a short-lived benchmark writer that targets a bind-mounted host directory must use the host UID/GID or an explicit equivalent ownership setup. Keep service containers on their declared non-root image users. This makes artifact writes portable without broadening runtime privileges.
+
+## Effective Workload Overrides
+
+Runtime overrides are part of the measured configuration. When a smoke run changes rows, requests, duration, repetitions, concurrency, or provider, the producer must derive an effective workload from the executed arguments and encode it in `workload`, `comparability_key`, and `workload.config_digest`. It must also assert that the raw result reports the requested work item count.
+
+Never copy canonical workload values into a smaller CI smoke artifact. The canonical and smoke runs can share a schema and producer, but they are not comparable unless their effective workload identity matches.
+
+For Python repositories that install with `pip install -e`, generated `*.egg-info/`, coverage files, and caches must be ignored before the clean-tree benchmark gate runs. Preserve the clean-tree gate because it protects provenance; generated installer metadata is the item to isolate.

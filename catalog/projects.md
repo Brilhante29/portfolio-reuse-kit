@@ -27,7 +27,7 @@
 | 23 | `feature-store-lite` | data-platform | python-3.12, feast-0.64.0, pandas-2.3.3, pyarrow-25.0.0, parquet, sqlite, docker | feature store minima | online_read_latency_ms |
 | 24 | `ci-cd-templates` | devops | Python 3.10+, PyYAML, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions | pipelines reutilizaveis | build_time_seconds |
 | 25 | `observability-stack` | observability | python-3.12, fastapi, prometheus-client, prometheus, grafana, docker-compose | observabilidade ponta a ponta | simulated_mttr_minutes |
-| 26 | `data-quality-checks` | data-quality | python-3.12, pandera-0.32.1, polars-1.42.1, docker | validacao objetiva de dados | rejected_rows_percent |
+| 26 | `data-quality-checks` | data-quality | python-3.12.13, pandera-0.32.1, polars-1.42.1, jsonschema-4.26.0, pytest-9.1.1, ruff-0.15.20, docker | gate fail-closed com paridade entre oraculo Python e adapter Polars/Pandera, quarentena e manifesto de lote validado | invalid_row_detection_f1, rejected_rows_percent, throughput_rows_per_second |
 | 27 | `terraform-aws-baseline` | infrastructure | terraform, python, docker, github-actions | baseline AWS como codigo | provision_time_seconds |
 | 28 | `kafka-streams-demo` | streaming | kotlin, java21, gradle, kafka-streams, junit5, docker, redpanda-optional | processamento streaming | messages_per_second |
 | 29 | `load-test-suite` | performance | go, k6, javascript, docker | suite reutilizavel de carga | p95_curve |
