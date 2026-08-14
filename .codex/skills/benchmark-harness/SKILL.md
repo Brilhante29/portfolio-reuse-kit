@@ -17,5 +17,9 @@ Use benchmarks as product evidence.
 8. When a custom summary reads `p(99)`, include `p(99)` in `summaryTrendStats`; k6 does not include it in the default summary trend set.
 9. Run a confirmation benchmark and report variance for the primary metric.
 10. Compare old vs new results with `harness/compare_results.py` when optimizing an existing baseline.
+11. Keep committed publication evidence stable during CI. A CI smoke run writes to a distinct path and artifact name, then receives its own schema, provenance, and failure-gate validation.
+12. Validate README-to-result consistency against the committed canonical result before running a smoke benchmark. Never require static README text to predict a runner-specific latency value.
+13. Keep V2 workload size and repetition count distinct: `workload.measured_iterations` is the number of domain work items in one repetition, while `execution.repeat` is the number of independent repetitions. When each metric stores one aggregate sample per repetition, its sample count must equal `execution.repeat`.
+14. On Linux, a benchmark container that writes evidence to a bind mount must run with the host UID/GID or use an equivalently explicit ownership setup. Apply this to the short-lived writer only; do not weaken non-root users for long-running services.
 
 Do not report a benchmark without the command needed to reproduce it, its measured window, warm-up policy, result JSON, and failure gates.

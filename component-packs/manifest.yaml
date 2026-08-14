@@ -198,6 +198,10 @@ packs:
       - local-cloud parity report
       - versioned cross-repository contract
       - benchmark result v2 with failure metrics
+      - tenant isolation proof
+      - protocol semantic parity test
+      - ingress context propagation contract
+      - scoped local-cloud conformance report
     rejection_rules:
       - Reject framework-first architecture with domain depending on infra.
       - Reject RabbitMQ, Kafka, or microservices unless the benchmark needs async scale or fault isolation.
@@ -205,6 +209,10 @@ packs:
       - Reject mutable cloud emulator images or parity claims without provider metadata.
       - Reject infrastructure named in README when it is absent from the measured path.
       - Reject no-op compensation, prewritten benchmark artifacts, and tautological consistency metrics.
+      - Reject schema-per-tenant claims backed only by maps or mocks.
+      - Reject REST versus gRPC comparisons that use different handlers, payloads, or workloads.
+      - Reject gateway observability claims with only a no-op exporter or in-process quota presented as distributed.
+      - Reject AWS parity claims broader than the operations exercised through the pinned local provider.
 
   - id: mlops-data-platform
     name: MLOps and Data Platform

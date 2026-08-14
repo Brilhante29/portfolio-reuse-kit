@@ -67,3 +67,11 @@ Schema validity alone does not prove semantic validity.
 For a published repository, `benchmark.result_path` may point directly to V2. The portfolio validator recognizes either legacy V1 or V2 as the canonical result and treats a separate `publication_result_path` as backward-compatible metadata.
 
 For a repository already marked `published`, central validation reads the committed Git `HEAD` for the manifest, README, benchmark artifacts, and placeholders. Uncommitted local files remain visible through `dirty_files` but cannot rewrite or revoke exact-head remote evidence. A `benchmarked` publication candidate still requires a clean working tree.
+
+## Stable Publication And CI Smoke Evidence
+
+The canonical result named by `project.yaml` is stable publication evidence. Validate its README metric, schema, and provenance before starting a variable CI smoke benchmark.
+
+A CI smoke run must write to a different path, such as `benchmarks/results/<benchmark>-ci-smoke.json`, and upload that file as a workflow artifact. Validate the smoke file independently for schema, source SHA, workload, failure gates, and infrastructure participation. Do not overwrite the canonical result and then compare its runner-specific latency with static README text.
+
+On Linux, a short-lived benchmark writer that targets a bind-mounted host directory must use the host UID/GID or an explicit equivalent ownership setup. Keep service containers on their declared non-root image users. This makes artifact writes portable without broadening runtime privileges.

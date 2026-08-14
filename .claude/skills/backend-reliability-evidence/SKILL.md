@@ -33,4 +33,4 @@ description: Build or audit backend reliability repositories that claim transact
 
 ## Release Rejections
 
-Reject publication when `.gradle` or build caches are tracked, the wrapper is incomplete, the default run needs a paid secret, the benchmark file predates the run, README omits the primary number, CI does not test the exact head, or documentation names infrastructure absent from the measured path.
+Reject publication when `.gradle` or build caches are tracked, the wrapper is incomplete, `gradlew` is not tracked as mode `100755`, the default run needs a paid secret, a CI smoke run overwrites committed publication evidence, the benchmark file predates the run, README omits the primary number, CI does not test the exact head, or documentation names infrastructure absent from the measured path.

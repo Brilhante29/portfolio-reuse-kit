@@ -1,8 +1,8 @@
 {
   "assets": {
     "backend-reliability-platform.yaml": {
-      "bytes": 1346,
-      "sha256": "sha256:ad4005cce3442195b8eedf95266b73e47863f14084ffc01641c0f5bf853edc59"
+      "bytes": 2948,
+      "sha256": "sha256:67cd63bb67a12e1fb6e661add1ce1c862138da92298f743cf42fbdc6fd36272d"
     },
     "benchmark-result-v2.schema.json": {
       "bytes": 3741,

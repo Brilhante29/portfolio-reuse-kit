@@ -85,3 +85,13 @@ Decision: fixture, config, and dependency-lock digests are calculated from canon
 Rejected: normalizing arbitrary filesystem bytes after execution or weakening the source-commit check.
 
 Evidence: ten producer tests, including LF/CRLF, committed tree, and untracked-input regressions.
+
+## 2026-08-14 - Backend Reliability Platform Closure
+
+Context: the transactional core was complete, but the traffic and platform edge still contained simulated infrastructure, ambiguous protocol workload semantics, stale local-cloud proof, and CI smoke evidence that was not portable to Linux.
+
+Decision: close the ten repositories as one system with private data boundaries and versioned behavior contracts. Canonical benchmark evidence remains committed; variable CI smoke evidence is written to runner-temporary paths and uploaded separately. A Linux benchmark writer uses the host UID/GID only for its bind-mounted output, while long-running service images retain non-root users.
+
+Rejected: presenting the ten repositories as unrelated pattern demos; claiming PostgreSQL, Redis, Kumo, OpenTelemetry, REST/gRPC parity, or distributed quota without those components in the measured path; weakening container users globally to solve artifact permissions.
+
+Evidence: all ten public `main` heads have exact-head CI success. Edge runs: #12 `31770932954`, #13 `31770435198`, #15 `31770456018`, #17 `31770435136`, and #18 `31770456130`.

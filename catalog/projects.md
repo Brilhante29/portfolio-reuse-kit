@@ -16,10 +16,10 @@
 | 12 | `go-rate-limiter` | backend | go-1.26, chi-v5, redis-8.8, go-redis-v9, lua, k6, docker | rate limiter distribuido | accepted_rps, rejected_rps, p95_latency_ms |
 | 13 | `mini-aws-emulator` | cloud-emulation | go-1.25.10, aws-sdk-go-v2-1.41.9, kumo-0.25.3, smithy-go-1.26.0, docker-27.4 | paridade local AWS para S3, SQS e DynamoDB com adaptadores desacoplados | conformance_rate_percent, p95_operation_latency_ms, operations_per_second |
 | 14 | `event-sourcing-orders` | backend | java21, spring-boot, postgresql, redpanda, docker | event sourcing e CQRS | events_per_second |
-| 15 | `grpc-vs-rest-bench` | protocol-benchmark | go, grpc, chi, protobuf, docker | comparacao REST vs gRPC | latency_ms_by_protocol |
+| 15 | `grpc-vs-rest-bench` | protocol-benchmark | go-1.26.5, grpc-go-1.71.1, chi-v5.2.1, protobuf-1.36.6, http-1.1, http-2, docker-compose | comparacao REST vs gRPC sobre o mesmo contrato e payload | rest_over_grpc_p95_ratio, latency_ms_by_protocol, throughput_rps_by_protocol, parity_failures |
 | 16 | `saga-orchestrator` | distributed-systems | java21, spring-boot, postgresql, docker, gradle | transacoes distribuidas com compensacao | consistency_rate |
-| 17 | `multi-tenant-starter` | backend | java21, spring-boot, docker | multi-tenant real | tenant_onboarding_seconds |
-| 18 | `api-gateway-lite` | gateway | go, reverse-proxy, redis, opentelemetry, k6, docker | gateway com auth, rate limit e observabilidade | overhead_ms |
+| 17 | `multi-tenant-starter` | backend | java-21, spring-boot-3.4, spring-jdbc, postgresql-17.6, flyway-10, gradle-wrapper, docker-compose | onboarding transacional e isolamento schema-per-tenant em PostgreSQL real | tenant_onboarding_p50_ms, tenant_onboarding_p95_ms, isolated_query_p95_ms, leakage_count |
+| 18 | `api-gateway-lite` | gateway | go-1.23.12, net-http-reverse-proxy, redis-7.4, opentelemetry-otlp-http, otel-collector-0.130.0, docker-compose | gateway com auth, quota Redis compartilhada, propagacao de contexto e OTLP plugavel | overhead_p95_ms, gateway_throughput_rps, gateway_rejects, gateway_failures |
 | 19 | `cache-strategies-bench` | caching | java21, spring-boot, docker | cache-aside vs write-through | hit_ratio, p95_latency_ms |
 | 20 | `outbox-pattern` | reliability | java21, spring-boot, postgresql, redpanda, docker | outbox transacional | lost_messages_under_failure |
 | 21 | `mlops-end2end` | mlops | python-3.12, apache-airflow-3.3.0, mlflow-3.14.0, fastapi-0.136.3, scikit-learn-1.9.0, pandera-0.32.1, prometheus-client-0.25.0, docker | treino, registro, deploy e monitoramento | time_to_production_minutes |

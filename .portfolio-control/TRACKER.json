@@ -1,43 +1,79 @@
 {
   "schema_version": 1,
-  "active_family": "backend-reliability-platform",
-  "phase": "traffic-platform-edge-audit",
+  "active_family": "mlops-data-platform",
+  "phase": "data-contract-and-lifecycle-audit",
   "affected": [
-    "go-rate-limiter",
-    "mini-aws-emulator",
-    "grpc-vs-rest-bench",
-    "multi-tenant-starter",
-    "api-gateway-lite",
+    "stroke-signal-demo",
+    "mlops-end2end",
+    "model-drift-detector",
+    "feature-store-lite",
+    "data-quality-checks",
+    "kafka-streams-demo",
     "portfolio-reuse-kit"
   ],
   "healthy_variants": [
-    "portfolio-reuse-kit"
-  ],
-  "unknown": [
+    "mlops-end2end",
+    "kafka-streams-demo",
+    "spring-hexagonal-payments",
     "go-rate-limiter",
     "mini-aws-emulator",
+    "event-sourcing-orders",
     "grpc-vs-rest-bench",
+    "saga-orchestrator",
     "multi-tenant-starter",
-    "api-gateway-lite"
+    "api-gateway-lite",
+    "cache-strategies-bench",
+    "outbox-pattern"
+  ],
+  "unknown": [
+    "stroke-signal-demo",
+    "model-drift-detector",
+    "feature-store-lite",
+    "data-quality-checks"
   ],
   "repos_local_verified": [
-    "portfolio-reuse-kit@74259066a4c3cf0ccebfb1a0a4978783740b5faa"
+    "go-rate-limiter@2a40e0864a7bfd4632cb0239573524d729425ef9",
+    "mini-aws-emulator@63927c0b93607b2509f1fdd57bcabaf08aa3c459",
+    "grpc-vs-rest-bench@5a96e7ec32da792fb9d2ff2084e1da865c391c42",
+    "multi-tenant-starter@ca91f35045085f832d2d18cf2dbae9f0bccb0158",
+    "api-gateway-lite@812fdfedda9d57f8163b0d6c2fd7914ccaeb6cbd"
   ],
   "repos_pushed": [
-    "portfolio-reuse-kit"
+    "spring-hexagonal-payments",
+    "go-rate-limiter",
+    "mini-aws-emulator",
+    "event-sourcing-orders",
+    "grpc-vs-rest-bench",
+    "saga-orchestrator",
+    "multi-tenant-starter",
+    "api-gateway-lite",
+    "cache-strategies-bench",
+    "outbox-pattern",
+    "kafka-streams-demo"
   ],
   "ci_green": [
-    "portfolio-reuse-kit#31360074015"
+    "spring-hexagonal-payments#31359207611",
+    "go-rate-limiter#31770932954",
+    "mini-aws-emulator#31770435198",
+    "event-sourcing-orders#31359210209",
+    "grpc-vs-rest-bench#31770456018",
+    "saga-orchestrator#31359213207",
+    "multi-tenant-starter#31770435136",
+    "api-gateway-lite#31770456130",
+    "cache-strategies-bench#31359781335",
+    "outbox-pattern#31359222289",
+    "kafka-streams-demo#31402256249"
   ],
   "blocked": [],
   "active_skills": [
     "i-have-adhd",
-    "backend-reliability-evidence",
+    "medical-ai-evaluation",
     "publish-benchmark-evidence",
-    "go-backend",
+    "fastapi-backend",
+    "kafka-streams",
     "cloud-local-first"
   ],
-  "last_evidence": "Backend Reliability Platform transactional core closed 5/5; the reuse kit is published at 7425906 with exact-head CI 31360074015 green.",
-  "next_action": "Audit projects 12, 13, 15, 17, and 18 from their clean local heads, then publish corrected main branches with exact-head CI.",
-  "updated_at": "2026-08-10T05:51:19Z"
+  "last_evidence": "Backend Reliability and Architecture Platform closed 10/10; MLOps and Data Platform is 2/6 with #21 and #28 published. go-rate-limiter run 31770932954 verifies the Linux evidence-volume fix.",
+  "next_action": "Audit data-quality-checks (#26) first, define the shared data contract, then close #23, #22, and #4 without reopening published #21 or #28 unless integration evidence requires it.",
+  "updated_at": "2026-08-14T04:58:00Z"
 }

@@ -100,9 +100,9 @@ projects:
   - id: 15
     name: "grpc-vs-rest-bench"
     domain: "protocol-benchmark"
-    stack: ["go", "grpc", "chi", "protobuf", "docker"]
-    proves: "comparacao REST vs gRPC"
-    benchmark: "latency_ms_by_protocol"
+    stack: ["go-1.26.5", "grpc-go-1.71.1", "chi-v5.2.1", "protobuf-1.36.6", "http-1.1", "http-2", "docker-compose"]
+    proves: "comparacao REST vs gRPC sobre o mesmo contrato e payload"
+    benchmark: "rest_over_grpc_p95_ratio, latency_ms_by_protocol, throughput_rps_by_protocol, parity_failures"
     reuse_from: ["grpc-examples", "k6"]
   - id: 16
     name: "saga-orchestrator"
@@ -114,16 +114,16 @@ projects:
   - id: 17
     name: "multi-tenant-starter"
     domain: "backend"
-    stack: ["java21", "spring-boot", "docker"]
-    proves: "multi-tenant real"
-    benchmark: "tenant_onboarding_seconds"
+    stack: ["java-21", "spring-boot-3.4", "spring-jdbc", "postgresql-17.6", "flyway-10", "gradle-wrapper", "docker-compose"]
+    proves: "onboarding transacional e isolamento schema-per-tenant em PostgreSQL real"
+    benchmark: "tenant_onboarding_p50_ms, tenant_onboarding_p95_ms, isolated_query_p95_ms, leakage_count"
     reuse_from: ["spring-security", "postgresql-rls"]
   - id: 18
     name: "api-gateway-lite"
     domain: "gateway"
-    stack: ["go", "reverse-proxy", "redis", "opentelemetry", "k6", "docker"]
-    proves: "gateway com auth, rate limit e observabilidade"
-    benchmark: "overhead_ms"
+    stack: ["go-1.23.12", "net-http-reverse-proxy", "redis-7.4", "opentelemetry-otlp-http", "otel-collector-0.130.0", "docker-compose"]
+    proves: "gateway com auth, quota Redis compartilhada, propagacao de contexto e OTLP plugavel"
+    benchmark: "overhead_p95_ms, gateway_throughput_rps, gateway_rejects, gateway_failures"
     reuse_from: ["envoy-ratelimit", "opentelemetry-demo"]
   - id: 19
     name: "cache-strategies-bench"

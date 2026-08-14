@@ -1,14 +1,14 @@
 # Execution Efficiency
 
-Generated: 2026-08-03T03:33:07.6676655Z
+Generated: 2026-08-14T04:54:11.9878819Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **113** | tracked duration: **3590,35 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **118** | tracked duration: **4096,05 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
-| invalid-command | 28 | 43 | 20,8 |
+| invalid-command | 30 | 46 | 197,5 |
 | tool-failure | 18 | 32 | 228,2 |
 | wait-timeout | 3 | 16 | 1820 |
 | command-timeout | 7 | 11 | 1225,15 |
@@ -17,6 +17,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **113** | tr
 | avoidable-retry | 2 | 4 | 0 |
 | agent-no-progress | 1 | 3 | 0 |
 | environment-fallback | 1 | 3 | 0 |
+| invalid-assumption | 2 | 2 | 329 |
 | invalid-orchestration | 1 | 2 | 0 |
 | redundant-work | 1 | 2 | 269 |
 
@@ -55,22 +56,26 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **113** | tr
 - Prefer a short-path git worktree for local repository isolation on Windows.
 - Preflight tracked build caches with git ls-files, reject them in validation, and use a short C:\tmp worktree for cleanup.
 - Probe apply_patch once per worktree; after this known signature, use asserted exact-context transformations and review the resulting git diff instead of retrying.
+- Put container validation in a checked-in POSIX script and pilot each dynamic Select-String pattern against a known nonmatching string before repository scans.
 - Quote Git revspecs such as '@{upstream}' in PowerShell commands.
 - Read PSVersion first and use Stopwatch plus a PowerShell-5.1-compatible runspace pool.
 - Read requires-python and resolve the project runtime before host-side tests; otherwise validate inside Docker.
 - Read Select-String.Line and strip non-digits; do not rerun the full validation suite for diagnostic-only failures.
 - Read the parameter block before invoking repository scripts and reuse the corrected command.
+- Read the V2 semantic contract before producer code and add a unit assertion that measured_iterations equals domain work items while execution.repeat equals independent runs.
 - Resolve the absolute interpreter once before running tests.
 - Resolve the complete pinned validation set in an isolated venv before editing CI requirements.
 - Run a one-percent benchmark calibration and estimate the full timeout before the production workload.
 - Run bounded help output directly; do not truncate a process whose exit code is part of validation.
 - Run formatter and check independently; never stash evidence that will be regenerated.
 - Run one explicit docker build with plain progress to identify dependency resolution or build progress before retrying the full gate
+- Run only the benchmark writer with the Linux host UID/GID, preserve non-root service users, upload smoke evidence, and validate these workflow guards.
 - Seed coherence smokes directly from the current Docker and GitHub Actions templates.
 - Stage inside one writable worktree and use one supported patch path before starting broad edits.
 - Syntax-check generated PowerShell and pilot every inventory transformation on one repository.
 - Use ${kumoVersion} in colon-delimited identifiers and inspect semantic fields after schema validation.
 - Use a staged single-root edit path and do not retry the same failing tool after the first confirmed platform failure.
+- Use absolute Go tool paths in minimal images and reserve race tests for a CGO-capable image or GitHub runner.
 - Use actual environment newlines or normalize generated text immediately before validation.
 - Use checkout fetch-depth 0 for source-commit verification and run the gate before image build.
 - Use deterministic exact replacements, GitHub REST with GH_TOKEN, and inspect script parameters before invocation.

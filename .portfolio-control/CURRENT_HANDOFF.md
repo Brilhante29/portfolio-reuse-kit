@@ -1,6 +1,6 @@
 # Current Handoff
 
-Updated: 2026-08-10
+Updated: 2026-08-14
 Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
@@ -11,17 +11,22 @@ Purpose: observable continuation state; no private chain-of-thought.
 
 ## Current Truth
 
-The Backend Reliability Platform transactional core is complete:
+The Backend Reliability and Architecture Platform is complete at 10/10 repositories. Every row points to the current public `main` SHA and a successful exact-head GitHub Actions run:
 
 | # | Repository | `main` head | CI run |
 |---:|---|---|---:|
 | 11 | `spring-hexagonal-payments` | `b85f563` | `31359207611` |
+| 12 | `go-rate-limiter` | `2a40e08` | `31770932954` |
+| 13 | `mini-aws-emulator` | `63927c0` | `31770435198` |
 | 14 | `event-sourcing-orders` | `ddf17f0` | `31359210209` |
+| 15 | `grpc-vs-rest-bench` | `5a96e7e` | `31770456018` |
 | 16 | `saga-orchestrator` | `f213c00` | `31359213207` |
+| 17 | `multi-tenant-starter` | `ca91f35` | `31770435136` |
+| 18 | `api-gateway-lite` | `812fdfe` | `31770456130` |
 | 19 | `cache-strategies-bench` | `bfddb67` | `31359781335` |
 | 20 | `outbox-pattern` | `02f7a81` | `31359222289` |
 
-AI Evaluation and Retrieval Systems remains complete at 6/6 repositories with exact-head CI.
+Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Vision and Medical AI 4/4, and Backend Reliability and Architecture Platform 10/10. Across the original 30 repositories, 22/30 are publication-complete: those 20 plus `#21 mlops-end2end` and `#28 kafka-streams-demo`. MLOps and Data Platform is 2/6.
 
 ## Decisions
 
@@ -30,7 +35,8 @@ AI Evaluation and Retrieval Systems remains complete at 6/6 repositories with ex
 - Name PostgreSQL, Redis, or Kafka in a claim only when that infrastructure participates in the measured path.
 - Separate committed benchmark evidence from variable CI smoke evidence.
 - Claim at-least-once delivery plus idempotent consumers; do not claim exactly-once external effects.
+- Run Linux benchmark-writer containers with the host UID/GID when writing bind-mounted CI evidence; archive smoke evidence without changing the canonical benchmark.
 
 ## Exact Next Action
 
-Audit the clean local heads of Backend Traffic and Platform Edge (`#12`, `#13`, `#15`, `#17`, `#18`) against their GitHub default branches. Fix real implementation/evidence gaps, publish all five to `main`, and require exact-head CI without reopening the completed transactional core unless CI regresses.
+Complete MLOps and Data Platform. Preserve published `#21` and `#28`, then audit `#4`, `#22`, `#23`, and `#26` as one data lifecycle: clinical training evidence, data quality, feature serving, drift detection, and event streaming. Start with `#26 data-quality-checks`, because its data contract is an input to the other three pending repositories.

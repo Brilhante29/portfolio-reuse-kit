@@ -35,7 +35,7 @@ programs:
       - commerce-event-v1 envelope
       - payment authorization provider contract
       - benchmark result v2 failure evidence
-    portfolio_story: "A transactional commerce core: idempotent payments, durable order history, saga compensation, outbox delivery, and an accelerated read path."
+    portfolio_story: "A commerce reliability platform from authenticated, rate-limited, tenant-aware ingress through protocol and local-cloud decisions to idempotent payments, durable order history, saga compensation, outbox delivery, and accelerated reads."
   - id: mlops-data-platform
     name: MLOps and Data Platform
     narrative: "Move models and data from experiment to monitored, validated, production-like workflows."
