@@ -105,3 +105,13 @@ Decision: publish accepted and quarantine artifacts through `validated-batch-man
 Rejected: direct source imports between MLOps repositories; feature ingestion without a passed quality status; weakening clean-tree provenance for editable Python installs; CI smoke artifacts that report canonical row counts.
 
 Evidence: final `main` `8d6dd2110243123324b97810886463f2385738d2`; exact-head CI `31773506491`; canonical F1 `1.0`; median throughput `717607.9778021169 rows/s`; 26 tests and 94.99% coverage.
+
+## 2026-08-17 - #23 Feature Store Publication Closure
+
+Context: the feature-store component had a valid Feast implementation and old latency evidence, but its publication path did not consume the #26 data contract, lacked transitive dependency locking and Benchmark Result V2 provenance, and aggregated with the host Python runtime.
+
+Decision: validate `validated-batch-manifest-v1` fail closed before Feast sees rows; keep temporal truth independent from Feast; measure only warmed SDK reads; record cold first read and materialization separately; aggregate three runs inside the pinned image; publish exact source, image, wheel, lock, workload, correctness, and comparability identity.
+
+Rejected: source imports between #26 and #23; custom joins presented as a feature-store engine; Redis or HTTP without a concurrency/transport claim; latency without future-leak, TTL, and online-value correctness proof; host-runtime-dependent aggregation.
+
+Evidence: final `main` `6f8c957807a122d189fe8021c80cfd3e2639e329`; exact-head CI `31991401685`; p95 median `45.645578341645894 ms`; throughput median `1061.9468119765338 entity values/s`; point-in-time and online match `1.0`; zero future leaks and TTL violations; 23 tests and 91.09% coverage.

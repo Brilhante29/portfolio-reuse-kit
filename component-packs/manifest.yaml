@@ -221,6 +221,7 @@ packs:
     problem: Move models and data through training, validation, feature serving, drift detection, and streaming.
     extra_skills:
       - fastapi-backend
+      - python-feature-store
     benchmark_focus:
       - time_to_production
       - drift_alarm_delta
@@ -241,6 +242,7 @@ packs:
       - Reject streaming claims without message-rate benchmark.
       - Reject cross-repository data flow without versioned manifests and SHA-256 artifact identity.
       - Reject feature or drift consumers that bypass the validated-batch status and contract identity.
+      - Reject feature-store performance claims without independent point-in-time, future-leak, TTL, and online-value correctness gates.
       - Reject smoke evidence whose workload overrides are absent from workload, comparability key, or effective config digest.
 
   - id: delivery-observability-infra

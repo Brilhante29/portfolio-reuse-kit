@@ -1,46 +1,37 @@
 # Current Handoff
 
-Updated: 2026-08-14
+Updated: 2026-08-17
 Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
 
-1. Read this file, `TRACKER.json`, `PROJECT_QUEUE.md`, and the active program document.
-2. Verify final `main` SHA and exact-head CI before changing a completed repository.
-3. Keep one macro active and apply only reuse improvements observed in multiple repositories.
+1. Read this file, `TRACKER.json`, `PROJECT_QUEUE.md`, and `docs/mlops-data-platform.md`.
+2. Verify the target repository's remote `main`, current evidence, Docker path, and exact-head CI before editing.
+3. Keep only #22 active; add a kit improvement only when the repository exposes a generic gap.
 
 ## Current Truth
 
-The Backend Reliability and Architecture Platform is complete at 10/10 repositories. Every row points to the current public `main` SHA and a successful exact-head GitHub Actions run:
+Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Vision and Medical AI 4/4, and Backend Reliability and Architecture Platform 10/10.
 
-| # | Repository | `main` head | CI run |
-|---:|---|---|---:|
-| 11 | `spring-hexagonal-payments` | `b85f563` | `31359207611` |
-| 12 | `go-rate-limiter` | `2a40e08` | `31770932954` |
-| 13 | `mini-aws-emulator` | `63927c0` | `31770435198` |
-| 14 | `event-sourcing-orders` | `ddf17f0` | `31359210209` |
-| 15 | `grpc-vs-rest-bench` | `5a96e7e` | `31770456018` |
-| 16 | `saga-orchestrator` | `f213c00` | `31359213207` |
-| 17 | `multi-tenant-starter` | `ca91f35` | `31770435136` |
-| 18 | `api-gateway-lite` | `812fdfe` | `31770456130` |
-| 19 | `cache-strategies-bench` | `bfddb67` | `31359781335` |
-| 20 | `outbox-pattern` | `02f7a81` | `31359222289` |
+Across the original 30 repositories, **24/30** are publication-complete. MLOps and Data Platform is **4/6**:
 
-Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Vision and Medical AI 4/4, and Backend Reliability and Architecture Platform 10/10. Across the original 30 repositories, 23/30 are publication-complete: those 20 plus `#21 mlops-end2end`, `#26 data-quality-checks`, and `#28 kafka-streams-demo`. MLOps and Data Platform is 3/6.
+| # | Repository | `main` head | Exact-head CI | State |
+|---:|---|---|---:|---|
+| 21 | `mlops-end2end` | `fb77827` | `30781190229` | Published |
+| 23 | `feature-store-lite` | `6f8c957` | `31991401685` | Published |
+| 26 | `data-quality-checks` | `8d6dd21` | `31773506491` | Published |
+| 28 | `kafka-streams-demo` | current verified `main` | `31402256249` | Published |
+| 22 | `model-drift-detector` | verify before editing | pending | Active next |
+| 4 | `stroke-signal-demo` | verify before editing | pending | After #22 |
 
-`#26 data-quality-checks` is published at `main` `8d6dd2110243123324b97810886463f2385738d2`; exact-head CI `31773506491` passed all steps. Its implemented cross-repository output is `validated-batch-manifest-v1`, with contract identity, quality status, row counts, reason counts, and SHA-256 artifact digests.
+## #23 Evidence
 
-## Decisions
-
-- Treat the five repositories as one commerce reliability system with private database boundaries.
-- Preserve idempotency keys across synchronous retries and `eventId`/correlation across asynchronous retries.
-- Name PostgreSQL, Redis, or Kafka in a claim only when that infrastructure participates in the measured path.
-- Separate committed benchmark evidence from variable CI smoke evidence.
-- Claim at-least-once delivery plus idempotent consumers; do not claim exactly-once external effects.
-- Run Linux benchmark-writer containers with the host UID/GID when writing bind-mounted CI evidence; archive smoke evidence without changing the canonical benchmark.
-- Exchange MLOps data through versioned manifests and artifact digests; never couple repositories through source imports.
-- Encode runtime workload overrides in workload, comparability key, and effective config digest.
+- Canonical p95: `45.645578341645894 ms`; median throughput: `1061.9468119765338 entity values/s`.
+- Historical and online value match: `1.0`; future leaks and TTL violations: `0`.
+- Docker: Python 3.12.13, Feast 0.64.0, Pandas 2.3.3, PyArrow 25.0.0, Parquet, SQLite, Jsonschema 4.26.0.
+- Cross-repository boundary: consumes `validated-batch-manifest-v1` fail closed; no source imports from #26.
+- Generic improvement: mirrored `python-feature-store` skill and MLOps pack/validator gates.
 
 ## Exact Next Action
 
-Complete `#23 feature-store-lite` next. Consume or faithfully fixture `validated-batch-manifest-v1`, prove point-in-time correctness and online-read latency, publish V2 evidence, and verify exact-head CI. Then close `#22 model-drift-detector` and `#4 stroke-signal-demo`; do not reopen published #21, #26, or #28 unless a versioned integration test exposes a defect.
+Audit `#22 model-drift-detector`. Preserve model, feature, reference-window, and current-window identity; reject thresholds selected from the evaluation batch; consume a versioned validated input contract; publish a three-repetition V2 drift report and exact-head CI. Do not add Evidently, Prometheus, an API, broker, or cloud unless each participates in the measured claim.

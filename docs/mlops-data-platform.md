@@ -7,10 +7,10 @@ This macro is one evidence system, not six unrelated demos. It proves that data 
 | # | Repository | Responsibility | Publication state |
 |---:|---|---|---|
 | 26 | `data-quality-checks` | Fail-closed structural and row gate; accepted/quarantine artifacts and manifest | Published |
-| 23 | `feature-store-lite` | Point-in-time-correct feature materialization and online reads | Active next |
+| 23 | `feature-store-lite` | Fail-closed validated-batch ingestion, point-in-time-correct feature materialization, and online reads | Published |
 | 21 | `mlops-end2end` | Airflow execution, MLflow registry, deploy and monitor lifecycle | Published |
 | 4 | `stroke-signal-demo` | Reproducible clinical classifier and held-out evaluation | Pending |
-| 22 | `model-drift-detector` | Baseline/current feature and prediction drift alarms | Pending |
+| 22 | `model-drift-detector` | Baseline/current feature and prediction drift alarms | Active next |
 | 28 | `kafka-streams-demo` | Stateful streaming and message-rate evidence | Published |
 
 ## Artifact Flow
@@ -20,7 +20,8 @@ flowchart LR
   raw["Raw batch"] --> quality["#26 Data quality gate"]
   quality -->|"validated-batch-manifest-v1"| features["#23 Feature store"]
   features -->|"feature-snapshot-v1"| lifecycle["#21 Train, register, deploy"]
-  features --> drift["#22 Drift detector"]
+  quality -->|"validated-batch-manifest-v1"| drift["#22 Drift detector"]
+  features -.->|"feature-snapshot-v1: planned contract"| drift
   lifecycle --> drift
   quality --> clinical["#4 Clinical reproduction"]
   events["Versioned events"] --> streams["#28 Kafka Streams"]
@@ -38,4 +39,4 @@ The arrows are artifact contracts, not source imports or a claim that every repo
 
 ## Completion Gate
 
-A component is publication-complete only when Docker execution, README headline numbers, canonical V2 evidence, reproducible smoke evidence, and exact-head CI all pass. The macro closes at 6/6, after #23, #22, and #4 consume or demonstrate compatible versions of the artifact chain.
+A component is publication-complete only when Docker execution, README headline numbers, canonical V2 evidence, reproducible smoke evidence, and exact-head CI all pass. Current progress is 4/6. The macro closes after #22 and #4 consume compatible validated inputs and preserve data/model identity; the direct `feature-snapshot-v1` arrow remains explicitly unclaimed until a producer and consumer implement it.

@@ -2,13 +2,13 @@
 
 ## Current Audit
 
-- Strict local audit target date: 2026-08-03.
+- Current exact-head publication checkpoint: 2026-08-17.
 - Repositories: 30.
 - Docker definitions: 30.
 - CI workflows: 30.
 - Tracked benchmark contracts: 30.
-- V2 publication artifacts: 5.
-- Published and centrally verified: 5.
+- Original repositories publication-complete: 24/30.
+- Central publication records: 25, including the reuse kit.
 - Declared published without verification: 0.
 
 ## Project #3
@@ -57,11 +57,23 @@
 - Image digest: `sha256:5228391a3b888a26c0fa5263d5a2393694ee6f862a80e48d7839ad22a2fb541f`.
 - Limit: deterministic local-first lifecycle, not distributed-cloud throughput.
 
+## Project #23
+
+- Repository: `Brilhante29/feature-store-lite`.
+- Source evidence commit: `10641d32af027761aec62c23b0586b3c1a10992f`.
+- Final published head: `6f8c957807a122d189fe8021c80cfd3e2639e329`.
+- Exact-head CI: `https://github.com/Brilhante29/feature-store-lite/actions/runs/31991401685`.
+- Result: p95 median `45.645578341645894 ms`; throughput median `1061.9468119765338 entity values/s`; three same-image repetitions.
+- Correctness: historical and online match `1.0`; future leaks, TTL violations, and failures `0`.
+- Provenance: image `sha256:cf84e303a901636d32baf1900565425f261664a2ce0575267a4daf8b334224bc`; wheel `sha256:eae158ceb9e9b1edbb02713025a4ca255ff776f7179b3ad5ac0be35d5efba5a9`.
+- Contract: consumes `validated-batch-manifest-v1` with schema, contract, digest, reconciliation, status, and path-confinement checks.
+- Limit: local in-process Feast SDK with SQLite; not Redis, network-serving, or cloud latency.
+
 ## Reuse Kit
 
-- Proven implementation head: `129d9b69979b6f5121c3c705ad77e92e03711528`.
-- Exact-head CI: `https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/30782110254`.
-- Tests: ten Python producer tests plus the PowerShell published-head regression.
+- Previous proven implementation head: `2d92dcc31ddca0eeb2c81ab83f2fb3dd9da07879`.
+- Previous exact-head CI: `https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/31773886720`.
+- Shared MLOps assets now include the validated-batch contract, effective workload rules, and mirrored `python-feature-store` skill.
 - Shared skill: `publish-benchmark-evidence` for Codex and Claude.
 - Published improvement: canonical Git-blob digests for tracked provenance inputs.
 

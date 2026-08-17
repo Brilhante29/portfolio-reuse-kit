@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "active_family": "mlops-data-platform",
-  "phase": "feature-store-publication",
+  "phase": "model-drift-publication-audit",
   "affected": [
     "stroke-signal-demo",
     "mlops-end2end",
@@ -14,6 +14,7 @@
   "healthy_variants": [
     "mlops-end2end",
     "data-quality-checks",
+    "feature-store-lite",
     "kafka-streams-demo",
     "spring-hexagonal-payments",
     "go-rate-limiter",
@@ -28,8 +29,7 @@
   ],
   "unknown": [
     "stroke-signal-demo",
-    "model-drift-detector",
-    "feature-store-lite"
+    "model-drift-detector"
   ],
   "repos_local_verified": [
     "go-rate-limiter@2a40e0864a7bfd4632cb0239573524d729425ef9",
@@ -50,6 +50,7 @@
     "cache-strategies-bench",
     "outbox-pattern",
     "data-quality-checks",
+    "feature-store-lite",
     "kafka-streams-demo"
   ],
   "ci_green": [
@@ -64,6 +65,7 @@
     "cache-strategies-bench#31359781335",
     "outbox-pattern#31359222289",
     "data-quality-checks#31773506491",
+    "feature-store-lite#31991401685",
     "kafka-streams-demo#31402256249"
   ],
   "blocked": [],
@@ -72,10 +74,11 @@
     "medical-ai-evaluation",
     "publish-benchmark-evidence",
     "fastapi-backend",
+    "python-feature-store",
     "kafka-streams",
     "cloud-local-first"
   ],
-  "last_evidence": "MLOps and Data Platform is 3/6. data-quality-checks main 8d6dd211 and run 31773506491 prove a fail-closed gate, validated-batch-manifest-v1, F1 1.0, median throughput 717607.9778021169 rows/s, and exact-head CI.",
-  "next_action": "Close feature-store-lite (#23) against validated-batch-manifest-v1 with point-in-time correctness, online-read V2 evidence, and exact-head CI; then #22 and #4.",
-  "updated_at": "2026-08-14T05:37:00Z"
+  "last_evidence": "MLOps and Data Platform is 4/6. feature-store-lite main 6f8c957 and run 31991401685 prove fail-closed validated-batch consumption, point-in-time and online match 1.0, zero future leaks and TTL violations, p95 45.645578341645894 ms, median 1061.9468119765338 entity values/s, and exact-head CI.",
+  "next_action": "Close model-drift-detector (#22) against versioned input and model identities with truthful drift thresholds, V2 evidence, and exact-head CI; then #4.",
+  "updated_at": "2026-08-17T03:35:00Z"
 }

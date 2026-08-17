@@ -29,6 +29,7 @@
 | #18 `api-gateway-lite` | canonical-versus-smoke evidence, shared quota, and upstream trace observation | `patch_now` in benchmark and backend evidence packs; gateway policy stays local |
 | #21 `mlops-end2end` | source-commit Git-blob provenance, early CI gate, framework execution proof | `patch_now` in generic producer and mirrored skills; lifecycle aggregation stays local |
 | #26 `data-quality-checks` | versioned validated-batch manifest, effective workload overrides, editable-install cleanliness, and shallow-history provenance guard | `patch_now` in MLOps contracts and benchmark gates; order policy and Polars/Pandera engines stay local |
+| #23 `feature-store-lite` | fail-closed validated-batch consumer, independent temporal oracle, point-in-time/TTL gates, pinned-runtime aggregation, and feature-store stack thresholds | `patch_now` as mirrored `python-feature-store` skill and MLOps pack gates; customer features, Feast service name, and temporal fixture stay local |
 
 ## Reuse Boundary
 
@@ -48,3 +49,5 @@ Upstream a pattern only when it is generic, tested, documented, backward compati
 - Runtime workload overrides alter workload identity, comparability key, and effective configuration digest; smoke evidence cannot inherit canonical row counts.
 - Python editable-install metadata is isolated from clean-tree provenance checks instead of weakening the checks.
 - MLOps repositories exchange versioned artifact manifests with SHA-256 identity rather than importing one another's domain code.
+- Feature-store latency is publishable only with independent point-in-time truth, future rows, TTL-null cases, exact online-value checks, and cold/materialization timing outside the warmed boundary.
+- Aggregate Python evidence inside the pinned image when the host runtime is not part of the claim.

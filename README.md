@@ -198,6 +198,7 @@ The same skills are provided for Codex and Claude Code:
 | `continuity-checkpoint` | Capture sanitized state, decisions, failures, and exact next actions before limits or handoffs. |
 | `spring-kotlin-backend` | Apply Spring Kotlin backend standards. |
 | `fastapi-backend` | Apply FastAPI backend standards. |
+| `python-feature-store` | Design and audit point-in-time-correct feature stores, fail-closed ingestion, materialization, and online-read evidence. |
 | `go-backend` | Apply Go backend standards. |
 | `node-typescript-backend` | Apply NestJS/Rocketseat-style Node TypeScript backend standards. |
 | `language-standards` | Apply language/framework layout, tests, linting, Docker, and benchmark conventions. |

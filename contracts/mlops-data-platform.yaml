@@ -26,7 +26,10 @@ stages:
       - validated-batch-manifest-v1
     produces:
       - contract: feature-snapshot-v1
-        status: project-owned-pending-publication
+        status: planned-not-claimed
+    evidence:
+      publication: feature-store-lite@6f8c957807a122d189fe8021c80cfd3e2639e329
+      exact_head_ci: 31991401685
   - project: mlops-end2end
     number: 21
     role: train-register-deploy-monitor
@@ -47,8 +50,10 @@ stages:
     number: 22
     role: baseline-current-comparison
     consumes:
+      - validated-batch-manifest-v1
       - feature-snapshot-v1
       - prediction-observation-batch
+    compatibility_rule: validated-batch-manifest-v1 is required for the current closure; feature-snapshot-v1 and prediction-observation-batch remain optional until implemented by both producer and consumer.
     produces:
       - drift-report-v1
   - project: kafka-streams-demo

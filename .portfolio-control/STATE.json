@@ -1,34 +1,21 @@
 {
-    "project":  "ci-cd-templates",
-    "status":  "audit-required",
-    "phase":  "ci-cd-templates-baseline-audit",
-    "last_commit":  "141173ee57b1446f6820c33edb0269c34beeeaae",
-    "completed_gates":  [
-                            "alpr_central_publication_evidence",
-                            "alpr_exact_head_ci",
-                            "alpr_truthful_image_only_ocr",
-                            "alpr_v2_measured_iterations_100",
-                            "central_publication_evidence",
-                            "kit_exact_head_ci",
-                            "kit_local_validation",
-                            "mini_aws_benchmark_v2",
-                            "mini_aws_local_validation",
-                            "mini_aws_published_exact_head_ci",
-                            "mini_aws_source_exact_head_ci",
-                            "reuse_improvement_published",
-                            "mlops_airflow_task_execution",
-                            "mlops_three_run_v2",
-                            "mlops_exact_head_ci",
-                            "mlops_central_publication_evidence",
-                            "git_blob_provenance_regression"
-                        ],
-    "failed_gates":  [
-                         "ci_templates_v2_publication_missing"
-                     ],
-    "blockers":  [
-
-                 ],
-    "next_action":  "Trace the seven-finding benchmark through real scanner policies, then add the smallest truthful V2 provenance path and exact-head CI.",
-    "reuse_kit_version":  "portfolio-reuse-kit@129d9b6",
-    "updated_at":  "2026-08-03T03:40:00Z"
+  "project": "model-drift-detector",
+  "status": "audit-required",
+  "phase": "model-drift-publication-audit",
+  "last_commit": "6f8c957807a122d189fe8021c80cfd3e2639e329",
+  "completed_gates": [
+    "backend_reliability_10_of_10",
+    "data_quality_exact_head_ci",
+    "data_quality_v2_publication",
+    "feature_store_validated_batch_consumer",
+    "feature_store_point_in_time_correctness",
+    "feature_store_v2_publication",
+    "feature_store_exact_head_ci",
+    "mlops_data_platform_4_of_6"
+  ],
+  "failed_gates": [],
+  "blockers": [],
+  "next_action": "Audit model-drift-detector against validated-batch-manifest-v1 and prediction observation identity, then implement the smallest truthful V2 drift proof and exact-head CI.",
+  "reuse_kit_version": "portfolio-reuse-kit@2d92dcc",
+  "updated_at": "2026-08-17T03:35:00Z"
 }

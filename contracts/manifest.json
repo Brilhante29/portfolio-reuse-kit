@@ -73,8 +73,8 @@
       "sha256": "sha256:9a40ded483840249752f97e81d8c9b78466f72c0e46940aa63a143530188a85e"
     },
     "mlops-data-platform.yaml": {
-      "bytes": 2292,
-      "sha256": "sha256:461bf3b805796df5bde8551ff2b54eb821d40f9b18c549cc96fc84947e7426e4"
+      "bytes": 2647,
+      "sha256": "sha256:6f97f72024e66055ce91b5fe0693cd29ab232073de327cb59eb5d5af97322d09"
     },
     "monitoring-batch.schema.json": {
       "bytes": 3153,

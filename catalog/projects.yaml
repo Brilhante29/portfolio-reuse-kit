@@ -156,10 +156,10 @@ projects:
   - id: 23
     name: "feature-store-lite"
     domain: "data-platform"
-    stack: ["python-3.12", "feast-0.64.0", "pandas-2.3.3", "pyarrow-25.0.0", "parquet", "sqlite", "docker"]
-    proves: "feature store minima"
-    benchmark: "online_read_latency_ms"
-    reuse_from: ["feast-patterns"]
+    stack: ["python-3.12.13", "feast-0.64.0", "pandas-2.3.3", "pyarrow-25.0.0", "jsonschema-4.26.0", "parquet", "sqlite", "pytest-9.1.1", "ruff-0.15.20", "docker"]
+    proves: "ingestao fail-closed, point-in-time correto, TTL e materializacao offline-online"
+    benchmark: "online_read_latency_p95_ms, online_entity_values_per_second"
+    reuse_from: ["feast-patterns", "validated-batch-manifest-v1", "benchmark-result-v2"]
   - id: 24
     name: "ci-cd-templates"
     domain: "devops"

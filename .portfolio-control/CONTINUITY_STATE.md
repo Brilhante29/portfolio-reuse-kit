@@ -1,32 +1,28 @@
 # Continuity State
 
-Captured: 2026-08-03
-Purpose: concise mechanical checkpoint. Re-run Git commands before editing because this snapshot is historical by design.
+Captured: 2026-08-17
+Purpose: concise mechanical checkpoint; re-read remote refs before editing.
 
-## portfolio-reuse-kit
+## Portfolio
 
-- Branch: `main`.
-- Proven implementation head: `129d9b69979b6f5121c3c705ad77e92e03711528`.
-- Exact-head CI: `30782110254`, success; all 12 steps passed.
-- Current work: #21 central evidence and Git-blob provenance improvement are published; #24 is active.
+- Original repositories publication-complete: 24/30.
+- Completed macros: AI Evaluation 6/6; Applied CV 4/4; Backend Reliability 10/10.
+- Active macro: MLOps and Data Platform 4/6.
+- Remaining original repositories: #22, #4, then #24, #25, #27, #29.
 
-## mlops-end2end
+## Latest Publication
 
-- Branch: `agent/complete-mlops-end2end`.
-- Final head: `fb778279f4462f7f478dc34da87c5d2559d4fd5a`.
-- Worktree: clean.
-- Exact-head CI: `30781190229`, success.
-- Publication: centrally verified.
+- `feature-store-lite` final `main`: `6f8c957807a122d189fe8021c80cfd3e2639e329`.
+- Exact-head CI: `31991401685`, success; contract, build, lint, 23 tests, V2 smoke, and artifact upload passed.
+- Canonical evidence: p95 `45.645578341645894 ms`; throughput `1061.9468119765338 entity values/s`; correctness `1.0`; zero future leaks and TTL violations.
 
-## Other Published Repositories
+## Reuse Kit Delta
 
-- `rag-knowledge-base@0cb9c6c`, CI `30638261570`; preserve its two timestamp-only dirty artifacts.
-- `alpr-mercosul@b69ae1d`, CI `30778498303`.
-- `spring-hexagonal-payments@71925cf`, CI `30638268558`.
-- `mini-aws-emulator@8d3a4f7`, CI `30774984792`.
+- Added mirrored `python-feature-store` skill and MLOps component-pack selection.
+- Added validation gates for fail-closed ingestion, temporal correctness, and Redis selection threshold.
+- Added central publication record and 24/30 operational state.
 
 ## Next Target
 
-- Repository: `ci-cd-templates` (#24).
-- Clean head: `141173ee57b1446f6820c33edb0269c34beeeaae`.
-- First check: trace the deterministic seven-finding V1 benchmark through real scanner policies and optional analyzers, then choose the smallest truthful V2 publication path.
+- Repository: `model-drift-detector` (#22).
+- First action: verify local/remote heads and audit model/data identity, thresholds, input contracts, V2 evidence, and exact CI before changing code.

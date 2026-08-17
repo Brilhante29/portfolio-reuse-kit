@@ -249,6 +249,7 @@ $requiredDirs = @(
   ".codex/skills/node-typescript-backend",
   ".codex/skills/publish-benchmark-evidence",
   ".codex/skills/backend-reliability-evidence",
+  ".codex/skills/python-feature-store",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -271,7 +272,8 @@ $requiredDirs = @(
   ".claude/skills/go-backend",
   ".claude/skills/node-typescript-backend",
   ".claude/skills/publish-benchmark-evidence",
-  ".claude/skills/backend-reliability-evidence"
+  ".claude/skills/backend-reliability-evidence",
+  ".claude/skills/python-feature-store"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -309,6 +311,11 @@ Require-Pattern "contracts/backend-reliability-platform.yaml" "cross_tenant_leak
 Require-Pattern "contracts/commerce-event-v1.schema.json" '"causationId"'
 Require-Pattern ".codex/skills/backend-reliability-evidence/SKILL.md" "no-op compensation"
 Require-Pattern ".claude/skills/backend-reliability-evidence/SKILL.md" "no-op compensation"
+Require-Pattern ".codex/skills/python-feature-store/SKILL.md" "Fail closed on unknown schema or contract IDs"
+Require-Pattern ".claude/skills/python-feature-store/SKILL.md" "Fail closed on unknown schema or contract IDs"
+Require-Pattern ".codex/skills/python-feature-store/SKILL.md" "Add Redis only for a measured cross-process"
+Require-Pattern ".claude/skills/python-feature-store/SKILL.md" "Add Redis only for a measured cross-process"
+Require-Pattern "component-packs/manifest.yaml" "python-feature-store"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "CI smoke run writes to a distinct path"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "CI smoke run writes to a distinct path"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "workload.measured_iterations.*execution.repeat"

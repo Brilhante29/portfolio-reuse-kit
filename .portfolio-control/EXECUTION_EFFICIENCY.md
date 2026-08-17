@@ -1,15 +1,15 @@
 # Execution Efficiency
 
-Generated: 2026-08-14T05:40:03.4738863Z
+Generated: 2026-08-17T03:40:34.0667404Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **126** | tracked duration: **4383,05 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **128** | tracked duration: **4753,05 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
 | invalid-command | 31 | 48 | 199,5 |
-| tool-failure | 21 | 35 | 318,2 |
+| tool-failure | 23 | 37 | 688,2 |
 | wait-timeout | 3 | 16 | 1820 |
 | command-timeout | 7 | 11 | 1225,15 |
 | invalid-diagnostic | 6 | 11 | 52,2 |
@@ -46,6 +46,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **126** | tr
 - Inspect branch, origin, and upstream together before the first push; set upstream explicitly.
 - Inspect disjoint worktrees and wait only when integration is blocked.
 - Keep PyYAML parsing in CI and count catalog entries independent of valid sequence indentation.
+- List image entrypoints before the first build and copy only the source, tests, contracts, and evidence tools each gate executes.
 - Maintain language-specific validation lists and parse generated scripts immediately.
 - Negative-test wrappers must fail fast during setup and assert both the expected message and nonzero exit code.
 - Never place Markdown backticks inside JavaScript template literals; use plain payload text or structured file patches.
@@ -72,6 +73,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **126** | tr
 - Retain the offline installed wheel and copy only source, tests, and validation tools needed by container gates.
 - Run a one-percent benchmark calibration and estimate the full timeout before the production workload.
 - Run bounded help output directly; do not truncate a process whose exit code is part of validation.
+- Run evidence aggregation inside the pinned image and keep host PowerShell limited to orchestration.
 - Run formatter and check independently; never stash evidence that will be regenerated.
 - Run one explicit docker build with plain progress to identify dependency resolution or build progress before retrying the full gate
 - Run only the benchmark writer with the Linux host UID/GID, preserve non-root service users, upload smoke evidence, and validate these workflow guards.

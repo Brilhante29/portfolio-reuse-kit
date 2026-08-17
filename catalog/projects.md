@@ -24,7 +24,7 @@
 | 20 | `outbox-pattern` | reliability | java21, spring-boot, postgresql, redpanda, docker | outbox transacional | lost_messages_under_failure |
 | 21 | `mlops-end2end` | mlops | python-3.12, apache-airflow-3.3.0, mlflow-3.14.0, fastapi-0.136.3, scikit-learn-1.9.0, pandera-0.32.1, prometheus-client-0.25.0, docker | treino, registro, deploy e monitoramento | time_to_production_minutes |
 | 22 | `model-drift-detector` | mlops | python-3.12, numpy-2.5.1, scipy-1.18.0, pydantic-2.13.4, prometheus-client-0.25.0, docker | deteccao de drift | drift_alarm_vs_baseline |
-| 23 | `feature-store-lite` | data-platform | python-3.12, feast-0.64.0, pandas-2.3.3, pyarrow-25.0.0, parquet, sqlite, docker | feature store minima | online_read_latency_ms |
+| 23 | `feature-store-lite` | data-platform | python-3.12.13, feast-0.64.0, pandas-2.3.3, pyarrow-25.0.0, jsonschema-4.26.0, parquet, sqlite, pytest-9.1.1, ruff-0.15.20, docker | ingestao fail-closed, point-in-time correto, TTL e materializacao offline-online | online_read_latency_p95_ms, online_entity_values_per_second |
 | 24 | `ci-cd-templates` | devops | Python 3.10+, PyYAML, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions | pipelines reutilizaveis | build_time_seconds |
 | 25 | `observability-stack` | observability | python-3.12, fastapi, prometheus-client, prometheus, grafana, docker-compose | observabilidade ponta a ponta | simulated_mttr_minutes |
 | 26 | `data-quality-checks` | data-quality | python-3.12.13, pandera-0.32.1, polars-1.42.1, jsonschema-4.26.0, pytest-9.1.1, ruff-0.15.20, docker | gate fail-closed com paridade entre oraculo Python e adapter Polars/Pandera, quarentena e manifesto de lote validado | invalid_row_detection_f1, rejected_rows_percent, throughput_rows_per_second |
