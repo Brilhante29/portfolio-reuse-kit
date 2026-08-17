@@ -7,9 +7,10 @@
 - Docker definitions: 30.
 - CI workflows: 30.
 - Tracked benchmark contracts: 30.
-- Original repositories publication-complete: 24/30.
-- Central publication records: 25, including the reuse kit.
-- Declared published without verification: 0.
+- Original repositories with durable successful publication records: 25/30.
+- Central publication records: 26, including the reuse kit.
+- Current Desktop clones matching their publication records exactly: 8/30.
+- Live local status is a synchronization audit, not permission to erase durable successful CI evidence; refresh stale records when those repositories become active.
 
 ## Project #3
 
@@ -68,6 +69,17 @@
 - Provenance: image `sha256:cf84e303a901636d32baf1900565425f261664a2ce0575267a4daf8b334224bc`; wheel `sha256:eae158ceb9e9b1edbb02713025a4ca255ff776f7179b3ad5ac0be35d5efba5a9`.
 - Contract: consumes `validated-batch-manifest-v1` with schema, contract, digest, reconciliation, status, and path-confinement checks.
 - Limit: local in-process Feast SDK with SQLite; not Redis, network-serving, or cloud latency.
+
+## Project #22
+
+- Repository: `Brilhante29/model-drift-detector`.
+- Source evidence commit: `12534946a5a6cb35e10260702d3765bc86b1931a`.
+- Final published head: `13a18d57657ac8c04e17c25adda98ff855b126a8`.
+- Exact-head CI: `https://github.com/Brilhante29/model-drift-detector/actions/runs/31994181644`.
+- Result: alarm F1 `1.0`; precision `1.0`; recall `1.0`; FPR `0.0`; median p95 `35.477515344973654 ms`; zero failures.
+- Provenance: image `sha256:fe60560a0d32b9cb6319cc7de7783b13c0caa93f24b33b95fdd143a8593251ac`; wheel `sha256:448368c4cea6a39597e8e97111865c5d6712c62c5a5359e746f65e685ae96e77`.
+- Contract: fail-closed validated input plus producer, dataset, contract, model artifact, time-order, payload, and feature-schema compatibility.
+- Limit: univariate KS intentionally misses correlation-only multivariate drift; no labeled model-performance claim.
 
 ## Reuse Kit
 

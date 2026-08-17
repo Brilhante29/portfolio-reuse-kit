@@ -4,6 +4,7 @@
 - [x] #3, #5, #11, #13, and #21 have exact-head CI and central publication evidence.
 - [x] #5 predicts from image pixels and reports 100 measured plates.
 - [x] #21 executes lifecycle tasks through Airflow, publishes three same-image runs with median aggregation, and has V2 provenance.
+- [x] #22 rejects incompatible monitoring identities, publishes labeled F1/FPR/runtime evidence, documents its multivariate blind spot, and has exact-head CI.
 - [x] V2 semantic-integrity and MLOps lifecycle publication families are closed.
 - [x] Portfolio has 30 Docker definitions, 30 CI workflows, and 30 tracked benchmark contracts.
 - [ ] #24 passes architecture, implementation, benchmark, V2 provenance, and exact-head CI audit.

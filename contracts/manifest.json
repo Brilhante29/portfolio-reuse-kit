@@ -73,12 +73,12 @@
       "sha256": "sha256:9a40ded483840249752f97e81d8c9b78466f72c0e46940aa63a143530188a85e"
     },
     "mlops-data-platform.yaml": {
-      "bytes": 2647,
-      "sha256": "sha256:6f97f72024e66055ce91b5fe0693cd29ab232073de327cb59eb5d5af97322d09"
+      "bytes": 2946,
+      "sha256": "sha256:786bc1cf57a39933a8686fb9caf3988fee0e3c2dc1221d5ada1737d353660abb"
     },
     "monitoring-batch.schema.json": {
-      "bytes": 3153,
-      "sha256": "sha256:1684fb18436414e8e2dbf7e0785bae56ea49f5eb18c28d4cad72947f7df9aef4"
+      "bytes": 3643,
+      "sha256": "sha256:57d164746035d9bc70c30643070840b982c0098f1fed6f4d97c6f17877ab09e7"
     },
     "portfolio-evidence.graphql": {
       "bytes": 1937,

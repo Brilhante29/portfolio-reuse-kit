@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "active_family": "mlops-data-platform",
-  "phase": "model-drift-publication-audit",
+  "phase": "stroke-signal-publication-audit",
   "affected": [
     "stroke-signal-demo",
     "mlops-end2end",
@@ -15,6 +15,7 @@
     "mlops-end2end",
     "data-quality-checks",
     "feature-store-lite",
+    "model-drift-detector",
     "kafka-streams-demo",
     "spring-hexagonal-payments",
     "go-rate-limiter",
@@ -28,15 +29,15 @@
     "outbox-pattern"
   ],
   "unknown": [
-    "stroke-signal-demo",
-    "model-drift-detector"
+    "stroke-signal-demo"
   ],
   "repos_local_verified": [
     "go-rate-limiter@2a40e0864a7bfd4632cb0239573524d729425ef9",
     "mini-aws-emulator@63927c0b93607b2509f1fdd57bcabaf08aa3c459",
     "grpc-vs-rest-bench@5a96e7ec32da792fb9d2ff2084e1da865c391c42",
     "multi-tenant-starter@ca91f35045085f832d2d18cf2dbae9f0bccb0158",
-    "api-gateway-lite@812fdfedda9d57f8163b0d6c2fd7914ccaeb6cbd"
+    "api-gateway-lite@812fdfedda9d57f8163b0d6c2fd7914ccaeb6cbd",
+    "model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8"
   ],
   "repos_pushed": [
     "spring-hexagonal-payments",
@@ -51,7 +52,8 @@
     "outbox-pattern",
     "data-quality-checks",
     "feature-store-lite",
-    "kafka-streams-demo"
+    "kafka-streams-demo",
+    "model-drift-detector"
   ],
   "ci_green": [
     "spring-hexagonal-payments#31359207611",
@@ -66,7 +68,8 @@
     "outbox-pattern#31359222289",
     "data-quality-checks#31773506491",
     "feature-store-lite#31991401685",
-    "kafka-streams-demo#31402256249"
+    "kafka-streams-demo#31402256249",
+    "model-drift-detector#31994181644"
   ],
   "blocked": [],
   "active_skills": [
@@ -75,10 +78,11 @@
     "publish-benchmark-evidence",
     "fastapi-backend",
     "python-feature-store",
+    "python-model-monitoring",
     "kafka-streams",
     "cloud-local-first"
   ],
-  "last_evidence": "MLOps and Data Platform is 4/6. feature-store-lite main 6f8c957 and run 31991401685 prove fail-closed validated-batch consumption, point-in-time and online match 1.0, zero future leaks and TTL violations, p95 45.645578341645894 ms, median 1061.9468119765338 entity values/s, and exact-head CI.",
-  "next_action": "Close model-drift-detector (#22) against versioned input and model identities with truthful drift thresholds, V2 evidence, and exact-head CI; then #4.",
-  "updated_at": "2026-08-17T03:35:00Z"
+  "last_evidence": "MLOps and Data Platform is 5/6. model-drift-detector main 13a18d57 and run 31994181644 prove fail-closed monitoring identity, labeled alarm F1 1.0, FPR 0.0, median p95 35.477515344973654 ms, the correlation-only blind spot, and exact-head CI.",
+  "next_action": "Close stroke-signal-demo (#4) with patient-level split integrity, paper-faithful held-out evaluation, clinically relevant confusion metrics, V2 evidence, and exact-head CI.",
+  "updated_at": "2026-08-17T04:24:51Z"
 }

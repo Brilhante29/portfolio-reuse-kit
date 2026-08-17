@@ -1,16 +1,16 @@
 {
-    "generated_at":  "2026-08-10T00:04:12.8720272Z",
+    "generated_at":  "2026-08-17T04:38:55.7569896Z",
     "repositories":  30,
     "docker":  30,
     "ci":  30,
     "tracked_benchmarks":  30,
     "contract_benchmarks":  30,
-    "contract_v2_benchmarks":  13,
+    "contract_v2_benchmarks":  16,
     "local_candidates":  29,
-    "publication_candidates":  13,
-    "published_verified":  7,
+    "publication_candidates":  16,
+    "published_verified":  8,
     "remote_configured":  30,
-    "upstream_configured":  15,
+    "upstream_configured":  16,
     "clean":  29,
     "rows":  [
                  {
@@ -86,7 +86,7 @@
                      "upstream_configured":  true,
                      "local_candidate":  true,
                      "publication_candidate":  true,
-                     "published_verified":  false
+                     "published_verified":  true
                  },
                  {
                      "id":  4,
@@ -286,7 +286,7 @@
                      "upstream_configured":  true,
                      "local_candidate":  true,
                      "publication_candidate":  true,
-                     "published_verified":  true
+                     "published_verified":  false
                  },
                  {
                      "id":  12,
@@ -336,7 +336,7 @@
                      "upstream_configured":  true,
                      "local_candidate":  true,
                      "publication_candidate":  true,
-                     "published_verified":  true
+                     "published_verified":  false
                  },
                  {
                      "id":  14,
@@ -419,22 +419,22 @@
                      "program":  "backend-reliability-platform",
                      "declared_status":  "benchmarked",
                      "language":  "java",
-                     "stack":  "java21, spring-boot, docker",
+                     "stack":  "java21, spring-boot, spring-jdbc, postgresql17, flyway, testcontainers, docker",
                      "architecture":  "hexagonal",
                      "api":  "rest-http",
                      "messaging":  "none",
-                     "cloud":  "adapter-fake",
-                     "database":  "in-memory (simulates schema-per-tenant)",
+                     "cloud":  "local-first",
+                     "database":  "postgresql-17 schema-per-tenant",
                      "docker":  true,
                      "ci":  true,
                      "benchmark_tracked":  true,
                      "benchmark_contract":  true,
                      "benchmark_contract_v2":  false,
                      "placeholders":  0,
-                     "dirty_files":  0,
+                     "dirty_files":  31,
                      "remote_configured":  true,
                      "upstream_configured":  false,
-                     "local_candidate":  true,
+                     "local_candidate":  false,
                      "publication_candidate":  false,
                      "published_verified":  false
                  },
@@ -554,14 +554,14 @@
                      "ci":  true,
                      "benchmark_tracked":  true,
                      "benchmark_contract":  true,
-                     "benchmark_contract_v2":  false,
+                     "benchmark_contract_v2":  true,
                      "placeholders":  0,
                      "dirty_files":  0,
                      "remote_configured":  true,
-                     "upstream_configured":  false,
+                     "upstream_configured":  true,
                      "local_candidate":  true,
-                     "publication_candidate":  false,
-                     "published_verified":  false
+                     "publication_candidate":  true,
+                     "published_verified":  true
                  },
                  {
                      "id":  23,
@@ -604,13 +604,13 @@
                      "ci":  true,
                      "benchmark_tracked":  true,
                      "benchmark_contract":  true,
-                     "benchmark_contract_v2":  false,
+                     "benchmark_contract_v2":  true,
                      "placeholders":  0,
-                     "dirty_files":  2,
+                     "dirty_files":  0,
                      "remote_configured":  true,
                      "upstream_configured":  false,
-                     "local_candidate":  false,
-                     "publication_candidate":  false,
+                     "local_candidate":  true,
+                     "publication_candidate":  true,
                      "published_verified":  false
                  },
                  {
@@ -693,25 +693,25 @@
                      "name":  "kafka-streams-demo",
                      "program":  "mlops-data-platform",
                      "declared_status":  "benchmarked",
-                     "language":  "spring-kotlin-backend",
-                     "stack":  "kotlin, java21, gradle, kafka-streams, junit5, docker, redpanda-optional",
+                     "language":  "kotlin-jvm",
+                     "stack":  "kotlin, java21, gradle-kotlin-dsl, kafka-streams, kafka, testcontainers, docker",
                      "architecture":  "event-driven",
                      "api":  "cli",
                      "messaging":  "kafka",
-                     "cloud":  "adapter-fake",
+                     "cloud":  "none",
                      "database":  "none",
                      "docker":  true,
                      "ci":  true,
                      "benchmark_tracked":  true,
                      "benchmark_contract":  true,
-                     "benchmark_contract_v2":  false,
+                     "benchmark_contract_v2":  true,
                      "placeholders":  0,
                      "dirty_files":  0,
                      "remote_configured":  true,
                      "upstream_configured":  true,
                      "local_candidate":  true,
-                     "publication_candidate":  false,
-                     "published_verified":  false
+                     "publication_candidate":  true,
+                     "published_verified":  true
                  },
                  {
                      "id":  29,

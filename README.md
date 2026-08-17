@@ -199,6 +199,7 @@ The same skills are provided for Codex and Claude Code:
 | `spring-kotlin-backend` | Apply Spring Kotlin backend standards. |
 | `fastapi-backend` | Apply FastAPI backend standards. |
 | `python-feature-store` | Design and audit point-in-time-correct feature stores, fail-closed ingestion, materialization, and online-read evidence. |
+| `python-model-monitoring` | Apply artifact identity, drift claim boundaries, statistical policy, and labeled alarm evidence rules. |
 | `go-backend` | Apply Go backend standards. |
 | `node-typescript-backend` | Apply NestJS/Rocketseat-style Node TypeScript backend standards. |
 | `language-standards` | Apply language/framework layout, tests, linting, Docker, and benchmark conventions. |
@@ -224,6 +225,8 @@ The first program operating guide is [AI Evaluation and Retrieval Systems](docs/
 The backend transactional-core guide is [Backend Reliability Platform](docs/backend-reliability-platform.md).
 
 The data lifecycle and artifact-contract guide is [MLOps and Data Platform](docs/mlops-data-platform.md).
+
+The drift decision and evidence guide is [Python Model Monitoring](docs/model-monitoring.md).
 
 ## First Six Projects
 

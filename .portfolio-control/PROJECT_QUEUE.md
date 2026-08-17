@@ -6,7 +6,7 @@ Keep one active macro and at most one reusable-kit improvement.
 
 MLOps and Data Platform: #4, #21, #22, #23, #26, and #28.
 
-Current phase: keep published #21, #23, #26, and #28 as lifecycle baselines; close #22 and #4 with versioned artifact contracts, V2 evidence, and exact-head CI. Current progress: 4/6. Exact next repository: #22 `model-drift-detector`.
+Current phase: keep published #21, #22, #23, #26, and #28 as lifecycle baselines; close #4 with patient-level split integrity, versioned artifacts, V2 evidence, and exact-head CI. Current progress: 5/6. Exact next repository: #4 `stroke-signal-demo`.
 
 ## Completed Macros
 

@@ -222,9 +222,13 @@ packs:
     extra_skills:
       - fastapi-backend
       - python-feature-store
+      - python-model-monitoring
     benchmark_focus:
       - time_to_production
       - drift_alarm_delta
+      - drift_alarm_f1
+      - drift_false_positive_rate
+      - drift_detection_p95_ms
       - feature_read_latency_ms
       - rejected_rows_ratio
       - messages_per_second
@@ -235,6 +239,8 @@ packs:
       - model registry record
       - drift baseline
       - drift report
+      - model and feature-schema identity
+      - labeled stable, shifted, and unsupported drift scenarios
       - pipeline DAG
     rejection_rules:
       - Reject ML demos with no data validation.
@@ -242,6 +248,8 @@ packs:
       - Reject streaming claims without message-rate benchmark.
       - Reject cross-repository data flow without versioned manifests and SHA-256 artifact identity.
       - Reject feature or drift consumers that bypass the validated-batch status and contract identity.
+      - Reject reference/current drift comparisons across model artifact, producer, contract, time-order, or feature-schema identity.
+      - Reject thresholds tuned on the scored evaluation scenarios or alarms presented as proof of accuracy decay without labels.
       - Reject feature-store performance claims without independent point-in-time, future-leak, TTL, and online-value correctness gates.
       - Reject smoke evidence whose workload overrides are absent from workload, comparability key, or effective config digest.
 

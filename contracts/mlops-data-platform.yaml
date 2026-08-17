@@ -56,6 +56,11 @@ stages:
     compatibility_rule: validated-batch-manifest-v1 is required for the current closure; feature-snapshot-v1 and prediction-observation-batch remain optional until implemented by both producer and consumer.
     produces:
       - drift-report-v1
+    evidence:
+      publication: model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8
+      source_commit: 12534946a5a6cb35e10260702d3765bc86b1931a
+      exact_head_ci: 31994181644
+      strict_identity: [producer, dataset, contract, model-artifact, capture-order, payload, feature-schema]
   - project: kafka-streams-demo
     number: 28
     role: event-stream-processing-proof

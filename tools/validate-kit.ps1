@@ -135,6 +135,7 @@ $requiredFiles = @(
   "docs/ai-evaluation-retrieval.md",
   "docs/backend-reliability-platform.md",
   "docs/mlops-data-platform.md",
+  "docs/model-monitoring.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
@@ -250,6 +251,7 @@ $requiredDirs = @(
   ".codex/skills/publish-benchmark-evidence",
   ".codex/skills/backend-reliability-evidence",
   ".codex/skills/python-feature-store",
+  ".codex/skills/python-model-monitoring",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -273,7 +275,8 @@ $requiredDirs = @(
   ".claude/skills/node-typescript-backend",
   ".claude/skills/publish-benchmark-evidence",
   ".claude/skills/backend-reliability-evidence",
-  ".claude/skills/python-feature-store"
+  ".claude/skills/python-feature-store",
+  ".claude/skills/python-model-monitoring"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -316,6 +319,14 @@ Require-Pattern ".claude/skills/python-feature-store/SKILL.md" "Fail closed on u
 Require-Pattern ".codex/skills/python-feature-store/SKILL.md" "Add Redis only for a measured cross-process"
 Require-Pattern ".claude/skills/python-feature-store/SKILL.md" "Add Redis only for a measured cross-process"
 Require-Pattern "component-packs/manifest.yaml" "python-feature-store"
+Require-Pattern ".codex/skills/python-model-monitoring/SKILL.md" "Reject comparisons across incompatible producers"
+Require-Pattern ".claude/skills/python-model-monitoring/SKILL.md" "Reject comparisons across incompatible producers"
+Require-Pattern ".codex/skills/python-model-monitoring/SKILL.md" "Never auto-retrain from a drift alarm"
+Require-Pattern ".claude/skills/python-model-monitoring/SKILL.md" "Never auto-retrain from a drift alarm"
+Require-Pattern "component-packs/manifest.yaml" "python-model-monitoring"
+Require-Pattern "contracts/monitoring-batch.schema.json" '"validated_batch"'
+Require-Pattern "contracts/monitoring-batch.schema.json" '"artifact_sha256"'
+Require-Pattern "docs/model-monitoring.md" "Future breaking changes require a new schema version"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "CI smoke run writes to a distinct path"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "CI smoke run writes to a distinct path"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "workload.measured_iterations.*execution.repeat"
