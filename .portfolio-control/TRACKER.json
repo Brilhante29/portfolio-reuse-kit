@@ -1,88 +1,49 @@
 {
   "schema_version": 1,
-  "active_family": "mlops-data-platform",
-  "phase": "stroke-signal-publication-audit",
+  "active_family": "delivery-observability-infra",
+  "phase": "delivery-ci-cd-publication-audit",
   "affected": [
+    "ci-cd-templates",
+    "observability-stack",
+    "terraform-aws-baseline",
+    "load-test-suite",
+    "portfolio-reuse-kit"
+  ],
+  "healthy_variants": [
     "stroke-signal-demo",
     "mlops-end2end",
     "model-drift-detector",
     "feature-store-lite",
     "data-quality-checks",
-    "kafka-streams-demo",
-    "portfolio-reuse-kit"
+    "kafka-streams-demo"
   ],
-  "healthy_variants": [
-    "mlops-end2end",
-    "data-quality-checks",
-    "feature-store-lite",
-    "model-drift-detector",
-    "kafka-streams-demo",
-    "spring-hexagonal-payments",
-    "go-rate-limiter",
-    "mini-aws-emulator",
-    "event-sourcing-orders",
-    "grpc-vs-rest-bench",
-    "saga-orchestrator",
-    "multi-tenant-starter",
-    "api-gateway-lite",
-    "cache-strategies-bench",
-    "outbox-pattern"
-  ],
-  "unknown": [
-    "stroke-signal-demo"
-  ],
+  "unknown": ["ci-cd-templates", "observability-stack", "terraform-aws-baseline", "load-test-suite"],
   "repos_local_verified": [
-    "go-rate-limiter@2a40e0864a7bfd4632cb0239573524d729425ef9",
-    "mini-aws-emulator@63927c0b93607b2509f1fdd57bcabaf08aa3c459",
-    "grpc-vs-rest-bench@5a96e7ec32da792fb9d2ff2084e1da865c391c42",
-    "multi-tenant-starter@ca91f35045085f832d2d18cf2dbae9f0bccb0158",
-    "api-gateway-lite@812fdfedda9d57f8163b0d6c2fd7914ccaeb6cbd",
-    "model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8"
+    "model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8",
+    "stroke-signal-demo@187466c4b47b50a1ebb2491d3ae60c0561aeebd6"
   ],
   "repos_pushed": [
-    "spring-hexagonal-payments",
-    "go-rate-limiter",
-    "mini-aws-emulator",
-    "event-sourcing-orders",
-    "grpc-vs-rest-bench",
-    "saga-orchestrator",
-    "multi-tenant-starter",
-    "api-gateway-lite",
-    "cache-strategies-bench",
-    "outbox-pattern",
     "data-quality-checks",
     "feature-store-lite",
     "kafka-streams-demo",
-    "model-drift-detector"
+    "model-drift-detector",
+    "stroke-signal-demo"
   ],
   "ci_green": [
-    "spring-hexagonal-payments#31359207611",
-    "go-rate-limiter#31770932954",
-    "mini-aws-emulator#31770435198",
-    "event-sourcing-orders#31359210209",
-    "grpc-vs-rest-bench#31770456018",
-    "saga-orchestrator#31359213207",
-    "multi-tenant-starter#31770435136",
-    "api-gateway-lite#31770456130",
-    "cache-strategies-bench#31359781335",
-    "outbox-pattern#31359222289",
     "data-quality-checks#31773506491",
     "feature-store-lite#31991401685",
     "kafka-streams-demo#31402256249",
-    "model-drift-detector#31994181644"
+    "model-drift-detector#31994181644",
+    "stroke-signal-demo#31998068664"
   ],
   "blocked": [],
   "active_skills": [
     "i-have-adhd",
-    "medical-ai-evaluation",
+    "continuity-checkpoint",
     "publish-benchmark-evidence",
-    "fastapi-backend",
-    "python-feature-store",
-    "python-model-monitoring",
-    "kafka-streams",
-    "cloud-local-first"
+    "benchmark-harness"
   ],
-  "last_evidence": "MLOps and Data Platform is 5/6. model-drift-detector main 13a18d57 and run 31994181644 prove fail-closed monitoring identity, labeled alarm F1 1.0, FPR 0.0, median p95 35.477515344973654 ms, the correlation-only blind spot, and exact-head CI.",
-  "next_action": "Close stroke-signal-demo (#4) with patient-level split integrity, paper-faithful held-out evaluation, clinically relevant confusion metrics, V2 evidence, and exact-head CI.",
-  "updated_at": "2026-08-17T04:24:51Z"
+  "last_evidence": "MLOps and Data Platform is 6/6. stroke-signal-demo main 187466c4 and run 31998068664 prove a patient-isolated, paper-inspired synthetic CT segmentation evaluation with Dice 0.9424706943 and no clinical-performance claim.",
+  "next_action": "Audit ci-cd-templates (#24) for reusable workflow security, deterministic build-time evidence, V2 provenance, and exact-head CI.",
+  "updated_at": "2026-08-17T05:31:43Z"
 }

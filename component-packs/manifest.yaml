@@ -221,6 +221,7 @@ packs:
     problem: Move models and data through training, validation, feature serving, drift detection, and streaming.
     extra_skills:
       - fastapi-backend
+      - medical-ai-evaluation
       - python-feature-store
       - python-model-monitoring
     benchmark_focus:
@@ -230,6 +231,9 @@ packs:
       - drift_false_positive_rate
       - drift_detection_p95_ms
       - feature_read_latency_ms
+      - segmentation_dice
+      - sensitivity
+      - specificity
       - rejected_rows_ratio
       - messages_per_second
     preferred_artifacts:
@@ -237,6 +241,7 @@ packs:
       - versioned data contract
       - feature snapshot manifest
       - model registry record
+      - medical evaluation report with grouped split identity and confusion matrix
       - drift baseline
       - drift report
       - model and feature-schema identity
@@ -244,6 +249,7 @@ packs:
       - pipeline DAG
     rejection_rules:
       - Reject ML demos with no data validation.
+      - Reject medical metrics selected on test data, missing grouped identity, or presented as clinical evidence when produced from synthetic fixtures.
       - Reject pipelines that cannot run locally.
       - Reject streaming claims without message-rate benchmark.
       - Reject cross-repository data flow without versioned manifests and SHA-256 artifact identity.

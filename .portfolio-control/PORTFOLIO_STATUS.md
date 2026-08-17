@@ -1,15 +1,15 @@
 # Portfolio Status Report
 
-Generated: 2026-08-17T04:38:55.7569896Z
+Generated: 2026-08-17T05:39:16.5912842Z
 
-Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **16** | local candidates: **29** | publication candidates: **16** | verified publications: **8** | origins: **30** | upstreams: **16**
+Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **17** | local candidates: **29** | publication candidates: **17** | verified publications: **9** | origins: **30** | upstreams: **17**
 
 | # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Valid contract | Contract v2 | Placeholders | Local | Publication candidate | Published |
 |---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|
 | 1 | yolo-training-pipeline | applied-computer-vision | published | python | python-3.12.13, ultralytics-8.4.96, pytorch-2.13.0-cpu, torchvision-0.28.0-cpu, pytest-9.1.1, ruff-0.15.21, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 2 | llm-eval-harness | ai-evaluation-retrieval | published | python | python, json-schema, jsonl, argparse, unittest, docker | pipeline-with-contract-boundary | cli-first | artifact-file | none | fixture-files | True | True | True | 0 | True | True | False |
 | 3 | rag-knowledge-base | ai-evaluation-retrieval | published | fastapi-backend | python, fastapi, uvicorn, local-hashing-embeddings, json-vector-store, docker | clean-architecture | rest-http | none | none | json-vector-store | True | True | True | 0 | True | True | True |
-| 4 | stroke-signal-demo | mlops-data-platform | benchmarked | python-ml | python, pandas, scikit-learn, matplotlib, docker | pipeline | cli | none | none | none | True | True | False | 0 | True | False | False |
+| 4 | stroke-signal-demo | mlops-data-platform | published | python | python-3.12, numpy-2.5.1, scipy-1.18.0, jsonschema-4.26.0, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 5 | alpr-mercosul | applied-computer-vision | published | python | python-3.12, pillow-10.4.0, numpy-1.26.4, pytest, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 6 | melanoma-classifier | applied-computer-vision | published | python-ml | python-3.12.13, numpy-2.0.2, scipy-1.15.3, scikit-learn-1.7.2, dermamnist-v2.1, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 7 | vision-serving-fastapi | applied-computer-vision | published | fastapi-backend | python-3.12.13, fastapi-0.116.1, ultralytics-8.4.96, pytorch-2.13.0-cpu, prometheus-client-0.22.1, httpx-0.28.1, docker | modular-monolith | rest-http | none | none | none | True | True | True | 0 | True | True | True |

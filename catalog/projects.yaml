@@ -23,10 +23,10 @@ projects:
   - id: 4
     name: "stroke-signal-demo"
     domain: "medical-ml"
-    stack: ["python", "pandas", "scikit-learn", "matplotlib", "docker"]
-    proves: "reproducao de classificador clinico"
-    benchmark: "accuracy, confusion_matrix"
-    reuse_from: ["scikit-learn"]
+    stack: ["python-3.12", "numpy-2.5.1", "scipy-1.18.0", "jsonschema-4.26.0", "docker"]
+    proves: "avaliacao de segmentacao CT sintetica com isolamento por paciente e sem selecao pelo teste"
+    benchmark: "segmentation_dice, sensitivity, specificity, accuracy, confusion_matrix, latency_p95_ms"
+    reuse_from: ["medical-evaluation-report-v1", "benchmark-result-v2", "scipy"]
   - id: 5
     name: "alpr-mercosul"
     domain: "ocr"
@@ -51,7 +51,7 @@ projects:
   - id: 8
     name: "embeddings-benchmark"
     domain: "retrieval"
-    stack: ["python", "sparse-vectorizers", "tf-idf", "feature-hashing", "jsonl", "docker"]
+    stack: ["python", "fastembed-0.8.0", "onnxruntime", "bge-small-en-v1.5", "all-minilm-l6-v2", "sparse-vectorizers", "jsonl", "docker"]
     proves: "comparacao de modelos de embedding"
     benchmark: "recall_at_k, indexing_time_ms, query_time_ms"
     reuse_from: ["sentence-transformers", "faiss", "qdrant"]
@@ -65,7 +65,7 @@ projects:
   - id: 10
     name: "prompt-ab-testing"
     domain: "prompt-eval"
-    stack: ["python", "statistics", "jsonl", "unittest", "docker"]
+    stack: ["python", "bootstrap-statistics", "jsonl", "unittest", "docker"]
     proves: "comparacao estatistica de prompts"
     benchmark: "score_by_variant, confidence_interval"
     reuse_from: ["mlflow", "openai-cookbook"]
@@ -100,7 +100,7 @@ projects:
   - id: 15
     name: "grpc-vs-rest-bench"
     domain: "protocol-benchmark"
-    stack: ["go-1.26.5", "grpc-go-1.71.1", "chi-v5.2.1", "protobuf-1.36.6", "http-1.1", "http-2", "docker-compose"]
+    stack: ["go", "grpc", "chi", "protobuf", "docker"]
     proves: "comparacao REST vs gRPC sobre o mesmo contrato e payload"
     benchmark: "rest_over_grpc_p95_ratio, latency_ms_by_protocol, throughput_rps_by_protocol, parity_failures"
     reuse_from: ["grpc-examples", "k6"]
@@ -114,14 +114,14 @@ projects:
   - id: 17
     name: "multi-tenant-starter"
     domain: "backend"
-    stack: ["java-21", "spring-boot-3.4", "spring-jdbc", "postgresql-17.6", "flyway-10", "gradle-wrapper", "docker-compose"]
+    stack: ["java21", "spring-boot", "spring-jdbc", "postgresql17", "flyway", "testcontainers", "docker"]
     proves: "onboarding transacional e isolamento schema-per-tenant em PostgreSQL real"
     benchmark: "tenant_onboarding_p50_ms, tenant_onboarding_p95_ms, isolated_query_p95_ms, leakage_count"
     reuse_from: ["spring-security", "postgresql-rls"]
   - id: 18
     name: "api-gateway-lite"
     domain: "gateway"
-    stack: ["go-1.23.12", "net-http-reverse-proxy", "redis-7.4", "opentelemetry-otlp-http", "otel-collector-0.130.0", "docker-compose"]
+    stack: ["go", "reverse-proxy", "redis", "opentelemetry", "k6", "docker"]
     proves: "gateway com auth, quota Redis compartilhada, propagacao de contexto e OTLP plugavel"
     benchmark: "overhead_p95_ms, gateway_throughput_rps, gateway_rejects, gateway_failures"
     reuse_from: ["envoy-ratelimit", "opentelemetry-demo"]
@@ -156,7 +156,7 @@ projects:
   - id: 23
     name: "feature-store-lite"
     domain: "data-platform"
-    stack: ["python-3.12.13", "feast-0.64.0", "pandas-2.3.3", "pyarrow-25.0.0", "jsonschema-4.26.0", "parquet", "sqlite", "pytest-9.1.1", "ruff-0.15.20", "docker"]
+    stack: ["python-3.12", "feast-0.64.0", "pandas-2.3.3", "pyarrow-25.0.0", "parquet", "sqlite", "docker"]
     proves: "ingestao fail-closed, point-in-time correto, TTL e materializacao offline-online"
     benchmark: "online_read_latency_p95_ms, online_entity_values_per_second"
     reuse_from: ["feast-patterns", "validated-batch-manifest-v1", "benchmark-result-v2"]
@@ -177,7 +177,7 @@ projects:
   - id: 26
     name: "data-quality-checks"
     domain: "data-quality"
-    stack: ["python-3.12.13", "pandera-0.32.1", "polars-1.42.1", "jsonschema-4.26.0", "pytest-9.1.1", "ruff-0.15.20", "docker"]
+    stack: ["python-3.12", "pandera-0.32.1", "polars-1.42.1", "docker"]
     proves: "gate fail-closed com paridade entre oraculo Python e adapter Polars/Pandera, quarentena e manifesto de lote validado"
     benchmark: "invalid_row_detection_f1, rejected_rows_percent, throughput_rows_per_second"
     reuse_from: ["pandera", "polars", "validated-batch-manifest-v1", "benchmark-result-v2"]
@@ -191,7 +191,7 @@ projects:
   - id: 28
     name: "kafka-streams-demo"
     domain: "streaming"
-    stack: ["kotlin", "java21", "gradle", "kafka-streams", "junit5", "docker", "redpanda-optional"]
+    stack: ["kotlin", "java21", "gradle-kotlin-dsl", "kafka-streams", "kafka", "testcontainers", "docker"]
     proves: "processamento streaming"
     benchmark: "messages_per_second"
     reuse_from: ["kafka-streams-examples"]

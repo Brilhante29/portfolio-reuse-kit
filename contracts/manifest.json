@@ -28,6 +28,14 @@
       "bytes": 1749,
       "sha256": "sha256:0074aeacec5abbc6d5938d6ae330160865d5d866237df0ae76d0425b27e1da2e"
     },
+    "fixtures/medical-evaluation-report-v1.invalid.json": {
+      "bytes": 1216,
+      "sha256": "sha256:1ded277145982ab2bace8958fe9fc2351f1eff8c6cc1699d055043a15647af0b"
+    },
+    "fixtures/medical-evaluation-report-v1.valid.json": {
+      "bytes": 1583,
+      "sha256": "sha256:0665c207f1de86fa8d1ad89d041638fe9e5a3be9424977ba61b5bcffea31c1be"
+    },
     "fixtures/portfolio-audit.valid.json": {
       "bytes": 2017,
       "sha256": "sha256:cb123086c3b2d52b74a096796ab34f53ee12ea198582da00e12edb21858e3190"
@@ -72,9 +80,13 @@
       "bytes": 11193,
       "sha256": "sha256:9a40ded483840249752f97e81d8c9b78466f72c0e46940aa63a143530188a85e"
     },
+    "medical-evaluation-report-v1.schema.json": {
+      "bytes": 4321,
+      "sha256": "sha256:9a8489f0732b396239d1e53e854a68f6eb3873c25d7a3c1d08d8401f5faf08d1"
+    },
     "mlops-data-platform.yaml": {
-      "bytes": 2946,
-      "sha256": "sha256:786bc1cf57a39933a8686fb9caf3988fee0e3c2dc1221d5ada1737d353660abb"
+      "bytes": 3476,
+      "sha256": "sha256:f81ee6e324cbd7b157041a830714de20cf646f71aa6fecaa68011485c735cd73"
     },
     "monitoring-batch.schema.json": {
       "bytes": 3643,
@@ -110,6 +122,6 @@
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.4.0",
+  "contract_set_version": "1.5.0",
   "schema_version": 1
 }

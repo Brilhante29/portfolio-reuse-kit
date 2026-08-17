@@ -41,11 +41,20 @@ stages:
       - prediction-observation-batch
   - project: stroke-signal-demo
     number: 4
-    role: clinical-reproduction-and-evaluation
+    role: paper-inspired-medical-segmentation-evaluation
     consumes:
-      - validated-clinical-splits
+      - versioned-medical-fixture
     produces:
-      - medical-evaluation-report
+      - contract: medical-evaluation-report-v1
+        schema: medical-evaluation-report-v1.schema.json
+    boundary: Uses deterministic synthetic CT phantoms; no clinical input integration or diagnostic performance is claimed.
+    evidence:
+      publication: stroke-signal-demo@187466c4b47b50a1ebb2491d3ae60c0561aeebd6
+      source_commit: ed1c8aee181b195d4aceeba9d08221486ee6b6ba
+      exact_head_ci: 31998068664
+      split_unit: patient
+      test_used_for_selection: false
+      synthetic_dice: 0.9424706943192065
   - project: model-drift-detector
     number: 22
     role: baseline-current-comparison
@@ -70,3 +79,4 @@ stages:
       - windowed-business-aggregate
     boundary: Does not claim direct data-lifecycle integration until a shared event contract is implemented and measured.
 completion_order: [26, 23, 22, 4]
+completion_state: complete-6-of-6

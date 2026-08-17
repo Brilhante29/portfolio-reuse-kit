@@ -1,8 +1,8 @@
 {
-  "project": "stroke-signal-demo",
+  "project": "ci-cd-templates",
   "status": "audit-required",
-  "phase": "stroke-signal-publication-audit",
-  "last_commit": "13a18d57657ac8c04e17c25adda98ff855b126a8",
+  "phase": "delivery-ci-cd-publication-audit",
+  "last_commit": "187466c4b47b50a1ebb2491d3ae60c0561aeebd6",
   "completed_gates": [
     "backend_reliability_10_of_10",
     "data_quality_exact_head_ci",
@@ -14,11 +14,14 @@
     "model_drift_strict_identity",
     "model_drift_v2_publication",
     "model_drift_exact_head_ci",
-    "mlops_data_platform_5_of_6"
+    "stroke_signal_patient_isolation",
+    "stroke_signal_v2_publication",
+    "stroke_signal_exact_head_ci",
+    "mlops_data_platform_6_of_6"
   ],
   "failed_gates": [],
   "blockers": [],
-  "next_action": "Audit stroke-signal-demo for paper fidelity, patient-level split leakage, held-out confusion metrics, V2 evidence, and exact-head CI.",
-  "reuse_kit_version": "portfolio-reuse-kit@a270660",
-  "updated_at": "2026-08-17T04:24:51Z"
+  "next_action": "Audit ci-cd-templates for reusable workflow security, deterministic build-time evidence, V2 provenance, and exact-head CI.",
+  "reuse_kit_version": "portfolio-reuse-kit@285939b",
+  "updated_at": "2026-08-17T05:31:43Z"
 }

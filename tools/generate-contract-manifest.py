@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 MANIFEST_NAME = "manifest.json"
+CONTRACT_SET_VERSION = "1.5.0"
 TEXT_SUFFIXES = {".json", ".yaml", ".yml", ".graphql"}
 
 
@@ -38,7 +39,7 @@ def build_manifest(contracts_dir: Path) -> dict[str, object]:
     return {
         "schema_version": 1,
         "contract_set": "portfolio-interoperability",
-        "contract_set_version": "1.4.0",
+        "contract_set_version": CONTRACT_SET_VERSION,
         "assets": assets,
     }
 

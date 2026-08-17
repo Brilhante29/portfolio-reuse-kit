@@ -94,6 +94,7 @@ $requiredFiles = @(
   "contracts/commerce-event-v1.schema.json",
   "contracts/backend-reliability-platform.yaml",
   "contracts/mlops-data-platform.yaml",
+  "contracts/medical-evaluation-report-v1.schema.json",
   "contracts/validated-batch-manifest-v1.schema.json",
   "contracts/fixtures/project.valid.json",
   "contracts/fixtures/project.non-jvm.valid.json",
@@ -107,6 +108,8 @@ $requiredFiles = @(
   "contracts/fixtures/project.wrapper-pair-mismatch.invalid.json",
   "contracts/fixtures/benchmark-result-v2.valid.json",
   "contracts/fixtures/benchmark-result-v2.invalid.json",
+  "contracts/fixtures/medical-evaluation-report-v1.valid.json",
+  "contracts/fixtures/medical-evaluation-report-v1.invalid.json",
   "contracts/fixtures/portfolio-audit.valid.json",
   "contracts/portfolio-evidence.openapi.yaml",
   "contracts/portfolio-evidence.graphql",
@@ -135,6 +138,7 @@ $requiredFiles = @(
   "docs/ai-evaluation-retrieval.md",
   "docs/backend-reliability-platform.md",
   "docs/mlops-data-platform.md",
+  "docs/medical-ai-evaluation.md",
   "docs/model-monitoring.md",
   "harness/bench.py",
   "harness/compare_results.py",
@@ -442,7 +446,7 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.4.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.5.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"

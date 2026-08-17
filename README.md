@@ -198,6 +198,7 @@ The same skills are provided for Codex and Claude Code:
 | `continuity-checkpoint` | Capture sanitized state, decisions, failures, and exact next actions before limits or handoffs. |
 | `spring-kotlin-backend` | Apply Spring Kotlin backend standards. |
 | `fastapi-backend` | Apply FastAPI backend standards. |
+| `medical-ai-evaluation` | Enforce grouped split identity, test isolation, confusion metrics, evidence scope, and non-clinical claim boundaries. |
 | `python-feature-store` | Design and audit point-in-time-correct feature stores, fail-closed ingestion, materialization, and online-read evidence. |
 | `python-model-monitoring` | Apply artifact identity, drift claim boundaries, statistical policy, and labeled alarm evidence rules. |
 | `go-backend` | Apply Go backend standards. |
@@ -225,6 +226,8 @@ The first program operating guide is [AI Evaluation and Retrieval Systems](docs/
 The backend transactional-core guide is [Backend Reliability Platform](docs/backend-reliability-platform.md).
 
 The data lifecycle and artifact-contract guide is [MLOps and Data Platform](docs/mlops-data-platform.md).
+
+The leakage-safe medical benchmark guide is [Medical AI Evaluation](docs/medical-ai-evaluation.md).
 
 The drift decision and evidence guide is [Python Model Monitoring](docs/model-monitoring.md).
 

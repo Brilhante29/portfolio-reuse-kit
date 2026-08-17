@@ -48,7 +48,7 @@ programs:
       - accepted and quarantine artifact protocol
       - drift reports
       - streaming benchmarks
-    portfolio_story: "From a fail-closed validated batch to feature serving, training, registry, clinical evaluation, drift detection, and streaming operation through versioned artifact contracts."
+    portfolio_story: "From a fail-closed validated batch to feature serving, training, registry, medically bounded evaluation, drift detection, and streaming operation through versioned artifact contracts."
   - id: delivery-observability-infra
     name: Delivery, Observability, and Infrastructure
     narrative: "Standardize delivery, telemetry, infrastructure, and performance evidence across repositories."

@@ -1,6 +1,6 @@
 # MLOps And Data Platform
 
-This macro is one evidence system, not six unrelated demos. It proves that data can be rejected safely, identified immutably, materialized as features, used by a real training lifecycle, evaluated in a clinical reproduction, observed for drift, and processed as a stream.
+This macro is one evidence system, not six unrelated demos. It proves that data can be rejected safely, identified immutably, materialized as features, used by a real training lifecycle, evaluated with medically bounded leakage controls, observed for drift, and processed as a stream.
 
 ## Repository Responsibilities
 
@@ -9,7 +9,7 @@ This macro is one evidence system, not six unrelated demos. It proves that data 
 | 26 | `data-quality-checks` | Fail-closed structural and row gate; accepted/quarantine artifacts and manifest | Published |
 | 23 | `feature-store-lite` | Fail-closed validated-batch ingestion, point-in-time-correct feature materialization, and online reads | Published |
 | 21 | `mlops-end2end` | Airflow execution, MLflow registry, deploy and monitor lifecycle | Published |
-| 4 | `stroke-signal-demo` | Reproducible clinical classifier and held-out evaluation | Pending |
+| 4 | `stroke-signal-demo` | Paper-inspired synthetic CT segmentation with patient-isolated evaluation | Published |
 | 22 | `model-drift-detector` | Fail-closed baseline/current feature and prediction drift alarms with model identity | Published |
 | 28 | `kafka-streams-demo` | Stateful streaming and message-rate evidence | Published |
 
@@ -23,11 +23,11 @@ flowchart LR
   quality -->|"validated-batch-manifest-v1"| drift["#22 Drift detector"]
   features -.->|"feature-snapshot-v1: planned contract"| drift
   lifecycle -.->|"model observation producer integration: pending"| drift
-  quality --> clinical["#4 Clinical reproduction"]
+  medical["Versioned medical fixture"] --> clinical["#4 Medical evaluation"]
   events["Versioned events"] --> streams["#28 Kafka Streams"]
 ```
 
-The arrows are artifact contracts, not source imports or a claim that every repository is deployed together. The central contract is `contracts/mlops-data-platform.yaml`; `contracts/validated-batch-manifest-v1.schema.json` is the first implemented cross-repository boundary.
+The arrows are artifact contracts, not source imports or a claim that every repository is deployed together. The central contract is `contracts/mlops-data-platform.yaml`. The data pipeline uses `validated-batch-manifest-v1`; the medical proof emits `medical-evaluation-report-v1` independently because no authorized clinical bridge to #26 exists.
 
 ## Decoupling Rules
 
@@ -39,4 +39,4 @@ The arrows are artifact contracts, not source imports or a claim that every repo
 
 ## Completion Gate
 
-A component is publication-complete only when Docker execution, README headline numbers, canonical V2 evidence, reproducible smoke evidence, and exact-head CI all pass. Current progress is 5/6. The macro closes after #4 consumes compatible validated clinical inputs and preserves split/model identity. The direct `feature-snapshot-v1` and lifecycle observation-producer arrows remain explicitly unclaimed until both sides implement them.
+A component is publication-complete only when Docker execution, README headline numbers, canonical V2 evidence, reproducible smoke evidence, and exact-head CI all pass. Current progress is 6/6. The direct `feature-snapshot-v1`, lifecycle observation-producer, and clinical-input arrows remain explicitly unclaimed until both producers and consumers implement and measure them.

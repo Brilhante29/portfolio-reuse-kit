@@ -41,4 +41,4 @@ description: Design and review leakage-safe, non-clinical medical AI or biomedic
 
 ## Publication Gate
 
-Require tests for checksum/split validation, threshold isolation, invalid inputs and confusion-matrix consistency. README, manifest, SDD, OpenSpec, dataset license, raw JSON and V2 evidence must agree before status becomes `published`.
+Require tests for checksum/split validation, threshold isolation, invalid inputs and confusion-matrix consistency. Validate the aggregate against `contracts/medical-evaluation-report-v1.schema.json`; preserve the patient/study identities, model digest, primary metric and confusion matrix in V2 provenance. README, manifest, SDD, OpenSpec, dataset license, raw JSON and V2 evidence must agree before status becomes `published`.
