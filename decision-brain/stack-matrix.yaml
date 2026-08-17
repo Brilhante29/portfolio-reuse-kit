@@ -224,6 +224,11 @@ profiles:
     use_when:
       - public UI, dashboard, demo, docs site, or portfolio-facing app matters
       - SSR/ISR, route structure, and polish are part of the proof
+  python:
+    public_signal: "Typed Python automation or CLI with reproducible local execution and explicit quality gates"
+    use_when:
+      - automation, developer tooling, scientific utilities, or command-line orchestration is the core problem
+      - Python libraries are justified but ML, HTTP serving, and data-platform frameworks are not
   python-ml:
     public_signal: "Python ML/data system with reproducible experiments and measurable model/data quality"
     use_when:
