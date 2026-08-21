@@ -40,6 +40,14 @@
       "bytes": 988,
       "sha256": "sha256:f6e4b1d96eb91dcff31cb9fb702acf17878079708b560356a99959915142330a"
     },
+    "fixtures/k6-load-curve-v1.invalid.json": {
+      "bytes": 938,
+      "sha256": "sha256:a0ce4a75c27b7ea8775ff396fcf234bbe0cd8d37aa203ca9fa2ef0802ce083f5"
+    },
+    "fixtures/k6-load-curve-v1.valid.json": {
+      "bytes": 938,
+      "sha256": "sha256:18d7402c80f2ce3f5a69a882719a8ed9777f68e70af1e6a63e1aca2e84acdc4e"
+    },
     "fixtures/medical-evaluation-report-v1.invalid.json": {
       "bytes": 1216,
       "sha256": "sha256:1ded277145982ab2bace8958fe9fc2351f1eff8c6cc1699d055043a15647af0b"
@@ -108,6 +116,10 @@
       "bytes": 1385,
       "sha256": "sha256:4e50873eff4f44429d4f63cf1987b515fd44d08e9ec8a5dd04b0af61c0b81a70"
     },
+    "k6-load-curve-v1.schema.json": {
+      "bytes": 2969,
+      "sha256": "sha256:efc66dd57a32dc3053a13b2aea7c9ab0756ec9edcf44b6d129b3eec1d54af36f"
+    },
     "medical-evaluation-report-v1.schema.json": {
       "bytes": 4321,
       "sha256": "sha256:9a8489f0732b396239d1e53e854a68f6eb3873c25d7a3c1d08d8401f5faf08d1"
@@ -158,6 +170,6 @@
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.8.0",
+  "contract_set_version": "1.9.0",
   "schema_version": 1
 }

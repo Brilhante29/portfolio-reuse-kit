@@ -97,6 +97,8 @@ $requiredFiles = @(
   "contracts/medical-evaluation-report-v1.schema.json",
   "contracts/ci-profile-v1.schema.json",
   "contracts/observability-evidence-v1.schema.json",
+  "contracts/terraform-kumo-lifecycle-v1.schema.json",
+  "contracts/k6-load-curve-v1.schema.json",
   "contracts/validated-batch-manifest-v1.schema.json",
   "contracts/fixtures/project.valid.json",
   "contracts/fixtures/project.non-jvm.valid.json",
@@ -116,6 +118,10 @@ $requiredFiles = @(
   "contracts/fixtures/ci-profile-v1.invalid.json",
   "contracts/fixtures/observability-evidence-v1.valid.json",
   "contracts/fixtures/observability-evidence-v1.invalid.json",
+  "contracts/fixtures/terraform-kumo-lifecycle-v1.valid.json",
+  "contracts/fixtures/terraform-kumo-lifecycle-v1.invalid.json",
+  "contracts/fixtures/k6-load-curve-v1.valid.json",
+  "contracts/fixtures/k6-load-curve-v1.invalid.json",
   "contracts/fixtures/portfolio-audit.valid.json",
   "contracts/portfolio-evidence.openapi.yaml",
   "contracts/portfolio-evidence.graphql",
@@ -151,6 +157,8 @@ $requiredFiles = @(
   "harness/compare_results.py",
   "harness/result.schema.json",
   "harness/k6/http-smoke.js",
+  "harness/k6/load-curve.mjs",
+  "tests/test-k6-load-curve.mjs",
   "metrics/registry.yaml",
   "sdd/templates/spec.md",
   "sdd/templates/benchmark-plan.md",
@@ -265,6 +273,7 @@ $requiredDirs = @(
   ".codex/skills/python-model-monitoring",
   ".codex/skills/github-actions-reusable-workflow",
   ".codex/skills/observability-evidence-harness",
+  ".codex/skills/k6-load-evidence",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -291,7 +300,8 @@ $requiredDirs = @(
   ".claude/skills/python-feature-store",
   ".claude/skills/python-model-monitoring",
   ".claude/skills/github-actions-reusable-workflow",
-  ".claude/skills/observability-evidence-harness"
+  ".claude/skills/observability-evidence-harness",
+  ".claude/skills/k6-load-evidence"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -457,9 +467,10 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.8.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.9.0"'
 Require-Pattern "contracts/observability-evidence-v1.schema.json" '"clock": \{ "const": "monotonic" \}'
 Require-Pattern "contracts/terraform-kumo-lifecycle-v1.schema.json" '"aws_conformance_claim": \{ "const": false \}'
+Require-Pattern "contracts/k6-load-curve-v1.schema.json" '"metric": \{ "const": "p95_ms_at_max_vus" \}'
 Require-Pattern ".codex/skills/observability-evidence-harness/SKILL.md" "fetch-depth: 0"
 Require-Pattern ".claude/skills/observability-evidence-harness/SKILL.md" "fetch-depth: 0"
 Require-Pattern ".codex/skills/terraform-kumo-lifecycle/SKILL.md" "residual state after destroy"
@@ -484,6 +495,7 @@ Invoke-Checked "benchmark v2 schema JSON" { python -m json.tool (Join-Path $root
 Invoke-Checked "CI profile schema JSON" { python -m json.tool (Join-Path $root "contracts/ci-profile-v1.schema.json") | Out-Null }
 Invoke-Checked "observability evidence schema JSON" { python -m json.tool (Join-Path $root "contracts/observability-evidence-v1.schema.json") | Out-Null }
 Invoke-Checked "Terraform Kumo lifecycle schema JSON" { python -m json.tool (Join-Path $root "contracts/terraform-kumo-lifecycle-v1.schema.json") | Out-Null }
+Invoke-Checked "k6 load curve schema JSON" { python -m json.tool (Join-Path $root "contracts/k6-load-curve-v1.schema.json") | Out-Null }
 Invoke-Checked "monitoring batch schema JSON" { python -m json.tool (Join-Path $root "contracts/monitoring-batch.schema.json") | Out-Null }
 Invoke-Checked "execution event schema JSON" { python -m json.tool (Join-Path $root "contracts/execution-event.schema.json") | Out-Null }
 Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Path $root "contracts/publication-evidence.schema.json") | Out-Null }
@@ -504,6 +516,7 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
 $pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/generate-publication-benchmark.py', r'$root/tools/sync-catalog-stacks.py', r'$root/tests/test_generate_publication_benchmark.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 Invoke-Checked "publication benchmark tests" { python -m unittest discover -s (Join-Path $root "tests") -p "test_*.py" | Out-Null }
+Invoke-Checked "k6 load curve tests" { node (Join-Path $root "tests/test-k6-load-curve.mjs") | Out-Null }
 Invoke-Checked "published HEAD validation regression" { & (Join-Path $root "tests/test-validate-portfolio-published-head.ps1") | Out-Null }
 
 $powerShellScripts = @(

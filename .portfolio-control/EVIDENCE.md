@@ -133,3 +133,22 @@ Full command output remains in CI and project artifacts. Credential values and p
 - Lifecycle: four resources after every apply and empty state after every destroy; no AWS credential required.
 - Provenance image: `sha256:198b11d02a761401632a8c2d20dd51ada744763dc7310628b82999d744ae2725`.
 - Limit: local Kumo timing is not AWS latency, cost, IAM, durability, quota, or full conformance evidence.
+
+## Project #29
+
+- Repository: `Brilhante29/load-test-suite`.
+- Source evidence commit: `3146602070006665950e42aeddc5aca19a8670db`.
+- Final published head: `b2e976f7153b9746bd7a41727cd03c8e788c20d3`.
+- Exact-head CI: `https://github.com/Brilhante29/load-test-suite/actions/runs/32451206733`.
+- Result: median p95 `15.14099235 ms` at 20 VUs; samples `14.9140293`, `15.14099235`, and `15.2416762 ms`.
+- Curve: p95 medians `3.3461`, `5.0537`, `8.9508`, and `15.1410 ms` at 1, 5, 10, and 20 VUs.
+- Throughput: plateaus near `1,453 req/s`; 41,234 total requests; zero failures.
+- Provenance image: `sha256:64f9c11c4de6a65cde252ccbb959091dd9b55e089e8c2499c070e14912af34f6`.
+- Runtime: Go `1.26.6`, k6 `2.1.0`, Docker; current Actions pinned by SHA.
+- Limit: controlled local bounded-worker target; not distributed-load or cloud-capacity evidence.
+
+## Original Portfolio Closure
+
+- Durable successful publication records: 30/30.
+- All five macro systems complete.
+- Contract set `1.9.0` promotes reusable multi-run k6 evidence without moving target-specific code into the kit.

@@ -9,7 +9,7 @@ This macro proves one operational path across four focused repositories. CI supp
 | 24 | `ci-cd-templates` | Execute and secure reusable Python, Go, Node, JVM/Gradle, and Terraform workflows | Published |
 | 25 | `observability-stack` | Correlate traces, metrics, and logs and measure a real controlled HTTP incident | Published |
 | 27 | `terraform-aws-baseline` | Provision one shared Terraform module through Kumo locally and AWS by provider switch | Published |
-| 29 | `load-test-suite` | Reuse k6 scenarios and publish the p95 load curve of real endpoints | Next |
+| 29 | `load-test-suite` | Reuse k6 scenarios and publish the p95 load curve of real endpoints | Published |
 
 ## Contract Flow
 
@@ -32,6 +32,10 @@ provenance, full Git history for source validation, and exact-head CI.
 
 `terraform-kumo-lifecycle-v1` requires a real provider-driven apply/destroy lifecycle, one warmup plus at least three measured runs, identical resource counts, parity `1.0`, no failed cycle, no cloud credential, one shared module across Kumo and AWS roots, and an explicit denial of full AWS conformance.
 
+`k6-load-curve-v1` requires multiple complete curves, one headline p95
+sample per repetition, fail-closed HTTP and latency thresholds, measured-only
+throughput, preserved raw points, isolated CI smoke output, and V2 provenance.
+
 ## Decoupling Rules
 
 - Stack-specific commands stay in explicit workflow profiles; project domain code does not depend on CI implementation.
@@ -45,4 +49,4 @@ provenance, full Git history for source validation, and exact-head CI.
 
 ## Completion Gate
 
-Each repository needs a credential-free local Docker path, README headline number, benchmark result V2, clean source provenance, and successful CI at the exact final `main`. Current progress is **3/4**; #29 is the sole remaining repository.
+Each repository needs a credential-free local Docker path, README headline number, benchmark result V2, clean source provenance, and successful CI at the exact final `main`. The macro is complete at **4/4**.

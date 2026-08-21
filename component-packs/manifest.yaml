@@ -269,6 +269,7 @@ packs:
       - github-actions-reusable-workflow
       - observability-evidence-harness
       - terraform-kumo-lifecycle
+      - k6-load-evidence
     benchmark_focus:
       - build_time_seconds
       - incident_recovery_seconds
@@ -289,6 +290,7 @@ packs:
       - terraform-kumo-lifecycle-v1 with apply count, destroy count, and zero residual state
       - shared Terraform module with isolated Kumo and AWS provider roots
       - k6 profile
+      - k6-load-curve-v1 with per-run curves, throughput, failure gates, and V2 provenance
     rejection_rules:
       - Reject cloud-only demos without local-first path.
       - Reject mutable action or reusable-workflow refs, write-all permissions, persisted checkout credentials, or arbitrary command inputs.
@@ -303,3 +305,4 @@ packs:
       - Reject duplicated resource declarations across Kumo and AWS Terraform roots.
       - Reject apply benchmarks without destroy cleanup and resource parity equal to 1.0.
       - Reject load-test repos without reusable scenarios.
+      - Reject one-point curves, samples that mix load levels with repetitions, setup-inclusive throughput, hidden dropped iterations, or CI smoke that overwrites publication evidence.

@@ -1,26 +1,23 @@
 {
-  "project": "load-test-suite",
-  "status": "audit-required",
-  "phase": "load-test-suite-publication-audit",
-  "last_commit": "32fb845ccb31e1c235f724aa1388b0ee9360fd24",
+  "project": "original-portfolio",
+  "status": "complete",
+  "phase": "30-of-30-publication-closure",
+  "last_project_commit": "b2e976f7153b9746bd7a41727cd03c8e788c20d3",
   "completed_gates": [
     "ai_evaluation_retrieval_6_of_6",
     "applied_computer_vision_4_of_4",
     "backend_reliability_10_of_10",
     "mlops_data_platform_6_of_6",
-    "ci_cd_exact_head_ci",
-    "observability_exact_head_ci",
-    "terraform_shared_module_adapter_boundary",
-    "terraform_kumo_real_apply_destroy",
-    "terraform_resource_parity_1_of_1",
-    "terraform_v2_publication",
-    "terraform_exact_head_ci",
-    "terraform_reuse_promotion",
-    "delivery_observability_infra_3_of_4"
+    "delivery_observability_infra_4_of_4",
+    "original_publications_30_of_30",
+    "load_curve_multi_run_v1",
+    "load_curve_benchmark_v2",
+    "load_curve_exact_head_ci",
+    "load_curve_reuse_promotion"
   ],
   "failed_gates": [],
   "blockers": [],
-  "next_action": "Audit load-test-suite before editing; define target lifecycle, workload curve, thresholds, failure semantics, result contract, and exact publication path.",
-  "reuse_kit_version": "portfolio-reuse-kit@e93171c",
-  "updated_at": "2026-08-21T05:17:00Z"
+  "next_action": "No original repository remains. Treat extensions 31-33 or maintenance as a new explicitly selected goal.",
+  "reuse_kit_version": "contract-set-1.9.0",
+  "updated_at": "2026-08-21T05:50:00Z"
 }

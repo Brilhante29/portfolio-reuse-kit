@@ -5,33 +5,32 @@ Purpose: concise mechanical checkpoint; re-read remote refs before editing.
 
 ## Portfolio
 
-- Original repositories with durable successful publication records: 29/30.
-- Current Desktop exact-head audit: 12/30.
-- Completed macros: AI Evaluation 6/6; Applied CV 4/4; Backend Reliability 10/10; MLOps and Data 6/6.
-- Active macro: Delivery, Observability, and Infrastructure 3/4.
-- Sole remaining original repository: #29 `load-test-suite`.
+- Durable successful publications: 30/30 original repositories.
+- Current mechanically aligned Desktop checkouts: 13/30 after tracking this kit update.
+- Docker present: 30/30.
+- CI workflow present: 30/30.
+- Tracked V1 benchmark: 30/30.
+- Valid V1 contract: 30/30.
+- Benchmark V2: 20/30.
+- Clean current checkouts: 29/30; `multi-tenant-starter` has pre-existing local changes.
+- Active original project: none.
 
-## Latest Publication
+## Final Macro
 
-- Repository: `terraform-aws-baseline` (#27).
-- Final main: `32fb845ccb31e1c235f724aa1388b0ee9360fd24`.
-- Exact-head CI: `https://github.com/Brilhante29/terraform-aws-baseline/actions/runs/32449453935`.
-- Canonical source: `bd51cd134a4b1c2742bbacfe833bbc4dda9a2db5`.
-- Apply median `11.2674 s`; destroy median `14.2319 s`; parity `1.0` in `3/3` runs.
-- Source image: `sha256:198b11d02a761401632a8c2d20dd51ada744763dc7310628b82999d744ae2725`.
-- Honest limit: local Kumo lifecycle timing is not AWS provisioning latency or full AWS conformance.
+Delivery, Observability, and Infrastructure is 4/4:
 
-## Reuse Kit Delta
+- #24 `ci-cd-templates`: reusable executable CI profiles.
+- #25 `observability-stack`: correlated metrics, traces, and logs.
+- #27 `terraform-aws-baseline`: shared Terraform module through Kumo/AWS adapters.
+- #29 `load-test-suite`: multi-run p95 curve and throughput plateau.
 
-- Contract set `1.8.0` adds `terraform-kumo-lifecycle-v1` with valid/invalid fixtures and semantic lifecycle checks.
-- Codex and Claude receive the mirrored `terraform-kumo-lifecycle` skill.
-- Current Kumo recommendation is `0.28.1` pinned by digest.
-- The delivery component pack requires one shared resource module, separate provider roots, warmup plus three measured apply/destroy cycles, resource parity `1.0`, and empty post-destroy state.
-- Reusable implementation commit: `e93171c0d506f9cbb2378663d240c013943487af`.
-- Reusable implementation CI: `https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/32449794326`.
+## Honest Limit
 
-## Next Target
+The #29 result is local Docker evidence against a controlled bounded-worker
+target. It is not distributed-load capacity, cloud latency, or a production
+SLO. Compare only matching V2 comparability keys.
 
-- Repository: `load-test-suite` (#29).
-- First action: audit local/remote state and distinguish real k6 target load from precomputed or synthetic curves.
-- Required proof: controlled target lifecycle, reusable scenarios, explicit load levels, fail-closed thresholds, p95 curve, V2 provenance, and exact-head CI.
+## Next
+
+No automatic next repository. Select maintenance or extensions #31-33 as a
+new goal, then create a new handoff instead of mutating this closure record.

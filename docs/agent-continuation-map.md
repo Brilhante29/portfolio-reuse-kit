@@ -372,3 +372,25 @@ terraform_data plan-only fake
 ```
 
 Restart at #29 with an audit of the target and workload, not a new k6 scaffold. Reject precomputed p95 curves, one-point load tests, thresholds that do not fail CI, and scenarios coupled to one repository's internals. Preserve exact load levels, target lifecycle, failures, p95 samples, and source/image provenance.
+
+## 2026-08-21 Load Closure And Original Portfolio Completion
+
+```text
+single short p95 artifact
+  -> controlled four-slot Go target
+  -> three complete sequential k6 curves
+  -> separate repetition samples from load-level points
+  -> fail closed on HTTP errors and p95 thresholds
+  -> preserve V1 raw curves and V2 source provenance
+  -> isolate CI smoke outside committed evidence
+  -> update Actions to Node 24-era releases pinned by SHA
+  -> pass exact final-head CI
+  -> promote k6-load-curve-v1, tested aggregator, and mirrored skill
+  -> close original portfolio at 30/30
+```
+
+There is no automatic next original repository. A future agent must treat
+maintenance or extensions #31-33 as a new goal. Read
+`.portfolio-control/CURRENT_HANDOFF.md`, distinguish durable publication
+records from current checkout synchronization, and never recreate the original
+queue from historical text.

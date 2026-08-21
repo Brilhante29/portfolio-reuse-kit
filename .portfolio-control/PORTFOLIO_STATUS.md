@@ -1,8 +1,8 @@
 # Portfolio Status Report
 
-Generated: 2026-08-21T05:16:03.3798456Z
+Generated: 2026-08-21T05:53:59.6766943Z
 
-Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **19** | local candidates: **29** | publication candidates: **19** | verified publications: **12** | origins: **30** | upstreams: **20**
+Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **20** | local candidates: **29** | publication candidates: **20** | verified publications: **13** | origins: **30** | upstreams: **21**
 
 | # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Valid contract | Contract v2 | Placeholders | Local | Publication candidate | Published |
 |---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|
@@ -34,5 +34,5 @@ Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary bench
 | 26 | data-quality-checks | mlops-data-platform | benchmarked | python | python-3.12, pandera-0.32.1, polars-1.42.1, docker | pipeline | cli | none | none | none | True | True | False | 0 | True | False | False |
 | 27 | terraform-aws-baseline | delivery-observability-infra | published | terraform | terraform-1.15, aws-provider-5, kumo, python-3.12, docker, github-actions | hexagonal | cli | sns | adapter-emulator | dynamodb | True | True | True | 0 | True | True | True |
 | 28 | kafka-streams-demo | mlops-data-platform | benchmarked | kotlin-jvm | kotlin, java21, gradle-kotlin-dsl, kafka-streams, kafka, testcontainers, docker | event-driven | cli | kafka | none | none | True | True | True | 0 | True | True | True |
-| 29 | load-test-suite | delivery-observability-infra | benchmarked | go-backend | go, k6, javascript, docker | modular-monolith | rest-http | none | none | none | True | True | False | 0 | True | False | False |
+| 29 | load-test-suite | delivery-observability-infra | published | go-backend | go, k6, javascript, docker | modular-monolith | rest-http | none | none | none | True | True | True | 0 | True | True | True |
 | 30 | cost-aware-inference | ai-evaluation-retrieval | published | python | python, ports-and-adapters, openai-compatible-http, json, docker | hexagonal | cli-first | none | local-first | fixture-and-pricing-files | True | True | True | 0 | True | True | False |

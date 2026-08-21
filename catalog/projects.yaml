@@ -198,10 +198,10 @@ projects:
   - id: 29
     name: "load-test-suite"
     domain: "performance"
-    stack: ["go", "k6", "javascript", "docker"]
-    proves: "suite reutilizavel de carga"
-    benchmark: "p95_curve"
-    reuse_from: ["grafana-k6"]
+    stack: ["go-1.26.6", "k6-2.1.0", "javascript", "docker"]
+    proves: "curva p95 multi-run contra alvo Go com saturacao controlada e throughput por nivel"
+    benchmark: "p95_ms_at_max_vus=15.14099235, total_requests=41234, error_rate=0"
+    reuse_from: ["grafana-k6", "k6-load-curve-v1", "benchmark-result-v2", "k6-load-evidence"]
   - id: 30
     name: "cost-aware-inference"
     domain: "llmops"

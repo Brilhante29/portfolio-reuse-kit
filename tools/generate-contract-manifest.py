@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 MANIFEST_NAME = "manifest.json"
-CONTRACT_SET_VERSION = "1.8.0"
+CONTRACT_SET_VERSION = "1.9.0"
 TEXT_SUFFIXES = {".json", ".yaml", ".yml", ".graphql"}
 
 

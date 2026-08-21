@@ -1,44 +1,29 @@
 {
   "schema_version": 1,
-  "active_family": "delivery-observability-infra",
-  "phase": "load-test-suite-publication-audit",
-  "affected": [
-    "ci-cd-templates",
-    "observability-stack",
-    "terraform-aws-baseline",
-    "load-test-suite",
-    "portfolio-reuse-kit"
-  ],
+  "active_family": "none",
+  "phase": "original-portfolio-complete",
+  "affected": ["load-test-suite", "portfolio-reuse-kit"],
   "healthy_variants": [
     "ci-cd-templates",
     "observability-stack",
-    "terraform-aws-baseline"
+    "terraform-aws-baseline",
+    "load-test-suite"
   ],
-  "unknown": ["load-test-suite"],
+  "unknown": [],
   "repos_local_verified": [
-    "ci-cd-templates@bc591185eeb3ec73ff550fa6b1fdf4d41885a55e",
-    "observability-stack@d332fe943da5a02cdaf75d43c8a648d952997265",
-    "terraform-aws-baseline@32fb845ccb31e1c235f724aa1388b0ee9360fd24"
+    "load-test-suite@b2e976f7153b9746bd7a41727cd03c8e788c20d3"
   ],
-  "repos_pushed": [
-    "ci-cd-templates",
-    "observability-stack",
-    "terraform-aws-baseline"
-  ],
-  "ci_green": [
-    "ci-cd-templates#32001541506",
-    "observability-stack#32446714093",
-    "terraform-aws-baseline#32449453935"
-  ],
+  "repos_pushed": ["load-test-suite"],
+  "ci_green": ["load-test-suite#32451206733"],
   "blocked": [],
   "active_skills": [
     "i-have-adhd",
     "continuity-checkpoint",
     "publish-benchmark-evidence",
     "benchmark-harness",
-    "k6-load-testing"
+    "k6-load-evidence"
   ],
-  "last_evidence": "Delivery, Observability, and Infrastructure is 3/4. terraform-aws-baseline main 32fb845 and run 32449453935 prove 11.2674 s Kumo apply median, 14.2319 s destroy median, and resource parity 1.0 across 3/3 measured runs. Kit e93171c promoted terraform-kumo-lifecycle-v1 and mirrored Terraform Kumo skills.",
-  "next_action": "Audit load-test-suite (#29) before editing: identify actual target lifecycle, reusable scenarios and thresholds, p95 curve definition, coordinated omission risk, V2 provenance, and exact-head CI.",
-  "updated_at": "2026-08-21T05:17:00Z"
+  "last_evidence": "load-test-suite main b2e976f and run 32451206733 prove 15.14099235 ms median p95 at 20 VUs, 41234 requests and zero errors across three complete curves. Contract set 1.9.0 adds k6-load-curve-v1, a tested aggregator, and mirrored skills.",
+  "next_action": "Original 30 complete. Do not reactivate a repository without a new objective and fresh audit.",
+  "updated_at": "2026-08-21T05:50:00Z"
 }

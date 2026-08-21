@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import statistics
 import subprocess
 import sys
@@ -11,6 +12,51 @@ from graphql import build_schema, validate_schema
 from jsonschema import Draft202012Validator, FormatChecker
 from openapi_spec_validator import validate as validate_openapi
 from openapi_spec_validator.readers import read_from_filename
+
+
+def k6_curve_semantic_errors(payload: dict) -> list[str]:
+    errors: list[str] = []
+    repeat = payload["repeat"]
+    runs = payload["runs"]
+    samples = payload["samples"]
+    curve = payload["curve"]
+    levels = [point["vus"] for point in curve]
+    if len(runs) != repeat or len(samples) != repeat:
+        errors.append("k6 repetitions, runs, and samples disagree")
+    if levels != sorted(set(levels)):
+        errors.append("k6 VU levels must be unique and sorted")
+    if payload["summary"]["levels"] != len(levels):
+        errors.append("k6 level count disagrees")
+    if payload["summary"]["repeats"] != repeat:
+        errors.append("k6 summary repeat disagrees")
+    if payload["summary"]["max_vus"] != max(levels):
+        errors.append("k6 max VUs disagree")
+    run_levels = [[point["vus"] for point in run["curve"]] for run in runs]
+    if any(candidate != levels for candidate in run_levels):
+        errors.append("k6 runs do not preserve the same levels")
+        return errors
+    max_samples = [run["curve"][-1]["p95_ms"] for run in runs]
+    if samples != max_samples:
+        errors.append("k6 headline samples do not match max-VU runs")
+    if payload["value"] != statistics.median(max_samples):
+        errors.append("k6 headline is not the sample median")
+    sample_seconds = int(payload["environment"]["sample_seconds"])
+    for index, point in enumerate(curve):
+        run_points = [run["curve"][index] for run in runs]
+        expected_samples = [candidate["p95_ms"] for candidate in run_points]
+        expected_requests = sum(candidate["requests"] for candidate in run_points)
+        if point["p95_samples_ms"] != expected_samples:
+            errors.append(f"k6 p95 samples disagree at {point['vus']} VUs")
+        if point["p95_ms"] != statistics.median(expected_samples):
+            errors.append(f"k6 p95 median disagrees at {point['vus']} VUs")
+        if point["requests"] != expected_requests:
+            errors.append(f"k6 request count disagrees at {point['vus']} VUs")
+        expected_rate = expected_requests / (sample_seconds * repeat)
+        if not math.isclose(point["requests_per_second"], expected_rate, rel_tol=1e-9):
+            errors.append(f"k6 request rate disagrees at {point['vus']} VUs")
+    if payload["summary"]["total_requests"] != sum(point["requests"] for point in curve):
+        errors.append("k6 total requests disagree")
+    return errors
 
 
 def main() -> int:
@@ -193,6 +239,25 @@ def main() -> int:
     except Exception as error:
         failures.append(f"Terraform Kumo lifecycle contract validation failed: {error}")
 
+    k6_schema_path = root / "contracts" / "k6-load-curve-v1.schema.json"
+    k6_valid_path = root / "contracts" / "fixtures" / "k6-load-curve-v1.valid.json"
+    k6_invalid_path = root / "contracts" / "fixtures" / "k6-load-curve-v1.invalid.json"
+    try:
+        k6_schema = json.loads(k6_schema_path.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(k6_schema)
+        k6_validator = Draft202012Validator(k6_schema, format_checker=FormatChecker())
+        k6_valid = json.loads(k6_valid_path.read_text(encoding="utf-8"))
+        k6_invalid = json.loads(k6_invalid_path.read_text(encoding="utf-8"))
+        k6_validator.validate(k6_valid)
+        k6_validator.validate(k6_invalid)
+        valid_semantic_errors = k6_curve_semantic_errors(k6_valid)
+        if valid_semantic_errors:
+            failures.extend(valid_semantic_errors)
+        if not k6_curve_semantic_errors(k6_invalid):
+            failures.append("semantically invalid k6 curve fixture was accepted")
+    except Exception as error:
+        failures.append(f"k6 load curve contract validation failed: {error}")
+
     openapi_path = root / "contracts" / "portfolio-evidence.openapi.yaml"
     try:
         openapi_document, base_uri = read_from_filename(str(openapi_path))
@@ -224,7 +289,7 @@ def main() -> int:
         print("\n".join(failures), file=sys.stderr)
         return 1
     print(
-        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, CI, observability, and Terraform Kumo fixtures, "
+        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, CI, observability, Terraform Kumo, and k6 curve fixtures, "
         "OpenAPI, GraphQL, and contract manifest"
     )
     return 0
