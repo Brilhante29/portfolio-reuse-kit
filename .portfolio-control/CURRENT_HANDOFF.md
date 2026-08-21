@@ -1,30 +1,39 @@
 # Current Handoff
 
-Updated: 2026-08-20
+Updated: 2026-08-21
 Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
 
-1. Read this file, `TRACKER.json`, `PROJECT_QUEUE.md`, and the active macro guide.
-2. Verify the target repository's local and remote `main`, current evidence, Docker path, and exact-head CI before editing.
-3. Keep only #25 active; #24 and its reusable CI profile delta are complete.
+1. Read this file, `TRACKER.json`, `PROJECT_QUEUE.md`, and `docs/delivery-observability-infra.md`.
+2. Verify #27 local and remote `main`, existing Terraform/Kumo behavior, benchmark evidence, and CI before editing.
+3. Keep only #27 active. #24 and #25 plus their reusable deltas are complete.
 
 ## Current Truth
 
-Completed macros: AI Evaluation and Retrieval Systems 6/6, Applied Computer Vision and Medical AI 4/4, Backend Reliability and Architecture Platform 10/10, and MLOps and Data Platform 6/6.
+Completed macros: AI Evaluation 6/6, Applied CV 4/4, Backend Reliability 10/10,
+and MLOps and Data 6/6.
 
-Across the original 30 repositories, **27/30** have durable successful publication records. The three remaining repositories are #25, #27, and #29 in Delivery, Observability, and Infrastructure. The active macro is 1/4.
+Across the original 30 repositories, **28/30** have durable successful
+publication records. The remaining repositories are #27 and #29. Delivery,
+Observability, and Infrastructure is 2/4.
 
-The current Desktop exact-head audit verifies 10/30 clones. This lower mechanical number means older completed clones are not all aligned locally; it does not invalidate their immutable successful publication records.
+The current Desktop audit verifies **11/30** clones at their recorded published
+heads. That mechanical number tracks local synchronization; it does not erase
+the other immutable publication records.
 
 ## Latest Evidence
 
-- `ci-cd-templates` final `main`: `bc591185eeb3ec73ff550fa6b1fdf4d41885a55e`.
-- Exact-head CI: `32001541506`, success for validation, Python, Go, Node, JVM/Gradle, and Terraform.
-- Median policy scan `104.945 ms`; all `7/7` expected unsafe findings detected; zero findings in five reusable workflows.
-- Source evidence commit `8bfd94a1a8fd6186b717bc7be53d61e92d419b2d`; Docker image `sha256:c075a917595faf3e84c5189306eb59c422e051cabaefbc6ea7f75b46d58ae70f`.
-- Reuse delta: `ci-profile-v1`, unsafe negative fixture, Delivery guide, and mirrored reusable-workflow skill.
+- `observability-stack` final `main`: `d332fe943da5a02cdaf75d43c8a648d952997265`.
+- Exact-head CI: `32446714093`.
+- Recovery median `0.1336 s`; detection median `0.0712 s`; signal correlation `1.0` in `3/3` runs.
+- Full profile: healthy API, Prometheus, Tempo 3, Loki, and Grafana with verified signal navigation.
+- Reuse delta: `observability-evidence-v1`, negative fixture, mirrored harness skill, named-volume UID portability, and full-history provenance guard.
+- Reuse implementation commit: `845560aa0f0704e8e8c6f6c4f98ba50d083b12a5`; CI `32446626119`.
 
 ## Exact Next Action
 
-Audit and close `#25 observability-stack`. Verify real trace/metric/log correlation, a deterministic simulated incident, honest MTTR measurement, offline Docker Compose, canonical V2 provenance, and exact-head GitHub Actions.
+Audit #27 `terraform-aws-baseline` before editing. Establish what it currently
+provisions, whether Kumo is exercised rather than named, how real AWS remains
+plug-compatible, how state/cleanup are isolated, and what timing can be measured
+without credentials. Then implement only the smallest truthful vertical slice.

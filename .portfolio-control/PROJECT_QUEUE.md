@@ -6,7 +6,8 @@ Keep one active macro and at most one reusable-kit improvement.
 
 Delivery, Observability, and Infrastructure: #24, #25, #27, and #29.
 
-Current phase: close one repository at a time in order #24, #25, #27, #29. Current progress: 1/4. Exact next repository: #25 `observability-stack`.
+Current phase: close one repository at a time in order #24, #25, #27, #29.
+Current progress: 2/4. Exact next repository: #27 `terraform-aws-baseline`.
 
 ## Completed Macros
 
@@ -17,4 +18,7 @@ Current phase: close one repository at a time in order #24, #25, #27, #29. Curre
 
 ## Next
 
-Complete #25 next. Completion requires correlated telemetry through real collectors, a reproducible incident and MTTR benchmark, V2 provenance, and successful CI on the exact final `main` SHA.
+Complete #27 next. Audit before editing. Completion requires a credential-free
+local Kumo path, a plug-compatible real AWS boundary, state and cleanup safety,
+measured provisioning evidence, V2 provenance, and successful CI on the exact
+final `main` SHA.

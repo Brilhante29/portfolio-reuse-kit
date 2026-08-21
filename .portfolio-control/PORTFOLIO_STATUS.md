@@ -1,8 +1,8 @@
 # Portfolio Status Report
 
-Generated: 2026-08-21T01:25:50.6669960Z
+Generated: 2026-08-21T04:26:01.3252346Z
 
-Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **17** | local candidates: **29** | publication candidates: **17** | verified publications: **10** | origins: **30** | upstreams: **18**
+Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **18** | local candidates: **29** | publication candidates: **18** | verified publications: **11** | origins: **30** | upstreams: **19**
 
 | # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Valid contract | Contract v2 | Placeholders | Local | Publication candidate | Published |
 |---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|
@@ -30,7 +30,7 @@ Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary bench
 | 22 | model-drift-detector | mlops-data-platform | benchmarked | python | python-3.12, numpy-2.5.1, scipy-1.18.0, pydantic-2.13.4, prometheus-client-0.25.0, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 23 | feature-store-lite | mlops-data-platform | benchmarked | python | python-3.12, feast-0.64.0, pandas-2.3.3, pyarrow-25.0.0, parquet, sqlite, docker | pipeline | cli | none | none | sqlite | True | True | False | 0 | True | False | False |
 | 24 | ci-cd-templates | delivery-observability-infra | published | python | Python 3.12.13, PyYAML 6.0.3, jsonschema 4.26.0, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions reusable workflows | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
-| 25 | observability-stack | backend-reliability-platform | benchmarked | fastapi-backend | python-3.12, fastapi, prometheus-client, prometheus, grafana, docker-compose | hexagonal | rest-http | none | none | none | True | True | False | 0 | True | False | False |
+| 25 | observability-stack | delivery-observability-infra | published | fastapi-backend | python-3.12, fastapi, opentelemetry-sdk, opentelemetry-collector, prometheus, tempo, loki, grafana, docker-compose | hexagonal-modular-monolith | rest-http | none | local-first | none | True | True | True | 0 | True | True | True |
 | 26 | data-quality-checks | mlops-data-platform | benchmarked | python | python-3.12, pandera-0.32.1, polars-1.42.1, docker | pipeline | cli | none | none | none | True | True | False | 0 | True | False | False |
 | 27 | terraform-aws-baseline | delivery-observability-infra | benchmarked | terraform | terraform, python, docker, github-actions | hexagonal | cli | none | adapter-fake | none | True | True | False | 0 | True | False | False |
 | 28 | kafka-streams-demo | mlops-data-platform | benchmarked | kotlin-jvm | kotlin, java21, gradle-kotlin-dsl, kafka-streams, kafka, testcontainers, docker | event-driven | cli | kafka | none | none | True | True | True | 0 | True | True | True |

@@ -110,3 +110,14 @@ Full command output remains in CI and project artifacts. Credential values and p
 - Profiles: Python `3.12.13`, Go `1.26.0`, Node `24.13.0`, Java `21` with Gradle `9.3.1`, and Terraform `1.14.8`.
 - Provenance: image `sha256:c075a917595faf3e84c5189306eb59c422e051cabaefbc6ea7f75b46d58ae70f`; V1 artifact `sha256:570d8173cb6c7d901df3a15d4a3229ba1e7451066de1c349a797fba817c24985`.
 - Limit: the benchmark measures deterministic static guardrails; GitHub Actions proves profile execution but does not compare arbitrary consumer build duration.
+
+## Project #25
+
+- Repository: `Brilhante29/observability-stack`.
+- Source evidence commit: `2b289f4554d5f976f45d0126816d93490811f34d`.
+- Final published head: `d332fe943da5a02cdaf75d43c8a648d952997265`.
+- Exact-head CI: `https://github.com/Brilhante29/observability-stack/actions/runs/32446714093`.
+- Result: recovery median `0.1336 s`; detection median `0.0712 s`; correlation `1.0` across metrics, traces, and logs in `3/3` runs.
+- Full runtime: Prometheus target `up`, trace retrieved from Tempo, three lifecycle events retrieved from Loki, and Grafana datasources/dashboard provisioned.
+- Provenance: image `sha256:a28b8b6e2f27aa4ed1d06c905bf59dc1448704b834c68bfffe590fd1c52b25a6`.
+- Limit: local controlled-incident instrumentation integrity; not production MTTR, retention, HA, or distributed ingest scale.

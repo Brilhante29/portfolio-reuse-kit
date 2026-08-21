@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "active_family": "delivery-observability-infra",
-  "phase": "delivery-observability-publication-audit",
+  "phase": "terraform-baseline-publication-audit",
   "affected": [
     "ci-cd-templates",
     "observability-stack",
@@ -16,13 +16,15 @@
     "feature-store-lite",
     "data-quality-checks",
     "kafka-streams-demo",
-    "ci-cd-templates"
+    "ci-cd-templates",
+    "observability-stack"
   ],
-  "unknown": ["observability-stack", "terraform-aws-baseline", "load-test-suite"],
+  "unknown": ["terraform-aws-baseline", "load-test-suite"],
   "repos_local_verified": [
     "model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8",
     "stroke-signal-demo@187466c4b47b50a1ebb2491d3ae60c0561aeebd6",
-    "ci-cd-templates@bc591185eeb3ec73ff550fa6b1fdf4d41885a55e"
+    "ci-cd-templates@bc591185eeb3ec73ff550fa6b1fdf4d41885a55e",
+    "observability-stack@d332fe943da5a02cdaf75d43c8a648d952997265"
   ],
   "repos_pushed": [
     "data-quality-checks",
@@ -30,7 +32,8 @@
     "kafka-streams-demo",
     "model-drift-detector",
     "stroke-signal-demo",
-    "ci-cd-templates"
+    "ci-cd-templates",
+    "observability-stack"
   ],
   "ci_green": [
     "data-quality-checks#31773506491",
@@ -38,7 +41,8 @@
     "kafka-streams-demo#31402256249",
     "model-drift-detector#31994181644",
     "stroke-signal-demo#31998068664",
-    "ci-cd-templates#32001541506"
+    "ci-cd-templates#32001541506",
+    "observability-stack#32446714093"
   ],
   "blocked": [],
   "active_skills": [
@@ -46,9 +50,10 @@
     "continuity-checkpoint",
     "publish-benchmark-evidence",
     "benchmark-harness",
-    "github-actions-reusable-workflow"
+    "cloud-local-first",
+    "terraform"
   ],
-  "last_evidence": "Delivery, Observability, and Infrastructure is 1/4. ci-cd-templates main bc591185 and run 32001541506 prove five executable stack profiles, median guardrail scan 104.945 ms, 7/7 unsafe findings, and zero template findings.",
-  "next_action": "Audit observability-stack (#25) for real trace, metric, and log correlation, reproducible simulated MTTR, offline Docker Compose, and exact-head CI.",
-  "updated_at": "2026-08-21T01:15:23Z"
+  "last_evidence": "Delivery, Observability, and Infrastructure is 2/4. observability-stack main d332fe9 and run 32446714093 prove recovery median 0.1336 s and signal correlation 1.0 across 3/3 real incidents. Kit 845560a promoted observability-evidence-v1 and the mirrored harness skill.",
+  "next_action": "Audit terraform-aws-baseline (#27): verify current local/remote heads, Kumo versus real AWS abstraction, credential-free provisioning path, state isolation, reproducible timing, V2 provenance, and exact-head CI before editing.",
+  "updated_at": "2026-08-21T04:24:00Z"
 }

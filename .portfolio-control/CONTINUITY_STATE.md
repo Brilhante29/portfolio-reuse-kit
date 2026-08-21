@@ -1,30 +1,31 @@
 # Continuity State
 
-Captured: 2026-08-20
+Captured: 2026-08-21
 Purpose: concise mechanical checkpoint; re-read remote refs before editing.
 
 ## Portfolio
 
-- Original repositories with durable successful publication records: 27/30.
-- Current Desktop exact-head audit: 10/30; older completed clones may be behind their durable published heads.
+- Original repositories with durable successful publication records: 28/30.
+- Current Desktop exact-head audit: 11/30; older completed clones may be behind their durable published heads.
 - Completed macros: AI Evaluation 6/6; Applied CV 4/4; Backend Reliability 10/10; MLOps and Data 6/6.
-- Active macro: Delivery, Observability, and Infrastructure 1/4.
-- Remaining original repositories: #25, #27, #29.
+- Active macro: Delivery, Observability, and Infrastructure 2/4.
+- Remaining original repositories: #27 and #29.
 
 ## Latest Publication
 
-- `ci-cd-templates` final `main`: `bc591185eeb3ec73ff550fa6b1fdf4d41885a55e`.
-- Exact-head CI: `32001541506`, success across six jobs.
-- Canonical evidence: median `104.945 ms`, `7/7` expected unsafe findings, zero findings across five reusable templates.
-- Scope: deterministic policy scan latency is separate from hosted consumer build duration.
+- `observability-stack` final `main`: `d332fe943da5a02cdaf75d43c8a648d952997265`.
+- Exact-head CI: `32446714093`.
+- Canonical source evidence: `2b289f4554d5f976f45d0126816d93490811f34d`.
+- Recovery `0.1336 s`; detection `0.0712 s`; correlation `1.0` across `3/3` runs.
 
 ## Reuse Kit Delta
 
-- Added `ci-profile-v1` with a safe fixture and a deliberately unsafe rejected fixture.
-- Added the mirrored `github-actions-reusable-workflow` skill and Delivery macro guide.
-- Workflows are selected per stack and consumed by immutable commit; no universal arbitrary-command template exists.
+- Contract set `1.7.0` adds `observability-evidence-v1` with semantic validation and negative proof.
+- Codex and Claude receive the mirrored `observability-evidence-harness` skill.
+- Delivery component pack now requires real lifecycle timing, two profiles, OTLP decoupling, backend navigation, non-root named volumes, and full source history for provenance.
+- Reusable implementation commit `845560a`; CI `32446626119`.
 
 ## Next Target
 
-- Repository: `observability-stack` (#25).
-- First action: verify local/remote heads, actual telemetry topology, incident fixture, MTTR definition, Docker Compose path, V2 evidence, and exact-head CI before changing code.
+- Repository: `terraform-aws-baseline` (#27).
+- First action: audit local/remote heads, Terraform modules, Kumo execution, AWS adapter boundary, state isolation, cleanup, benchmark definition, V2 provenance, and exact-head CI.
