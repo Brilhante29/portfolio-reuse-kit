@@ -48,6 +48,14 @@
       "bytes": 1583,
       "sha256": "sha256:0665c207f1de86fa8d1ad89d041638fe9e5a3be9424977ba61b5bcffea31c1be"
     },
+    "fixtures/observability-evidence-v1.invalid.json": {
+      "bytes": 2470,
+      "sha256": "sha256:9965af2de193db5be3a913590dc46760b42f4729b408c4bcca33ffcec32e3064"
+    },
+    "fixtures/observability-evidence-v1.valid.json": {
+      "bytes": 2545,
+      "sha256": "sha256:8cde3a46a75697bea4e97ea06f1a43b5b3710238d6ef13570a06d365f7d9e4e5"
+    },
     "fixtures/portfolio-audit.valid.json": {
       "bytes": 2017,
       "sha256": "sha256:cb123086c3b2d52b74a096796ab34f53ee12ea198582da00e12edb21858e3190"
@@ -104,6 +112,10 @@
       "bytes": 3643,
       "sha256": "sha256:57d164746035d9bc70c30643070840b982c0098f1fed6f4d97c6f17877ab09e7"
     },
+    "observability-evidence-v1.schema.json": {
+      "bytes": 4987,
+      "sha256": "sha256:449fde8b79d1a1e67c7776784aafaa13a21f80d2818fc851473a4fac21a17f1e"
+    },
     "portfolio-evidence.graphql": {
       "bytes": 1937,
       "sha256": "sha256:197a2b067f7a4482c3cab553bb127accc0ba8c27df443f76a8e8611a445e4d09"
@@ -134,6 +146,6 @@
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.6.0",
+  "contract_set_version": "1.7.0",
   "schema_version": 1
 }

@@ -170,10 +170,10 @@ projects:
   - id: 25
     name: "observability-stack"
     domain: "observability"
-    stack: ["python-3.12", "fastapi", "prometheus-client", "prometheus", "grafana", "docker-compose"]
-    proves: "observabilidade ponta a ponta"
-    benchmark: "simulated_mttr_minutes"
-    reuse_from: ["opentelemetry-demo"]
+    stack: ["python-3.12.13", "fastapi-0.141.1", "opentelemetry-1.44.0", "otel-collector-0.158.0", "prometheus-3.12.0", "tempo-3.0.0", "loki-3.7.4", "grafana-13.1.0", "docker-compose"]
+    proves: "incidente HTTP real correlacionado por incident_id e trace_id em metricas, traces e logs"
+    benchmark: "incident_recovery_seconds=0.1336, incident_detection_seconds=0.0712, signal_correlation_rate=1.0"
+    reuse_from: ["observability-evidence-v1", "benchmark-result-v2", "observability-evidence-harness"]
   - id: 26
     name: "data-quality-checks"
     domain: "data-quality"

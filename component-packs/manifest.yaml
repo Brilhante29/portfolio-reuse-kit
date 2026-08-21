@@ -267,13 +267,19 @@ packs:
     extra_skills:
       - go-backend
       - github-actions-reusable-workflow
+      - observability-evidence-harness
     benchmark_focus:
       - build_time_seconds
-      - mttr_simulated_minutes
+      - incident_recovery_seconds
+      - incident_detection_seconds
+      - signal_correlation_rate
       - provision_time_seconds
       - p95_load_curve
     preferred_artifacts:
       - ci-profile-v1 with immutable workflow source and exact-head evidence
+      - observability-evidence-v1 with real lifecycle and three-signal correlation
+      - fast evidence Compose plus full exploration Compose
+      - OTLP cloud switch and provisioned datasource navigation
       - executable stack fixture
       - zero-finding actionlint, zizmor, and local policy report
       - dashboard JSON or screenshot recipe
@@ -285,4 +291,8 @@ packs:
       - Reject reusable workflows that are only linted and never executed against a stack fixture.
       - Reject comparisons that mix static policy latency with hosted build duration.
       - Reject dashboards without a simulated incident.
+      - Reject logical clocks, prewritten signal evidence, or correlation below 1.0.
+      - Reject full observability stacks without a fast fail-closed evidence profile.
+      - Reject writable bind-mount evidence that relies on host UID behavior.
+      - Reject historical provenance validation from a shallow checkout.
       - Reject load-test repos without reusable scenarios.

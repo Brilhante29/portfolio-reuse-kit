@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import statistics
 import subprocess
 import sys
 from pathlib import Path
@@ -102,6 +103,46 @@ def main() -> int:
     except Exception as error:
         failures.append(f"CI profile contract validation failed: {error}")
 
+    observability_schema_path = root / "contracts" / "observability-evidence-v1.schema.json"
+    observability_valid_path = (
+        root / "contracts" / "fixtures" / "observability-evidence-v1.valid.json"
+    )
+    observability_invalid_path = (
+        root / "contracts" / "fixtures" / "observability-evidence-v1.invalid.json"
+    )
+    try:
+        observability_schema = json.loads(
+            observability_schema_path.read_text(encoding="utf-8")
+        )
+        Draft202012Validator.check_schema(observability_schema)
+        observability_validator = Draft202012Validator(
+            observability_schema, format_checker=FormatChecker()
+        )
+        observability_valid = json.loads(
+            observability_valid_path.read_text(encoding="utf-8")
+        )
+        observability_validator.validate(observability_valid)
+        recovery_samples = observability_valid["benchmark"]["samples"]
+        run_samples = [run["recovery_seconds"] for run in observability_valid["runs"]]
+        if recovery_samples != run_samples:
+            failures.append("observability recovery samples do not match run evidence")
+        if observability_valid["benchmark"]["median"] != statistics.median(
+            recovery_samples
+        ):
+            failures.append("observability recovery median does not match samples")
+        incident_ids = [run["incident_id"] for run in observability_valid["runs"]]
+        if len(incident_ids) != len(set(incident_ids)):
+            failures.append("observability incident IDs are not unique")
+        observability_invalid_errors = list(
+            observability_validator.iter_errors(
+                json.loads(observability_invalid_path.read_text(encoding="utf-8"))
+            )
+        )
+        if not observability_invalid_errors:
+            failures.append("invalid observability evidence fixture was accepted")
+    except Exception as error:
+        failures.append(f"observability evidence contract validation failed: {error}")
+
     openapi_path = root / "contracts" / "portfolio-evidence.openapi.yaml"
     try:
         openapi_document, base_uri = read_from_filename(str(openapi_path))
@@ -133,7 +174,7 @@ def main() -> int:
         print("\n".join(failures), file=sys.stderr)
         return 1
     print(
-        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, and CI fixtures, "
+        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, CI, and observability fixtures, "
         "OpenAPI, GraphQL, and contract manifest"
     )
     return 0

@@ -9,7 +9,7 @@ description: Build or audit reusable GitHub Actions workflows for Python, Go, No
 
 1. Read the project's problem, stack decision, lockfiles, test commands, and benchmark contract. Select only the runtime profile the project actually needs.
 2. Reuse a stack workflow by immutable 40-character source commit. Keep stack commands explicit inside the called workflow; never accept an arbitrary shell command as input.
-3. Require `workflow_call`, read-only permissions, a timeout inside the called job, full-SHA action pins, and `persist-credentials: false` on checkout.
+3. Require `workflow_call`, read-only permissions, a timeout inside the called job, full-SHA action pins, and `persist-credentials: false` on checkout. Use `fetch-depth: 0` whenever a validator reads a historical source commit.
 4. Execute the workflow against a minimal repository-owned fixture. Static YAML validation alone does not prove that install, lint, type, test, build, or validation commands work.
 5. Run actionlint, zizmor, and repository-local policy checks without credentials. Fail when the template produces any finding.
 6. Publish the stack profile under `ci-profile-v1` and record successful GitHub Actions evidence for the exact final head.

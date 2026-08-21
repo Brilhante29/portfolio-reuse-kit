@@ -1,15 +1,15 @@
 # Execution Efficiency
 
-Generated: 2026-08-17T03:40:34.0667404Z
+Generated: 2026-08-21T04:20:20.8190674Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **128** | tracked duration: **4753,05 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **130** | tracked duration: **4853,05 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
 | invalid-command | 31 | 48 | 199,5 |
-| tool-failure | 23 | 37 | 688,2 |
+| tool-failure | 25 | 39 | 788,2 |
 | wait-timeout | 3 | 16 | 1820 |
 | command-timeout | 7 | 11 | 1225,15 |
 | invalid-diagnostic | 6 | 11 | 52,2 |
@@ -43,11 +43,13 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **128** | tr
 - Give a four-case bounded regression checklist, continue local work, and interrupt once after the first long timeout instead of polling repeatedly.
 - Hash fixture, config, and lock inputs from Git blobs at source_commit; regression-test LF/CRLF invariance.
 - Ignore generated egg-info, coverage, and cache artifacts while preserving the benchmark clean-tree gate.
+- Initialize named evidence and result volumes from directories owned by the runtime UID, then copy artifacts explicitly after the container exits.
 - Inspect branch, origin, and upstream together before the first push; set upstream explicitly.
 - Inspect disjoint worktrees and wait only when integration is blocked.
 - Keep PyYAML parsing in CI and count catalog entries independent of valid sequence indentation.
 - List image entrypoints before the first build and copy only the source, tests, contracts, and evidence tools each gate executes.
 - Maintain language-specific validation lists and parse generated scripts immediately.
+- Make fetch-depth 0 a reusable publication-workflow guard whenever evidence references any commit other than the checked-out head.
 - Negative-test wrappers must fail fast during setup and assert both the expected message and nonzero exit code.
 - Never place Markdown backticks inside JavaScript template literals; use plain payload text or structured file patches.
 - Normalize source and replacement anchors to LF before delimiter-based edits.
