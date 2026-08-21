@@ -356,3 +356,19 @@ Restart at #27 with an audit, not a scaffold rewrite. Prove which resources are
 actually exercised through Kumo, define the real AWS switch at the provider or
 endpoint boundary, isolate Terraform state and cleanup, and reject any
 provisioning-time number that measures a no-op plan or prewritten artifact.
+
+## 2026-08-21 Terraform Closure And Load Transition
+
+```text
+terraform_data plan-only fake
+  -> one shared AWS resource module
+  -> isolated Kumo and AWS provider roots
+  -> pin Terraform, provider locks, and Kumo digest
+  -> execute real apply/destroy as non-root
+  -> assert four resources after apply and empty state after destroy
+  -> publish three-run apply/destroy evidence and exact-head CI
+  -> promote terraform-kumo-lifecycle-v1 and mirrored skill
+  -> activate #29 load-test-suite
+```
+
+Restart at #29 with an audit of the target and workload, not a new k6 scaffold. Reject precomputed p95 curves, one-point load tests, thresholds that do not fail CI, and scenarios coupled to one repository's internals. Preserve exact load levels, target lifecycle, failures, p95 samples, and source/image provenance.

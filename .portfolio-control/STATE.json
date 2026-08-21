@@ -1,26 +1,26 @@
 {
-  "project": "terraform-aws-baseline",
+  "project": "load-test-suite",
   "status": "audit-required",
-  "phase": "terraform-baseline-publication-audit",
-  "last_commit": "d332fe943da5a02cdaf75d43c8a648d952997265",
+  "phase": "load-test-suite-publication-audit",
+  "last_commit": "32fb845ccb31e1c235f724aa1388b0ee9360fd24",
   "completed_gates": [
+    "ai_evaluation_retrieval_6_of_6",
+    "applied_computer_vision_4_of_4",
     "backend_reliability_10_of_10",
     "mlops_data_platform_6_of_6",
-    "ci_cd_five_executable_profiles",
-    "ci_cd_v2_publication",
     "ci_cd_exact_head_ci",
-    "observability_real_http_lifecycle",
-    "observability_three_signal_correlation",
-    "observability_non_root_cross_platform_evidence",
-    "observability_full_stack_navigation",
-    "observability_v2_publication",
     "observability_exact_head_ci",
-    "observability_reuse_promotion",
-    "delivery_observability_infra_2_of_4"
+    "terraform_shared_module_adapter_boundary",
+    "terraform_kumo_real_apply_destroy",
+    "terraform_resource_parity_1_of_1",
+    "terraform_v2_publication",
+    "terraform_exact_head_ci",
+    "terraform_reuse_promotion",
+    "delivery_observability_infra_3_of_4"
   ],
   "failed_gates": [],
   "blockers": [],
-  "next_action": "Audit terraform-aws-baseline before editing; define the Kumo/local AWS-compatible boundary and truthful provisioning benchmark first.",
-  "reuse_kit_version": "portfolio-reuse-kit@845560a",
-  "updated_at": "2026-08-21T04:24:00Z"
+  "next_action": "Audit load-test-suite before editing; define target lifecycle, workload curve, thresholds, failure semantics, result contract, and exact publication path.",
+  "reuse_kit_version": "portfolio-reuse-kit@e93171c",
+  "updated_at": "2026-08-21T05:17:00Z"
 }

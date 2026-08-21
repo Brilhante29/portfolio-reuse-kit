@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "active_family": "delivery-observability-infra",
-  "phase": "terraform-baseline-publication-audit",
+  "phase": "load-test-suite-publication-audit",
   "affected": [
     "ci-cd-templates",
     "observability-stack",
@@ -10,39 +10,25 @@
     "portfolio-reuse-kit"
   ],
   "healthy_variants": [
-    "stroke-signal-demo",
-    "mlops-end2end",
-    "model-drift-detector",
-    "feature-store-lite",
-    "data-quality-checks",
-    "kafka-streams-demo",
     "ci-cd-templates",
-    "observability-stack"
+    "observability-stack",
+    "terraform-aws-baseline"
   ],
-  "unknown": ["terraform-aws-baseline", "load-test-suite"],
+  "unknown": ["load-test-suite"],
   "repos_local_verified": [
-    "model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8",
-    "stroke-signal-demo@187466c4b47b50a1ebb2491d3ae60c0561aeebd6",
     "ci-cd-templates@bc591185eeb3ec73ff550fa6b1fdf4d41885a55e",
-    "observability-stack@d332fe943da5a02cdaf75d43c8a648d952997265"
+    "observability-stack@d332fe943da5a02cdaf75d43c8a648d952997265",
+    "terraform-aws-baseline@32fb845ccb31e1c235f724aa1388b0ee9360fd24"
   ],
   "repos_pushed": [
-    "data-quality-checks",
-    "feature-store-lite",
-    "kafka-streams-demo",
-    "model-drift-detector",
-    "stroke-signal-demo",
     "ci-cd-templates",
-    "observability-stack"
+    "observability-stack",
+    "terraform-aws-baseline"
   ],
   "ci_green": [
-    "data-quality-checks#31773506491",
-    "feature-store-lite#31991401685",
-    "kafka-streams-demo#31402256249",
-    "model-drift-detector#31994181644",
-    "stroke-signal-demo#31998068664",
     "ci-cd-templates#32001541506",
-    "observability-stack#32446714093"
+    "observability-stack#32446714093",
+    "terraform-aws-baseline#32449453935"
   ],
   "blocked": [],
   "active_skills": [
@@ -50,10 +36,9 @@
     "continuity-checkpoint",
     "publish-benchmark-evidence",
     "benchmark-harness",
-    "cloud-local-first",
-    "terraform"
+    "k6-load-testing"
   ],
-  "last_evidence": "Delivery, Observability, and Infrastructure is 2/4. observability-stack main d332fe9 and run 32446714093 prove recovery median 0.1336 s and signal correlation 1.0 across 3/3 real incidents. Kit 845560a promoted observability-evidence-v1 and the mirrored harness skill.",
-  "next_action": "Audit terraform-aws-baseline (#27): verify current local/remote heads, Kumo versus real AWS abstraction, credential-free provisioning path, state isolation, reproducible timing, V2 provenance, and exact-head CI before editing.",
-  "updated_at": "2026-08-21T04:24:00Z"
+  "last_evidence": "Delivery, Observability, and Infrastructure is 3/4. terraform-aws-baseline main 32fb845 and run 32449453935 prove 11.2674 s Kumo apply median, 14.2319 s destroy median, and resource parity 1.0 across 3/3 measured runs. Kit e93171c promoted terraform-kumo-lifecycle-v1 and mirrored Terraform Kumo skills.",
+  "next_action": "Audit load-test-suite (#29) before editing: identify actual target lifecycle, reusable scenarios and thresholds, p95 curve definition, coordinated omission risk, V2 provenance, and exact-head CI.",
+  "updated_at": "2026-08-21T05:17:00Z"
 }

@@ -1,24 +1,26 @@
 # Portfolio Project Queue
 
-Keep one active macro and at most one reusable-kit improvement.
+Keep one active macro and one active repository.
 
 ## Active
 
 Delivery, Observability, and Infrastructure: #24, #25, #27, and #29.
 
-Current phase: close one repository at a time in order #24, #25, #27, #29.
-Current progress: 2/4. Exact next repository: #27 `terraform-aws-baseline`.
+Current progress: **3/4**. Exact next repository: #29 `load-test-suite`.
 
 ## Completed Macros
 
-- AI Evaluation and Retrieval Systems: #2, #3, #8, #9, #10, #30; 6/6 exact-head CI green.
-- Applied Computer Vision and Medical AI: #1, #5, #6, #7; 4/4 exact-head CI green.
-- Backend Reliability and Architecture Platform: #11 through #20; 10/10 exact-head CI green.
-- MLOps and Data Platform: #4, #21, #22, #23, #26, #28; 6/6 exact-head CI green.
+- AI Evaluation and Retrieval Systems: 6/6.
+- Applied Computer Vision and Medical AI: 4/4.
+- Backend Reliability and Architecture Platform: 10/10.
+- MLOps and Data Platform: 6/6.
+
+## Completed In Active Macro
+
+- #24 `ci-cd-templates`: published with exact-head CI.
+- #25 `observability-stack`: published with exact-head CI.
+- #27 `terraform-aws-baseline`: published with exact-head CI.
 
 ## Next
 
-Complete #27 next. Audit before editing. Completion requires a credential-free
-local Kumo path, a plug-compatible real AWS boundary, state and cleanup safety,
-measured provisioning evidence, V2 provenance, and successful CI on the exact
-final `main` SHA.
+Complete #29 only. Audit before editing. Completion requires real k6 execution against a controlled target, reusable versioned scenarios, an honest p95 curve across load levels, threshold failures, Docker, V2 provenance, and successful CI on the exact final `main` SHA.

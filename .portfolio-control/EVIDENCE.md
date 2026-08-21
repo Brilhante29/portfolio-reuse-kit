@@ -121,3 +121,15 @@ Full command output remains in CI and project artifacts. Credential values and p
 - Full runtime: Prometheus target `up`, trace retrieved from Tempo, three lifecycle events retrieved from Loki, and Grafana datasources/dashboard provisioned.
 - Provenance: image `sha256:a28b8b6e2f27aa4ed1d06c905bf59dc1448704b834c68bfffe590fd1c52b25a6`.
 - Limit: local controlled-incident instrumentation integrity; not production MTTR, retention, HA, or distributed ingest scale.
+
+## Project #27
+
+- Repository: `Brilhante29/terraform-aws-baseline`.
+- Source evidence commit: `bd51cd134a4b1c2742bbacfe833bbc4dda9a2db5`.
+- Final published head: `32fb845ccb31e1c235f724aa1388b0ee9360fd24`.
+- Exact-head CI: `https://github.com/Brilhante29/terraform-aws-baseline/actions/runs/32449453935`.
+- Result: apply median `11.2674 s`; destroy median `14.2319 s`; resource parity `1.0` across `3/3` measured runs after one warmup.
+- Runtime: Terraform `1.15.8`, AWS provider `5.100.0`, Kumo `0.28.1`, Python `3.12.14`.
+- Lifecycle: four resources after every apply and empty state after every destroy; no AWS credential required.
+- Provenance image: `sha256:198b11d02a761401632a8c2d20dd51ada744763dc7310628b82999d744ae2725`.
+- Limit: local Kumo timing is not AWS latency, cost, IAM, durability, quota, or full conformance evidence.

@@ -1,8 +1,8 @@
 # Portfolio Status Report
 
-Generated: 2026-08-21T04:26:01.3252346Z
+Generated: 2026-08-21T05:16:03.3798456Z
 
-Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **18** | local candidates: **29** | publication candidates: **18** | verified publications: **11** | origins: **30** | upstreams: **19**
+Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **19** | local candidates: **29** | publication candidates: **19** | verified publications: **12** | origins: **30** | upstreams: **20**
 
 | # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Valid contract | Contract v2 | Placeholders | Local | Publication candidate | Published |
 |---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|
@@ -32,7 +32,7 @@ Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary bench
 | 24 | ci-cd-templates | delivery-observability-infra | published | python | Python 3.12.13, PyYAML 6.0.3, jsonschema 4.26.0, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions reusable workflows | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 25 | observability-stack | delivery-observability-infra | published | fastapi-backend | python-3.12, fastapi, opentelemetry-sdk, opentelemetry-collector, prometheus, tempo, loki, grafana, docker-compose | hexagonal-modular-monolith | rest-http | none | local-first | none | True | True | True | 0 | True | True | True |
 | 26 | data-quality-checks | mlops-data-platform | benchmarked | python | python-3.12, pandera-0.32.1, polars-1.42.1, docker | pipeline | cli | none | none | none | True | True | False | 0 | True | False | False |
-| 27 | terraform-aws-baseline | delivery-observability-infra | benchmarked | terraform | terraform, python, docker, github-actions | hexagonal | cli | none | adapter-fake | none | True | True | False | 0 | True | False | False |
+| 27 | terraform-aws-baseline | delivery-observability-infra | published | terraform | terraform-1.15, aws-provider-5, kumo, python-3.12, docker, github-actions | hexagonal | cli | sns | adapter-emulator | dynamodb | True | True | True | 0 | True | True | True |
 | 28 | kafka-streams-demo | mlops-data-platform | benchmarked | kotlin-jvm | kotlin, java21, gradle-kotlin-dsl, kafka-streams, kafka, testcontainers, docker | event-driven | cli | kafka | none | none | True | True | True | 0 | True | True | True |
 | 29 | load-test-suite | delivery-observability-infra | benchmarked | go-backend | go, k6, javascript, docker | modular-monolith | rest-http | none | none | none | True | True | False | 0 | True | False | False |
 | 30 | cost-aware-inference | ai-evaluation-retrieval | published | python | python, ports-and-adapters, openai-compatible-http, json, docker | hexagonal | cli-first | none | local-first | fixture-and-pricing-files | True | True | True | 0 | True | True | False |

@@ -1,10 +1,10 @@
 # Execution Efficiency
 
-Generated: 2026-08-21T04:20:20.8190674Z
+Generated: 2026-08-21T05:11:07.4325240Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **130** | tracked duration: **4853,05 s**
+Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **133** | tracked duration: **5278,05 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
@@ -15,11 +15,11 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **130** | tr
 | invalid-diagnostic | 6 | 11 | 52,2 |
 | authorization-limit | 2 | 8 | 0 |
 | agent-no-progress | 2 | 5 | 170 |
+| redundant-work | 2 | 5 | 694 |
 | avoidable-retry | 2 | 4 | 0 |
 | environment-fallback | 1 | 3 | 0 |
 | invalid-assumption | 2 | 2 | 329 |
 | invalid-orchestration | 1 | 2 | 0 |
-| redundant-work | 1 | 2 | 269 |
 
 ## Prevention Rules
 
@@ -70,6 +70,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **130** | tr
 - Read Select-String.Line and strip non-digits; do not rerun the full validation suite for diagnostic-only failures.
 - Read the parameter block before invoking repository scripts and reuse the corrected command.
 - Read the V2 semantic contract before producer code and add a unit assertion that measured_iterations equals domain work items while execution.repeat equals independent runs.
+- Resolve provider locks in a layer keyed only by version/lock files, share TF_PLUGIN_CACHE_DIR across roots, copy changing source afterward, and never recursively chown the cache.
 - Resolve the absolute interpreter once before running tests.
 - Resolve the complete pinned validation set in an isolated venv before editing CI requirements.
 - Retain the offline installed wheel and copy only source, tests, and validation tools needed by container gates.
