@@ -1,23 +1,24 @@
 {
-  "project": "original-portfolio",
-  "status": "complete",
-  "phase": "30-of-30-publication-closure",
-  "last_project_commit": "b2e976f7153b9746bd7a41727cd03c8e788c20d3",
+  "project": "portfolio-evidence-platform",
+  "status": "in_progress",
+  "phase": "31-source-hardened-publication-blocked",
+  "last_project_commit": "fdb948263cc322dd3f9d1c921985ae3f485cd861",
   "completed_gates": [
-    "ai_evaluation_retrieval_6_of_6",
-    "applied_computer_vision_4_of_4",
-    "backend_reliability_10_of_10",
-    "mlops_data_platform_6_of_6",
-    "delivery_observability_infra_4_of_4",
     "original_publications_30_of_30",
-    "load_curve_multi_run_v1",
-    "load_curve_benchmark_v2",
-    "load_curve_exact_head_ci",
-    "load_curve_reuse_promotion"
+    "desktop_checkouts_aligned_30_of_30",
+    "cache_strategies_status_republished",
+    "portfolio_evidence_api_implementation",
+    "portfolio_evidence_api_v2_benchmark",
+    "portfolio_evidence_api_dependency_audit_zero_offline",
+    "portfolio_evidence_api_typecheck_build_validator"
   ],
-  "failed_gates": [],
-  "blockers": [],
-  "next_action": "No original repository remains. Treat extensions 31-33 or maintenance as a new explicitly selected goal.",
-  "reuse_kit_version": "contract-set-1.9.0",
-  "updated_at": "2026-08-21T05:50:00Z"
+  "failed_gates": [
+    "portfolio_evidence_api_exact_head_ci_pending"
+  ],
+  "blockers": [
+    "Codex approval-review usage exhausted until 2026-08-28T00:40 local; remote publication and Docker rerun were not authorized"
+  ],
+  "next_action": "Push portfolio-evidence-api local main fdb948263cc322dd3f9d1c921985ae3f485cd861, wait for exact-head CI, then mark published only after success.",
+  "reuse_kit_version": "contract-set-1.9.0-plus-local-node-security-guidance",
+  "updated_at": "2026-08-21T12:38:00Z"
 }

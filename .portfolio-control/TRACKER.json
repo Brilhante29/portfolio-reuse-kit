@@ -1,29 +1,36 @@
 {
   "schema_version": 1,
-  "active_family": "none",
-  "phase": "original-portfolio-complete",
-  "affected": ["load-test-suite", "portfolio-reuse-kit"],
+  "active_family": "portfolio-evidence-platform",
+  "phase": "portfolio-evidence-api-publication",
+  "affected": [
+    "portfolio-evidence-api",
+    "portfolio-reuse-kit"
+  ],
   "healthy_variants": [
-    "ci-cd-templates",
-    "observability-stack",
-    "terraform-aws-baseline",
-    "load-test-suite"
+    "original-portfolio-30-of-30",
+    "cache-strategies-bench"
   ],
   "unknown": [],
   "repos_local_verified": [
-    "load-test-suite@b2e976f7153b9746bd7a41727cd03c8e788c20d3"
+    "cache-strategies-bench@251f0f4d3b9a9cace77683014f45a26be9229d11",
+    "portfolio-evidence-api@fdb948263cc322dd3f9d1c921985ae3f485cd861"
   ],
-  "repos_pushed": ["load-test-suite"],
-  "ci_green": ["load-test-suite#32451206733"],
-  "blocked": [],
+  "repos_pushed": [
+    "cache-strategies-bench"
+  ],
+  "ci_green": [
+    "cache-strategies-bench#32481590754"
+  ],
+  "blocked": [
+    "portfolio-evidence-api remote publication: approval-review usage limit"
+  ],
   "active_skills": [
     "i-have-adhd",
     "continuity-checkpoint",
-    "publish-benchmark-evidence",
-    "benchmark-harness",
-    "k6-load-evidence"
+    "node-typescript-backend",
+    "publish-benchmark-evidence"
   ],
-  "last_evidence": "load-test-suite main b2e976f and run 32451206733 prove 15.14099235 ms median p95 at 20 VUs, 41234 requests and zero errors across three complete curves. Contract set 1.9.0 adds k6-load-curve-v1, a tested aggregator, and mirrored skills.",
-  "next_action": "Original 30 complete. Do not reactivate a repository without a new objective and fresh audit.",
-  "updated_at": "2026-08-21T05:50:00Z"
+  "last_evidence": "Original portfolio passes 30/30 strict and published gates. #31 local source fdb9482 has zero offline audit findings, corrected transitive versions, pinned Actions, passing typecheck/build/project validation, and historical V2 ingestion p95 40.201 ms.",
+  "next_action": "Push #31 fdb9482 to main and inspect every exact-head CI step before changing project status from benchmarked to published.",
+  "updated_at": "2026-08-21T12:38:00Z"
 }

@@ -1,19 +1,19 @@
 # Execution Efficiency
 
-Generated: 2026-08-21T05:11:07.4325240Z
+Generated: 2026-08-21T12:43:20.9500153Z
 
 Excluded: 2026-07-20, attributed by the user to Antigravity/OpenCode.
 
-Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **133** | tracked duration: **5278,05 s**
+Hard limits: **12** | wait timeouts: **16** | avoidable occurrences: **137** | tracked duration: **5280,05 s**
 
 | Category | Event records | Occurrences | Duration (s) |
 |---|---:|---:|---:|
 | invalid-command | 31 | 48 | 199,5 |
-| tool-failure | 25 | 39 | 788,2 |
+| tool-failure | 26 | 40 | 790,2 |
 | wait-timeout | 3 | 16 | 1820 |
+| authorization-limit | 4 | 12 | 0 |
 | command-timeout | 7 | 11 | 1225,15 |
 | invalid-diagnostic | 6 | 11 | 52,2 |
-| authorization-limit | 2 | 8 | 0 |
 | agent-no-progress | 2 | 5 | 170 |
 | redundant-work | 2 | 5 | 694 |
 | avoidable-retry | 2 | 4 | 0 |
@@ -24,9 +24,11 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **133** | tr
 ## Prevention Rules
 
 - Accept the first isolated passing test as evidence, avoid repeated equivalent runs, and move cross-platform cache design to a separate kit task.
+- After the first global limit, stop all additional escalated operations and continue only with local deterministic checks plus a durable handoff.
 - After the first split-root failure, create one reviewed patch under the writable root and use git apply --check plus approved git apply, or use an isolated clean worktree with one deterministic editor path.
 - Always resolve and use the full commit SHA for local-clone integration.
 - Always run git rev-parse HEAD before cross-worktree cherry-pick.
+- Before editing, inspect git rev-parse --git-dir; use an independent local clone when Git metadata is outside the writable root.
 - Budget repository-wide Git scans from a one-repository timing sample.
 - Cap heavy write delegation at two; preflight one writer; finish and validate the producer/API contract before starting consumers; preserve a handoff before limits approach.
 - Collect read-only Git snapshots through a bounded cross-version runspace pool.
@@ -83,6 +85,7 @@ Hard limits: **8** | wait timeouts: **16** | avoidable occurrences: **133** | tr
 - Seed coherence smokes directly from the current Docker and GitHub Actions templates.
 - Stage inside one writable worktree and use one supported patch path before starting broad edits.
 - Syntax-check generated PowerShell and pilot every inventory transformation on one repository.
+- Treat the first account-wide limit as terminal for escalated work in that execution; commit locally, capture exact continuation, and do not probe alternate write paths.
 - Use ${kumoVersion} in colon-delimited identifiers and inspect semantic fields after schema validation.
 - Use a staged single-root edit path and do not retry the same failing tool after the first confirmed platform failure.
 - Use absolute Go tool paths in minimal images and reserve race tests for a CGO-capable image or GitHub runner.

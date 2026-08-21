@@ -2,15 +2,17 @@
 
 ## Current Audit
 
-- Current exact-head publication checkpoint: 2026-08-17.
+- Current exact-head publication checkpoint: 2026-08-21.
 - Repositories: 30.
 - Docker definitions: 30.
 - CI workflows: 30.
 - Tracked benchmark contracts: 30.
-- Original repositories with durable successful publication records: 25/30.
-- Central publication records: 26, including the reuse kit.
-- Current Desktop clones matching their publication records exactly: 8/30.
-- Live local status is a synchronization audit, not permission to erase durable successful CI evidence; refresh stale records when those repositories become active.
+- Original repositories with durable successful publication records: 30/30.
+- Central original-repository publication records: 30/30.
+- Current Desktop clones matching their publication records exactly: 30/30.
+- All current Desktop checkouts are clean. The prior dirty
+  `multi-tenant-starter` state is preserved on a local WIP branch instead of
+  being discarded.
 
 ## Project #3
 
@@ -152,3 +154,29 @@ Full command output remains in CI and project artifacts. Credential values and p
 - Durable successful publication records: 30/30.
 - All five macro systems complete.
 - Contract set `1.9.0` promotes reusable multi-run k6 evidence without moving target-specific code into the kit.
+
+## Checkout Alignment
+
+- Strict verified-publication audit: 30/30.
+- `cache-strategies-bench` corrected final head:
+  `251f0f4d3b9a9cace77683014f45a26be9229d11`.
+- Exact-head CI:
+  `https://github.com/Brilhante29/cache-strategies-bench/actions/runs/32481590754`.
+- `multi-tenant-starter` pre-alignment state preserved locally on
+  `wip/preserved-before-main-alignment-20260821` at `0415b691`.
+
+## Extension #31
+
+- Repository: `Brilhante29/portfolio-evidence-api`.
+- Remote head: `496df3e5a23b81b23f2182fea8998ff6c4b803ab`.
+- Local source head pending push:
+  `fdb948263cc322dd3f9d1c921985ae3f485cd861`.
+- Historical V2 result: ingestion p95 `40.201 ms`, throughput `438.148
+  requests/second`, GraphQL p95 `24.119 ms`, zero failures.
+- Security repair: offline npm audit reports zero vulnerabilities after
+  patched direct and transitive lockfile updates; Actions are full-SHA pinned.
+- Local gates: 35 tests and coverage passed after direct upgrades; typecheck,
+  build, offline audit, dependency inspection, project validation, and diff
+  checks passed after the final transitive repair.
+- Pending: Docker rerun, push, exact-head CI, final publication-status commit,
+  canonical Desktop checkout, and central publication record.

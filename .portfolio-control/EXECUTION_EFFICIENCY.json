@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-08-21T12:43:20.9500153Z",
+  "excluded_windows": [
+    "2026-07-20: user-operated Antigravity/OpenCode activity"
+  ],
+  "event_records": 87,
+  "occurrence_count": 159.0,
+  "hard_limit_occurrences": 12.0,
+  "wait_timeout_occurrences": 16.0,
+  "avoidable_occurrences": 137.0,
+  "tracked_duration_seconds": 5280.05,
+  "categories": [
+    {
+      "category": "invalid-command",
+      "events": 31,
+      "occurrences": 48.0,
+      "duration_seconds": 199.5
+    },
+    {
+      "category": "tool-failure",
+      "events": 26,
+      "occurrences": 40.0,
+      "duration_seconds": 790.2
+    },
+    {
+      "category": "wait-timeout",
+      "events": 3,
+      "occurrences": 16.0,
+      "duration_seconds": 1820.0
+    },
+    {
+      "category": "authorization-limit",
+      "events": 4,
+      "occurrences": 12.0,
+      "duration_seconds": 0.0
+    },
+    {
+      "category": "command-timeout",
+      "events": 7,
+      "occurrences": 11.0,
+      "duration_seconds": 1225.15
+    },
+    {
+      "category": "invalid-diagnostic",
+      "events": 6,
+      "occurrences": 11.0,
+      "duration_seconds": 52.2
+    },
+    {
+      "category": "agent-no-progress",
+      "events": 2,
+      "occurrences": 5.0,
+      "duration_seconds": 170.0
+    },
+    {
+      "category": "redundant-work",
+      "events": 2,
+      "occurrences": 5.0,
+      "duration_seconds": 694.0
+    },
+    {
+      "category": "avoidable-retry",
+      "events": 2,
+      "occurrences": 4.0,
+      "duration_seconds": 0.0
+    },
+    {
+      "category": "environment-fallback",
+      "events": 1,
+      "occurrences": 3.0,
+      "duration_seconds": 0.0
+    },
+    {
+      "category": "invalid-assumption",
+      "events": 2,
+      "occurrences": 2.0,
+      "duration_seconds": 329.0
+    },
+    {
+      "category": "invalid-orchestration",
+      "events": 1,
+      "occurrences": 2.0,
+      "duration_seconds": 0.0
+    }
+  ]
+}

@@ -4,7 +4,9 @@ WIP limit: one active macro and one active repository.
 
 ## Active
 
-None. The original portfolio is complete at **30/30**.
+- Portfolio Evidence Platform: #31 `portfolio-evidence-api`.
+- Current gate: publish local source commit `fdb9482`, obtain exact-head CI,
+  then make a separate truthful publication-status commit.
 
 ## Completed Macros
 
@@ -13,8 +15,11 @@ None. The original portfolio is complete at **30/30**.
 - Backend Reliability and Architecture Platform: 10/10.
 - MLOps and Data Platform: 6/6.
 - Delivery, Observability, and Infrastructure: 4/4.
+- Original portfolio: 30/30 durable publications and 30/30 aligned Desktop
+  checkouts.
 
-## Optional Extensions
+## Waiting
 
-Repositories #31-33 are not part of the original 30 and are not active.
-Starting one requires a new objective, audit, benchmark claim, and handoff.
+- #32 `portfolio-evidence-console`: do not start before #31 final CI.
+- #33 `portfolio-operations-console`: do not start before the API contracts
+  and command semantics are stable.

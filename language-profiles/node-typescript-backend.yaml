@@ -56,6 +56,10 @@ persistence_decisions:
     - SQL visibility and lightweight query layer matter more than Prisma ergonomics
   use_typeorm_when:
     - ORM decorators or legacy Nest ecosystem fit the project better
+  use_kysely_when:
+    - controlled SQL is part of the evidence
+    - SQLite and PostgreSQL adapters must preserve one typed port
+    - ORM-generated behavior would hide the benchmarked persistence boundary
 required_tooling:
   - nodejs-lts
   - typescript_strict
@@ -76,6 +80,17 @@ quality_gates:
   - DTO/schema validation at boundaries
   - OpenAPI or GraphQL schema exported when relevant
   - benchmark JSON generated under benchmarks/results
+  - package lock committed and installed with npm ci on the declared Node major
+  - high and critical dependency advisories fail closed
+  - GitHub Actions pinned by full commit SHA
+  - native dependencies exercised in the Docker and CI runtime
+dependency_security:
+  default: npm_audit
+  rules:
+    - refresh the lockfile to patched transitive versions instead of suppressing advisories
+    - keep audit transport failures distinct from advisory failures
+    - when a custom Bulk Advisory client is necessary, test identity and gzip bodies, malformed responses, severity ordering, and bounded retries
+    - do not promote a custom audit harness to the kit until exact-head CI proves it
 benchmark_rules:
   - REST: p95_latency_ms, endpoint_throughput_rps, payload_bytes
   - GraphQL: query_latency_ms, payload_bytes_saved, resolver_count, n_plus_one_guard

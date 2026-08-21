@@ -394,3 +394,28 @@ maintenance or extensions #31-33 as a new goal. Read
 `.portfolio-control/CURRENT_HANDOFF.md`, distinguish durable publication
 records from current checkout synchronization, and never recreate the original
 queue from historical text.
+
+## 2026-08-21 Alignment And Evidence Platform Activation
+
+```text
+30 durable publications but 13 aligned checkouts
+  -> fetch every mismatched origin/main
+  -> fast-forward 16 clean canonical checkouts
+  -> preserve multi-tenant dirty state on a local WIP commit
+  -> discover cache-strategies declared ready at its published head
+  -> correct status, publish, and pass exact-head CI
+  -> verify original portfolio at 30/30 mechanically
+  -> activate extension #31 instead of reopening original work
+  -> reproduce npm audit failure as real advisories
+  -> refresh direct and transitive Node dependencies
+  -> pin GitHub Actions and keep historical V2 provenance immutable
+  -> stop remote work after the account-wide approval limit
+```
+
+Restart with #31 local source `fdb9482`. Push it without force, require the
+complete exact-head CI, and only then create a separate publication-status
+commit. The reusable lesson is broader than one lockfile: Node repositories
+must distinguish registry transport defects from genuine advisories, update
+vulnerable transitive versions instead of suppressing findings, and exercise
+native modules in the declared Docker runtime. Do not promote the custom audit
+client until remote CI proves it.
