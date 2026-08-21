@@ -100,6 +100,14 @@
       "bytes": 11193,
       "sha256": "sha256:9a40ded483840249752f97e81d8c9b78466f72c0e46940aa63a143530188a85e"
     },
+    "fixtures/terraform-kumo-lifecycle-v1.invalid.json": {
+      "bytes": 1171,
+      "sha256": "sha256:452b16f94ea0a60768a74771a7b537071a474bbf5bdfc06db6d4b85bda1bd128"
+    },
+    "fixtures/terraform-kumo-lifecycle-v1.valid.json": {
+      "bytes": 1385,
+      "sha256": "sha256:4e50873eff4f44429d4f63cf1987b515fd44d08e9ec8a5dd04b0af61c0b81a70"
+    },
     "medical-evaluation-report-v1.schema.json": {
       "bytes": 4321,
       "sha256": "sha256:9a8489f0732b396239d1e53e854a68f6eb3873c25d7a3c1d08d8401f5faf08d1"
@@ -140,12 +148,16 @@
       "bytes": 983,
       "sha256": "sha256:4a69fe3b65b66dde595216d1014e210545a62db3c4d1bcdcf6d2dd1fe42373a3"
     },
+    "terraform-kumo-lifecycle-v1.schema.json": {
+      "bytes": 4404,
+      "sha256": "sha256:25817ef20f4ab9286f90b37ff751b81b71fefe06c4f8711d8f13aa2e6502aed3"
+    },
     "validated-batch-manifest-v1.schema.json": {
       "bytes": 2458,
       "sha256": "sha256:21e591d26eab411000b3dca54ea4349c860aafb3e320db50ecb1cadeb0e2cb52"
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.7.0",
+  "contract_set_version": "1.8.0",
   "schema_version": 1
 }

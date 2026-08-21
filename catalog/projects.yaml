@@ -184,10 +184,10 @@ projects:
   - id: 27
     name: "terraform-aws-baseline"
     domain: "infrastructure"
-    stack: ["terraform", "python", "docker", "github-actions"]
-    proves: "baseline AWS como codigo"
-    benchmark: "provision_time_seconds"
-    reuse_from: ["terraform-aws-modules"]
+    stack: ["terraform-1.15.8", "aws-provider-5.100.0", "kumo-0.28.1", "python-3.12", "docker"]
+    proves: "um modulo Terraform compartilhado executa apply/destroy local via Kumo e troca para AWS somente pela configuracao do provider"
+    benchmark: "kumo_apply_seconds, kumo_destroy_seconds, resource_parity"
+    reuse_from: ["terraform-kumo-lifecycle-v1", "benchmark-result-v2", "terraform-kumo-lifecycle", "cloud-local-first"]
   - id: 28
     name: "kafka-streams-demo"
     domain: "streaming"

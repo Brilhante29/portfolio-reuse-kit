@@ -143,6 +143,56 @@ def main() -> int:
     except Exception as error:
         failures.append(f"observability evidence contract validation failed: {error}")
 
+    terraform_schema_path = root / "contracts" / "terraform-kumo-lifecycle-v1.schema.json"
+    terraform_valid_path = (
+        root / "contracts" / "fixtures" / "terraform-kumo-lifecycle-v1.valid.json"
+    )
+    terraform_invalid_path = (
+        root / "contracts" / "fixtures" / "terraform-kumo-lifecycle-v1.invalid.json"
+    )
+    try:
+        terraform_schema = json.loads(terraform_schema_path.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(terraform_schema)
+        terraform_validator = Draft202012Validator(
+            terraform_schema, format_checker=FormatChecker()
+        )
+        terraform_valid = json.loads(terraform_valid_path.read_text(encoding="utf-8"))
+        terraform_validator.validate(terraform_valid)
+        repeat = terraform_valid["repeat"]
+        sample_sets = (
+            terraform_valid["samples"],
+            terraform_valid["metrics"]["destroy_seconds"],
+            terraform_valid["metrics"]["resource_parity"],
+            terraform_valid["operations"]["resource_counts"],
+        )
+        if any(len(samples) != repeat for samples in sample_sets):
+            failures.append("Terraform Kumo sample counts do not match repeat")
+        if terraform_valid["value"] != statistics.median(terraform_valid["samples"]):
+            failures.append("Terraform Kumo primary value does not match apply median")
+        if terraform_valid["summary"]["destroy_median_seconds"] != statistics.median(
+            terraform_valid["metrics"]["destroy_seconds"]
+        ):
+            failures.append("Terraform Kumo destroy median does not match samples")
+        expected_resources = terraform_valid["operations"]["resources_per_apply"]
+        if any(
+            count != expected_resources
+            for count in terraform_valid["operations"]["resource_counts"]
+        ):
+            failures.append("Terraform Kumo resource counts do not prove parity")
+        if terraform_valid["operations"]["apply_cycles"] != repeat:
+            failures.append("Terraform Kumo apply cycles do not match repeat")
+        if terraform_valid["operations"]["destroy_cycles"] != repeat:
+            failures.append("Terraform Kumo destroy cycles do not match repeat")
+        terraform_invalid_errors = list(
+            terraform_validator.iter_errors(
+                json.loads(terraform_invalid_path.read_text(encoding="utf-8"))
+            )
+        )
+        if not terraform_invalid_errors:
+            failures.append("invalid Terraform Kumo lifecycle fixture was accepted")
+    except Exception as error:
+        failures.append(f"Terraform Kumo lifecycle contract validation failed: {error}")
+
     openapi_path = root / "contracts" / "portfolio-evidence.openapi.yaml"
     try:
         openapi_document, base_uri = read_from_filename(str(openapi_path))
@@ -174,7 +224,7 @@ def main() -> int:
         print("\n".join(failures), file=sys.stderr)
         return 1
     print(
-        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, CI, and observability fixtures, "
+        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, CI, observability, and Terraform Kumo fixtures, "
         "OpenAPI, GraphQL, and contract manifest"
     )
     return 0

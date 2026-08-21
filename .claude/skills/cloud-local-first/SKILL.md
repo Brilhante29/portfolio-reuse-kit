@@ -22,13 +22,13 @@ Use this skill whenever a repository touches AWS-compatible storage, queues, pub
 Reviewed command:
 
 ```powershell
-docker run -p 4566:4566 ghcr.io/sivchari/kumo:0.25.3@sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b
+docker run -p 4566:4566 ghcr.io/sivchari/kumo:0.28.1@sha256:c470c46ca00c9211a00cbda6b5aab17170997d5adc94e0c1b40f8ac604ba4b42
 ```
 
 Persistent local path:
 
 ```powershell
-docker run -p 4566:4566 -e KUMO_DATA_DIR=/data -v kumo-data:/data ghcr.io/sivchari/kumo:0.25.3@sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b
+docker run -p 4566:4566 -e KUMO_DATA_DIR=/data -v kumo-data:/data ghcr.io/sivchari/kumo:0.28.1@sha256:c470c46ca00c9211a00cbda6b5aab17170997d5adc94e0c1b40f8ac604ba4b42
 ```
 
 Do not claim full AWS conformance from a scoped emulator suite. Real cloud is never the default demo path.

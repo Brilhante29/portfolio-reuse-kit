@@ -28,7 +28,7 @@
 | 24 | `ci-cd-templates` | devops | Python 3.12.13, PyYAML 6.0.3, jsonschema 4.26.0, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions reusable workflows | cinco perfis CI executaveis e guardrails de supply chain offline para Python, Go, Node, JVM Gradle e Terraform | scan_time_ms, fixture_findings, template_findings |
 | 25 | `observability-stack` | observability | python-3.12, fastapi, prometheus-client, prometheus, grafana, docker-compose | observabilidade ponta a ponta | simulated_mttr_minutes |
 | 26 | `data-quality-checks` | data-quality | python-3.12, pandera-0.32.1, polars-1.42.1, docker | gate fail-closed com paridade entre oraculo Python e adapter Polars/Pandera, quarentena e manifesto de lote validado | invalid_row_detection_f1, rejected_rows_percent, throughput_rows_per_second |
-| 27 | `terraform-aws-baseline` | infrastructure | terraform, python, docker, github-actions | baseline AWS como codigo | provision_time_seconds |
+| 27 | `terraform-aws-baseline` | infrastructure | terraform-1.15.8, aws-provider-5.100.0, kumo-0.28.1, python-3.12, docker | modulo Terraform compartilhado com adapters Kumo e AWS | kumo_apply_seconds, kumo_destroy_seconds, resource_parity |
 | 28 | `kafka-streams-demo` | streaming | kotlin, java21, gradle-kotlin-dsl, kafka-streams, kafka, testcontainers, docker | processamento streaming | messages_per_second |
 | 29 | `load-test-suite` | performance | go, k6, javascript, docker | suite reutilizavel de carga | p95_curve |
 | 30 | `cost-aware-inference` | llmops | python, ports-and-adapters, openai-compatible-http, json, docker | custo e latencia local vs API | cost_per_1k_tokens, latency_ms |

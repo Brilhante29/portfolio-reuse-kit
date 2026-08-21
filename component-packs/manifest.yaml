@@ -268,12 +268,15 @@ packs:
       - go-backend
       - github-actions-reusable-workflow
       - observability-evidence-harness
+      - terraform-kumo-lifecycle
     benchmark_focus:
       - build_time_seconds
       - incident_recovery_seconds
       - incident_detection_seconds
       - signal_correlation_rate
-      - provision_time_seconds
+      - kumo_apply_seconds
+      - kumo_destroy_seconds
+      - resource_parity
       - p95_load_curve
     preferred_artifacts:
       - ci-profile-v1 with immutable workflow source and exact-head evidence
@@ -283,7 +286,8 @@ packs:
       - executable stack fixture
       - zero-finding actionlint, zizmor, and local policy report
       - dashboard JSON or screenshot recipe
-      - Terraform plan summary
+      - terraform-kumo-lifecycle-v1 with apply count, destroy count, and zero residual state
+      - shared Terraform module with isolated Kumo and AWS provider roots
       - k6 profile
     rejection_rules:
       - Reject cloud-only demos without local-first path.
@@ -295,4 +299,7 @@ packs:
       - Reject full observability stacks without a fast fail-closed evidence profile.
       - Reject writable bind-mount evidence that relies on host UID behavior.
       - Reject historical provenance validation from a shallow checkout.
+      - Reject terraform_data plans presented as cloud provisioning.
+      - Reject duplicated resource declarations across Kumo and AWS Terraform roots.
+      - Reject apply benchmarks without destroy cleanup and resource parity equal to 1.0.
       - Reject load-test repos without reusable scenarios.

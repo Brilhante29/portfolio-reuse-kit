@@ -18,19 +18,21 @@ application use case
 
 The domain and application layers must not import AWS SDK packages.
 
+For Terraform repositories, replace SDK ports with one shared resource module. Kumo and AWS roots may differ in provider configuration, but they must not duplicate resource declarations. A provider-free `terraform_data` plan is a configuration test, not cloud provisioning evidence.
+
 ## Reviewed Provider Snapshot
 
-The kit's reviewed snapshot on 2026-07-15 is:
+The kit's reviewed snapshot on 2026-08-21 is:
 
-- Kumo release: `v0.25.3`
-- Container tag: `0.25.3`
-- OCI version label: `0.25.3`
-- Manifest digest: `sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b`
+- Kumo release: `v0.28.1`
+- Container tag: `0.28.1`
+- OCI version label: `0.28.1`
+- Manifest digest: `sha256:c470c46ca00c9211a00cbda6b5aab17170997d5adc94e0c1b40f8ac604ba4b42`
 
 The release tag includes a leading `v`, while Kumo's GoReleaser image tag does not. Pin both the readable image tag and immutable digest:
 
 ```powershell
-docker run -p 4566:4566 ghcr.io/sivchari/kumo:0.25.3@sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b
+docker run -p 4566:4566 ghcr.io/sivchari/kumo:0.28.1@sha256:c470c46ca00c9211a00cbda6b5aab17170997d5adc94e0c1b40f8ac604ba4b42
 ```
 
 Do not use a mutable `:latest` reference in committed Dockerfiles, Compose files, CI, README commands, or benchmark evidence. It is acceptable only during an explicit dependency-update investigation.
@@ -46,11 +48,12 @@ Do not use a mutable `:latest` reference in committed Dockerfiles, Compose files
 - Provider release, digest, SDK version, and region in benchmark JSON.
 - Numeric compatibility diagnostics when an SDK warning is intentionally handled.
 - Documented unsupported Kumo or real-cloud behaviors.
+- For Terraform: committed provider locks, identical shared-module source in both roots, and apply/destroy evidence with zero residual state.
 
 ## Persistent Local Path
 
 ```powershell
-docker run -p 4566:4566 -e KUMO_DATA_DIR=/data -v kumo-data:/data ghcr.io/sivchari/kumo:0.25.3@sha256:7ea090ae0b6d1d34615e8b7bd04a2f1cd864ec640a6826a91e90f40e975e196b
+docker run -p 4566:4566 -e KUMO_DATA_DIR=/data -v kumo-data:/data ghcr.io/sivchari/kumo:0.28.1@sha256:c470c46ca00c9211a00cbda6b5aab17170997d5adc94e0c1b40f8ac604ba4b42
 ```
 
 ## Configuration Pattern
