@@ -95,6 +95,7 @@ $requiredFiles = @(
   "contracts/backend-reliability-platform.yaml",
   "contracts/mlops-data-platform.yaml",
   "contracts/medical-evaluation-report-v1.schema.json",
+  "contracts/ci-profile-v1.schema.json",
   "contracts/validated-batch-manifest-v1.schema.json",
   "contracts/fixtures/project.valid.json",
   "contracts/fixtures/project.non-jvm.valid.json",
@@ -110,6 +111,8 @@ $requiredFiles = @(
   "contracts/fixtures/benchmark-result-v2.invalid.json",
   "contracts/fixtures/medical-evaluation-report-v1.valid.json",
   "contracts/fixtures/medical-evaluation-report-v1.invalid.json",
+  "contracts/fixtures/ci-profile-v1.valid.json",
+  "contracts/fixtures/ci-profile-v1.invalid.json",
   "contracts/fixtures/portfolio-audit.valid.json",
   "contracts/portfolio-evidence.openapi.yaml",
   "contracts/portfolio-evidence.graphql",
@@ -140,6 +143,7 @@ $requiredFiles = @(
   "docs/mlops-data-platform.md",
   "docs/medical-ai-evaluation.md",
   "docs/model-monitoring.md",
+  "docs/delivery-observability-infra.md",
   "harness/bench.py",
   "harness/compare_results.py",
   "harness/result.schema.json",
@@ -256,6 +260,7 @@ $requiredDirs = @(
   ".codex/skills/backend-reliability-evidence",
   ".codex/skills/python-feature-store",
   ".codex/skills/python-model-monitoring",
+  ".codex/skills/github-actions-reusable-workflow",
   ".claude/skills/portfolio-project",
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
@@ -280,7 +285,8 @@ $requiredDirs = @(
   ".claude/skills/publish-benchmark-evidence",
   ".claude/skills/backend-reliability-evidence",
   ".claude/skills/python-feature-store",
-  ".claude/skills/python-model-monitoring"
+  ".claude/skills/python-model-monitoring",
+  ".claude/skills/github-actions-reusable-workflow"
 )
 
 foreach ($dir in $requiredDirs) { Require-Directory $dir }
@@ -446,7 +452,7 @@ Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingest
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "Idempotency-Key"
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "InvalidOperation"
 Require-Pattern "contracts/portfolio-evidence.graphql" "compareBenchmarkRuns"
-Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.5.0"'
+Require-Pattern "contracts/manifest.json" '"contract_set_version": "1.6.0"'
 Require-Pattern "templates/validate-project.ps1" "Vendored contract drift"
 Require-Pattern "templates/validate-project.ps1" '\.portfolio/contracts/project\.schema\.json'
 Require-Pattern "tools/publish-all.ps1" "publication_candidate"
@@ -464,6 +470,7 @@ Invoke-Checked "harness result schema JSON" { python -m json.tool (Join-Path $ro
 Invoke-Checked "project schema JSON" { python -m json.tool (Join-Path $root "contracts/project.schema.json") | Out-Null }
 Invoke-Checked "benchmark schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result.schema.json") | Out-Null }
 Invoke-Checked "benchmark v2 schema JSON" { python -m json.tool (Join-Path $root "contracts/benchmark-result-v2.schema.json") | Out-Null }
+Invoke-Checked "CI profile schema JSON" { python -m json.tool (Join-Path $root "contracts/ci-profile-v1.schema.json") | Out-Null }
 Invoke-Checked "monitoring batch schema JSON" { python -m json.tool (Join-Path $root "contracts/monitoring-batch.schema.json") | Out-Null }
 Invoke-Checked "execution event schema JSON" { python -m json.tool (Join-Path $root "contracts/execution-event.schema.json") | Out-Null }
 Invoke-Checked "publication evidence schema JSON" { python -m json.tool (Join-Path $root "contracts/publication-evidence.schema.json") | Out-Null }

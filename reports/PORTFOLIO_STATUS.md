@@ -1,15 +1,15 @@
 # Portfolio Status Report
 
-Generated: 2026-08-17T04:38:55.7569896Z
+Generated: 2026-08-21T01:25:50.6669960Z
 
-Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **16** | local candidates: **29** | publication candidates: **16** | verified publications: **8** | origins: **30** | upstreams: **16**
+Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary benchmarks: **30** | valid contracts: **30** | contract v2: **17** | local candidates: **29** | publication candidates: **17** | verified publications: **10** | origins: **30** | upstreams: **18**
 
 | # | Repository | Program | Declared | Language | Stack | Architecture | API | Messaging | Cloud | Database | Benchmark | Valid contract | Contract v2 | Placeholders | Local | Publication candidate | Published |
 |---:|---|---|---|---|---|---|---|---|---|---|:---:|:---:|:---:|---:|:---:|:---:|:---:|
 | 1 | yolo-training-pipeline | applied-computer-vision | published | python | python-3.12.13, ultralytics-8.4.96, pytorch-2.13.0-cpu, torchvision-0.28.0-cpu, pytest-9.1.1, ruff-0.15.21, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 2 | llm-eval-harness | ai-evaluation-retrieval | published | python | python, json-schema, jsonl, argparse, unittest, docker | pipeline-with-contract-boundary | cli-first | artifact-file | none | fixture-files | True | True | True | 0 | True | True | False |
 | 3 | rag-knowledge-base | ai-evaluation-retrieval | published | fastapi-backend | python, fastapi, uvicorn, local-hashing-embeddings, json-vector-store, docker | clean-architecture | rest-http | none | none | json-vector-store | True | True | True | 0 | True | True | True |
-| 4 | stroke-signal-demo | mlops-data-platform | benchmarked | python-ml | python, pandas, scikit-learn, matplotlib, docker | pipeline | cli | none | none | none | True | True | False | 0 | True | False | False |
+| 4 | stroke-signal-demo | mlops-data-platform | published | python | python-3.12, numpy-2.5.1, scipy-1.18.0, jsonschema-4.26.0, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 5 | alpr-mercosul | applied-computer-vision | published | python | python-3.12, pillow-10.4.0, numpy-1.26.4, pytest, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 6 | melanoma-classifier | applied-computer-vision | published | python-ml | python-3.12.13, numpy-2.0.2, scipy-1.15.3, scikit-learn-1.7.2, dermamnist-v2.1, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 7 | vision-serving-fastapi | applied-computer-vision | published | fastapi-backend | python-3.12.13, fastapi-0.116.1, ultralytics-8.4.96, pytorch-2.13.0-cpu, prometheus-client-0.22.1, httpx-0.28.1, docker | modular-monolith | rest-http | none | none | none | True | True | True | 0 | True | True | True |
@@ -29,7 +29,7 @@ Repositories: **30** | Docker: **30** | CI files: **30** | tracked primary bench
 | 21 | mlops-end2end | mlops-data-platform | published | python | python-3.12, apache-airflow-3.3.0, mlflow-3.14.0, fastapi-0.136.3, scikit-learn-1.9.0, pandera-0.32.1, prometheus-client-0.25.0, docker | pipeline | rest-http | none | none | SQLite for ephemeral Airflow and MLflow metadata | True | True | True | 0 | True | True | True |
 | 22 | model-drift-detector | mlops-data-platform | benchmarked | python | python-3.12, numpy-2.5.1, scipy-1.18.0, pydantic-2.13.4, prometheus-client-0.25.0, docker | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 23 | feature-store-lite | mlops-data-platform | benchmarked | python | python-3.12, feast-0.64.0, pandas-2.3.3, pyarrow-25.0.0, parquet, sqlite, docker | pipeline | cli | none | none | sqlite | True | True | False | 0 | True | False | False |
-| 24 | ci-cd-templates | delivery-observability-infra | benchmarked | python | Python 3.10+, PyYAML, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions | pipeline | cli | none | none | none | True | True | True | 0 | True | True | False |
+| 24 | ci-cd-templates | delivery-observability-infra | published | python | Python 3.12.13, PyYAML 6.0.3, jsonschema 4.26.0, actionlint 1.7.12, zizmor 1.26.1, Docker, GitHub Actions reusable workflows | pipeline | cli | none | none | none | True | True | True | 0 | True | True | True |
 | 25 | observability-stack | backend-reliability-platform | benchmarked | fastapi-backend | python-3.12, fastapi, prometheus-client, prometheus, grafana, docker-compose | hexagonal | rest-http | none | none | none | True | True | False | 0 | True | False | False |
 | 26 | data-quality-checks | mlops-data-platform | benchmarked | python | python-3.12, pandera-0.32.1, polars-1.42.1, docker | pipeline | cli | none | none | none | True | True | False | 0 | True | False | False |
 | 27 | terraform-aws-baseline | delivery-observability-infra | benchmarked | terraform | terraform, python, docker, github-actions | hexagonal | cli | none | adapter-fake | none | True | True | False | 0 | True | False | False |

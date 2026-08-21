@@ -55,7 +55,7 @@ programs:
     problem: "Portfolio projects need repeatable CI, provisioning, observability, and load testing."
     projects: [24, 25, 27, 29]
     shared_assets:
-      - GitHub Actions templates
+      - ci-profile-v1 and executable GitHub Actions templates
       - dashboards
       - Terraform checks
       - k6 load profiles

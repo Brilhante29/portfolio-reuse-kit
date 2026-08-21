@@ -86,6 +86,22 @@ def main() -> int:
     except Exception as error:
         failures.append(f"medical evaluation contract validation failed: {error}")
 
+    ci_schema_path = root / "contracts" / "ci-profile-v1.schema.json"
+    ci_valid_path = root / "contracts" / "fixtures" / "ci-profile-v1.valid.json"
+    ci_invalid_path = root / "contracts" / "fixtures" / "ci-profile-v1.invalid.json"
+    try:
+        ci_schema = json.loads(ci_schema_path.read_text(encoding="utf-8"))
+        Draft202012Validator.check_schema(ci_schema)
+        ci_validator = Draft202012Validator(ci_schema, format_checker=FormatChecker())
+        ci_validator.validate(json.loads(ci_valid_path.read_text(encoding="utf-8")))
+        ci_invalid_errors = list(
+            ci_validator.iter_errors(json.loads(ci_invalid_path.read_text(encoding="utf-8")))
+        )
+        if not ci_invalid_errors:
+            failures.append("invalid CI profile fixture was accepted")
+    except Exception as error:
+        failures.append(f"CI profile contract validation failed: {error}")
+
     openapi_path = root / "contracts" / "portfolio-evidence.openapi.yaml"
     try:
         openapi_document, base_uri = read_from_filename(str(openapi_path))
@@ -117,7 +133,7 @@ def main() -> int:
         print("\n".join(failures), file=sys.stderr)
         return 1
     print(
-        f"validated {len(yaml_files)} YAML files, project, benchmark V2, and medical fixtures, "
+        f"validated {len(yaml_files)} YAML files, project, benchmark V2, medical, and CI fixtures, "
         "OpenAPI, GraphQL, and contract manifest"
     )
     return 0

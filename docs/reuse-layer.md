@@ -15,7 +15,7 @@ This repository is a reusable decision platform for the portfolio. It should ans
 | Layer | Path | Responsibility |
 |---|---|---|
 | Portfolio registry | `catalog/` | Defines the initial 30 projects and future additions, program groups, proficiency signals, and intended evidence. |
-| Project contract | `contracts/` | Defines required shape for `project.yaml` and benchmark JSON. |
+| Project contract | `contracts/` | Defines required shape for `project.yaml`, benchmark JSON, cross-repository artifacts, medical evaluation, and reusable CI profiles. |
 | Agent graph | `decision-brain/agent-graph.yaml` and `docs/agent-graph.md` | Defines principal agent, subagents, local-first runtime, handoff contract, validation, and publication flow. |
 | Reuse improvement | `decision-brain/reuse-improvement-loop.yaml` and `docs/reuse-improvement-loop.md` | Forces every project to patch, backlog, or reject improvements to the reuse kit. |
 | Architecture selection | `architecture/` | Provides the decision matrix for MVC, layered, modular monolith, Clean Architecture, Hexagonal, MVVM, pipeline, event-driven, CQRS, serverless, and microservices. |

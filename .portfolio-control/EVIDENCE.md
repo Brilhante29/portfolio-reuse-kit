@@ -99,3 +99,14 @@
 - Keep domain-specific multi-run aggregation in the project until a second implementation proves a stable reusable abstraction.
 
 Full command output remains in CI and project artifacts. Credential values and private reasoning are intentionally excluded.
+
+## Project #24
+
+- Repository: `Brilhante29/ci-cd-templates`.
+- Source evidence commit: `8bfd94a1a8fd6186b717bc7be53d61e92d419b2d`.
+- Final published head: `bc591185eeb3ec73ff550fa6b1fdf4d41885a55e`.
+- Exact-head CI: `https://github.com/Brilhante29/ci-cd-templates/actions/runs/32001541506`.
+- Result: median `104.945 ms`; samples `104.945`, `103.531`, `152.502 ms`; all seven unsafe fixture findings; zero template findings.
+- Profiles: Python `3.12.13`, Go `1.26.0`, Node `24.13.0`, Java `21` with Gradle `9.3.1`, and Terraform `1.14.8`.
+- Provenance: image `sha256:c075a917595faf3e84c5189306eb59c422e051cabaefbc6ea7f75b46d58ae70f`; V1 artifact `sha256:570d8173cb6c7d901df3a15d4a3229ba1e7451066de1c349a797fba817c24985`.
+- Limit: the benchmark measures deterministic static guardrails; GitHub Actions proves profile execution but does not compare arbitrary consumer build duration.

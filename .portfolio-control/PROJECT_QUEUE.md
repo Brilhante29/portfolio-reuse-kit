@@ -6,7 +6,7 @@ Keep one active macro and at most one reusable-kit improvement.
 
 Delivery, Observability, and Infrastructure: #24, #25, #27, and #29.
 
-Current phase: close one repository at a time in order #24, #25, #27, #29. Current progress: 0/4. Exact next repository: #24 `ci-cd-templates`.
+Current phase: close one repository at a time in order #24, #25, #27, #29. Current progress: 1/4. Exact next repository: #25 `observability-stack`.
 
 ## Completed Macros
 
@@ -17,4 +17,4 @@ Current phase: close one repository at a time in order #24, #25, #27, #29. Curre
 
 ## Next
 
-Complete #24 first. Completion requires reusable workflow security, deterministic benchmark evidence, V2 provenance, and successful CI on the exact final `main` SHA.
+Complete #25 next. Completion requires correlated telemetry through real collectors, a reproducible incident and MTTR benchmark, V2 provenance, and successful CI on the exact final `main` SHA.

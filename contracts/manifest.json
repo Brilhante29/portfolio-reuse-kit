@@ -12,6 +12,10 @@
       "bytes": 746,
       "sha256": "sha256:7df83b5774b363ff6b23a902595c50a5d34a89e66866d898a9dac43fb807a9de"
     },
+    "ci-profile-v1.schema.json": {
+      "bytes": 3033,
+      "sha256": "sha256:4356148c50b0c8500a2ecd87fd409cde0982e45df21057626ea5d1b416dbc94f"
+    },
     "commerce-event-v1.schema.json": {
       "bytes": 1006,
       "sha256": "sha256:fdb16ccca3e0bb63d9e0ea2ffed729f2022022d6a4460a7157302bb2a279ace8"
@@ -27,6 +31,14 @@
     "fixtures/benchmark-result-v2.valid.json": {
       "bytes": 1749,
       "sha256": "sha256:0074aeacec5abbc6d5938d6ae330160865d5d866237df0ae76d0425b27e1da2e"
+    },
+    "fixtures/ci-profile-v1.invalid.json": {
+      "bytes": 754,
+      "sha256": "sha256:c542023cd5776185aeefb11a3b90d8845656fbf401cbbc5305cfca12195f78ea"
+    },
+    "fixtures/ci-profile-v1.valid.json": {
+      "bytes": 988,
+      "sha256": "sha256:f6e4b1d96eb91dcff31cb9fb702acf17878079708b560356a99959915142330a"
     },
     "fixtures/medical-evaluation-report-v1.invalid.json": {
       "bytes": 1216,
@@ -122,6 +134,6 @@
     }
   },
   "contract_set": "portfolio-interoperability",
-  "contract_set_version": "1.5.0",
+  "contract_set_version": "1.6.0",
   "schema_version": 1
 }

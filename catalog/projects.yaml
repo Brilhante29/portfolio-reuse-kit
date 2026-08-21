@@ -163,10 +163,10 @@ projects:
   - id: 24
     name: "ci-cd-templates"
     domain: "devops"
-    stack: ["Python 3.10+", "PyYAML", "actionlint 1.7.12", "zizmor 1.26.1", "Docker", "GitHub Actions"]
-    proves: "pipelines reutilizaveis"
-    benchmark: "build_time_seconds"
-    reuse_from: ["actions-starter-workflows"]
+    stack: ["Python 3.12.13", "PyYAML 6.0.3", "jsonschema 4.26.0", "actionlint 1.7.12", "zizmor 1.26.1", "Docker", "GitHub Actions reusable workflows"]
+    proves: "cinco perfis CI executaveis e guardrails de supply chain offline para Python, Go, Node, JVM Gradle e Terraform"
+    benchmark: "scan_time_ms, fixture_findings, template_findings"
+    reuse_from: ["ci-profile-v1", "benchmark-result-v2", "github-actions-reusable-workflow"]
   - id: 25
     name: "observability-stack"
     domain: "observability"

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "active_family": "delivery-observability-infra",
-  "phase": "delivery-ci-cd-publication-audit",
+  "phase": "delivery-observability-publication-audit",
   "affected": [
     "ci-cd-templates",
     "observability-stack",
@@ -15,35 +15,40 @@
     "model-drift-detector",
     "feature-store-lite",
     "data-quality-checks",
-    "kafka-streams-demo"
+    "kafka-streams-demo",
+    "ci-cd-templates"
   ],
-  "unknown": ["ci-cd-templates", "observability-stack", "terraform-aws-baseline", "load-test-suite"],
+  "unknown": ["observability-stack", "terraform-aws-baseline", "load-test-suite"],
   "repos_local_verified": [
     "model-drift-detector@13a18d57657ac8c04e17c25adda98ff855b126a8",
-    "stroke-signal-demo@187466c4b47b50a1ebb2491d3ae60c0561aeebd6"
+    "stroke-signal-demo@187466c4b47b50a1ebb2491d3ae60c0561aeebd6",
+    "ci-cd-templates@bc591185eeb3ec73ff550fa6b1fdf4d41885a55e"
   ],
   "repos_pushed": [
     "data-quality-checks",
     "feature-store-lite",
     "kafka-streams-demo",
     "model-drift-detector",
-    "stroke-signal-demo"
+    "stroke-signal-demo",
+    "ci-cd-templates"
   ],
   "ci_green": [
     "data-quality-checks#31773506491",
     "feature-store-lite#31991401685",
     "kafka-streams-demo#31402256249",
     "model-drift-detector#31994181644",
-    "stroke-signal-demo#31998068664"
+    "stroke-signal-demo#31998068664",
+    "ci-cd-templates#32001541506"
   ],
   "blocked": [],
   "active_skills": [
     "i-have-adhd",
     "continuity-checkpoint",
     "publish-benchmark-evidence",
-    "benchmark-harness"
+    "benchmark-harness",
+    "github-actions-reusable-workflow"
   ],
-  "last_evidence": "MLOps and Data Platform is 6/6. stroke-signal-demo main 187466c4 and run 31998068664 prove a patient-isolated, paper-inspired synthetic CT segmentation evaluation with Dice 0.9424706943 and no clinical-performance claim.",
-  "next_action": "Audit ci-cd-templates (#24) for reusable workflow security, deterministic build-time evidence, V2 provenance, and exact-head CI.",
-  "updated_at": "2026-08-17T05:31:43Z"
+  "last_evidence": "Delivery, Observability, and Infrastructure is 1/4. ci-cd-templates main bc591185 and run 32001541506 prove five executable stack profiles, median guardrail scan 104.945 ms, 7/7 unsafe findings, and zero template findings.",
+  "next_action": "Audit observability-stack (#25) for real trace, metric, and log correlation, reproducible simulated MTTR, offline Docker Compose, and exact-head CI.",
+  "updated_at": "2026-08-21T01:15:23Z"
 }

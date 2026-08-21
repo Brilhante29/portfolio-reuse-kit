@@ -115,3 +115,13 @@ Decision: validate `validated-batch-manifest-v1` fail closed before Feast sees r
 Rejected: source imports between #26 and #23; custom joins presented as a feature-store engine; Redis or HTTP without a concurrency/transport claim; latency without future-leak, TTL, and online-value correctness proof; host-runtime-dependent aggregation.
 
 Evidence: final `main` `6f8c957807a122d189fe8021c80cfd3e2639e329`; exact-head CI `31991401685`; p95 median `45.645578341645894 ms`; throughput median `1061.9468119765338 entity values/s`; point-in-time and online match `1.0`; zero future leaks and TTL violations; 23 tests and 91.09% coverage.
+
+## 2026-08-20 - #24 Reusable CI Publication Closure
+
+Context: `ci-cd-templates` promised reusable pipelines but only shipped a scanner, and its README number no longer matched committed evidence.
+
+Decision: publish five explicit `workflow_call` profiles for Python, Go, Node, JVM/Gradle, and Terraform. Each profile executes a repository-owned fixture, pins external actions by full SHA, uses read-only permissions, disables checkout credential persistence, and owns its timeout. Measure deterministic policy scan latency separately from hosted consumer build duration.
+
+Rejected: a universal template that accepts arbitrary commands; mutable workflow refs; comparing unrelated stack build times; treating actionlint-only validation as execution proof.
+
+Evidence: source `8bfd94a1a8fd6186b717bc7be53d61e92d419b2d`; final `main` `bc591185eeb3ec73ff550fa6b1fdf4d41885a55e`; exact-head CI `32001541506`; median scan `104.945 ms`; `7/7` unsafe findings; zero template findings.
