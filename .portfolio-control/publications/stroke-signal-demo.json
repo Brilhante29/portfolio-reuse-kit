@@ -1,0 +1,11 @@
+{
+    "schema_version":  1,
+    "repository":  "stroke-signal-demo",
+    "commit_sha":  "187466c4b47b50a1ebb2491d3ae60c0561aeebd6",
+    "branch":  "main",
+    "remote_url":  "https://github.com/Brilhante29/stroke-signal-demo.git",
+    "ci_conclusion":  "success",
+    "ci_run_url":  "https://github.com/Brilhante29/stroke-signal-demo/actions/runs/31998068664",
+    "workflow":  "validate",
+    "verified_at":  "2026-08-21T13:15:00.3444690Z"
+}

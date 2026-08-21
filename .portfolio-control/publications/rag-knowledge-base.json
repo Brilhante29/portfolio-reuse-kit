@@ -1,11 +1,11 @@
 {
     "schema_version":  1,
     "repository":  "rag-knowledge-base",
-    "commit_sha":  "0cb9c6cc7d7ceb2b6e57c116403531de61ace02d",
+    "commit_sha":  "891b97d42643030b1d829382c6b3ec4b96005ced",
     "branch":  "codex/rag-knowledge-base/publication-gates",
     "remote_url":  "https://github.com/Brilhante29/rag-knowledge-base.git",
     "ci_conclusion":  "success",
-    "ci_run_url":  "https://github.com/Brilhante29/rag-knowledge-base/actions/runs/30638261570",
+    "ci_run_url":  "https://github.com/Brilhante29/rag-knowledge-base/actions/runs/31400571243",
     "workflow":  "validate",
-    "verified_at":  "2026-08-03T00:00:44.9173703Z"
+    "verified_at":  "2026-08-21T13:14:58.7552683Z"
 }

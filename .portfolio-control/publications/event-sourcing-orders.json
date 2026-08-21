@@ -1,0 +1,11 @@
+{
+    "schema_version":  1,
+    "repository":  "event-sourcing-orders",
+    "commit_sha":  "ddf17f0b3ef765762e3a3a35dacbb2e2b62eff16",
+    "branch":  "main",
+    "remote_url":  "https://github.com/Brilhante29/event-sourcing-orders.git",
+    "ci_conclusion":  "success",
+    "ci_run_url":  "https://github.com/Brilhante29/event-sourcing-orders/actions/runs/31359210209",
+    "workflow":  "CI",
+    "verified_at":  "2026-08-21T13:14:49.3485693Z"
+}
