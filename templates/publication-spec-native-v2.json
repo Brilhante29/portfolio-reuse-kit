@@ -1,0 +1,17 @@
+{
+  "mode": "native-v2",
+  "project": "<project-name>",
+  "benchmark_id": "replace-benchmark-v1",
+  "primary_metric": "replace_primary_metric",
+  "result_path": "benchmarks/results/latest.json",
+  "publication_path": "benchmarks/publication/latest.json",
+  "config_path": "benchmarks/config/workload-v1.json",
+  "fixture_path": "benchmarks/fixtures",
+  "lock_path": "package-lock.json",
+  "repeat": 1,
+  "measured_iterations": 30,
+  "warmup_iterations": 5,
+  "concurrency": 1,
+  "comparability_key": "replace-runtime-workload-v1",
+  "readme_metrics": ["replace_primary_metric"]
+}

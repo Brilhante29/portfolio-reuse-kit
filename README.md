@@ -238,8 +238,8 @@ The drift decision and evidence guide is [Python Model Monitoring](docs/model-mo
 Delivery order:
 
 1. `portfolio-evidence-api`: published with exact-head CI.
-2. `portfolio-evidence-console`: locally complete and benchmarked; remote publication is the active gate.
-3. `portfolio-operations-console`: after public read contracts stabilize, consuming REST command contracts and GraphQL reads.
+2. `portfolio-evidence-console`: published with exact-head CI and immutable V2 browser evidence.
+3. `portfolio-operations-console`: next eligible repository, consuming REST command contracts and GraphQL reads.
 
 The original 30 repositories remain closed and independently published. The
 three extensions form one evidence platform rather than isolated technology

@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
   "active_family": "portfolio-evidence-platform",
-  "phase": "portfolio-evidence-api-complete",
+  "phase": "portfolio-evidence-console-complete",
   "affected": [
     "portfolio-evidence-api",
+    "portfolio-evidence-console",
     "portfolio-reuse-kit"
   ],
   "healthy_variants": [
@@ -13,25 +14,28 @@
   "unknown": [],
   "repos_local_verified": [
     "cache-strategies-bench@251f0f4d3b9a9cace77683014f45a26be9229d11",
-    "portfolio-evidence-api@88fa375de0abe7e4a93d427928016f6d4b0b8bfa"
+    "portfolio-evidence-api@88fa375de0abe7e4a93d427928016f6d4b0b8bfa",
+    "portfolio-evidence-console@ae22e864b605907c2c61403950173977a5271404"
   ],
   "repos_pushed": [
     "cache-strategies-bench",
-    "portfolio-evidence-api"
+    "portfolio-evidence-api",
+    "portfolio-evidence-console"
   ],
   "ci_green": [
     "cache-strategies-bench#32481590754",
     "portfolio-evidence-api#33205651604",
-    "portfolio-reuse-kit#33206913412"
+    "portfolio-evidence-console#33217542452",
+    "portfolio-reuse-kit#33216079565"
   ],
   "blocked": [],
   "active_skills": [
     "i-have-adhd",
     "continuity-checkpoint",
-    "node-typescript-backend",
+    "nextjs-frontend",
     "publish-benchmark-evidence"
   ],
-  "last_evidence": "Original portfolio remains 30/30. Extension #31 is published at 88fa375 with exact-head CI 33205651604, 35 tests, 93.05% line coverage, ingestion p95 40.201 ms, throughput 438.148 req/s, GraphQL p95 24.119 ms, and zero workload failures. Reuse-kit content baseline 3f42adf passed CI 33206913412 without action-runtime warnings.",
-  "next_action": "Treat #31 as closed and start #32 only from the published GraphQL read contract after this kit commit has green exact-head CI.",
-  "updated_at": "2026-08-28T19:52:01Z"
+  "last_evidence": "Original portfolio remains 30/30. Extensions #31 and #32 are published, bringing the total to 32. #32 final head ae22e86 passed exact-head CI 33217542452 with zero warnings/failures; its clean-source browser evidence reports 41.72 ms filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318437 bytes, and zero workload failures.",
+  "next_action": "Start #33 portfolio-operations-console as the audited Angular command surface; keep public reads on GraphQL and commands on REST.",
+  "updated_at": "2026-08-28T22:41:44Z"
 }

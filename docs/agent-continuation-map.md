@@ -452,4 +452,4 @@ Docker runtime. The next eligible repository is #32; do not reopen the original
   -> promote only Next.js, template, token, and browser-harness lessons to the kit
 ```
 
-#32 local source `f887d21` is benchmarked at 41.72 ms filter-to-chart p95 with zero failures. Remote publication, exact-head CI, Desktop alignment, and the kit publication record remain the strict continuation order. The published count stays 31 until those gates pass.
+#32 final main `ae22e864b605907c2c61403950173977a5271404` passed exact-head CI `33217542452` with zero warning/failure annotations. Clean source `f887d21` is benchmarked at 41.72 ms filter-to-chart p95 with zero failures. The publication registry is current, the published count is 32, and #33 is the next eligible repository.

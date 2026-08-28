@@ -23,6 +23,10 @@ try {
   if ($firstLine -ne "# #999 $name") {
     throw "Next.js profile README identity mismatch: $firstLine"
   }
+  $publicationSpec = Get-Content -LiteralPath (Join-Path $target "benchmarks/publication-spec.json") -Raw | ConvertFrom-Json
+  if ($publicationSpec.mode -ne "native-v2" -or $publicationSpec.project -ne $name) {
+    throw "Next.js profile publication contract is not native V2 for $name"
+  }
   Write-Host "nextjs profile scaffold fixture passed"
 } finally {
   if (Test-Path -LiteralPath $workspace) {

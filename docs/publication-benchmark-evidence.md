@@ -20,7 +20,7 @@ A V2 result is publication evidence, not a formatting upgrade from V1. The produ
 
 Use `tools/generate-publication-benchmark.py` for a single V1 `metric`/`value` result whose workload count is explicit. Pass `--measured-iterations` when the V1 file does not expose an unambiguous count.
 
-Every project keeps `benchmarks/publication-spec.json` as the machine-readable bridge between V1, V2, README and `project.yaml`. Set optional `v1_project` only when a legacy raw result uses an older identifier such as a numeric prefix; V2 always uses the canonical repository name. `tools/validate-publication.py --require-git` verifies raw/V2 agreement and hashes fixture, configuration and lock inputs from source-commit Git blobs.
+Every project keeps `benchmarks/publication-spec.json` as the machine-readable bridge between evidence, README and `project.yaml`. The default `v1-derived` mode verifies raw/V2 agreement; set optional `v1_project` only when the legacy raw result uses an older identifier. Browser-native harnesses may use `mode: native-v2` from `templates/publication-spec-native-v2.json`; this requires byte-equivalent result/publication objects, zero failures across every metric, and README values for each declared metric. Both modes hash fixture, configuration and lock inputs from source-commit Git blobs when `tools/validate-publication.py --require-git` runs.
 
 Keep a project-specific V2 producer when the publication claim needs:
 

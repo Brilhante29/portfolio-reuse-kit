@@ -7,7 +7,7 @@ Purpose: observable continuation state; no private chain-of-thought.
 
 1. Read this file, `TRACKER.json`, and `CONTINUITY_STATE.md`.
 2. Confirm the original portfolio still passes 30/30 before changing it.
-3. Confirm this kit's latest exact-head CI is green before publishing #32.
+3. Treat #31 and #32 as closed; start only #33 next.
 
 ## Current Truth
 
@@ -16,10 +16,14 @@ repositories pass strict local, V2 publication-candidate, and verified
 publication gates. Docker, CI, benchmark contracts, V2 evidence, clean
 checkouts, origins, and upstreams are all 30/30.
 
-Extension #31 is also complete. The portfolio therefore has **31 published
-repositories**: 30 original repositories plus one evidence-platform extension.
+Extensions #31 and #32 are complete. The portfolio therefore has **32 published
+repositories**: 30 original repositories plus two evidence-platform extensions.
 
-Extension #32 is locally complete but not yet published. Its clean-source browser benchmark on `f887d21` reports 41.72 ms filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318,437 transferred bytes, and zero failures. The published count remains 31 until remote exact-head CI succeeds.
+Extension #32 final main `ae22e864b605907c2c61403950173977a5271404`
+passed exact-head CI run `33217542452` with zero warning/failure annotations.
+Its clean-source browser benchmark on `f887d21` reports 41.72 ms
+filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318,437 transferred bytes, and
+zero failures.
 
 The reuse-kit content baseline `9c29595b78e56326d1a94780d49299e719c1710b`
 passed exact-head CI run `33215938357` without GitHub Actions warnings. Its
@@ -57,6 +61,18 @@ The remote-proven npm advisory transport is promoted as
 `harness/node/npm-advisory-audit.mjs`. The project API, SQLite schema, and
 benchmark workload remain project-owned.
 
+Extension #32 `portfolio-evidence-console` is published and aligned:
+
+- final main `ae22e864b605907c2c61403950173977a5271404`;
+- exact-head CI `https://github.com/Brilhante29/portfolio-evidence-console/actions/runs/33217542452`;
+- Node 24, TypeScript 6, Next.js 16, React 19, GraphQL, Zod 4, ECharts 6,
+  Vitest 4, Playwright 1.62, and Docker;
+- 14 application tests plus 3 V2 validator tests; 99.13% statements, 97.43%
+  branches, 100% functions, and 98.91% lines;
+- clean-source browser result at `f887d21`: 41.72 ms p95, 372 ms LCP,
+  0.0859 CLS, 318,437 bytes, and zero failures;
+- publication record: `.portfolio-control/publications/portfolio-evidence-console.json`.
+
 ## Limit Record
 
 Four approval-review operations were blocked after the account reported its
@@ -67,9 +83,9 @@ limit and write a handoff instead of probing alternate paths.
 
 ## Exact Continuation
 
-1. Finish #32 publication, require exact-head CI, align its Desktop checkout, and add its publication record here.
-2. Revalidate this kit after the #32 publication record is added.
-3. Keep commands out of GraphQL; #33 will use REST for audited state changes.
-4. Reopen #31 only for a measured contract, correctness, security, or scale requirement.
+1. Align #32's canonical Desktop checkout to the recorded publication SHA.
+2. Start #33 as the audited Angular operations surface.
+3. Keep commands out of GraphQL; #33 uses REST for state changes and GraphQL for reads.
+4. Reopen #31 or #32 only for a measured contract, correctness, security, or scale requirement.
 
 Do not reopen the original 30 as active work.

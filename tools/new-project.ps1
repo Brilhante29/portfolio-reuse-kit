@@ -85,6 +85,7 @@ if ($Profile -eq "nextjs") {
   Copy-Item (Join-Path $root "templates/github-actions-nextjs.yml") (Join-Path $target ".github/workflows/ci.yml")
   Copy-Item (Join-Path $root "templates/prepare-standalone.mjs") (Join-Path $target "tools/prepare-standalone.mjs")
   Copy-Item (Join-Path $root "templates/prettierignore.nextjs") (Join-Path $target ".prettierignore")
+  Copy-Item (Join-Path $root "templates/publication-spec-native-v2.json") (Join-Path $target "benchmarks/publication-spec.json") -Force
 }
 
 $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
