@@ -25,8 +25,8 @@ Its clean-source browser benchmark on `f887d21` reports 41.72 ms
 filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318,437 transferred bytes, and
 zero failures.
 
-The reuse-kit content baseline `9c29595b78e56326d1a94780d49299e719c1710b`
-passed exact-head CI run `33215938357` without GitHub Actions warnings. Its
+The reuse-kit content baseline `574a1490b2bc2aa7072dde3b7690002794d45414`
+passed exact-head CI run `33218318317` without GitHub Actions warnings. Its
 publication record intentionally points to that prior content commit because a
 record cannot contain the SHA of the commit that contains itself.
 
