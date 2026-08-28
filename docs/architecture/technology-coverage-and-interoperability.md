@@ -22,17 +22,17 @@ Every language emits the same vendored and digest-pinned `benchmark-result-v2` J
 
 ## Evidence API
 
-Architecture: modular monolith with hexagonal module boundaries and lightweight CQRS.
+Architecture: modular monolith with hexagonal boundaries and explicit command/query separation, without a CQRS framework.
 
-Modules: evidence ingestion, benchmark catalog, comparability, publication readiness, query read model, and audit.
+Boundaries: immutable evidence domain, ingestion and operational commands, read and comparison use cases, REST commands, GraphQL reads, schema validation, and SQLite persistence.
 
-Stack: Node.js LTS, TypeScript strict, NestJS, Fastify, REST commands, GraphQL queries, Ajv, Kysely, SQLite local-first, PostgreSQL adapter, Pino, OpenTelemetry, Prometheus, and k6.
+Stack: Node.js 24, TypeScript strict, NestJS 11, Fastify 5, REST commands, Mercurius GraphQL reads, Ajv, Kysely, SQLite local-first, Pino, Prometheus, Vitest, and Docker.
 
-Kysely is selected over Prisma because controlled SQL and adapter parity between SQLite and PostgreSQL are part of the claim. NestJS, Fastify, GraphQL, and Kysely stay outside the domain.
+Kysely is selected over Prisma because controlled SQL and SQLite behavior are part of the evidence. NestJS, Fastify, GraphQL, Ajv, and Kysely stay outside the domain.
 
-Default `docker run` uses SQLite and filesystem storage. Optional Compose profiles exercise PostgreSQL and Kumo. Real AWS remains behind the same object-store port.
+Default `docker run` uses SQLite and needs no secret, broker, cloud account, or second service. PostgreSQL is deferred until measured multi-writer pressure exists. Kumo becomes the first local provider only if artifact storage creates a real cloud boundary; AWS must remain behind the same future port.
 
-Primary evidence: ingest p95 and throughput for 10,000 results, GraphQL query p95, invalid-evidence rejection rate, and SQLite/PostgreSQL behavioral parity.
+Primary evidence: ingestion p95 `40.201 ms`, throughput `438.148 requests/second`, GraphQL query p95 `24.119 ms`, and zero workload failures across a clean-source V2 run.
 
 ## Public Console
 

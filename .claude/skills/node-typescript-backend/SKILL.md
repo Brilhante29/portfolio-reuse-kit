@@ -19,7 +19,7 @@ Use this skill when `decision_brain.stack_profile` is `node-typescript-backend`.
 10. Export OpenAPI or GraphQL schema when relevant.
 11. Commit the lockfile, use `npm ci`, pin Actions by full SHA, and fail closed on high or critical advisories.
 12. Fix vulnerable transitive packages in the lockfile. Do not silence advisories; distinguish registry transport failures from real findings.
-13. If a custom npm Bulk Advisory client is unavoidable, test identity/gzip decoding, malformed bodies, severity ordering, and bounded retries before CI.
+13. If ordinary `npm audit` transport is proven unreliable, reuse `harness/node/npm-advisory-audit.mjs`; its identity/gzip decoding, malformed-body handling, severity ordering, and bounded retries were remotely proven by `portfolio-evidence-api` CI run `33205651604`.
 14. Exercise native modules in the declared Node Docker image; host-only success is insufficient.
 
 Rule: TypeScript backend repos must prove structure and typed contracts, not just Node endpoints.

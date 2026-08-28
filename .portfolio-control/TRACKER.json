@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "active_family": "portfolio-evidence-platform",
-  "phase": "portfolio-evidence-api-publication",
+  "phase": "portfolio-evidence-api-complete",
   "affected": [
     "portfolio-evidence-api",
     "portfolio-reuse-kit"
@@ -13,24 +13,24 @@
   "unknown": [],
   "repos_local_verified": [
     "cache-strategies-bench@251f0f4d3b9a9cace77683014f45a26be9229d11",
-    "portfolio-evidence-api@fdb948263cc322dd3f9d1c921985ae3f485cd861"
+    "portfolio-evidence-api@88fa375de0abe7e4a93d427928016f6d4b0b8bfa"
   ],
   "repos_pushed": [
-    "cache-strategies-bench"
+    "cache-strategies-bench",
+    "portfolio-evidence-api"
   ],
   "ci_green": [
-    "cache-strategies-bench#32481590754"
+    "cache-strategies-bench#32481590754",
+    "portfolio-evidence-api#33205651604"
   ],
-  "blocked": [
-    "portfolio-evidence-api remote publication: approval-review usage limit"
-  ],
+  "blocked": [],
   "active_skills": [
     "i-have-adhd",
     "continuity-checkpoint",
     "node-typescript-backend",
     "publish-benchmark-evidence"
   ],
-  "last_evidence": "Original portfolio passes 30/30 strict and published gates. #31 local source fdb9482 has zero offline audit findings, corrected transitive versions, pinned Actions, passing typecheck/build/project validation, and historical V2 ingestion p95 40.201 ms.",
-  "next_action": "Push #31 fdb9482 to main and inspect every exact-head CI step before changing project status from benchmarked to published.",
-  "updated_at": "2026-08-21T12:38:00Z"
+  "last_evidence": "Original portfolio remains 30/30. Extension #31 is published at 88fa375 with exact-head CI 33205651604, 35 tests, 93.05% line coverage, ingestion p95 40.201 ms, throughput 438.148 req/s, GraphQL p95 24.119 ms, and zero workload failures.",
+  "next_action": "Treat #31 as closed and start #32 only from the published GraphQL read contract after this kit commit has green exact-head CI.",
+  "updated_at": "2026-08-28T19:52:01Z"
 }

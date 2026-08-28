@@ -211,6 +211,8 @@ $requiredFiles = @(
   "templates/validate-project.ps1",
   "templates/validate-gradle-project.ps1",
   "templates/project.yaml",
+  "harness/node/npm-advisory-audit.mjs",
+  "harness/node/npm-advisory-audit.test.mjs",
   "tools/new-project.ps1",
   "tools/install-project-skills.ps1",
   "tools/backfill-project-standard.ps1",
@@ -460,7 +462,10 @@ Require-Pattern "contracts/project.schema.json" '"manifest_version"'
 Require-Pattern "contracts/project.schema.json" '"rebalance_plan"'
 Require-Pattern "docs/architecture/technology-coverage-and-interoperability.md" "portfolio-evidence-api"
 Require-Pattern "catalog/programs.yaml" "id: portfolio-evidence-platform"
-Require-Pattern "catalog/technology-coverage.yaml" "planned_repository: portfolio-evidence-api"
+Require-Pattern "catalog/technology-coverage.yaml" "node-typescript-nestjs:"
+Require-Pattern "catalog/technology-coverage.yaml" "repositories: \[portfolio-evidence-api\]"
+Require-Pattern "language-profiles/node-typescript-backend.yaml" "status: remote-proven"
+Require-Pattern ".github/workflows/validate.yml" "npm-advisory-audit.test.mjs"
 Require-Pattern ".portfolio-control/CURRENT_HANDOFF.md" "## Continuation Order"
 Require-Pattern "contracts/benchmark-result-v2.schema.json" '"clean_tree": \{ "const": true \}'
 Require-Pattern "contracts/portfolio-evidence.openapi.yaml" "operationId: ingestBenchmarkRun"
@@ -572,17 +577,21 @@ $searchFiles = @(
       ([IO.Path]::GetExtension($candidate) -in $searchExtensions) -and
       ($relativePath -notmatch "^benchmarks/results/")
     ) {
-      Get-Item -LiteralPath $candidate
+      $candidate
     }
   }
 )
-$forbidden = Select-String -Path $searchFiles.FullName -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
+$forbidden = if ($searchFiles.Count -gt 0) {
+  Select-String -LiteralPath $searchFiles -Pattern $patterns -SimpleMatch -ErrorAction SilentlyContinue
+}
 if ($forbidden) {
   $failures.Add("Forbidden legacy project nickname found")
 }
 
 $mutableKumoPattern = "ghcr.io/sivchari/kumo:" + "latest"
-$mutableKumo = Select-String -Path $searchFiles.FullName -Pattern $mutableKumoPattern -SimpleMatch -ErrorAction SilentlyContinue
+$mutableKumo = if ($searchFiles.Count -gt 0) {
+  Select-String -LiteralPath $searchFiles -Pattern $mutableKumoPattern -SimpleMatch -ErrorAction SilentlyContinue
+}
 if ($mutableKumo) {
   $failures.Add("Mutable Kumo image reference found; pin a reviewed tag and digest")
 }
@@ -595,13 +604,17 @@ $hardcodedPathPatterns = @(
   ($forwardSlash + "Users" + $forwardSlash),
   ($forwardSlash + "home" + $forwardSlash)
 )
-$hardcodedPaths = Select-String -Path $searchFiles.FullName -Pattern $hardcodedPathPatterns -SimpleMatch -ErrorAction SilentlyContinue
+$hardcodedPaths = if ($searchFiles.Count -gt 0) {
+  Select-String -LiteralPath $searchFiles -Pattern $hardcodedPathPatterns -SimpleMatch -ErrorAction SilentlyContinue
+}
 if ($hardcodedPaths) {
   $failures.Add("Personal absolute path found in public repository files")
 }
 
 $liveTokenPattern = "(ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})"
-$liveTokens = Select-String -Path $searchFiles.FullName -Pattern $liveTokenPattern -ErrorAction SilentlyContinue
+$liveTokens = if ($searchFiles.Count -gt 0) {
+  Select-String -LiteralPath $searchFiles -Pattern $liveTokenPattern -ErrorAction SilentlyContinue
+}
 if ($liveTokens) {
   $failures.Add("Live GitHub token pattern found in public repository files")
 }

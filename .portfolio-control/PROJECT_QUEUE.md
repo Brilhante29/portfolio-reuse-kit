@@ -4,9 +4,8 @@ WIP limit: one active macro and one active repository.
 
 ## Active
 
-- Portfolio Evidence Platform: #31 `portfolio-evidence-api`.
-- Current gate: publish local source commit `fdb9482`, obtain exact-head CI,
-  then make a separate truthful publication-status commit.
+- No repository is active.
+- Next eligible repository: #32 `portfolio-evidence-console`.
 
 ## Completed Macros
 
@@ -17,9 +16,12 @@ WIP limit: one active macro and one active repository.
 - Delivery, Observability, and Infrastructure: 4/4.
 - Original portfolio: 30/30 durable publications and 30/30 aligned Desktop
   checkouts.
+- Portfolio Evidence Platform: #31 `portfolio-evidence-api` is 1/3 complete.
+- Total published portfolio repositories: 31.
 
 ## Waiting
 
-- #32 `portfolio-evidence-console`: do not start before #31 final CI.
-- #33 `portfolio-operations-console`: do not start before the API contracts
-  and command semantics are stable.
+- #32 `portfolio-evidence-console`: ready to start from the published GraphQL
+  read contract.
+- #33 `portfolio-operations-console`: wait until #32 proves public read
+  contracts and #31 command semantics remain stable.

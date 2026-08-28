@@ -212,9 +212,9 @@ projects:
   - id: 31
     name: "portfolio-evidence-api"
     domain: "portfolio-evidence"
-    stack: ["nodejs-lts", "typescript-strict", "nestjs", "fastify", "graphql", "ajv", "kysely", "sqlite", "postgresql", "opentelemetry", "prometheus", "k6", "docker"]
+    stack: ["nodejs-24", "typescript-strict", "nestjs-11", "fastify-5", "graphql", "mercurius", "ajv", "kysely", "sqlite", "prometheus", "pino", "vitest", "docker"]
     proves: "interoperable benchmark evidence ingestion, comparison, and publication readiness"
-    benchmark: "ingestion_p95_ms, ingestion_throughput_rps, graphql_query_p95_ms, adapter_parity_percent"
+    benchmark: "ingestion_p95_ms=40.201, ingestion_throughput_rps=438.148, graphql_query_p95_ms=24.119, failures=0"
     reuse_from: ["benchmark-result-v2", "design-tokens", "openspec", "nestjs"]
   - id: 32
     name: "portfolio-evidence-console"

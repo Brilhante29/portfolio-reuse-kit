@@ -1,6 +1,6 @@
 # Harness
 
-Reusable benchmark harness for the 30 projects.
+Reusable evidence harnesses for the portfolio projects.
 
 ## Generic command benchmark
 
@@ -19,3 +19,15 @@ python harness/compare_results.py old.json new.json
 ## Result rule
 
 Every benchmark must produce a JSON object compatible with `result.schema.json`.
+
+## Node dependency advisories
+
+```bash
+node harness/node/npm-advisory-audit.mjs --level=high
+```
+
+The standalone Node 24 harness reads `package-lock.json`, calls npm's Bulk
+Advisory endpoint, decodes identity or gzip bodies, retries bounded transport
+failures, and fails closed when an advisory meets the selected severity.
+Copy it into a Node repository only when ordinary `npm audit` transport is not
+reliable in that CI environment; security findings must never be suppressed.

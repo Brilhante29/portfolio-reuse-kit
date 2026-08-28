@@ -1,13 +1,13 @@
 # Current Handoff
 
-Updated: 2026-08-21
+Updated: 2026-08-28
 Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
 
 1. Read this file, `TRACKER.json`, and `CONTINUITY_STATE.md`.
 2. Confirm the original portfolio still passes 30/30 before changing it.
-3. Continue only #31 until its final exact-head CI is green.
+3. Confirm this kit's latest exact-head CI is green before starting #32.
 
 ## Current Truth
 
@@ -15,6 +15,9 @@ The original portfolio is complete and mechanically aligned: **30/30**
 repositories pass strict local, V2 publication-candidate, and verified
 publication gates. Docker, CI, benchmark contracts, V2 evidence, clean
 checkouts, origins, and upstreams are all 30/30.
+
+Extension #31 is also complete. The portfolio therefore has **31 published
+repositories**: 30 original repositories plus one evidence-platform extension.
 
 `cache-strategies-bench` was corrected from `status: ready` to `published`:
 
@@ -27,30 +30,25 @@ They are preserved locally on
 `wip/preserved-before-main-alignment-20260821` at `0415b691`; canonical
 `main` is clean at the published SHA `ca91f350`.
 
-## Active Repository
+## Completed Extension
 
-Extension #31 `portfolio-evidence-api` is implemented and benchmarked but is
-not yet published:
+Extension #31 `portfolio-evidence-api` is published and aligned:
 
-- remote main remains `496df3e5a23b81b23f2182fea8998ff6c4b803ab` with failed CI run
-  `30189214178` caused by real dependency advisories;
-- local main is clean and one commit ahead at
-  `fdb948263cc322dd3f9d1c921985ae3f485cd861`;
-- local commit updates NestJS/Fastify/SQLite tooling, refreshes patched
-  transitive packages, and pins checkout/setup-node by full SHA;
-- `npm audit fix` and `npm audit --offline --audit-level=high` report zero
-  vulnerabilities;
-- patched versions include `@fastify/static 10.1.3`,
-  `brace-expansion 1.1.18/2.1.4/5.0.9`, `fast-uri 2.4.4/3.1.5/4.1.2`,
-  `js-yaml 4.3.1`, and `nanoid 3.3.18`;
-- after the direct dependency update, 35 tests and coverage passed; after the
-  final transitive audit fix, typecheck, build, offline audit, dependency tree,
-  diff check, and project validation passed;
-- the final Docker/test rerun and remote CI are still required.
+- final main `88fa375de0abe7e4a93d427928016f6d4b0b8bfa`;
+- exact-head CI `https://github.com/Brilhante29/portfolio-evidence-api/actions/runs/33205651604`;
+- canonical Desktop checkout is clean, tracks `origin/main`, and matches the
+  publication SHA;
+- Node 24, TypeScript, NestJS 11, Fastify 5, Mercurius GraphQL, Kysely,
+  SQLite, Ajv, Prometheus, Pino, Vitest, and Docker;
+- 35 tests; 93.05% statements/lines, 89.4% branches, 100% functions;
+- historical clean-source V2 benchmark at `14e43efd`: ingestion p95 `40.201
+  ms`, throughput `438.148 requests/second`, GraphQL p95 `24.119 ms`, zero
+  failures;
+- publication record: `.portfolio-control/publications/portfolio-evidence-api.json`.
 
-The committed V2 benchmark remains historical clean-source evidence from
-`14e43efd` and is not rewritten: ingestion p95 `40.201 ms`, throughput
-`438.148 requests/second`, GraphQL p95 `24.119 ms`, zero failures.
+The remote-proven npm advisory transport is promoted as
+`harness/node/npm-advisory-audit.mjs`. The project API, SQLite schema, and
+benchmark workload remain project-owned.
 
 ## Limit Record
 
@@ -62,15 +60,12 @@ limit and write a handoff instead of probing alternate paths.
 
 ## Exact Continuation
 
-1. In the #31 worktree, confirm `git status` is clean at `fdb9482`.
-2. Push local `main` without force.
-3. Wait for exact-head CI and inspect audit, check, coverage, validator, Docker
-   build, health smoke, and Docker calibration.
-4. Only after success, change #31 status/docs from `benchmarked` to
-   `published`, record the run URL, commit, push, and confirm final-head CI.
-5. Clone or fast-forward the canonical Desktop checkout and add the #31
-   publication record to this kit.
-6. Promote the generic audit transport only after remote proof; keep project
-   API, SQLite schema, and benchmark workload project-owned.
+1. Verify this kit's latest `main` CI and publication record before consuming
+   shared assets.
+2. Start #32 `portfolio-evidence-console` from #31's read-only GraphQL
+   contract and the unified design tokens.
+3. Keep commands out of GraphQL; #33 will use REST for audited state changes.
+4. Reopen #31 only for a measured contract, correctness, security, or scale
+   requirement.
 
-Do not start #32 before step 4 is green.
+Do not reopen the original 30 as active work.

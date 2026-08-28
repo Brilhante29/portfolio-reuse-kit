@@ -412,10 +412,27 @@ queue from historical text.
   -> stop remote work after the account-wide approval limit
 ```
 
-Restart with #31 local source `fdb9482`. Push it without force, require the
-complete exact-head CI, and only then create a separate publication-status
-commit. The reusable lesson is broader than one lockfile: Node repositories
-must distinguish registry transport defects from genuine advisories, update
-vulnerable transitive versions instead of suppressing findings, and exercise
-native modules in the declared Docker runtime. Do not promote the custom audit
-client until remote CI proves it.
+## 2026-08-28 Evidence API Publication
+
+```text
+#31 local source hardened at fdb9482
+  -> fail setup because setup-node SHA was mistyped
+  -> resolve the official action tag and pin a valid full SHA
+  -> pass code, coverage, benchmark, and dependency advisory gates
+  -> fail Linux validation on optional FileInfo materialization
+  -> keep literal paths as strings in project and kit validators
+  -> pass complete exact-head CI at bf230a9
+  -> publish truthful status metadata without rewriting benchmark provenance
+  -> upgrade setup-node to v7 and remove the deprecated action-runtime warning
+  -> pass final exact-head CI at 88fa375
+  -> align the canonical Desktop checkout
+  -> promote only the generic advisory transport and validator lesson
+```
+
+#31 is closed at `88fa375de0abe7e4a93d427928016f6d4b0b8bfa` with CI run
+`33205651604`. The reusable lesson is broader than one lockfile: Node
+repositories must distinguish registry transport defects from genuine
+advisories, update vulnerable transitive versions instead of suppressing
+findings, pin valid action SHAs, and exercise native modules in the declared
+Docker runtime. The next eligible repository is #32; do not reopen the original
+30.

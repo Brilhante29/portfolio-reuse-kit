@@ -1,8 +1,8 @@
 {
   "project": "portfolio-evidence-platform",
   "status": "in_progress",
-  "phase": "31-source-hardened-publication-blocked",
-  "last_project_commit": "fdb948263cc322dd3f9d1c921985ae3f485cd861",
+  "phase": "31-published-ready-for-32",
+  "last_project_commit": "88fa375de0abe7e4a93d427928016f6d4b0b8bfa",
   "completed_gates": [
     "original_publications_30_of_30",
     "desktop_checkouts_aligned_30_of_30",
@@ -10,15 +10,15 @@
     "portfolio_evidence_api_implementation",
     "portfolio_evidence_api_v2_benchmark",
     "portfolio_evidence_api_dependency_audit_zero_offline",
-    "portfolio_evidence_api_typecheck_build_validator"
+    "portfolio_evidence_api_typecheck_build_validator",
+    "portfolio_evidence_api_docker_runtime",
+    "portfolio_evidence_api_exact_head_ci",
+    "portfolio_evidence_api_published",
+    "portfolio_evidence_api_desktop_aligned"
   ],
-  "failed_gates": [
-    "portfolio_evidence_api_exact_head_ci_pending"
-  ],
-  "blockers": [
-    "Codex approval-review usage exhausted until 2026-08-28T00:40 local; remote publication and Docker rerun were not authorized"
-  ],
-  "next_action": "Push portfolio-evidence-api local main fdb948263cc322dd3f9d1c921985ae3f485cd861, wait for exact-head CI, then mark published only after success.",
-  "reuse_kit_version": "contract-set-1.9.0-plus-local-node-security-guidance",
-  "updated_at": "2026-08-21T12:38:00Z"
+  "failed_gates": [],
+  "blockers": [],
+  "next_action": "Start #32 portfolio-evidence-console from the published GraphQL read contract; keep #31 commands on REST and do not reopen the original 30.",
+  "reuse_kit_version": "contract-set-1.9.0-plus-remote-proven-node-security-harness",
+  "updated_at": "2026-08-28T19:52:01Z"
 }

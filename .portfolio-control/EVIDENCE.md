@@ -168,15 +168,20 @@ Full command output remains in CI and project artifacts. Credential values and p
 ## Extension #31
 
 - Repository: `Brilhante29/portfolio-evidence-api`.
-- Remote head: `496df3e5a23b81b23f2182fea8998ff6c4b803ab`.
-- Local source head pending push:
-  `fdb948263cc322dd3f9d1c921985ae3f485cd861`.
+- Published head: `88fa375de0abe7e4a93d427928016f6d4b0b8bfa`.
+- Exact-head CI:
+  `https://github.com/Brilhante29/portfolio-evidence-api/actions/runs/33205651604`.
 - Historical V2 result: ingestion p95 `40.201 ms`, throughput `438.148
   requests/second`, GraphQL p95 `24.119 ms`, zero failures.
-- Security repair: offline npm audit reports zero vulnerabilities after
-  patched direct and transitive lockfile updates; Actions are full-SHA pinned.
-- Local gates: 35 tests and coverage passed after direct upgrades; typecheck,
-  build, offline audit, dependency inspection, project validation, and diff
-  checks passed after the final transitive repair.
-- Pending: Docker rerun, push, exact-head CI, final publication-status commit,
-  canonical Desktop checkout, and central publication record.
+- Verification: 35 tests; 93.05% statements/lines, 89.4% branches, 100%
+  functions; dependency advisory gate, project validator, Docker build, health
+  smoke, and Docker calibration passed in CI.
+- Security repair: patched direct and transitive lockfile versions, fail-closed
+  Bulk Advisory client, and checkout/setup-node actions pinned to valid full
+  SHAs; final CI has no action-runtime warning.
+- Checkout and publication record: canonical Desktop clone is clean and
+  aligned; `.portfolio-control/publications/portfolio-evidence-api.json` stores
+  the durable proof.
+- Reuse delta: literal-path validation is patched in the project template and
+  kit; the remote-proven Node advisory transport is available under
+  `harness/node/` with deterministic tests.

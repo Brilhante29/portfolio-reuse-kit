@@ -231,16 +231,17 @@ The leakage-safe medical benchmark guide is [Medical AI Evaluation](docs/medical
 
 The drift decision and evidence guide is [Python Model Monitoring](docs/model-monitoring.md).
 
-## First Six Projects
+## Evidence Platform Extensions
 
-Recommended build order:
+Delivery order:
 
-1. `portfolio-evidence-api`
-2. integrate benchmark V2 producers in Python, Go, and Kotlin
-3. repair `saga-orchestrator`, `multi-tenant-starter`, and `outbox-pattern`
-4. `portfolio-evidence-console`
-5. `portfolio-operations-console`
-6. migrate the remaining repositories to verified publication evidence
+1. `portfolio-evidence-api`: published with exact-head CI.
+2. `portfolio-evidence-console`: next, consuming read-only GraphQL contracts.
+3. `portfolio-operations-console`: after public read contracts stabilize, consuming REST command contracts and GraphQL reads.
+
+The original 30 repositories remain closed and independently published. The
+three extensions form one evidence platform rather than isolated technology
+demos.
 
 The full project catalog is in [catalog/projects.md](catalog/projects.md) and [catalog/projects.yaml](catalog/projects.yaml).
 

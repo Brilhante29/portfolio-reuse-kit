@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "repository": "portfolio-evidence-api",
+  "commit_sha": "88fa375de0abe7e4a93d427928016f6d4b0b8bfa",
+  "branch": "main",
+  "remote_url": "https://github.com/Brilhante29/portfolio-evidence-api.git",
+  "ci_conclusion": "success",
+  "ci_run_url": "https://github.com/Brilhante29/portfolio-evidence-api/actions/runs/33205651604",
+  "workflow": "ci",
+  "verified_at": "2026-08-28T19:52:01Z"
+}

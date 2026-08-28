@@ -1,5 +1,5 @@
 version: 1
-generated_at: 2026-07-21
+generated_at: 2026-08-28
 classifications: [real-benchmarked, real-weak-evidence, present-unverified, absent-planned, conditional]
 technologies:
   spring-kotlin:
@@ -23,11 +23,11 @@ technologies:
     classification: real-benchmarked
     repositories: [go-rate-limiter, mini-aws-emulator]
   node-typescript-nestjs:
-    classification: absent-planned
-    planned_repository: portfolio-evidence-api
+    classification: real-benchmarked
+    repositories: [portfolio-evidence-api]
   graphql:
-    classification: absent-planned
-    planned_repository: portfolio-evidence-api
+    classification: real-benchmarked
+    repositories: [portfolio-evidence-api]
   angular:
     classification: absent-planned
     planned_repository: portfolio-operations-console
@@ -62,10 +62,11 @@ technologies:
     repositories: [terraform-aws-baseline, mini-aws-emulator]
   docker:
     classification: real-weak-evidence
-    gap: "All 30 repositories contain a Dockerfile, but build evidence is uneven."
+    gap: "All original 30 repositories and extension #31 contain Docker assets and successful publication records; benchmark comparability still varies by workload."
   github-actions:
-    classification: real-weak-evidence
-    gap: "All 30 repositories contain workflows, but remote green evidence is not established portfolio-wide."
+    classification: real-benchmarked
+    repositories: [portfolio-evidence-api]
+    gap: "The original 30 and extension #31 have exact-head green publication records; reusable workflow depth still varies by language."
   observability:
     classification: real-weak-evidence
     repositories: [observability-stack, spring-hexagonal-payments, go-rate-limiter, api-gateway-lite]
