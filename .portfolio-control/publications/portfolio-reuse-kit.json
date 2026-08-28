@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "portfolio-reuse-kit",
-  "commit_sha": "3f42adf98672b90eb977120a1957f49d7e4d9178",
+  "commit_sha": "9c29595b78e56326d1a94780d49299e719c1710b",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/portfolio-reuse-kit.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/33206913412",
+  "ci_run_url": "https://github.com/Brilhante29/portfolio-reuse-kit/actions/runs/33215938357",
   "workflow": "validate",
-  "verified_at": "2026-08-28T20:08:27Z"
+  "verified_at": "2026-08-28T22:14:28Z"
 }

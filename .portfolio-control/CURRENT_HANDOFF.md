@@ -21,8 +21,8 @@ repositories**: 30 original repositories plus one evidence-platform extension.
 
 Extension #32 is locally complete but not yet published. Its clean-source browser benchmark on `f887d21` reports 41.72 ms filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318,437 transferred bytes, and zero failures. The published count remains 31 until remote exact-head CI succeeds.
 
-The reuse-kit content baseline `3f42adf98672b90eb977120a1957f49d7e4d9178`
-passed exact-head CI run `33206913412` without GitHub Actions warnings. Its
+The reuse-kit content baseline `9c29595b78e56326d1a94780d49299e719c1710b`
+passed exact-head CI run `33215938357` without GitHub Actions warnings. Its
 publication record intentionally points to that prior content commit because a
 record cannot contain the SHA of the commit that contains itself.
 
@@ -67,8 +67,8 @@ limit and write a handoff instead of probing alternate paths.
 
 ## Exact Continuation
 
-1. Commit and publish the #32-proven Next.js/template/token/benchmark delta in this kit; require exact-head CI.
-2. Finish #32 publication, require exact-head CI, align its Desktop checkout, and add its publication record here.
+1. Finish #32 publication, require exact-head CI, align its Desktop checkout, and add its publication record here.
+2. Revalidate this kit after the #32 publication record is added.
 3. Keep commands out of GraphQL; #33 will use REST for audited state changes.
 4. Reopen #31 only for a measured contract, correctness, security, or scale requirement.
 
