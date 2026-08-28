@@ -96,6 +96,8 @@ pwsh -NoProfile -File tools/new-project.ps1 `
   -InitializeGit
 ```
 
+For a public Next.js product, add `-Profile nextjs`. The profile materializes the proven non-root standalone Docker runtime, pinned GitHub Actions workflow, standalone asset preparation, formatter boundaries, and mirrored `nextjs-frontend` skills; product routes and domain code remain project-owned.
+
 Validate the kit:
 
 ```powershell
@@ -236,7 +238,7 @@ The drift decision and evidence guide is [Python Model Monitoring](docs/model-mo
 Delivery order:
 
 1. `portfolio-evidence-api`: published with exact-head CI.
-2. `portfolio-evidence-console`: next, consuming read-only GraphQL contracts.
+2. `portfolio-evidence-console`: locally complete and benchmarked; remote publication is the active gate.
 3. `portfolio-operations-console`: after public read contracts stabilize, consuming REST command contracts and GraphQL reads.
 
 The original 30 repositories remain closed and independently published. The

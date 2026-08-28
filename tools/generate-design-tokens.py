@@ -14,9 +14,21 @@ def digest(content: bytes) -> str:
 
 def render(source: Path) -> dict[str, bytes]:
     data = yaml.safe_load(source.read_text(encoding="utf-8"))
-    colors = data.get("colors", {})
-    css_lines = [":root {"] + [f"  --portfolio-color-{name}: {value};" for name, value in colors.items()] + ["}", ""]
-    scss_lines = [f"$portfolio-color-{name}: {value};" for name, value in colors.items()] + [""]
+    sections = {
+        "color": data.get("colors", {}),
+        "space": data.get("spacing", {}),
+        "radius": data.get("radii", {}),
+        "size": data.get("sizing", {}),
+        "breakpoint": data.get("breakpoints", {}),
+        "shadow": data.get("shadows", {}),
+    }
+    variables = [
+        (f"portfolio-{prefix}-{name.replace('_', '-')}", value)
+        for prefix, tokens in sections.items()
+        for name, value in tokens.items()
+    ]
+    css_lines = [":root {"] + [f"  --{name}: {value};" for name, value in variables] + ["}", ""]
+    scss_lines = [f"${name}: {value};" for name, value in variables] + [""]
     typescript = "export const portfolioTokens = " + json.dumps(data, indent=2, ensure_ascii=True) + " as const;\n"
     outputs = {
         "tokens.css": "\n".join(css_lines).encode(),

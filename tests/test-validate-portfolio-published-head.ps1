@@ -51,6 +51,7 @@ benchmark:
   git -C $repo init -b main | Out-Null
   git -C $repo config user.name "Portfolio Test" | Out-Null
   git -C $repo config user.email "portfolio-test@example.invalid" | Out-Null
+  git -C $repo config core.autocrlf false | Out-Null
   git -C $repo add . | Out-Null
   git -C $repo commit -m "fixture" | Out-Null
   if ($LASTEXITCODE -ne 0) { throw "Cannot create published fixture commit" }

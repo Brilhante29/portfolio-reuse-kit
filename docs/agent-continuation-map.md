@@ -436,3 +436,20 @@ advisories, update vulnerable transitive versions instead of suppressing
 findings, pin valid action SHAs, and exercise native modules in the declared
 Docker runtime. The next eligible repository is #32; do not reopen the original
 30.
+
+## 2026-08-28 Evidence Console Local Completion
+
+```text
+#32 reuse-kit scaffold
+  -> choose MVVM-style modular monolith from UI-state and transport-substitution forces
+  -> isolate EvidenceRepository from Next.js, React, and GraphQL
+  -> reject Apollo, Redux, BFF, broker, database, cloud, and auth without a measured force
+  -> pass 14 unit/contract tests with 99.13% statements and 97.43% branches
+  -> expose mobile table overflow through screenshot geometry, then replace it with a responsive evidence subset
+  -> use production standalone for E2E, screenshots, benchmark, and Docker
+  -> measure to the ECharts finished marker, not click dispatch
+  -> rebuild the runtime from clean source and record its real image digest
+  -> promote only Next.js, template, token, and browser-harness lessons to the kit
+```
+
+#32 local source `f887d21` is benchmarked at 41.72 ms filter-to-chart p95 with zero failures. Remote publication, exact-head CI, Desktop alignment, and the kit publication record remain the strict continuation order. The published count stays 31 until those gates pass.

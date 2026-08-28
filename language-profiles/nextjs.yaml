@@ -19,14 +19,20 @@ required_tooling:
   - eslint
   - prettier
   - playwright_when_ui_is_part_of_claim
+recommended_skills:
+  - nextjs-frontend
+  - design-system
+  - benchmark-harness
 architecture_mapping:
   component-driven: [app, components, features, lib]
   mvvm: [models, view-models, views, services]
   layered: [app, server, lib, data]
 benchmark_rules:
-  - include Lighthouse metrics for public UI
+  - include Core Web Vitals when public rendering is part of the claim
   - include route latency when server rendering is part of the claim
-  - include interaction latency for dashboard workflows
+  - measure dashboard interaction latency to an explicit view completion marker
+  - use production standalone output for E2E, screenshots, benchmark, and Docker
+  - assert canvas pixels and viewport containment when visualization is part of the claim
 readme_rules:
   - include rendered route map
   - include screenshot or short demo gif when UI is the artifact

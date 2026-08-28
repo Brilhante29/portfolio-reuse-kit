@@ -7,7 +7,7 @@ Purpose: observable continuation state; no private chain-of-thought.
 
 1. Read this file, `TRACKER.json`, and `CONTINUITY_STATE.md`.
 2. Confirm the original portfolio still passes 30/30 before changing it.
-3. Confirm this kit's latest exact-head CI is green before starting #32.
+3. Confirm this kit's latest exact-head CI is green before publishing #32.
 
 ## Current Truth
 
@@ -18,6 +18,8 @@ checkouts, origins, and upstreams are all 30/30.
 
 Extension #31 is also complete. The portfolio therefore has **31 published
 repositories**: 30 original repositories plus one evidence-platform extension.
+
+Extension #32 is locally complete but not yet published. Its clean-source browser benchmark on `f887d21` reports 41.72 ms filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318,437 transferred bytes, and zero failures. The published count remains 31 until remote exact-head CI succeeds.
 
 The reuse-kit content baseline `3f42adf98672b90eb977120a1957f49d7e4d9178`
 passed exact-head CI run `33206913412` without GitHub Actions warnings. Its
@@ -65,12 +67,9 @@ limit and write a handoff instead of probing alternate paths.
 
 ## Exact Continuation
 
-1. Verify this kit's latest `main` CI and publication record before consuming
-   shared assets.
-2. Start #32 `portfolio-evidence-console` from #31's read-only GraphQL
-   contract and the unified design tokens.
+1. Commit and publish the #32-proven Next.js/template/token/benchmark delta in this kit; require exact-head CI.
+2. Finish #32 publication, require exact-head CI, align its Desktop checkout, and add its publication record here.
 3. Keep commands out of GraphQL; #33 will use REST for audited state changes.
-4. Reopen #31 only for a measured contract, correctness, security, or scale
-   requirement.
+4. Reopen #31 only for a measured contract, correctness, security, or scale requirement.
 
 Do not reopen the original 30 as active work.

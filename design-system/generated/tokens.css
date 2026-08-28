@@ -1,9 +1,30 @@
 :root {
   --portfolio-color-ink: #111827;
+  --portfolio-color-muted: #64748B;
   --portfolio-color-surface: #F9FAFB;
+  --portfolio-color-panel: #FFFFFF;
   --portfolio-color-border: #D1D5DB;
+  --portfolio-color-border-strong: #B8C2CF;
   --portfolio-color-accent: #2563EB;
+  --portfolio-color-accent-soft: #E8EFFF;
   --portfolio-color-success: #059669;
   --portfolio-color-warning: #D97706;
   --portfolio-color-danger: #DC2626;
+  --portfolio-color-nav: #151B24;
+  --portfolio-color-nav-muted: #99A6B7;
+  --portfolio-space-xs: 4px;
+  --portfolio-space-sm: 8px;
+  --portfolio-space-md: 12px;
+  --portfolio-space-lg: 16px;
+  --portfolio-space-xl: 24px;
+  --portfolio-space-xxl: 32px;
+  --portfolio-radius-control: 4px;
+  --portfolio-radius-panel: 6px;
+  --portfolio-size-icon-button: 38px;
+  --portfolio-size-navigation: 228px;
+  --portfolio-size-content-max: 1480px;
+  --portfolio-breakpoint-mobile: 620px;
+  --portfolio-breakpoint-tablet: 860px;
+  --portfolio-breakpoint-compact-desktop: 1050px;
+  --portfolio-shadow-subtle: 0 1px 2px rgba(15, 23, 42, 0.06);
 }

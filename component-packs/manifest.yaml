@@ -112,6 +112,34 @@ base_pack:
     - validation_passes
 
 packs:
+  - id: portfolio-evidence-platform
+    name: Portfolio Evidence and Operations Platform
+    extends: default-portfolio-project
+    program_id: portfolio-evidence-platform
+    problem: Turn cross-language benchmark artifacts into verified ingestion, public comparison, and audited operations.
+    extra_skills:
+      - node-typescript-backend
+      - nextjs-frontend
+      - api-style-decision
+      - benchmark-harness
+    benchmark_focus:
+      - ingestion_p95_ms
+      - graphql_query_p95_ms
+      - filter_to_chart_p95_ms
+      - cumulative_layout_shift
+      - command_confirmation_p95_ms
+    preferred_artifacts:
+      - benchmark-result-v2 with clean source and runtime image digest
+      - read-only GraphQL contract for nested evidence views
+      - REST command contract for audited state changes
+      - responsive screenshot and nonblank-canvas proof
+      - exact-head publication record
+    rejection_rules:
+      - Reject commands hidden in a read-oriented GraphQL surface.
+      - Reject frontend state libraries, BFFs, brokers, databases, or cloud adapters without a measured workflow force.
+      - Reject browser timing that stops before the rendered view completion marker.
+      - Reject publication evidence with placeholder image digests or a dirty source tree.
+
   - id: ai-evaluation-retrieval
     name: AI Evaluation and Retrieval Systems
     extends: default-portfolio-project

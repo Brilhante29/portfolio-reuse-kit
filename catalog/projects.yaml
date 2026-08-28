@@ -219,10 +219,10 @@ projects:
   - id: 32
     name: "portfolio-evidence-console"
     domain: "portfolio-experience"
-    stack: ["nextjs", "react", "typescript-strict", "graphql-codegen", "echarts", "playwright", "lighthouse-ci", "docker"]
-    proves: "public comparison and reproducibility experience backed by verified evidence"
-    benchmark: "lcp_ms, inp_ms, cls, filter_to_chart_p95_ms, bundle_bytes"
-    reuse_from: ["benchmark-result-v2", "graphql-schema", "design-tokens"]
+    stack: ["nodejs-24", "typescript-6.0.3", "nextjs-16.3.3", "react-19.2.8", "graphql", "zod-4.5.1", "echarts-6.1.0", "playwright-1.62.1", "vitest-4.1.11", "docker"]
+    proves: "responsive public filtering, contract-aware comparison, and provenance inspection backed by verified evidence"
+    benchmark: "filter_to_chart_p95_ms=41.72, lcp_ms=372, cls=0.0859, next_static_transfer_bytes=318437, failures=0"
+    reuse_from: ["benchmark-result-v2", "portfolio-evidence-graphql", "design-tokens-v2", "nextjs-frontend"]
   - id: 33
     name: "portfolio-operations-console"
     domain: "portfolio-operations"

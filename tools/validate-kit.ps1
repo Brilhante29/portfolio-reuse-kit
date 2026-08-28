@@ -211,9 +211,14 @@ $requiredFiles = @(
   "templates/validate-project.ps1",
   "templates/validate-gradle-project.ps1",
   "templates/project.yaml",
+  "templates/Dockerfile.nextjs",
+  "templates/github-actions-nextjs.yml",
+  "templates/prepare-standalone.mjs",
+  "templates/prettierignore.nextjs",
   "harness/node/npm-advisory-audit.mjs",
   "harness/node/npm-advisory-audit.test.mjs",
   "tools/new-project.ps1",
+  "tools/test-new-project-nextjs.ps1",
   "tools/install-project-skills.ps1",
   "tools/backfill-project-standard.ps1",
   "tools/plan-project.ps1",
@@ -241,6 +246,7 @@ $requiredFiles = @(
   "tools/checkpoint-portfolio.ps1",
   "tools/test-checkpoint-portfolio.ps1",
   "tests/test_generate_publication_benchmark.py",
+  "tests/test_generate_design_tokens.py",
   "tests/test-validate-portfolio-published-head.ps1",
   "tools/validate-kit.ps1"
 )
@@ -252,6 +258,7 @@ $requiredDirs = @(
   ".codex/skills/agent-orchestration",
   ".codex/skills/reuse-improvement-review",
   ".codex/skills/continuity-checkpoint",
+  ".codex/skills/nextjs-frontend",
   ".codex/skills/spec-driven-project",
   ".codex/skills/agentic-spec-governance",
   ".codex/skills/benchmark-harness",
@@ -280,6 +287,7 @@ $requiredDirs = @(
   ".claude/skills/agent-orchestration",
   ".claude/skills/reuse-improvement-review",
   ".claude/skills/continuity-checkpoint",
+  ".claude/skills/nextjs-frontend",
   ".claude/skills/spec-driven-project",
   ".claude/skills/agentic-spec-governance",
   ".claude/skills/benchmark-harness",
@@ -360,6 +368,21 @@ Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "workload.measured_it
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "workload.measured_iterations.*execution.repeat"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "host UID/GID"
 Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "host UID/GID"
+Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "explicit product completion marker"
+Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "explicit product completion marker"
+Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "real immutable digest"
+Require-Pattern ".claude/skills/benchmark-harness/SKILL.md" "real immutable digest"
+Require-Pattern ".codex/skills/nextjs-frontend/SKILL.md" "framework-independent application policy"
+Require-Pattern ".claude/skills/nextjs-frontend/SKILL.md" "framework-independent application policy"
+Require-Pattern "tools/new-project.ps1" 'Profile -eq "nextjs"'
+Require-Pattern "templates/Dockerfile.nextjs" "USER nextjs"
+Require-Pattern "templates/github-actions-nextjs.yml" "playwright install --with-deps chromium"
+
+$codexNextSkill = Get-Content -Raw -LiteralPath (Join-Path $root ".codex/skills/nextjs-frontend/SKILL.md")
+$claudeNextSkill = Get-Content -Raw -LiteralPath (Join-Path $root ".claude/skills/nextjs-frontend/SKILL.md")
+if ($codexNextSkill -ne $claudeNextSkill) {
+  $failures.Add("Next.js frontend skill must stay byte-identical for Codex and Claude")
+}
 Require-Pattern "docs/publication-benchmark-evidence.md" "Stable Publication And CI Smoke Evidence"
 Require-Pattern "docs/publication-benchmark-evidence.md" "short-lived benchmark writer.*host UID/GID"
 Require-Pattern ".codex/skills/benchmark-harness/SKILL.md" "workload overrides.*comparability_key.*config_digest"
@@ -518,9 +541,10 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $root ".portfolio-control/
     if ($field -notin @($event.PSObject.Properties.Name)) { $failures.Add("Execution event line $executionLine missing $field") }
   }
 }
-$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/generate-publication-benchmark.py', r'$root/tools/sync-catalog-stacks.py', r'$root/tests/test_generate_publication_benchmark.py']]; print('python syntax ok')"
+$pythonSyntaxCommand = "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in [r'$root/harness/bench.py', r'$root/harness/compare_results.py', r'$root/tools/validate-contracts.py', r'$root/tools/audit-manifest-rollout.py', r'$root/tools/generate-contract-manifest.py', r'$root/tools/generate-design-tokens.py', r'$root/tools/generate-publication-benchmark.py', r'$root/tools/sync-catalog-stacks.py', r'$root/tests/test_generate_design_tokens.py', r'$root/tests/test_generate_publication_benchmark.py']]; print('python syntax ok')"
 Invoke-Checked "python syntax" { python -c $pythonSyntaxCommand | Out-Null }
 Invoke-Checked "publication benchmark tests" { python -m unittest discover -s (Join-Path $root "tests") -p "test_*.py" | Out-Null }
+Invoke-Checked "Next.js profile scaffold fixture" { & (Join-Path $root "tools/test-new-project-nextjs.ps1") | Out-Null }
 Invoke-Checked "k6 load curve tests" { node (Join-Path $root "tests/test-k6-load-curve.mjs") | Out-Null }
 Invoke-Checked "published HEAD validation regression" { & (Join-Path $root "tests/test-validate-portfolio-published-head.ps1") | Out-Null }
 

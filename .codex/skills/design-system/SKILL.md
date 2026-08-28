@@ -14,7 +14,8 @@ Use the shared design system so every repository looks like part of one portfoli
 5. Use program badges or labels from `.portfolio/catalog/programs.yaml`.
 6. Keep Mermaid diagrams simple: named boundaries and visible dependency direction.
 7. Use dashboard defaults for observability projects: throughput, latency, error rate, benchmark result.
+8. For web products, consume generated semantic colors, spacing, radii, stable sizes, breakpoints, and shadows. Keep project-specific page composition and domain components outside the kit.
+9. On mobile, replace wide tables with a responsive subset plus a detail route when horizontal scrolling harms the primary workflow.
 
 Rule: design exists to expose evidence quickly, not to create marketing pages.
-
 

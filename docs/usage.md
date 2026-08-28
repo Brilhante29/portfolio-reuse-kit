@@ -34,6 +34,8 @@ The generated repo contains:
 - `.claude/skills/*`
 - `.portfolio/*` standards snapshot when `-InstallSkills` is used
 
+For a Next.js public product, pass `-Profile nextjs` after the architecture and stack decision. It additionally creates `Dockerfile`, `.github/workflows/ci.yml`, `tools/prepare-standalone.mjs`, and `.prettierignore`; the agent must still implement the problem-specific application before publication.
+
 ## Prepare A Project For Agents
 
 After the manifest and first architecture decision are ready, run one command:

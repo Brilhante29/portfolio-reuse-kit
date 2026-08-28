@@ -1,0 +1,14 @@
+.next
+coverage
+node_modules
+playwright-report
+test-results
+.portfolio
+.portfolio-control
+.claude
+.codex
+contracts
+design-system
+AGENTS.md
+CLAUDE.md
+next-env.d.ts

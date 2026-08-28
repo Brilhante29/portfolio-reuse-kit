@@ -23,5 +23,8 @@ Use benchmarks as product evidence.
 14. On Linux, a benchmark container that writes evidence to a bind mount must run with the host UID/GID or use an equivalently explicit ownership setup. Apply this to the short-lived writer only; do not weaken non-root users for long-running services.
 15. Treat command-line workload overrides as evidence inputs. Rows, duration, repetitions, concurrency, and provider overrides must update `workload`, `comparability_key`, and the effective `config_digest`; assert the raw result reports the requested workload. A CI smoke artifact must never inherit canonical workload values it did not execute.
 16. When CI installs an editable Python package before enforcing a clean Git tree, ignore generated `*.egg-info/` and coverage/cache outputs. Keep the clean-tree gate; do not waive it to accommodate generated metadata.
+17. For browser workflows, measure until an explicit product completion marker such as a committed view revision or chart `finished` event. Click dispatch, arbitrary sleeps, and network idle alone do not prove rendered completion.
+18. When canvas, WebGL, or generated media is part of the claim, assert nonblank pixels and stable desktop/mobile framing. Also test that the root viewport cannot scroll horizontally; intentional wide data belongs in a contained or responsive view.
+19. Build the runtime image from the clean source commit before publication. Record its real immutable digest in V2 provenance; never substitute a hash of placeholder text for an unavailable image.
 
 Do not report a benchmark without the command needed to reproduce it, its measured window, warm-up policy, result JSON, and failure gates.

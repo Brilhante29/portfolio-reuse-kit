@@ -5,6 +5,8 @@ param(
   [string]$Name,
   [Parameter(Mandatory=$true)]
   [string]$TargetDir,
+  [ValidateSet("base", "nextjs")]
+  [string]$Profile = "base",
   [switch]$InstallSkills,
   [switch]$InitializeGit
 )
@@ -77,6 +79,14 @@ Copy-Item (Join-Path $root "templates/portfolio-control/DECISION_CONTEXT.md") (J
 Copy-Item (Join-Path $root "templates/portfolio-control/QUALITY_GATES.md") (Join-Path $target ".portfolio-control/QUALITY_GATES.md")
 Copy-Item (Join-Path $root "templates/portfolio-control/AGENT_HANDOFFS/README.md") (Join-Path $target ".portfolio-control/AGENT_HANDOFFS/README.md")
 
+if ($Profile -eq "nextjs") {
+  New-Item -ItemType Directory -Force -Path (Join-Path $target ".github/workflows") | Out-Null
+  Copy-Item (Join-Path $root "templates/Dockerfile.nextjs") (Join-Path $target "Dockerfile")
+  Copy-Item (Join-Path $root "templates/github-actions-nextjs.yml") (Join-Path $target ".github/workflows/ci.yml")
+  Copy-Item (Join-Path $root "templates/prepare-standalone.mjs") (Join-Path $target "tools/prepare-standalone.mjs")
+  Copy-Item (Join-Path $root "templates/prettierignore.nextjs") (Join-Path $target ".prettierignore")
+}
+
 $readmeContent = (Get-Content (Join-Path $target "README.md") -Raw) `
   -replace "<id>", $Id `
   -replace "<project-name>", $Name
@@ -132,4 +142,4 @@ if ($InitializeGit) {
   git -C $target commit -m "Initial portfolio scaffold" | Out-Null
 }
 
-Write-Host "Created $target"
+Write-Host "Created $target with profile $Profile"
