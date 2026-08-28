@@ -21,7 +21,8 @@
   ],
   "ci_green": [
     "cache-strategies-bench#32481590754",
-    "portfolio-evidence-api#33205651604"
+    "portfolio-evidence-api#33205651604",
+    "portfolio-reuse-kit#33206913412"
   ],
   "blocked": [],
   "active_skills": [
@@ -30,7 +31,7 @@
     "node-typescript-backend",
     "publish-benchmark-evidence"
   ],
-  "last_evidence": "Original portfolio remains 30/30. Extension #31 is published at 88fa375 with exact-head CI 33205651604, 35 tests, 93.05% line coverage, ingestion p95 40.201 ms, throughput 438.148 req/s, GraphQL p95 24.119 ms, and zero workload failures.",
+  "last_evidence": "Original portfolio remains 30/30. Extension #31 is published at 88fa375 with exact-head CI 33205651604, 35 tests, 93.05% line coverage, ingestion p95 40.201 ms, throughput 438.148 req/s, GraphQL p95 24.119 ms, and zero workload failures. Reuse-kit content baseline 3f42adf passed CI 33206913412 without action-runtime warnings.",
   "next_action": "Treat #31 as closed and start #32 only from the published GraphQL read contract after this kit commit has green exact-head CI.",
   "updated_at": "2026-08-28T19:52:01Z"
 }

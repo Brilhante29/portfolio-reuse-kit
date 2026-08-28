@@ -8,7 +8,7 @@ Purpose: mechanical Git and worktree state for continuation. Read CURRENT_HANDOF
 - Git repository: yes
 - Repository alias: reuse-kit-aligned-checkpoint
 - Branch: main
-- Baseline checkpoint: 13e5ec13afc45f4f7252ed7f7c6516dc8c4ff65c
+- Validated content baseline: 3f42adf98672b90eb977120a1957f49d7e4d9178
 - Current head: resolve with `git rev-parse HEAD` because this file belongs to the control commit it describes.
 - Origin: https://github.com/Brilhante29/portfolio-reuse-kit.git
 - Expected dirty entries after checkpoint publication: 0

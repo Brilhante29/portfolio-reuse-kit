@@ -19,6 +19,11 @@ checkouts, origins, and upstreams are all 30/30.
 Extension #31 is also complete. The portfolio therefore has **31 published
 repositories**: 30 original repositories plus one evidence-platform extension.
 
+The reuse-kit content baseline `3f42adf98672b90eb977120a1957f49d7e4d9178`
+passed exact-head CI run `33206913412` without GitHub Actions warnings. Its
+publication record intentionally points to that prior content commit because a
+record cannot contain the SHA of the commit that contains itself.
+
 `cache-strategies-bench` was corrected from `status: ready` to `published`:
 
 - final main `251f0f4d3b9a9cace77683014f45a26be9229d11`;
