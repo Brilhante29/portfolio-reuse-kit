@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T02:37:48.1285685Z",
+  "generated_at": "2026-09-15T02:41:58.3243852Z",
   "repository_count": 32,
   "docker_count": 32,
   "ci_count": 32,
@@ -9,8 +9,8 @@
   "publication_candidate_count": 32,
   "control_count": 32,
   "local_candidate_count": 32,
-  "published_verified_count": 28,
-  "declared_published_unverified_count": 4,
+  "published_verified_count": 32,
+  "declared_published_unverified_count": 0,
   "repositories": [
     {
       "id": "5",
@@ -306,10 +306,10 @@
       "upstream_configured": true,
       "local_candidate": true,
       "publication_candidate": true,
-      "publication_evidence": false,
-      "published_verified": false,
-      "complete_candidate": false,
-      "declared_published_unverified": true,
+      "publication_evidence": true,
+      "published_verified": true,
+      "complete_candidate": true,
+      "declared_published_unverified": false,
       "failed_checks": []
     },
     {
@@ -431,10 +431,10 @@
       "upstream_configured": true,
       "local_candidate": true,
       "publication_candidate": true,
-      "publication_evidence": false,
-      "published_verified": false,
-      "complete_candidate": false,
-      "declared_published_unverified": true,
+      "publication_evidence": true,
+      "published_verified": true,
+      "complete_candidate": true,
+      "declared_published_unverified": false,
       "failed_checks": []
     },
     {
@@ -456,10 +456,10 @@
       "upstream_configured": true,
       "local_candidate": true,
       "publication_candidate": true,
-      "publication_evidence": false,
-      "published_verified": false,
-      "complete_candidate": false,
-      "declared_published_unverified": true,
+      "publication_evidence": true,
+      "published_verified": true,
+      "complete_candidate": true,
+      "declared_published_unverified": false,
       "failed_checks": []
     },
     {
@@ -756,10 +756,10 @@
       "upstream_configured": true,
       "local_candidate": true,
       "publication_candidate": true,
-      "publication_evidence": false,
-      "published_verified": false,
-      "complete_candidate": false,
-      "declared_published_unverified": true,
+      "publication_evidence": true,
+      "published_verified": true,
+      "complete_candidate": true,
+      "declared_published_unverified": false,
       "failed_checks": []
     },
     {
