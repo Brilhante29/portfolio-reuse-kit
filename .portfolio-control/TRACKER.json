@@ -58,6 +58,7 @@
     "feature-store-lite#34907539228",
     "go-rate-limiter#31770932954",
     "grpc-vs-rest-bench#34907427338",
+    "kafka-streams-demo#34921725625",
     "llm-agent-eval#34906864971",
     "llm-eval-harness#34906876573",
     "load-test-suite#34907437660",
@@ -75,6 +76,7 @@
     "saga-orchestrator#31359213207",
     "spring-hexagonal-payments#33473883380",
     "stroke-signal-demo#34907547450",
+    "terraform-aws-baseline#34921898144",
     "vision-serving-fastapi#31343903742",
     "yolo-training-pipeline#31343899639"
   ],
@@ -87,5 +89,5 @@
   ],
   "last_evidence": "20 product repositories received scoped corrections. Seven unpublished worktrees remain; current CI and exact SHAs are in audit-close-2026-09-14.json. Security remediation is incomplete.",
   "next_action": "Read HANDOFFS/2026-09-14-portfolio-audit.md and audit-close-2026-09-14.json; do not restart full audit or start #33.",
-  "updated_at": "2026-09-15T02:38:46.3998695Z"
+  "updated_at": "2026-09-15T02:41:31.7726008Z"
 }

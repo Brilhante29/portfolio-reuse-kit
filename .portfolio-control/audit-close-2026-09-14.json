@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-15T02:39:24.8372402Z",
+  "generated_at": "2026-09-15T02:41:31.7726008Z",
   "repository_count": 32,
   "remote_aligned_count": 32,
-  "ci_green_count": 30,
+  "ci_green_count": 32,
   "pending_worktree_count": 7,
   "repositories": [
     {
@@ -190,12 +190,12 @@
       "repository": "kafka-streams-demo",
       "head": "58cbd40c37b94f6a6b41ec9761d36d3e79efc574",
       "remote_main": "58cbd40c37b94f6a6b41ec9761d36d3e79efc574",
-      "ci_green": false,
+      "ci_green": true,
       "ci_runs": [
         {
           "id": 34921725625,
-          "status": "in_progress",
-          "conclusion": null,
+          "status": "completed",
+          "conclusion": "success",
           "html_url": "https://github.com/Brilhante29/kafka-streams-demo/actions/runs/34921725625"
         }
       ],
@@ -490,12 +490,12 @@
       "repository": "terraform-aws-baseline",
       "head": "45ea387f20772b3b4814f83948e13ecb2a3857f2",
       "remote_main": "45ea387f20772b3b4814f83948e13ecb2a3857f2",
-      "ci_green": false,
+      "ci_green": true,
       "ci_runs": [
         {
           "id": 34921898144,
-          "status": "in_progress",
-          "conclusion": null,
+          "status": "completed",
+          "conclusion": "success",
           "html_url": "https://github.com/Brilhante29/terraform-aws-baseline/actions/runs/34921898144"
         }
       ],

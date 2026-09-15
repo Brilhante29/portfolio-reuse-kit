@@ -13,7 +13,8 @@ Purpose: observable continuation state; no private chain-of-thought.
 
 Twenty product repositories received scoped published corrections in this audit:
 17 runtime/dependency updates and three README/status corrections. This is not
-a claim that all security remediation is finished. The current exact-head CI
+a claim that all security remediation is finished. All 32 product main branches
+passed exact-head CI at close-out, including mini, Kafka, and Terraform. The CI
 snapshot and seven preserved worktrees are listed in
 `audit-close-2026-09-14.json`. The new reusable harness passed 21 Python tests
 and the kit validation/regression suite.

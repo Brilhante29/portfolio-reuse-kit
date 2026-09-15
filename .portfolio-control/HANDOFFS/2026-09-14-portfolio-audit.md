@@ -2,6 +2,10 @@
 
 Status: economical close-out requested by the user. No claim of all-clear.
 
+Final product CI verification: **32/32 exact-main runs successful**. The reuse
+kit's new checkpoint has its own CI, separate from the 32 product repositories.
+Security remediation remains incomplete despite the successful functional CI.
+
 ## Scope and Evidence
 
 - Existing portfolio: 32 products, plus the reuse kit; extension #33 remains planned.
