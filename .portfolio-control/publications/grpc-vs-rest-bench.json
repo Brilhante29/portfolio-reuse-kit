@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "grpc-vs-rest-bench",
-  "commit_sha": "5a96e7ec32da792fb9d2ff2084e1da865c391c42",
+  "commit_sha": "f49057ec8b81ed4b88c5cd4bc3b2e02da66ec687",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/grpc-vs-rest-bench.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/grpc-vs-rest-bench/actions/runs/31770456018",
+  "ci_run_url": "https://github.com/Brilhante29/grpc-vs-rest-bench/actions/runs/34907427338",
   "workflow": "ci",
-  "verified_at": "2026-08-14T04:50:42Z"
+  "verified_at": "2026-09-15T02:35:43.5957072Z"
 }

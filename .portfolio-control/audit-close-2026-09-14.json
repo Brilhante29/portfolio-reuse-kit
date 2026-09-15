@@ -1,0 +1,573 @@
+{
+  "generated_at": "2026-09-15T02:39:24.8372402Z",
+  "repository_count": 32,
+  "remote_aligned_count": 32,
+  "ci_green_count": 30,
+  "pending_worktree_count": 7,
+  "repositories": [
+    {
+      "repository": "alpr-mercosul",
+      "head": "1f9f308a0ba8a1a1961683da5eb811bf18c5aeb0",
+      "remote_main": "1f9f308a0ba8a1a1961683da5eb811bf18c5aeb0",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907263784,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/alpr-mercosul/actions/runs/34907263784"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "api-gateway-lite",
+      "head": "caf0afc1982906793d82160aae41958be8b9e6bc",
+      "remote_main": "caf0afc1982906793d82160aae41958be8b9e6bc",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907408269,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/api-gateway-lite/actions/runs/34907408269"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "cache-strategies-bench",
+      "head": "251f0f4d3b9a9cace77683014f45a26be9229d11",
+      "remote_main": "251f0f4d3b9a9cace77683014f45a26be9229d11",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 32481590754,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/cache-strategies-bench/actions/runs/32481590754"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "ci-cd-templates",
+      "head": "83f941f77f559258921b03d31f498f7783d768ce",
+      "remote_main": "83f941f77f559258921b03d31f498f7783d768ce",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34921701731,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/ci-cd-templates/actions/runs/34921701731"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "cost-aware-inference",
+      "head": "35d7c4e37449a24ea3f68c8fa575c216ab70b549",
+      "remote_main": "35d7c4e37449a24ea3f68c8fa575c216ab70b549",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34921691426,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/cost-aware-inference/actions/runs/34921691426"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "data-quality-checks",
+      "head": "540f29b3e1efa214f074817ab2a88475b592c043",
+      "remote_main": "540f29b3e1efa214f074817ab2a88475b592c043",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34921695796,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/data-quality-checks/actions/runs/34921695796"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "embeddings-benchmark",
+      "head": "2cdc1370857d311858abc00570aca837fd9b8d6f",
+      "remote_main": "2cdc1370857d311858abc00570aca837fd9b8d6f",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907286360,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/embeddings-benchmark/actions/runs/34907286360"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "event-sourcing-orders",
+      "head": "ddf17f0b3ef765762e3a3a35dacbb2e2b62eff16",
+      "remote_main": "ddf17f0b3ef765762e3a3a35dacbb2e2b62eff16",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31359210209,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/event-sourcing-orders/actions/runs/31359210209"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "feature-store-lite",
+      "head": "44da08dee5b0283970a6d6e53eb247cb34f1811a",
+      "remote_main": "44da08dee5b0283970a6d6e53eb247cb34f1811a",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907539228,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/feature-store-lite/actions/runs/34907539228"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "go-rate-limiter",
+      "head": "2a40e0864a7bfd4632cb0239573524d729425ef9",
+      "remote_main": "2a40e0864a7bfd4632cb0239573524d729425ef9",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31770932954,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/go-rate-limiter/actions/runs/31770932954"
+        }
+      ],
+      "pending_tracked_files": [
+        "Dockerfile",
+        "go.mod",
+        "project.yaml",
+        "sdd/technical-decision.md"
+      ],
+      "worktree_entries": 6
+    },
+    {
+      "repository": "grpc-vs-rest-bench",
+      "head": "f49057ec8b81ed4b88c5cd4bc3b2e02da66ec687",
+      "remote_main": "f49057ec8b81ed4b88c5cd4bc3b2e02da66ec687",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907427338,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/grpc-vs-rest-bench/actions/runs/34907427338"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "kafka-streams-demo",
+      "head": "58cbd40c37b94f6a6b41ec9761d36d3e79efc574",
+      "remote_main": "58cbd40c37b94f6a6b41ec9761d36d3e79efc574",
+      "ci_green": false,
+      "ci_runs": [
+        {
+          "id": 34921725625,
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/Brilhante29/kafka-streams-demo/actions/runs/34921725625"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "llm-agent-eval",
+      "head": "0be9ebfcb45cfba95ac1f7e9b477c205780af2dd",
+      "remote_main": "0be9ebfcb45cfba95ac1f7e9b477c205780af2dd",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34906864971,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/llm-agent-eval/actions/runs/34906864971"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "llm-eval-harness",
+      "head": "1588f9084e3520fce2fcdf1a8bc2b4c80465db10",
+      "remote_main": "1588f9084e3520fce2fcdf1a8bc2b4c80465db10",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34906876573,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/llm-eval-harness/actions/runs/34906876573"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "load-test-suite",
+      "head": "176f5babc51064593172e77adfd3940037c70be1",
+      "remote_main": "176f5babc51064593172e77adfd3940037c70be1",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907437660,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/load-test-suite/actions/runs/34907437660"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "melanoma-classifier",
+      "head": "414afc2dbc0c8b5406b65d1745cfa466c5b235e6",
+      "remote_main": "414afc2dbc0c8b5406b65d1745cfa466c5b235e6",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907274041,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/melanoma-classifier/actions/runs/34907274041"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "mini-aws-emulator",
+      "head": "be5061cf4aa42f61262bb1adf0c16e2137b57935",
+      "remote_main": "be5061cf4aa42f61262bb1adf0c16e2137b57935",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34921715888,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/mini-aws-emulator/actions/runs/34921715888"
+        }
+      ],
+      "pending_tracked_files": [
+        "Dockerfile",
+        "go.mod",
+        "project.yaml",
+        "sdd/technical-decision.md",
+        "tools/benchmark-v2.ps1",
+        "tools/demo.sh",
+        "tools/validate-benchmark-v2.py"
+      ],
+      "worktree_entries": 9
+    },
+    {
+      "repository": "mlops-end2end",
+      "head": "4e872b74b8fa3f49ad0808c5cf8a49a949aa1089",
+      "remote_main": "4e872b74b8fa3f49ad0808c5cf8a49a949aa1089",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34921712003,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/mlops-end2end/actions/runs/34921712003"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "model-drift-detector",
+      "head": "d0406f35a94175544324b25e8238b204e0fee02c",
+      "remote_main": "d0406f35a94175544324b25e8238b204e0fee02c",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907131931,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/model-drift-detector/actions/runs/34907131931"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "multi-tenant-starter",
+      "head": "ca91f35045085f832d2d18cf2dbae9f0bccb0158",
+      "remote_main": "ca91f35045085f832d2d18cf2dbae9f0bccb0158",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31770435136,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/multi-tenant-starter/actions/runs/31770435136"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "observability-stack",
+      "head": "b65a85535b49359c02714cbf7531b0f5251c6dd7",
+      "remote_main": "b65a85535b49359c02714cbf7531b0f5251c6dd7",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34921705979,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/observability-stack/actions/runs/34921705979"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "outbox-pattern",
+      "head": "02f7a818e0128ed4bcc2e64c4369f68409414817",
+      "remote_main": "02f7a818e0128ed4bcc2e64c4369f68409414817",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31359222289,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/outbox-pattern/actions/runs/31359222289"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "portfolio-evidence-api",
+      "head": "88fa375de0abe7e4a93d427928016f6d4b0b8bfa",
+      "remote_main": "88fa375de0abe7e4a93d427928016f6d4b0b8bfa",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 33205651604,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/portfolio-evidence-api/actions/runs/33205651604"
+        }
+      ],
+      "pending_tracked_files": [
+        "package-lock.json"
+      ],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "portfolio-evidence-console",
+      "head": "ae22e864b605907c2c61403950173977a5271404",
+      "remote_main": "ae22e864b605907c2c61403950173977a5271404",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 33217542452,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/portfolio-evidence-console/actions/runs/33217542452"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "prompt-ab-testing",
+      "head": "0de67cd72612b735bbf34df8e6955c903886d208",
+      "remote_main": "0de67cd72612b735bbf34df8e6955c903886d208",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34906892183,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/prompt-ab-testing/actions/runs/34906892183"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "rag-knowledge-base",
+      "head": "ee461368fc59a94aaf8ea13cf0dadbbaf2ef0203",
+      "remote_main": "ee461368fc59a94aaf8ea13cf0dadbbaf2ef0203",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31347697814,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/rag-knowledge-base/actions/runs/31347697814"
+        }
+      ],
+      "pending_tracked_files": [
+        "Dockerfile"
+      ],
+      "worktree_entries": 2
+    },
+    {
+      "repository": "saga-orchestrator",
+      "head": "f213c00ceb6c8552849ff97c74697f592c06c7a0",
+      "remote_main": "f213c00ceb6c8552849ff97c74697f592c06c7a0",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31359213207,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/saga-orchestrator/actions/runs/31359213207"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "spring-hexagonal-payments",
+      "head": "6a88f8bc0212ebd4abc07086bff11750f21004d0",
+      "remote_main": "6a88f8bc0212ebd4abc07086bff11750f21004d0",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 33473883380,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/spring-hexagonal-payments/actions/runs/33473883380"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 0
+    },
+    {
+      "repository": "stroke-signal-demo",
+      "head": "ae563e1e36d986a43c2df3b4748d6394341fa0ba",
+      "remote_main": "ae563e1e36d986a43c2df3b4748d6394341fa0ba",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 34907547450,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/stroke-signal-demo/actions/runs/34907547450"
+        }
+      ],
+      "pending_tracked_files": [],
+      "worktree_entries": 1
+    },
+    {
+      "repository": "terraform-aws-baseline",
+      "head": "45ea387f20772b3b4814f83948e13ecb2a3857f2",
+      "remote_main": "45ea387f20772b3b4814f83948e13ecb2a3857f2",
+      "ci_green": false,
+      "ci_runs": [
+        {
+          "id": 34921898144,
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/Brilhante29/terraform-aws-baseline/actions/runs/34921898144"
+        }
+      ],
+      "pending_tracked_files": [
+        ".dockerignore",
+        "Dockerfile",
+        "adapters/aws/.terraform.lock.hcl",
+        "adapters/aws/versions.tf",
+        "adapters/kumo/.terraform.lock.hcl",
+        "adapters/kumo/versions.tf",
+        "benchmarks/benchmark.py",
+        "project.yaml",
+        "sdd/technical-decision.md",
+        "tests/test_contracts.py",
+        "tools/benchmark_v2.py"
+      ],
+      "worktree_entries": 14
+    },
+    {
+      "repository": "vision-serving-fastapi",
+      "head": "2966a478c864c219585ccd27303382dae79df3f6",
+      "remote_main": "2966a478c864c219585ccd27303382dae79df3f6",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31343903742,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/vision-serving-fastapi/actions/runs/31343903742"
+        },
+        {
+          "id": 31343901540,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/vision-serving-fastapi/actions/runs/31343901540"
+        }
+      ],
+      "pending_tracked_files": [
+        "Dockerfile",
+        "pyproject.toml",
+        "requirements-runtime.lock",
+        "requirements-test.lock",
+        "requirements-validation.lock",
+        "requirements.txt"
+      ],
+      "worktree_entries": 7
+    },
+    {
+      "repository": "yolo-training-pipeline",
+      "head": "14ecde16e7c0af0e21bde41878523839390ab1f7",
+      "remote_main": "14ecde16e7c0af0e21bde41878523839390ab1f7",
+      "ci_green": true,
+      "ci_runs": [
+        {
+          "id": 31343899639,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/yolo-training-pipeline/actions/runs/31343899639"
+        },
+        {
+          "id": 31343897736,
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/Brilhante29/yolo-training-pipeline/actions/runs/31343897736"
+        }
+      ],
+      "pending_tracked_files": [
+        "Dockerfile",
+        "requirements-validation.lock",
+        "requirements.txt"
+      ],
+      "worktree_entries": 4
+    }
+  ]
+}

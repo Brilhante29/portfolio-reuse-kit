@@ -1,15 +1,54 @@
 # Current Handoff
 
-Updated: 2026-08-28
+Updated: 2026-09-14
 Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
 
 1. Read this file, `TRACKER.json`, and `CONTINUITY_STATE.md`.
-2. Confirm the original portfolio still passes 30/30 before changing it.
-3. Treat #31 and #32 as closed; start only #33 next.
+2. The user requested an economical close-out. Do not restart the full audit or start #33.
+3. Read `HANDOFFS/2026-09-14-portfolio-audit.md` for the current evidence and ownership.
 
-## Current Truth
+## Economical Close-Out
+
+Twenty product repositories received scoped published corrections in this audit:
+17 runtime/dependency updates and three README/status corrections. This is not
+a claim that all security remediation is finished. The current exact-head CI
+snapshot and seven preserved worktrees are listed in
+`audit-close-2026-09-14.json`. The new reusable harness passed 21 Python tests
+and the kit validation/regression suite.
+
+One account quota event stopped all three specialists. Do not restart agents or
+repeat completed builds. Their detailed handoffs, raw scans, logs, and tracked
+patch backups remain in the current workspace's `tmp/close-audit` directory.
+No user work, old branches, or historical benchmark JSON was discarded.
+
+Resume only the pending work listed in the close-out handoff, using the existing
+images and evidence first. Unpatched severe OS findings remain review-required;
+several JVM dependency fixes have not yet been implemented.
+
+## Audit Background
+
+The user requested verification and correction of the existing portfolio, with
+efficient execution. There are 32 published product repositories plus the reuse
+kit; #33 is still planned, not implemented. All 32 canonical Desktop checkouts
+were safely aligned to origin/main without deleting old work branches.
+
+Initial remote audit found seven stale central publication records and one
+failed main CI (mini-aws-emulator, missing the 100% primary metric in its README
+opening). The README fix is applied, pending publication with the runtime fixes.
+
+Old untracked security reports in 23 repositories are historical diagnostics,
+not current release clearance. The audit is rebuilding images and updating
+fixable severe dependencies. Remaining unpatched vulnerabilities must be
+reported explicitly; never declare them fixed through a blanket disposition.
+
+The portfolio validator now batches committed placeholder searches per repo,
+accepts descriptive H1 titles, checks the actual primary benchmark value in the
+README opening, and reports failed checks. First optimized audit: 18.85 seconds
+before adding the numeric-opening check, versus approximately 40 seconds before.
+
+## Historical Baseline (2026-08-28)
 
 The original portfolio is complete and mechanically aligned: **30/30**
 repositories pass strict local, V2 publication-candidate, and verified
@@ -81,11 +120,11 @@ three later probes were avoidable and changed no remote state. The efficiency
 log now requires agents to stop all escalated work after the first account-wide
 limit and write a handoff instead of probing alternate paths.
 
-## Exact Continuation
+## Deferred Extension
 
-1. Align #32's canonical Desktop checkout to the recorded publication SHA.
-2. Start #33 as the audited Angular operations surface.
-3. Keep commands out of GraphQL; #33 uses REST for state changes and GraphQL for reads.
-4. Reopen #31 or #32 only for a measured contract, correctness, security, or scale requirement.
+After this audit, #33 remains the audited Angular operations surface. Keep
+commands on REST and reads on GraphQL. #31/#32 changes are justified only by
+measured contract, correctness, security, or scale requirements.
 
-Do not reopen the original 30 as active work.
+The current explicit audit request supersedes the old instruction not to reopen
+the original 30. Do not expand this audit into unrelated product features.

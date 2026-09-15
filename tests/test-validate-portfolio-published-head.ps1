@@ -23,7 +23,7 @@ benchmark:
   publication_result_path: benchmarks/publication/baseline-v2.json
   evidence_status: current
 "@
-  Write-TestFile (Join-Path $repo "README.md") ("# #99 published-fixture: 1 ms latency" + [Environment]::NewLine)
+  Write-TestFile (Join-Path $repo "README.md") ("# Published Fixture: 1 ms latency" + [Environment]::NewLine)
   Write-TestFile (Join-Path $repo "Dockerfile") ("FROM scratch" + [Environment]::NewLine)
   Write-TestFile (Join-Path $repo ".github/workflows/ci.yml") ("name: ci" + [Environment]::NewLine + "on: [push]" + [Environment]::NewLine)
   foreach ($path in @(
@@ -70,9 +70,39 @@ benchmark:
   if (-not $row.benchmark_contract) { throw "Validator read dirty V1 instead of committed HEAD" }
   if (-not $row.publication_candidate) { throw "Committed V2 publication candidate was not recognized" }
 
+  $v1.value = 0.627341
+  Write-TestFile (Join-Path $repo "benchmarks/results/baseline.json") (($v1 | ConvertTo-Json) + [Environment]::NewLine)
+  Write-TestFile (Join-Path $repo "README.md") ("# Published Fixture`nBenchmark: 62.73%`n")
+  git -C $repo add README.md benchmarks/results/baseline.json | Out-Null
+  git -C $repo commit -m "rounded percentage evidence" | Out-Null
+  & $shell.Source -NoProfile -ExecutionPolicy Bypass -File (Join-Path $kitRoot "tools/validate-portfolio.ps1") -RepoRoot $workspace -Strict -JsonPath $report | Out-Null
+  if ($LASTEXITCODE -ne 0) { throw "Rounded percentage benchmark should pass" }
+
+  Write-TestFile (Join-Path $repo "README.md") ("# Published Fixture`nNo measured result in the opening.`n")
+  git -C $repo add README.md | Out-Null
+  git -C $repo commit -m "remove benchmark from opening" | Out-Null
+  & $shell.Source -NoProfile -ExecutionPolicy Bypass -File (Join-Path $kitRoot "tools/validate-portfolio.ps1") -RepoRoot $workspace -Strict -JsonPath $report | Out-Null
+  if ($LASTEXITCODE -ne 1) { throw "Missing README benchmark must fail strict validation" }
+  $row = (Get-Content -Raw -LiteralPath $report | ConvertFrom-Json).repositories | Select-Object -First 1
+  if ('readme_benchmark' -notin $row.failed_checks) { throw "Missing actionable README failure" }
+
+  Write-TestFile (Join-Path $repo "sdd/spec.md") ("# Incomplete`nTODO and TBD`n")
+  git -C $repo add sdd/spec.md | Out-Null
+  git -C $repo commit -m "introduce two placeholders" | Out-Null
+  & $shell.Source -NoProfile -ExecutionPolicy Bypass -File (Join-Path $kitRoot "tools/validate-portfolio.ps1") -RepoRoot $workspace -Strict -JsonPath $report | Out-Null
+  if ($LASTEXITCODE -ne 1) { throw "Committed placeholders must fail strict validation" }
+  $row = (Get-Content -Raw -LiteralPath $report | ConvertFrom-Json).repositories | Select-Object -First 1
+  if ($row.placeholders -ne 2) { throw "Expected two placeholders on one line, got $($row.placeholders)" }
+  $global:LASTEXITCODE = 0
+
   Write-Host "published_head_regression=passed"
 } finally {
   if (Test-Path -LiteralPath $workspace) {
-    Remove-Item -LiteralPath $workspace -Recurse -Force
+    $resolvedWorkspace = (Resolve-Path -LiteralPath $workspace).Path
+    $tempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath())
+    if (-not $resolvedWorkspace.StartsWith($tempRoot, [StringComparison]::OrdinalIgnoreCase)) {
+      throw "Refusing cleanup outside temp: $resolvedWorkspace"
+    }
+    Remove-Item -LiteralPath $resolvedWorkspace -Recurse -Force
   }
 }

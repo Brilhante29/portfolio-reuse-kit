@@ -1,7 +1,7 @@
 {
   "project": "portfolio-evidence-platform",
   "status": "in_progress",
-  "phase": "32-published-ready-for-33",
+  "phase": "audit-economical-checkpoint",
   "last_project_commit": "ae22e864b605907c2c61403950173977a5271404",
   "completed_gates": [
     "original_publications_30_of_30",
@@ -22,9 +22,13 @@
     "portfolio_evidence_console_exact_head_ci",
     "portfolio_evidence_console_published"
   ],
-  "failed_gates": [],
-  "blockers": [],
-  "next_action": "Start #33 portfolio-operations-console as an audited Angular command surface; consume GraphQL reads from #31 and keep commands on REST.",
+  "failed_gates": [
+    "remaining-runtime-security-review"
+  ],
+  "blockers": [
+    "User requested economical close-out; three specialists stopped at one account quota event. Seven unpublished worktrees are preserved."
+  ],
+  "next_action": "Read HANDOFFS/2026-09-14-portfolio-audit.md and audit-close-2026-09-14.json; do not restart full audit or start #33.",
   "reuse_kit_version": "contract-set-1.9.0-plus-proven-nextjs-profile",
-  "updated_at": "2026-08-28T22:41:44Z"
+  "updated_at": "2026-09-15T02:38:46.3998695Z"
 }

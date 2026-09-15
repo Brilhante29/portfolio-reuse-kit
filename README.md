@@ -6,6 +6,9 @@ This repository is the decision brain and shared operating system for the portfo
 
 It is intentionally not one of the portfolio projects. It exists so every project can be created, evaluated, documented, and published with the same level of rigor.
 
+Current maintenance evidence: [September audit and remaining work](.portfolio-control/HANDOFFS/2026-09-14-portfolio-audit.md).
+Publication, structural validation, and security clearance are tracked separately.
+
 ## What Problem This Solves
 
 Without a reuse layer, each repository tends to drift:
@@ -28,6 +31,10 @@ Without a reuse layer, each repository tends to drift:
 - repeated CI and benchmark boilerplate
 
 This kit solves that by making every portfolio project follow the same contract and decision flow.
+
+Current-image vulnerability checks are a separate release gate. Use the
+[container security harness](docs/container-security.md) to rebuild and scan an
+exact image without overwriting its historical benchmark evidence.
 
 ## Core Contract
 

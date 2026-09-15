@@ -10,6 +10,8 @@ $ErrorActionPreference = "Stop"
 $kitRoot = Split-Path -Parent $PSScriptRoot
 if (-not $RepoRoot) { $RepoRoot = Split-Path -Parent $kitRoot }
 $resolvedRoot = (Resolve-Path -LiteralPath $RepoRoot).Path
+$script:GitFileCache = @{}
+$script:GitRevisionByRepo = @{}
 
 function Get-Scalar {
   param([string]$Body, [string]$Pattern, [string]$Default = "")
@@ -32,14 +34,19 @@ function Get-GitLines {
 
 function Get-GitFileText {
   param([string]$Repo, [string]$Path)
+  $revision = if ($script:GitRevisionByRepo.ContainsKey($Repo)) { $script:GitRevisionByRepo[$Repo] } else { 'HEAD' }
+  $cacheKey = "$Repo`0$revision`0$Path"
+  if ($script:GitFileCache.ContainsKey($cacheKey)) { return $script:GitFileCache[$cacheKey] }
   $previousPreference = $ErrorActionPreference
   $ErrorActionPreference = 'SilentlyContinue'
-  $output = @(& git -C $Repo show "HEAD:$Path" 2>$null)
+  $output = @(& git -C $Repo show "${revision}:$Path" 2>$null)
   $code = $LASTEXITCODE
   $global:LASTEXITCODE = 0
   $ErrorActionPreference = $previousPreference
   if ($code -ne 0) { return "" }
-  return ($output -join [Environment]::NewLine)
+  $body = $output -join [Environment]::NewLine
+  $script:GitFileCache[$cacheKey] = $body
+  return $body
 }
 
 function Test-BenchmarkContract {
@@ -90,14 +97,42 @@ function Test-BenchmarkContractV2 {
 function Get-PlaceholderCount {
   param([string]$Repo, [string[]]$TrackedFiles)
   $docs = @($TrackedFiles | Where-Object { $_ -match '^(sdd|openspec)/.*\.md$' })
-  $count = 0
-  foreach ($doc in $docs) {
-    $content = Get-GitFileText $Repo $doc
-    if ($content) {
-      $count += [regex]::Matches($content, '<(scope|problem|metric|implementation|verification)>|\b(TODO|TBD)\b').Count
-    }
+  if ($docs.Count -eq 0) { return 0 }
+  $pattern = '<(scope|problem|metric|implementation|verification)>|\b(TODO|TBD)\b'
+  $revision = if ($script:GitRevisionByRepo.ContainsKey($Repo)) { $script:GitRevisionByRepo[$Repo] } else { 'HEAD' }
+  $arguments = @('grep','-I','-E','-o',$pattern,$revision,'--') + $docs
+  $output = @(& git -C $Repo @arguments 2>$null)
+  $code = $LASTEXITCODE
+  $global:LASTEXITCODE = 0
+  if ($code -gt 1) { throw "Cannot inspect committed placeholders in $Repo" }
+  return $output.Count
+}
+
+function Test-ReadmeBenchmark {
+  param([string]$Repo, [string]$Readme, [string]$ResultPath, [string]$PrimaryMetric)
+  if (-not $ResultPath -or -not $PrimaryMetric) { return $false }
+  try { $result = Get-GitFileText $Repo $ResultPath | ConvertFrom-Json }
+  catch { return $false }
+  $value = if ($result.schema_version -eq 2) {
+    $metrics = @($result.metrics | Where-Object { $_.name -eq $PrimaryMetric })
+    if ($metrics.Count -ne 1) { return $false }
+    $metrics[0].value
+  } elseif ($result.metric -eq $PrimaryMetric) { $result.value }
+  if ($null -eq $value) { return $false }
+  $opening = ([regex]::Split($Readme, '\r?\n') | Select-Object -First 8) -join "`n"
+  # README values may be rounded, grouped, or displayed as percentages.
+  foreach ($token in [regex]::Matches($opening, '(?<![\w.])[-+]?\d+(?:,\d{3})*(?:\.\d+)?%?(?![\w.])')) {
+    $literal = $token.Value.Replace(',', '').TrimEnd('%')
+    $decimals = if ($literal.Contains('.')) { $literal.Split('.')[1].Length } else { 0 }
+    $displayed = [double]::Parse($literal, [Globalization.CultureInfo]::InvariantCulture)
+    $expected = [double]$value
+    if ($token.Value.EndsWith('%') -and $expected -ge 0 -and $expected -le 1) { $expected *= 100 }
+    $minimumDecimals = if ([math]::Abs($expected) -lt 1) { 2 } else { 1 }
+    if ($expected -ne [math]::Truncate($expected) -and $decimals -lt $minimumDecimals) { continue }
+    $tolerance = [math]::Pow(10, -$decimals) / 2
+    if ([math]::Abs($displayed - $expected) -le $tolerance) { return $true }
   }
-  return $count
+  return $false
 }
 
 function Get-GitState {
@@ -157,7 +192,6 @@ $repositories = @(
 $snapshotScript = {
   param($repo,$name)
   $ErrorActionPreference = 'SilentlyContinue'
-  $tracked = @(& git -C $repo ls-files 2>$null)
   $statusLines = @(& git -C $repo status --porcelain=v2 --branch 2>$null)
   $head = ''
   $branch = ''
@@ -169,6 +203,7 @@ $snapshotScript = {
     elseif ($line -match '^# branch\.upstream (.+)$') { $upstream = $matches[1] }
     elseif (-not $line.StartsWith('#')) { $dirty++ }
   }
+  $tracked = @(& git -C $repo ls-tree -r --name-only $head 2>$null)
   $remote = @(& git -C $repo remote get-url origin 2>$null | Select-Object -First 1)
   $remote = if ($remote.Count -eq 1) { [string]$remote[0] } else { '' }
   [pscustomobject]@{
@@ -202,6 +237,7 @@ $rows = New-Object System.Collections.Generic.List[object]
 
 foreach ($snapshot in $snapshots | Sort-Object name) {
   $repo = $snapshot.full_name
+  $script:GitRevisionByRepo[$repo] = $snapshot.head
   $tracked = @($snapshot.tracked)
   $gitState = $snapshot
   $remote = $snapshot.remote
@@ -229,7 +265,9 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
   $placeholderCount = Get-PlaceholderCount $repo $tracked
 
   $checks = [ordered]@{
-    numbered_readme = ('README.md' -in $tracked -and $firstLine -match '^#\s*#?\d+\s+')
+    readme_title = ('README.md' -in $tracked -and $firstLine -match '^#\s+\S')
+    readme_benchmark = Test-ReadmeBenchmark $repo $readme $benchmarkResultPath (Get-Scalar $manifest '(?m)^\s{2}primary_metric:\s*(.+)$' '')
+    project_id = (Get-Scalar $manifest '(?m)^id:\s*(.+)$' '') -match '^\d+$'
     docker = 'Dockerfile' -in $tracked
     ci = $workflowFiles.Count -gt 0
     sdd = @($requiredSdd | Where-Object { $_ -in $tracked }).Count -eq $requiredSdd.Count
@@ -270,6 +308,7 @@ foreach ($snapshot in $snapshots | Sort-Object name) {
     published_verified = $publishedVerified
     complete_candidate = $publishedVerified
     declared_published_unverified = ($status -eq 'published' -and -not $publishedVerified)
+    failed_checks = @($checks.GetEnumerator() | Where-Object { -not $_.Value -and ($_.Key -ne 'clean' -or -not $cleanGate) } | ForEach-Object Key)
   })
 }
 

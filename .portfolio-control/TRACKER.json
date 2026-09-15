@@ -1,32 +1,82 @@
 {
   "schema_version": 1,
-  "active_family": "portfolio-evidence-platform",
-  "phase": "portfolio-evidence-console-complete",
+  "active_family": "portfolio-maintenance",
+  "phase": "audit-economical-checkpoint",
   "affected": [
+    "go-rate-limiter",
+    "mini-aws-emulator",
     "portfolio-evidence-api",
-    "portfolio-evidence-console",
-    "portfolio-reuse-kit"
+    "rag-knowledge-base",
+    "terraform-aws-baseline",
+    "vision-serving-fastapi",
+    "yolo-training-pipeline"
   ],
   "healthy_variants": [
-    "original-portfolio-30-of-30",
-    "cache-strategies-bench"
+    "structural-gates-32-of-32"
   ],
-  "unknown": [],
+  "unknown": [
+    "remaining JVM remediation",
+    "unpatched distribution vulnerabilities",
+    "seven unpublished worktrees"
+  ],
   "repos_local_verified": [
     "cache-strategies-bench@251f0f4d3b9a9cace77683014f45a26be9229d11",
     "portfolio-evidence-api@88fa375de0abe7e4a93d427928016f6d4b0b8bfa",
     "portfolio-evidence-console@ae22e864b605907c2c61403950173977a5271404"
   ],
   "repos_pushed": [
-    "cache-strategies-bench",
-    "portfolio-evidence-api",
-    "portfolio-evidence-console"
+    "alpr-mercosul",
+    "api-gateway-lite",
+    "ci-cd-templates",
+    "cost-aware-inference",
+    "data-quality-checks",
+    "embeddings-benchmark",
+    "feature-store-lite",
+    "grpc-vs-rest-bench",
+    "kafka-streams-demo",
+    "llm-agent-eval",
+    "llm-eval-harness",
+    "load-test-suite",
+    "melanoma-classifier",
+    "mini-aws-emulator",
+    "mlops-end2end",
+    "model-drift-detector",
+    "observability-stack",
+    "prompt-ab-testing",
+    "stroke-signal-demo",
+    "terraform-aws-baseline"
   ],
   "ci_green": [
+    "alpr-mercosul#34907263784",
+    "api-gateway-lite#34907408269",
     "cache-strategies-bench#32481590754",
+    "ci-cd-templates#34921701731",
+    "cost-aware-inference#34921691426",
+    "data-quality-checks#34921695796",
+    "embeddings-benchmark#34907286360",
+    "event-sourcing-orders#31359210209",
+    "feature-store-lite#34907539228",
+    "go-rate-limiter#31770932954",
+    "grpc-vs-rest-bench#34907427338",
+    "llm-agent-eval#34906864971",
+    "llm-eval-harness#34906876573",
+    "load-test-suite#34907437660",
+    "melanoma-classifier#34907274041",
+    "mini-aws-emulator#34921715888",
+    "mlops-end2end#34921712003",
+    "model-drift-detector#34907131931",
+    "multi-tenant-starter#31770435136",
+    "observability-stack#34921705979",
+    "outbox-pattern#31359222289",
     "portfolio-evidence-api#33205651604",
     "portfolio-evidence-console#33217542452",
-    "portfolio-reuse-kit#33218318317"
+    "prompt-ab-testing#34906892183",
+    "rag-knowledge-base#31347697814",
+    "saga-orchestrator#31359213207",
+    "spring-hexagonal-payments#33473883380",
+    "stroke-signal-demo#34907547450",
+    "vision-serving-fastapi#31343903742",
+    "yolo-training-pipeline#31343899639"
   ],
   "blocked": [],
   "active_skills": [
@@ -35,7 +85,7 @@
     "nextjs-frontend",
     "publish-benchmark-evidence"
   ],
-  "last_evidence": "Original portfolio remains 30/30. Extensions #31 and #32 are published, bringing the total to 32. #32 final head ae22e86 passed exact-head CI 33217542452 with zero warnings/failures; its clean-source browser evidence reports 41.72 ms filter-to-chart p95, 372 ms LCP, 0.0859 CLS, 318437 bytes, and zero workload failures.",
-  "next_action": "Start #33 portfolio-operations-console as the audited Angular command surface; keep public reads on GraphQL and commands on REST.",
-  "updated_at": "2026-08-28T22:41:44Z"
+  "last_evidence": "20 product repositories received scoped corrections. Seven unpublished worktrees remain; current CI and exact SHAs are in audit-close-2026-09-14.json. Security remediation is incomplete.",
+  "next_action": "Read HANDOFFS/2026-09-14-portfolio-audit.md and audit-close-2026-09-14.json; do not restart full audit or start #33.",
+  "updated_at": "2026-09-15T02:38:46.3998695Z"
 }
