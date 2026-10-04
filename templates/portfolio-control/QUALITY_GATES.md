@@ -11,6 +11,7 @@ Completion requires evidence, not intent.
 - [ ] Every compatibility claim in the README (SDK, CLI, protocol) is backed by a test that drives the real client and runs in CI.
 - [ ] Docker runs the documented default path from a clean checkout.
 - [ ] CI runs the same meaningful checks without mutable dependencies or secrets.
+- [ ] Dependency and vulnerability scans run on every pull request, Dependabot's included, and any automatic merge waits for them as required checks.
 - [ ] Benchmark writes valid JSON under `benchmarks/results/` and can be repeated.
 - [ ] README, benchmark JSON, and `project.yaml` report the same primary metric.
 - [ ] Reuse review records every kit improvement, backlog item, or rejected duplication.
