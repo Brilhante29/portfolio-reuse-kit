@@ -11,7 +11,7 @@ Purpose: observable continuation state; no private chain-of-thought.
 
 ## Public Presentation Pass (2026-10-04)
 
-Public READMEs now follow a profile-facing standard (descriptive title instead of `#<id>`, why, limitations, author links); the kit template, validator template, design tokens, and skills carry it. The pass also fixed two red `main` CIs (evidence API and console), a latent model-drift build break (embeddings), stale default branches (mlops, kafka: switch to `main` in GitHub settings), and security defects in lightpanda-mcp-server and llm-based-doc-scan. After merging, refresh the publication records, because every merged README moves `main` away from the recorded SHA.
+Public READMEs now follow a profile-facing standard (descriptive title instead of `#<id>`, why, limitations, author links); the kit template, validator template, design tokens, and skills carry it. The pass also fixed two red `main` CIs (evidence API and console), a latent model-drift build break (embeddings), stale default branches (mlops, kafka: switch to `main` in GitHub settings), and security defects in lightpanda-mcp-server and llm-based-doc-scan. kiri-gcp, the profile's lead project, failed its own SDK snippets; Cloud Storage now passes the official Go, Python, and Node.js clients, CI runs the Go client checks, and the README states measured per-service fidelity. Every SDK, CLI, or protocol claim now needs a real-client CI test (quality gate). After merging, refresh the publication records, because every merged README moves `main` away from the recorded SHA.
 
 ## Economical Close-Out (2026-09-14)
 
