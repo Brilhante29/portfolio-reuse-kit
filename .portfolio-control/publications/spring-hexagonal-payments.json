@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "spring-hexagonal-payments",
-  "commit_sha": "6a88f8bc0212ebd4abc07086bff11750f21004d0",
+  "commit_sha": "23ffd0f826c76cf40731127dbc872ef9f6a8b4cd",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/spring-hexagonal-payments.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/spring-hexagonal-payments/actions/runs/33473883380",
+  "ci_run_url": "https://github.com/Brilhante29/spring-hexagonal-payments/actions/runs/37183188951",
   "workflow": "ci",
-  "verified_at": "2026-09-15T02:35:55.0104685Z"
+  "verified_at": "2026-10-04T06:46:25Z"
 }

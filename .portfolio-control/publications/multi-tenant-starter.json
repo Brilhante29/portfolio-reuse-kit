@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "multi-tenant-starter",
-  "commit_sha": "ca91f35045085f832d2d18cf2dbae9f0bccb0158",
+  "commit_sha": "4bc81ae6007baa77097a916b62471f85f63c1718",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/multi-tenant-starter.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/multi-tenant-starter/actions/runs/31770435136",
+  "ci_run_url": "https://github.com/Brilhante29/multi-tenant-starter/actions/runs/37183198146",
   "workflow": "CI",
-  "verified_at": "2026-09-15T02:35:49.2652828Z"
+  "verified_at": "2026-10-04T06:46:25Z"
 }

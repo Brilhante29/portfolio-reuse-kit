@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "model-drift-detector",
-  "commit_sha": "d0406f35a94175544324b25e8238b204e0fee02c",
+  "commit_sha": "b8cb9f4cfaa0de3aaf47a833d529eb7164e6c5a3",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/model-drift-detector.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/model-drift-detector/actions/runs/34907131931",
+  "ci_run_url": "https://github.com/Brilhante29/model-drift-detector/actions/runs/37183376632",
   "workflow": "validate",
-  "verified_at": "2026-09-15T02:35:48.4992571Z"
+  "verified_at": "2026-10-04T06:46:25Z"
 }

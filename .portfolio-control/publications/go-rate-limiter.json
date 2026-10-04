@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "go-rate-limiter",
-  "commit_sha": "2a40e0864a7bfd4632cb0239573524d729425ef9",
+  "commit_sha": "d93dab4d196fbb7fa57560eb7f6885680c34b595",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/go-rate-limiter.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/go-rate-limiter/actions/runs/31770932954",
+  "ci_run_url": "https://github.com/Brilhante29/go-rate-limiter/actions/runs/37183232348",
   "workflow": "ci",
-  "verified_at": "2026-09-15T02:35:43.5551628Z"
+  "verified_at": "2026-10-04T06:46:25Z"
 }

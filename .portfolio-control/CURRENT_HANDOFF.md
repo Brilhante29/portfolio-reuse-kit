@@ -6,12 +6,14 @@ Purpose: observable continuation state; no private chain-of-thought.
 ## Continuation Order
 
 1. Read this file, `TRACKER.json`, and `CONTINUITY_STATE.md`.
-2. Read `HANDOFFS/2026-10-04-public-presentation.md` first: the latest work lives on branch `ccr-447647b4-ma4w79` in 38 product repositories, the kit, and the profile repository, and is not merged.
+2. Read `HANDOFFS/2026-10-04-public-presentation.md` first: the latest work is squash-merged to `main` in 37 product repositories, the kit, and the profile repository, and the central publication records point at the merged heads.
 3. Read `HANDOFFS/2026-09-14-portfolio-audit.md` for the security and evidence state it did not change. Do not restart the full audit or start #33.
 
 ## Public Presentation Pass (2026-10-04)
 
-Public READMEs now follow a profile-facing standard (descriptive title instead of `#<id>`, why, limitations, author links); the kit template, validator template, design tokens, and skills carry it. The pass also fixed two red `main` CIs (evidence API and console), a latent model-drift build break (embeddings), stale default branches (mlops, kafka: switch to `main` in GitHub settings), and security defects in lightpanda-mcp-server and llm-based-doc-scan. kiri-gcp, the profile's lead project, failed its own SDK snippets; Cloud Storage now passes the official Go, Python, and Node.js clients, CI runs the Go client checks, and the README states measured per-service fidelity. Every SDK, CLI, or protocol claim now needs a real-client CI test (quality gate). After merging, refresh the publication records, because every merged README moves `main` away from the recorded SHA.
+Public READMEs now follow a profile-facing standard (descriptive title instead of `#<id>`, why, limitations, author links); the kit template, validator template, design tokens, and skills carry it. The pass also fixed two red `main` CIs (evidence API and console), a latent model-drift build break (embeddings), stale default branches (mlops, kafka: switch to `main` in GitHub settings), and security defects in lightpanda-mcp-server and llm-based-doc-scan. kiri-gcp, the profile's lead project, failed its own SDK snippets; Cloud Storage now passes the official Go, Python, and Node.js clients, CI runs the Go client checks, and the README states measured per-service fidelity. Every SDK, CLI, or protocol claim now needs a real-client CI test (quality gate).
+
+Every pull request of the pass is squash-merged, and `main` CI passed on every merged head. Merging surfaced advisories published after the last green `main` runs (2026-09-15), fixed in the same pull requests without lowering a gate: Next.js 16.3.8 (critical `next/og` RCE) in the console, fastify 5.12.5 with an override plus fast-uri, js-yaml, and brace-expansion in the evidence API, and Jackson 2.21.7 plus a Temurin JRE base digest with patched OpenSSL in kafka-streams-demo. The 32 central publication records now point at the merged heads and their exact-head CI runs; `validate-portfolio.ps1` reports 32/32 published and verified. The kit's own record points at the #7 merge, the last content commit before the record refresh.
 
 ## Economical Close-Out (2026-09-14)
 
