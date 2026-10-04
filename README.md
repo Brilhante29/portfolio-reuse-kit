@@ -1,6 +1,10 @@
-# Portfolio Reuse Kit
+# Portfolio Reuse Kit: Spec-Driven, AI-Assisted Governance for an Engineering Portfolio
 
 Reusable decision brain, component-pack catalog, and spec governance layer for an extensible technical portfolio whose approved roadmap contains 33 repositories across six connected programs.
+
+[![validate](https://github.com/Brilhante29/portfolio-reuse-kit/actions/workflows/validate.yml/badge.svg)](https://github.com/Brilhante29/portfolio-reuse-kit/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![PowerShell](https://img.shields.io/badge/PowerShell-7-5391FE?logo=powershell&logoColor=white) ![Python](https://img.shields.io/badge/python-3.13-3776AB?logo=python&logoColor=white)
 
 This repository is the decision brain and shared operating system for the portfolio: it defines portfolio programs, project contracts, scaffolding, the agent graph, reuse-improvement loop, architecture decision rules, engineering principles, stack decision matrices, messaging decisions, language/framework profiles, proficiency map, design-system standards, metrics, benchmark harnesses, agent skills, validation rules, and GitHub publication automation.
 
@@ -9,7 +13,7 @@ It is intentionally not one of the portfolio projects. It exists so every projec
 Current maintenance evidence: [September audit and remaining work](.portfolio-control/HANDOFFS/2026-09-14-portfolio-audit.md).
 Publication, structural validation, and security clearance are tracked separately.
 
-## What Problem This Solves
+## What problem this solves
 
 Without a reuse layer, each repository tends to drift:
 
@@ -36,7 +40,7 @@ Current-image vulnerability checks are a separate release gate. Use the
 [container security harness](docs/container-security.md) to rebuild and scan an
 exact image without overwriting its historical benchmark evidence.
 
-## Core Contract
+## Core contract
 
 Every completed project must provide:
 
@@ -163,7 +167,7 @@ pwsh -NoProfile -File tools/publish-github.ps1 `
 Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 ```
 
-## Repository Layout
+## Repository layout
 
 | Path | Responsibility |
 |---|---|
@@ -185,7 +189,7 @@ Remove-Item Env:\GH_TOKEN -ErrorAction SilentlyContinue
 | `tools/` | Automation for project creation, reuse sync, validation, skill install, and GitHub publishing. |
 | `docs/` | Operating model for humans and agents. |
 
-## Skills Included
+## Skills included
 
 The same skills are provided for Codex and Claude Code:
 
@@ -217,7 +221,7 @@ The same skills are provided for Codex and Claude Code:
 | `benchmark-harness` | Add or validate metrics, benchmark JSON, k6 checks, and README tables. |
 | `backend-reliability-evidence` | Replace simulated transactional claims with real local infrastructure, failure matrices, and benchmark V2 proof. |
 
-## Program Groups
+## Program groups
 
 The 30 repositories are grouped into portfolio programs:
 
@@ -240,7 +244,7 @@ The leakage-safe medical benchmark guide is [Medical AI Evaluation](docs/medical
 
 The drift decision and evidence guide is [Python Model Monitoring](docs/model-monitoring.md).
 
-## Evidence Platform Extensions
+## Evidence platform extensions
 
 Delivery order:
 
@@ -278,7 +282,7 @@ The full project catalog is in [catalog/projects.md](catalog/projects.md) and [c
 - [Technology coverage and interoperability](docs/architecture/technology-coverage-and-interoperability.md)
 - [Publish](PUBLISH.md)
 
-## Reuse Policy
+## Reuse policy
 
 Use public repositories as references, not as disguised copies. Reuse dependencies, architecture ideas, organization patterns, benchmark patterns, and documentation structure. Project-specific implementation, fixtures, benchmark scripts, and results must be original.
 

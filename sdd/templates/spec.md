@@ -6,7 +6,7 @@
 
 ## Claim
 
-Este projeto prova que:
+This project proves that:
 
 > <one sentence claim>
 
