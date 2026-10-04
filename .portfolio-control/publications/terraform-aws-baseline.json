@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "repository": "terraform-aws-baseline",
-  "commit_sha": "45ea387f20772b3b4814f83948e13ecb2a3857f2",
+  "commit_sha": "dcee10563b011985fc362c0fa531b487b596a482",
   "branch": "main",
   "remote_url": "https://github.com/Brilhante29/terraform-aws-baseline.git",
   "ci_conclusion": "success",
-  "ci_run_url": "https://github.com/Brilhante29/terraform-aws-baseline/actions/runs/34921898144",
+  "ci_run_url": "https://github.com/Brilhante29/terraform-aws-baseline/actions/runs/37183243085",
   "workflow": "validation",
-  "verified_at": "2026-09-15T02:41:31.7115412Z"
+  "verified_at": "2026-10-04T06:46:25Z"
 }
