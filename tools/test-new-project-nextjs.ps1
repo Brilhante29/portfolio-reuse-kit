@@ -20,7 +20,7 @@ try {
     }
   }
   $firstLine = Get-Content -LiteralPath (Join-Path $target "README.md") -TotalCount 1
-  if ($firstLine -ne "# #999 $name") {
+  if (-not $firstLine.StartsWith("# ${name}: ") -or $firstLine -match '^#\s+#?\d+\s') {
     throw "Next.js profile README identity mismatch: $firstLine"
   }
   $publicationSpec = Get-Content -LiteralPath (Join-Path $target "benchmarks/publication-spec.json") -Raw | ConvertFrom-Json

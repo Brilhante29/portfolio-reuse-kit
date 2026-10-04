@@ -49,7 +49,7 @@ Every completed project must provide:
 - durable decision lineage in `docs/agent-continuation-map.md` and project context in `.portfolio-control/DECISION_CONTEXT.md`
 - a primary language/framework profile
 - shared design-system components
-- README opening with project number, claim, and benchmark result
+- README opening with a descriptive title (no internal project number), claim, and benchmark result
 - `sdd/spec.md`, `sdd/benchmark-plan.md`, `sdd/architecture-decision.md`, `sdd/technical-decision.md`, and `sdd/agent-handoff.md`, `sdd/reuse-improvement-review.md`
 - Docker build/run path
 - local benchmark JSON compatible with `contracts/benchmark-result.schema.json`
@@ -284,6 +284,11 @@ Use public repositories as references, not as disguised copies. Reuse dependenci
 
 See [catalog/reuse-policy.md](catalog/reuse-policy.md).
 
+## Author
+
+**Guilherme Brilhante**, software engineer working on scalable backends and production AI.
+[LinkedIn](https://www.linkedin.com/in/guilhermefreirebrilhanteseveriano/) · [GitHub](https://github.com/Brilhante29) · [Publications](https://dblp.org/pid/353/6812.html)
+
 ## License
 
-MIT.
+[MIT](LICENSE).

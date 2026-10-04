@@ -2,7 +2,7 @@
 
 Completion requires evidence, not intent.
 
-- [ ] README opens with `#<id> <name>` and reports the current benchmark number.
+- [ ] README opens with a descriptive title (no `#<id>`) and reports the current benchmark number.
 - [ ] `project.yaml` names the problem, architecture, stack, primary metric, and result path.
 - [ ] SDD and OpenSpec artifacts agree with the implementation.
 - [ ] Domain logic is isolated from transport, persistence, broker, provider, and vendor details.

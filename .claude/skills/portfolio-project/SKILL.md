@@ -26,7 +26,7 @@ Decision order:
 15. Create or update `sdd/agent-handoff.md` with subagent decisions, local-first runtime, benchmark handoff, risks, and release gates.
 16. Create or update `sdd/reuse-improvement-review.md`, remove template placeholders, classify findings as patch_now/backlog/reject, and mark the final gate complete before publication.
 17. Keep the default path runnable without paid credentials.
-18. Ensure `README.md` starts with the project number, claim, and benchmark status/result.
+18. Ensure `README.md` starts with a descriptive title (no internal project number), the claim, and the benchmark status/result.
 19. Include `REFERENCES.md` and state whether reuse is dependency, architecture, organization pattern, benchmark idea, or documentation pattern.
 20. Add Docker support and one documented command path.
 21. Add a benchmark command that writes JSON compatible with `contracts/benchmark-result.schema.json` or `.portfolio/contracts/benchmark-result.schema.json` under `benchmarks/results/`.

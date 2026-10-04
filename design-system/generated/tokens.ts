@@ -52,8 +52,7 @@ export const portfolioTokens = {
   "components": {
     "readme_header": {
       "required_items": [
-        "project_number",
-        "project_name",
+        "descriptive_title",
         "claim",
         "benchmark_status"
       ]
@@ -110,7 +109,9 @@ export const portfolioTokens = {
     ]
   },
   "readme_rules": [
-    "open with number, claim, and current benchmark result or pending status",
+    "open with a descriptive title (never the internal project number), the claim, and the current benchmark result or pending status",
+    "explain why the project exists before deep detail, and state limitations explicitly",
+    "end with build process, related work, author links, and license",
     "show one reproducible command before deep explanation",
     "include architecture decision summary",
     "include references and reuse disclosure",

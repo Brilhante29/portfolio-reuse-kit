@@ -8,7 +8,7 @@ description: Apply the shared portfolio design system to README structure, bench
 Use the shared design system so every repository looks like part of one portfolio.
 
 1. Read `design-system/tokens.yaml` or `.portfolio/design-system/tokens.yaml`.
-2. Make README headers consistent: project number, name, claim, benchmark status/result.
+2. Make README headers consistent: descriptive title (no internal project number), claim, benchmark status/result.
 3. Use benchmark cards/tables with metric, value, command, fixture, and date.
 4. Add architecture cards with style, reason, dependency rule, and rejected alternatives.
 5. Use program badges or labels from `.portfolio/catalog/programs.yaml`.

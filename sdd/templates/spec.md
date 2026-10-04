@@ -56,7 +56,7 @@ Secondary metrics:
 ## Definition of done
 
 - [ ] Docker command works from clean clone.
-- [ ] README starts with project number and benchmark result.
+- [ ] README starts with a descriptive title and the benchmark result.
 - [ ] Benchmark command writes JSON result.
 - [ ] Tests cover core behavior.
 - [ ] `REFERENCES.md` explains reuse.
