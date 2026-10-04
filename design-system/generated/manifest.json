@@ -2,10 +2,10 @@
   "artifacts": {
     "tokens.css": "sha256:77bb5d999e1b256114fcf61288f745dcbd587ebda04604d69d3e9d38f9dcc04c",
     "tokens.scss": "sha256:435e9113b845ffb8bac656aa909ca9c770faade5a692b9b693a2908b766aaa15",
-    "tokens.ts": "sha256:89d6c74eb128553c7da0110deaf6048c64b1ea3f07b55bddbbf7634369f10886"
+    "tokens.ts": "sha256:6ccc7f27227f233b1c00e655eeedeab9ada4d4593e29f1704c28221eab155ede"
   },
   "schema_version": 1,
   "source": "design-system/tokens.yaml",
-  "source_digest": "sha256:87b0546961ccd1c6a0482a2ea00091ff6536b08c4222865a1ff3423b82d8d0d0",
+  "source_digest": "sha256:0b301616fe2bce1f21d1dedaf8c118630179e4575719979769d8c4ff9706455d",
   "token_version": 2
 }

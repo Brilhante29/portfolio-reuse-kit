@@ -61,7 +61,7 @@ Do not present this repository as portfolio-ready until it has:
 - Docker run path
 - benchmark command
 - benchmark JSON in `benchmarks/results/`
-- README opening with project number, claim, and result
+- README opening with a descriptive title, claim, and result; no internal project number
 - complete `REFERENCES.md`
 - complete `sdd/reuse-improvement-review.md` with all final gate checks marked
 - passing validation

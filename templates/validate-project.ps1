@@ -137,8 +137,8 @@ if (Test-Path -LiteralPath $contractManifestPath -PathType Leaf) {
 $readmePath = Join-Path $root "README.md"
 if (Test-Path -LiteralPath $readmePath -PathType Leaf) {
   $readmeFirstLine = (Get-Content -LiteralPath $readmePath -TotalCount 1)
-  if ($readmeFirstLine -notmatch '^#\s*#?\d+\s+') {
-    Add-Failure "README first line must start with #<project number> <name>"
+  if ($readmeFirstLine -notmatch '^#\s+\S' -or $readmeFirstLine -match '^#\s+#?\d+\s') {
+    Add-Failure "README first line must be a descriptive H1 title without the internal project number"
   }
 }
 

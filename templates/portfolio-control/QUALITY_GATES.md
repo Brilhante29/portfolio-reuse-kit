@@ -2,12 +2,13 @@
 
 Completion requires evidence, not intent.
 
-- [ ] README opens with `#<id> <name>` and reports the current benchmark number.
+- [ ] README opens with a descriptive title (no `#<id>`) and reports the current benchmark number.
 - [ ] `project.yaml` names the problem, architecture, stack, primary metric, and result path.
 - [ ] SDD and OpenSpec artifacts agree with the implementation.
 - [ ] Domain logic is isolated from transport, persistence, broker, provider, and vendor details.
 - [ ] SOLID, DRY, KISS, YAGNI, and Law of Demeter review has no unexplained exception.
 - [ ] Tests cover the contract and the failure paths that affect the claim.
+- [ ] Every compatibility claim in the README (SDK, CLI, protocol) is backed by a test that drives the real client and runs in CI.
 - [ ] Docker runs the documented default path from a clean checkout.
 - [ ] CI runs the same meaningful checks without mutable dependencies or secrets.
 - [ ] Benchmark writes valid JSON under `benchmarks/results/` and can be repeated.

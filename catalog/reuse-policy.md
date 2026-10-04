@@ -1,34 +1,34 @@
 # Reuse Policy
 
-Priorize as skills, templates, decision brain, SDD e harness deste kit. Use repos publicos como referencia e acelerador, nao como copia.
+Prioritize this kit's skills, templates, decision brain, SDD, and harness. Use public repositories as references and accelerators, not as copies.
 
-## Prioridade
+## Priority
 
-1. Skills proprias em `.codex/skills/` e `.claude/skills/`.
-2. Decisoes canonicas do kit: `decision-brain/`, `component-packs/`, `architecture/`, `language-profiles/`, `design-system/`, `sdd/`, `harness/` e `templates/`.
-3. Padroes de repos externos que melhorem organizacao, contratos, testes, benchmarks, docs, agent workflow, schema ou DX.
-4. Bibliotecas oficiais e dependencias quando resolverem melhor o problema do projeto.
+1. The kit's own skills in `.codex/skills/` and `.claude/skills/`.
+2. Canonical kit decisions: `decision-brain/`, `component-packs/`, `architecture/`, `language-profiles/`, `design-system/`, `sdd/`, `harness/`, and `templates/`.
+3. Patterns from external repositories that improve organization, contracts, tests, benchmarks, docs, agent workflow, schemas, or developer experience.
+4. Official libraries and dependencies when they solve the project's problem better.
 
-Se uma referencia externa contradizer uma skill propria, a skill propria vence. Se a referencia externa for claramente melhor, atualize o kit primeiro ou registre backlog em `sdd/reuse-improvement-review.md`.
+If an external reference contradicts one of the kit's skills, the kit's skill wins. If the external reference is clearly better, update the kit first or record a backlog item in `sdd/reuse-improvement-review.md`.
 
-## Permitido
+## Allowed
 
-- Usar repos externos para aprender organizacao, fronteiras, padroes de pastas, workflow, SDD, validadores e benchmark.
-- Usar bibliotecas oficiais como dependencia.
-- Recriar arquitetura em outro dominio.
-- Reaproveitar ideias de benchmark e contratos de API.
-- Citar referencias em `REFERENCES.md`.
-- Usar trechos pequenos somente se a licenca permitir e houver atribuicao.
+- Learning organization, boundaries, folder patterns, workflow, SDD, validators, and benchmarks from external repositories.
+- Using official libraries as dependencies.
+- Recreating an architecture in another domain.
+- Reusing benchmark ideas and API contracts.
+- Citing references in `REFERENCES.md`.
+- Using small excerpts only when the license allows it and attribution is given.
 
-## Evitar
+## Avoid
 
-- Substituir as skills proprias por componentes externos sem decisao registrada.
-- Forkar exemplo e trocar nomes.
-- Copiar estrutura inteira sem motivo.
-- Usar codigo AGPL internamente sem entender obrigacoes.
-- Publicar repo sem resultado reproduzivel.
+- Replacing the kit's skills with external components without a recorded decision.
+- Forking an example and renaming things.
+- Copying an entire structure without a reason.
+- Using AGPL code internally without understanding its obligations.
+- Publishing a repository without a reproducible result.
 
-## Obrigatorio em cada projeto
+## Required in every project
 
 ```md
 ## References

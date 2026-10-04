@@ -1,15 +1,19 @@
 # Current Handoff
 
-Updated: 2026-09-14
+Updated: 2026-10-04
 Purpose: observable continuation state; no private chain-of-thought.
 
 ## Continuation Order
 
 1. Read this file, `TRACKER.json`, and `CONTINUITY_STATE.md`.
-2. The user requested an economical close-out. Do not restart the full audit or start #33.
-3. Read `HANDOFFS/2026-09-14-portfolio-audit.md` for the current evidence and ownership.
+2. Read `HANDOFFS/2026-10-04-public-presentation.md` first: the latest work lives on branch `ccr-447647b4-ma4w79` in 38 product repositories, the kit, and the profile repository, and is not merged.
+3. Read `HANDOFFS/2026-09-14-portfolio-audit.md` for the security and evidence state it did not change. Do not restart the full audit or start #33.
 
-## Economical Close-Out
+## Public Presentation Pass (2026-10-04)
+
+Public READMEs now follow a profile-facing standard (descriptive title instead of `#<id>`, why, limitations, author links); the kit template, validator template, design tokens, and skills carry it. The pass also fixed two red `main` CIs (evidence API and console), a latent model-drift build break (embeddings), stale default branches (mlops, kafka: switch to `main` in GitHub settings), and security defects in lightpanda-mcp-server and llm-based-doc-scan. kiri-gcp, the profile's lead project, failed its own SDK snippets; Cloud Storage now passes the official Go, Python, and Node.js clients, CI runs the Go client checks, and the README states measured per-service fidelity. Every SDK, CLI, or protocol claim now needs a real-client CI test (quality gate). After merging, refresh the publication records, because every merged README moves `main` away from the recorded SHA.
+
+## Economical Close-Out (2026-09-14)
 
 Twenty product repositories received scoped published corrections in this audit:
 17 runtime/dependency updates and three README/status corrections. This is not
